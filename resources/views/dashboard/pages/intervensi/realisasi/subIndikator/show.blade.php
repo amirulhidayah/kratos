@@ -13,11 +13,12 @@
 @endsection
 
 @section('buttonPanelHeader')
-    <a href="{{ url('/realisasi-intervensi') }}" class="btn btn-info btn-round mr-2"><i class="fas fa-arrow-left mr-1"></i>
+    <a href="{{ url('/realisasi-intervensi') }}" class="btn btn-secondary btn-round mr-2"><i
+            class="fas fa-arrow-left mr-1"></i>
         Kembali</a>
     @if (Auth::user()->role == 'OPD' && Auth::user()->opd_id == $rencana_intervensi->opd_id)
         <a href="{{ url('realisasi-intervensi/create-pelaporan/' . $rencana_intervensi->id) }}"
-            class="btn btn-info btn-round"><i class="fas fa-plus"></i>
+            class="btn btn-secondary btn-round"><i class="fas fa-plus"></i>
             Tambah</a>
     @endif
 @endsection
@@ -61,7 +62,7 @@
                                 </button>
                             @endif
                             <a href="{{ route('rencana-intervensi.show', $rencana_intervensi->id) }}"
-                                class="btn btn-info btn-border font-weight-bold btn-round btn-sm mr-2 {{ $class ?? '' }} id={{ $id ?? '' }}"
+                                class="btn btn-secondary btn-border font-weight-bold btn-round btn-sm mr-2 {{ $class ?? '' }} id={{ $id ?? '' }}"
                                 target="_blank">
                                 <i class="fas fa-eye"></i>
                                 Lihat Data Perencanaan

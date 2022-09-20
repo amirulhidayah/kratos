@@ -1,5 +1,5 @@
 <!-- Logo Header -->
-<div class="logo-header" data-background-color="light-blue2">
+<div class="logo-header" data-background-color="purple2">
 
     <a href="{{ url('/') }}" class="logo">
         <img src="{{ asset('assets/dashboard') }}/img/logo-sigi.png" width="175px" alt="navbar brand" class="navbar-brand">

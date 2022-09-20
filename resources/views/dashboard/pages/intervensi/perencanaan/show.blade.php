@@ -13,7 +13,7 @@
 @endsection
 
 @section('buttonPanelHeader')
-    <a href="{{ url()->previous() }}" class="btn btn-info btn-round"><i class="fas fa-arrow-left mr-1"></i>
+    <a href="{{ url()->previous() }}" class="btn btn-secondary btn-round"><i class="fas fa-arrow-left mr-1"></i>
         Kembali</a>
 @endsection
 

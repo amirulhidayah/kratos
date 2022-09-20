@@ -1,11 +1,11 @@
 @extends('dashboard.layouts.main')
 
 @section('title')
-    Hasil Realisasi Pada Habitat Keong
+    Hasil Realisasi
 @endsection
 
 @section('titlePanelHeader')
-    Hasil Realisasi Pada Habitat Keong
+    Hasil Realisasi
 @endsection
 
 @section('subTitlePanelHeader')
@@ -21,11 +21,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
-                        <div class="card-title">Data Hasil Realisasi Pada Habitat Keong</div>
+                        <div class="card-title">Data Hasil Realisasi</div>
                         <div class="card-tools">
                             <form action="{{ url('export-hasil-realisasi-keong') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-info btn-border btn-round btn-sm mr-2"
+                                <button type="submit" class="btn btn-secondary btn-border btn-round btn-sm mr-2"
                                     id="export-penduduk" value="" name="desa_id">
                                     <i class="fas fa-lg fa-download"></i>
                                     Export Data Hasil Realisasi

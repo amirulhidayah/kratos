@@ -30,7 +30,7 @@
                         <div class="card-tools">
                             <form action="{{ url('export-realisasi-keong') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-info btn-border btn-round btn-sm mr-2"
+                                <button type="submit" class="btn btn-secondary btn-border btn-round btn-sm mr-2"
                                     id="export-penduduk" value="" name="desa_id">
                                     <i class="fas fa-lg fa-download"></i>
                                     Export Data Realisasi

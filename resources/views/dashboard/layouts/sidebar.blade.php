@@ -2,7 +2,7 @@
  <div class="sidebar sidebar-style-2">
      <div class="sidebar-wrapper scrollbar scrollbar-inner">
          <div class="sidebar-content">
-             <ul class="nav nav-info">
+             <ul class="nav nav-secondary">
                  <li class="nav-item" id="nav-dashboard">
                      <a href="{{ url('/dashboard') }}">
                          <i class="fas fa-home"></i>

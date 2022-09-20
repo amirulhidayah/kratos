@@ -950,7 +950,7 @@ class RealisasiController extends Controller
         $filterOpd = $this->unique_multidim_array($filterOpd, 'id');
         $filterTahun = $this->unique_multidim_array($filterSubIndikator, 'tahun');
 
-        return view('dashboard.pages.hasilRealisasi.keong.index', ['filterSubIndikator' => $filterSubIndikator, 'filterOpd' => $filterOpd, 'filterTahun' => $filterTahun]);
+        return view('dashboard.pages.hasilRealisasi.index', ['filterSubIndikator' => $filterSubIndikator, 'filterOpd' => $filterOpd, 'filterTahun' => $filterTahun]);
     }
 
     public function export()
