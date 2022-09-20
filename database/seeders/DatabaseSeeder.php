@@ -7,7 +7,6 @@ namespace Database\Seeders;
 use App\Models\User;
 use Database\Seeders\OPDSeeder;
 use Illuminate\Database\Seeder;
-use Database\Seeders\DesaSeeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\HewanSeeder;
 use Database\Seeders\SiswaSeeder;
@@ -55,11 +54,13 @@ class DatabaseSeeder extends Seeder
         );
 
         $this->call(OPDSeeder::class);
-        $this->call(DesaSeeder::class);
         $this->call(HewanSeeder::class);
         $this->call(LokasiKeongTableSeeder::class);
         $this->call(LokasiHewanSeeder::class);
-        $this->call(PendudukTableSeeder::class); // new
+        $this->call(DesaTableSeeder::class);
+        $this->call(KecamatanTableSeeder::class);
+        $this->call(PendudukSeeder::class);
+        // $this->call(PendudukTableSeeder::class); // new
         $this->call(LokasiKeongTableSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(RealisasiKeongTableSeeder::class);
@@ -88,5 +89,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DokumenRealisasiHewanTableSeeder::class);
         $this->call(PerencanaanKeongTableSeeder::class);
         $this->call(DokumenPerencanaanKeongTableSeeder::class);
+        $this->call(IndikatorTableSeeder::class);
     }
 }
