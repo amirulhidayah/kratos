@@ -20,8 +20,8 @@ class Penduduk extends Model
         return $this->belongsTo(Desa::class)->withTrashed();
     }
 
-    public function listIndikator()
-    { // untuk hasil realisasi
-        return $this->hasMany(PendudukPerencanaanManusia::class)->where('status', 1);
-    }
+    // public function listIndikator()
+    // { // untuk hasil realisasi
+    //     return $this->hasMany(PendudukPerencanaanManusia::class)->where('status', 1);
+    // }
 }

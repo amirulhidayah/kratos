@@ -51,9 +51,9 @@ class PendudukController extends Controller
         }
 
         $daftarDesa = Desa::orderBy('nama', 'asc')->get();
-        $daftarJumlahPenduduk = $this->_getJumlahPenduduk();
+        // $daftarJumlahPenduduk = $this->_getJumlahPenduduk();
 
-        return view('dashboard.pages.masterData.penduduk.index', compact(['daftarJumlahPenduduk', 'daftarDesa']));
+        return view('dashboard.pages.masterData.penduduk.index', compact(['daftarDesa']));
     }
 
     private function _getJumlahPenduduk()

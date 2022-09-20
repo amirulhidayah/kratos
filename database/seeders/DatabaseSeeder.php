@@ -7,7 +7,6 @@ namespace Database\Seeders;
 use App\Models\User;
 use Database\Seeders\OPDSeeder;
 use Illuminate\Database\Seeder;
-use Database\Seeders\DesaSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -37,14 +36,17 @@ class DatabaseSeeder extends Seeder
         $this->call(PerencanaanTableSeeder::class);
         $this->call(RealisasiTableSeeder::class);
         $this->call(OPDSeeder::class);
-        $this->call(DesaSeeder::class);
+        $this->call(DesaTableSeeder::class);
+        $this->call(KecamatanTableSeeder::class);
+        $this->call(PendudukSeeder::class);
         $this->call(LokasiTableSeeder::class);
+        $this->call(IndikatorTableSeeder::class);
         $this->call(DokumenPerencanaanTableSeeder::class);
         $this->call(DokumenRealisasiTableSeeder::class);
         $this->call(LokasiPerencanaanTableSeeder::class);
         $this->call(OpdTerkaitTableSeeder::class);
         // $this->call(PemilikLokasiSeeder::class);
-        $this->call(PendudukTableSeeder::class); // new
+        // $this->call(PendudukTableSeeder::class); // new
         $this->call(UserSeeder::class);
     }
 }

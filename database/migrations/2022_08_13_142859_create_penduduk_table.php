@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('no_paspor')->nullable();
             $table->string('no_kitap')->nullable();
             $table->longText('alamat');
-            $table->uuid('desa_id');
+            $table->bigInteger('desa_id');
             $table->softDeletes();
             $table->timestamps();
         });
