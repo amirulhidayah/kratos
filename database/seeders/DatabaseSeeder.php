@@ -8,32 +8,12 @@ use App\Models\User;
 use Database\Seeders\OPDSeeder;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
-use Database\Seeders\HewanSeeder;
-use Database\Seeders\SiswaSeeder;
-use Database\Seeders\TahunSeeder;
-use App\Models\PemilikLokasiKeong;
-use Database\Seeders\RoadMapSeeder;
-use Database\Seeders\SekolahSeeder;
-use Database\Seeders\PendudukSeeder;
 use Illuminate\Support\Facades\File;
-use Database\Seeders\MasterPlanSeeder;
-use App\Models\DokumenPerencanaanKeong;
-use Database\Seeders\LokasiHewanSeeder;
-use Database\Seeders\LokasiKeongSeeder;
 use Illuminate\Support\Facades\Storage;
 use Database\Seeders\PendudukTableSeeder;
-use Database\Seeders\JumlahHewanTableSeeder;
-use Database\Seeders\LokasiKeongTableSeeder;
-use Database\Seeders\PerencanaanKeongSeeder;
 use Database\Seeders\PemilikLokasiKeongSeeder;
-use Database\Seeders\RealisasiKeongTableSeeder;
-use Database\Seeders\LokasiPerencanaanKeongSeeder;
-use Database\Seeders\OpdTerkaitManusiaTableSeeder;
-use Database\Seeders\DokumenPerencanaanKeongSeeder;
-use Database\Seeders\PemilikLokasiHewanTableSeeder;
 use Database\Seeders\DokumenRealisasiKeongTableSeeder;
-use Database\Seeders\LokasiPerencanaanKeongTableSeeder;
-use Database\Seeders\DokumenRealisasiManusiaTableSeeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -53,7 +33,10 @@ class DatabaseSeeder extends Seeder
             storage_path('app/public/uploads')
         );
 
+        $this->call(PerencanaanTableSeeder::class);
+        $this->call(RealisasiTableSeeder::class);
         $this->call(OPDSeeder::class);
+<<<<<<< HEAD
         $this->call(HewanSeeder::class);
         $this->call(LokasiKeongTableSeeder::class);
         $this->call(LokasiHewanSeeder::class);
@@ -90,5 +73,16 @@ class DatabaseSeeder extends Seeder
         $this->call(PerencanaanKeongTableSeeder::class);
         $this->call(DokumenPerencanaanKeongTableSeeder::class);
         $this->call(IndikatorTableSeeder::class);
+=======
+        $this->call(DesaSeeder::class);
+        $this->call(LokasiTableSeeder::class);
+        $this->call(DokumenPerencanaanTableSeeder::class);
+        $this->call(DokumenRealisasiTableSeeder::class);
+        $this->call(LokasiPerencanaanTableSeeder::class);
+        $this->call(OpdTerkaitTableSeeder::class);
+        // $this->call(PemilikLokasiSeeder::class);
+        $this->call(PendudukTableSeeder::class); // new
+        $this->call(UserSeeder::class);
+>>>>>>> kratos/main
     }
 }

@@ -30,133 +30,133 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        $tahun = $request->tahun;
-        $totalData = $this->_totalData();
-        $lokasi = $this->_lokasi();
-        $totalHewan = $this->_totalHewan();
-        $intervensi = $this->_intervensi($tahun);
+        // $tahun = $request->tahun;
+        // $totalData = $this->_totalData();
+        // $lokasi = $this->_lokasi();
+        // $totalHewan = $this->_totalHewan();
+        // $intervensi = $this->_intervensi($tahun);
 
-        $tabelKeong = $this->_tabelKeong($tahun);
-        $tabelManusia = $this->_tabelManusia($tahun);
-        $tabelHewan = $this->_tabelHewan($tahun);
+        // $tabelKeong = $this->_tabelKeong($tahun);
+        // $tabelManusia = $this->_tabelManusia($tahun);
+        // $tabelHewan = $this->_tabelHewan($tahun);
 
-        $anggaranPerencanaan = $this->_anggaranPerencanaan($tahun);
-        $penggunaanAnggaran = $this->_penggunaanAnggaran($tahun);
+        // $anggaranPerencanaan = $this->_anggaranPerencanaan($tahun);
+        // $penggunaanAnggaran = $this->_penggunaanAnggaran($tahun);
 
-        $tabelAnggaranKeong = $this->_tabelAnggaranKeong($tahun);
-        $tabelAnggaranManusia = $this->_tabelAnggaranManusia($tahun);
-        $tabelAnggaranHewan = $this->_tabelAnggaranHewan($tahun);
-        $tabelAnggaranSemua = $this->_tabelAnggaranSemua($tahun);
+        // $tabelAnggaranKeong = $this->_tabelAnggaranKeong($tahun);
+        // $tabelAnggaranManusia = $this->_tabelAnggaranManusia($tahun);
+        // $tabelAnggaranHewan = $this->_tabelAnggaranHewan($tahun);
+        // $tabelAnggaranSemua = $this->_tabelAnggaranSemua($tahun);
 
-        $perencanaanKeong = PerencanaanKeong::where(function ($query) {
-            if (Auth::user()->role == 'OPD') {
-                $query->where('opd_id', Auth::user()->opd_id);
-            }
-        })->latest()->get();
-        $totalPerencanaanKeongTidakTerselesaikan = 0;
+        // $perencanaanKeong = PerencanaanKeong::where(function ($query) {
+        //     if (Auth::user()->role == 'OPD') {
+        //         $query->where('opd_id', Auth::user()->opd_id);
+        //     }
+        // })->latest()->get();
+        // $totalPerencanaanKeongTidakTerselesaikan = 0;
 
-        $perencanaanManusia = PerencanaanManusia::where(function ($query) {
-            if (Auth::user()->role == 'OPD') {
-                $query->where('opd_id', Auth::user()->opd_id);
-            }
-        })->latest()->get();
-        $totalPerencanaanManusiaTidakTerselesaikan = 0;
+        // $perencanaanManusia = PerencanaanManusia::where(function ($query) {
+        //     if (Auth::user()->role == 'OPD') {
+        //         $query->where('opd_id', Auth::user()->opd_id);
+        //     }
+        // })->latest()->get();
+        // $totalPerencanaanManusiaTidakTerselesaikan = 0;
 
-        $perencanaanHewan = PerencanaanHewan::where(function ($query) {
-            if (Auth::user()->role == 'OPD') {
-                $query->where('opd_id', Auth::user()->opd_id);
-            }
-        })->latest()->get();
-        $totalPerencanaanHewanTidakTerselesaikan = 0;
+        // $perencanaanHewan = PerencanaanHewan::where(function ($query) {
+        //     if (Auth::user()->role == 'OPD') {
+        //         $query->where('opd_id', Auth::user()->opd_id);
+        //     }
+        // })->latest()->get();
+        // $totalPerencanaanHewanTidakTerselesaikan = 0;
 
-        if (Auth::user()->role == 'OPD') {
-            $totalMenungguKonfirmasiPerencanaanKeong = PerencanaanKeong::where('status', 2)->where('opd_id', Auth::user()->opd_id)->count();
-            $totalMenungguKonfirmasiPerencanaanManusia = PerencanaanManusia::where('status', 2)->where('opd_id', Auth::user()->opd_id)->count();
-            $totalMenungguKonfirmasiPerencanaanHewan = PerencanaanHewan::where('status', 2)->where('opd_id', Auth::user()->opd_id)->count();
+        // if (Auth::user()->role == 'OPD') {
+        //     $totalMenungguKonfirmasiPerencanaanKeong = PerencanaanKeong::where('status', 2)->where('opd_id', Auth::user()->opd_id)->count();
+        // $totalMenungguKonfirmasiPerencanaanManusia = PerencanaanManusia::where('status', 2)->where('opd_id', Auth::user()->opd_id)->count();
+        // $totalMenungguKonfirmasiPerencanaanHewan = PerencanaanHewan::where('status', 2)->where('opd_id', Auth::user()->opd_id)->count();
 
-            $listPerencanaanKeong = PerencanaanKeong::where('opd_id', Auth::user()->opd_id)->where('status', 1)->pluck('id')->toArray();
-            $totalMenungguKonfirmasiRealisasiKeong = RealisasiKeong::whereIn('perencanaan_keong_id', $listPerencanaanKeong)->where('status', 2)->count();
-            $listPerencanaanManusia = PerencanaanManusia::where('opd_id', Auth::user()->opd_id)->where('status', 1)->pluck('id')->toArray();
-            $totalMenungguKonfirmasiRealisasiManusia = RealisasiManusia::whereIn('perencanaan_manusia_id', $listPerencanaanManusia)->where('status', 2)->count();
-            $listPerencanaanHewan = PerencanaanHewan::where('opd_id', Auth::user()->opd_id)->where('status', 1)->pluck('id')->toArray();
-            $totalMenungguKonfirmasiRealisasiHewan = RealisasiHewan::whereIn('perencanaan_hewan_id', $listPerencanaanHewan)->where('status', 2)->count();
+        // $listPerencanaanKeong = PerencanaanKeong::where('opd_id', Auth::user()->opd_id)->where('status', 1)->pluck('id')->toArray();
+        // $totalMenungguKonfirmasiRealisasiKeong = RealisasiKeong::whereIn('perencanaan_keong_id', $listPerencanaanKeong)->where('status', 2)->count();
+        // $listPerencanaanManusia = PerencanaanManusia::where('opd_id', Auth::user()->opd_id)->where('status', 1)->pluck('id')->toArray();
+        // $totalMenungguKonfirmasiRealisasiManusia = RealisasiManusia::whereIn('perencanaan_manusia_id', $listPerencanaanManusia)->where('status', 2)->count();
+        // $listPerencanaanHewan = PerencanaanHewan::where('opd_id', Auth::user()->opd_id)->where('status', 1)->pluck('id')->toArray();
+        // $totalMenungguKonfirmasiRealisasiHewan = RealisasiHewan::whereIn('perencanaan_hewan_id', $listPerencanaanHewan)->where('status', 2)->count();
 
-            foreach ($perencanaanKeong as $row) {
-                if (($row->created_at->year != Carbon::now()->year) && ($row->realisasiKeong->where('status', 1)->max('progress') != 100) && ($row->alasan_tidak_terselesaikan == null) && ($row->status_baca == null)) {
-                    $totalPerencanaanKeongTidakTerselesaikan++;
-                }
-            }
+        // foreach ($perencanaanKeong as $row) {
+        //     if (($row->created_at->year != Carbon::now()->year) && ($row->realisasiKeong->where('status', 1)->max('progress') != 100) && ($row->alasan_tidak_terselesaikan == null) && ($row->status_baca == null)) {
+        //         $totalPerencanaanKeongTidakTerselesaikan++;
+        //     }
+        // }
 
-            foreach ($perencanaanManusia as $row) {
-                if (($row->created_at->year != Carbon::now()->year) && ($row->realisasiManusia->where('status', 1)->max('progress') != 100) && ($row->alasan_tidak_terselesaikan == null) && ($row->status_baca == null)) {
-                    $totalPerencanaanManusiaTidakTerselesaikan++;
-                }
-            }
+        // foreach ($perencanaanManusia as $row) {
+        //     if (($row->created_at->year != Carbon::now()->year) && ($row->realisasiManusia->where('status', 1)->max('progress') != 100) && ($row->alasan_tidak_terselesaikan == null) && ($row->status_baca == null)) {
+        //         $totalPerencanaanManusiaTidakTerselesaikan++;
+        //     }
+        // }
 
-            foreach ($perencanaanHewan as $row) {
-                if (($row->created_at->year != Carbon::now()->year) && ($row->realisasiHewan->where('status', 1)->max('progress') != 100) && ($row->alasan_tidak_terselesaikan == null) && ($row->status_baca == null)) {
-                    $totalPerencanaanHewanTidakTerselesaikan++;
-                }
-            }
-        } else if (in_array(Auth::user()->role, ['Admin', 'Pimpinan'])) {
-            $totalMenungguKonfirmasiPerencanaanKeong = PerencanaanKeong::where('status', 0)->count();
-            $totalMenungguKonfirmasiPerencanaanManusia = PerencanaanManusia::where('status', 0)->count();
-            $totalMenungguKonfirmasiPerencanaanHewan = PerencanaanHewan::where('status', 0)->count();
+        // foreach ($perencanaanHewan as $row) {
+        //     if (($row->created_at->year != Carbon::now()->year) && ($row->realisasiHewan->where('status', 1)->max('progress') != 100) && ($row->alasan_tidak_terselesaikan == null) && ($row->status_baca == null)) {
+        //         $totalPerencanaanHewanTidakTerselesaikan++;
+        //     }
+        // }
+        // } else if (in_array(Auth::user()->role, ['Admin', 'Pimpinan'])) {
+        // $totalMenungguKonfirmasiPerencanaanKeong = PerencanaanKeong::where('status', 0)->count();
+        // $totalMenungguKonfirmasiPerencanaanManusia = PerencanaanManusia::where('status', 0)->count();
+        // $totalMenungguKonfirmasiPerencanaanHewan = PerencanaanHewan::where('status', 0)->count();
 
-            $totalMenungguKonfirmasiRealisasiKeong = RealisasiKeong::where('status', 0)->count();
-            $totalMenungguKonfirmasiRealisasiManusia = RealisasiManusia::where('status', 0)->count();
-            $totalMenungguKonfirmasiRealisasiHewan = RealisasiHewan::where('status', 0)->count();
+        // $totalMenungguKonfirmasiRealisasiKeong = RealisasiKeong::where('status', 0)->count();
+        // $totalMenungguKonfirmasiRealisasiManusia = RealisasiManusia::where('status', 0)->count();
+        // $totalMenungguKonfirmasiRealisasiHewan = RealisasiHewan::where('status', 0)->count();
 
-            foreach ($perencanaanKeong as $row) {
-                if (($row->created_at->year != Carbon::now()->year) && ($row->realisasiKeong->where('status', 1)->max('progress') != 100) && ($row->alasan_tidak_terselesaikan != null) && ($row->status_baca != 1)) {
-                    $totalPerencanaanKeongTidakTerselesaikan++;
-                }
-            }
+        // foreach ($perencanaanKeong as $row) {
+        //     if (($row->created_at->year != Carbon::now()->year) && ($row->realisasiKeong->where('status', 1)->max('progress') != 100) && ($row->alasan_tidak_terselesaikan != null) && ($row->status_baca != 1)) {
+        //         $totalPerencanaanKeongTidakTerselesaikan++;
+        //     }
+        // }
 
-            foreach ($perencanaanManusia as $row) {
-                if (($row->created_at->year != Carbon::now()->year) && ($row->realisasiManusia->where('status', 1)->max('progress') != 100) && ($row->alasan_tidak_terselesaikan != null) && ($row->status_baca != 1)) {
-                    $totalPerencanaanManusiaTidakTerselesaikan++;
-                }
-            }
+        // foreach ($perencanaanManusia as $row) {
+        //     if (($row->created_at->year != Carbon::now()->year) && ($row->realisasiManusia->where('status', 1)->max('progress') != 100) && ($row->alasan_tidak_terselesaikan != null) && ($row->status_baca != 1)) {
+        //         $totalPerencanaanManusiaTidakTerselesaikan++;
+        //     }
+        // }
 
-            foreach ($perencanaanHewan as $row) {
-                if (($row->created_at->year != Carbon::now()->year) && ($row->realisasiHewan->where('status', 1)->max('progress') != 100) && ($row->alasan_tidak_terselesaikan != null) && ($row->status_baca != 1)) {
-                    $totalPerencanaanHewanTidakTerselesaikan++;
-                }
-            }
-        }
+        // foreach ($perencanaanHewan as $row) {
+        //     if (($row->created_at->year != Carbon::now()->year) && ($row->realisasiHewan->where('status', 1)->max('progress') != 100) && ($row->alasan_tidak_terselesaikan != null) && ($row->status_baca != 1)) {
+        //         $totalPerencanaanHewanTidakTerselesaikan++;
+        //     }
+        // }
+        // }
 
-        $tahunKeong = PerencanaanKeong::selectRaw('year(created_at) year')->groupBy('year')->get()->pluck('year')->toArray();
-        $tahunManusia = PerencanaanManusia::selectRaw('year(created_at) year')->groupBy('year')->get()->pluck('year')->toArray();
-        $tahunHewan = PerencanaanHewan::selectRaw('year(created_at) year')->groupBy('year')->get()->pluck('year')->toArray();
-        $daftarTahun = array_unique(array_merge($tahunKeong, $tahunManusia, $tahunHewan));
+        // $tahunKeong = PerencanaanKeong::selectRaw('year(created_at) year')->groupBy('year')->get()->pluck('year')->toArray();
+        // $tahunManusia = PerencanaanManusia::selectRaw('year(created_at) year')->groupBy('year')->get()->pluck('year')->toArray();
+        // $tahunHewan = PerencanaanHewan::selectRaw('year(created_at) year')->groupBy('year')->get()->pluck('year')->toArray();
+        // $daftarTahun = array_unique(array_merge($tahunKeong));
 
         return view('dashboard.pages.dashboard', compact(
             [
-                'totalData',
-                'lokasi',
-                'totalHewan',
-                'intervensi',
-                'tabelKeong',
-                'tabelManusia',
-                'tabelHewan',
-                'anggaranPerencanaan',
-                'penggunaanAnggaran',
-                'tabelAnggaranKeong',
-                'tabelAnggaranManusia',
-                'tabelAnggaranHewan',
-                'tabelAnggaranSemua',
-                'totalMenungguKonfirmasiPerencanaanKeong',
-                'totalMenungguKonfirmasiPerencanaanManusia',
-                'totalMenungguKonfirmasiPerencanaanHewan',
-                'totalMenungguKonfirmasiRealisasiKeong',
-                'totalMenungguKonfirmasiRealisasiManusia',
-                'totalMenungguKonfirmasiRealisasiHewan',
-                'totalPerencanaanKeongTidakTerselesaikan',
-                'totalPerencanaanManusiaTidakTerselesaikan',
-                'totalPerencanaanHewanTidakTerselesaikan',
-                'daftarTahun',
-                'tahun'
+                // 'totalData',
+                // 'lokasi',
+                // 'totalHewan',
+                // 'intervensi',
+                // 'tabelKeong',
+                // 'tabelManusia',
+                // 'tabelHewan',
+                // 'anggaranPerencanaan',
+                // 'penggunaanAnggaran',
+                // 'tabelAnggaranKeong',
+                // 'tabelAnggaranManusia',
+                // 'tabelAnggaranHewan',
+                // 'tabelAnggaranSemua',
+                // 'totalMenungguKonfirmasiPerencanaanKeong',
+                // 'totalMenungguKonfirmasiPerencanaanManusia',
+                // 'totalMenungguKonfirmasiPerencanaanHewan',
+                // 'totalMenungguKonfirmasiRealisasiKeong',
+                // 'totalMenungguKonfirmasiRealisasiManusia',
+                // 'totalMenungguKonfirmasiRealisasiHewan',
+                // 'totalPerencanaanKeongTidakTerselesaikan',
+                // 'totalPerencanaanManusiaTidakTerselesaikan',
+                // 'totalPerencanaanHewanTidakTerselesaikan',
+                // 'daftarTahun',
+                // 'tahun'
             ]
         ));
     }
@@ -248,195 +248,195 @@ class DashboardController extends Controller
         return $tabel;
     }
 
-    private function _tabelHewan($tahun)
-    {
-        $tabel = [];
-        if (Auth::user()->role == 'OPD') {
-            $daftarOPD = OPD::orderBy('nama', 'asc')->where('id', Auth::user()->opd_id)->withTrashed()->get();
-        } else {
-            $daftarOPD = OPD::orderBy('nama', 'asc')->where(function ($query) {
-                if (Auth::user()->role == 'OPD') {
-                    $query->where('id', Auth::user()->opd_id);
-                }
-            })->get();
-        }
-        foreach ($daftarOPD as $opd) {
-            $perencanaan = PerencanaanHewan::where('opd_id', $opd->id)->where('status', 1)->where(function ($query) use ($tahun) {
-                if (($tahun != '') && $tahun != 'Semua') {
-                    $query->where('created_at', 'LIKE', '%' . $tahun . '%');
-                }
-            })->count();
-            $realisasi = RealisasiHewan::with(['perencanaanHewan'])->whereHas('perencanaanHewan', function ($query) use ($opd) {
-                $query->where('opd_id', $opd->id);
-            })->where(function ($query) use ($tahun) {
-                if (($tahun != '') && $tahun != 'Semua') {
-                    $query->where('created_at', 'LIKE', '%' . $tahun . '%');
-                }
-            })->where('progress', '=', 100)->count();
+    // private function _tabelHewan($tahun)
+    // {
+    //     $tabel = [];
+    //     if (Auth::user()->role == 'OPD') {
+    //         $daftarOPD = OPD::orderBy('nama', 'asc')->where('id', Auth::user()->opd_id)->withTrashed()->get();
+    //     } else {
+    //         $daftarOPD = OPD::orderBy('nama', 'asc')->where(function ($query) {
+    //             if (Auth::user()->role == 'OPD') {
+    //                 $query->where('id', Auth::user()->opd_id);
+    //             }
+    //         })->get();
+    //     }
+    //     foreach ($daftarOPD as $opd) {
+    //         $perencanaan = PerencanaanHewan::where('opd_id', $opd->id)->where('status', 1)->where(function ($query) use ($tahun) {
+    //             if (($tahun != '') && $tahun != 'Semua') {
+    //                 $query->where('created_at', 'LIKE', '%' . $tahun . '%');
+    //             }
+    //         })->count();
+    //         $realisasi = RealisasiHewan::with(['perencanaanHewan'])->whereHas('perencanaanHewan', function ($query) use ($opd) {
+    //             $query->where('opd_id', $opd->id);
+    //         })->where(function ($query) use ($tahun) {
+    //             if (($tahun != '') && $tahun != 'Semua') {
+    //                 $query->where('created_at', 'LIKE', '%' . $tahun . '%');
+    //             }
+    //         })->where('progress', '=', 100)->count();
 
-            if ($perencanaan == 0) {
-                $persentase = '-';
-            } else {
-                $persentase = round(($realisasi / $perencanaan) * 100, 2);
-            }
+    //         if ($perencanaan == 0) {
+    //             $persentase = '-';
+    //         } else {
+    //             $persentase = round(($realisasi / $perencanaan) * 100, 2);
+    //         }
 
-            $tabel[] = [
-                'opd' => $opd->nama,
-                'perencanaan' => round($perencanaan, 2),
-                'realisasi' => round($realisasi, 2),
-                'persentase' => $persentase
-            ];
-        }
+    //         $tabel[] = [
+    //             'opd' => $opd->nama,
+    //             'perencanaan' => round($perencanaan, 2),
+    //             'realisasi' => round($realisasi, 2),
+    //             'persentase' => $persentase
+    //         ];
+    //     }
 
-        return $tabel;
-    }
+    //     return $tabel;
+    // }
 
-    private function _intervensi($tahun)
-    {
-        $daftarOPD = OPD::orderBy('nama', 'asc')->get()->pluck('id');
-        $data = [];
-        $perencanaanKeong = PerencanaanKeong::where('status', 1)->where(function ($query) use ($daftarOPD) {
-            if (Auth::user()->role == 'OPD') {
-                $query->where('opd_id', Auth::user()->opd_id);
-            } else {
-                $query->whereIn('opd_id', $daftarOPD);
-            }
-        })->where(function ($query) use ($tahun) {
-            if (($tahun != '') && $tahun != 'Semua') {
-                $query->where('created_at', 'LIKE', '%' . $tahun . '%');
-            }
-        })->count();
-        $perencanaanHewan = PerencanaanHewan::where('status', 1)->where(function ($query) use ($daftarOPD) {
-            if (Auth::user()->role == 'OPD') {
-                $query->where('opd_id', Auth::user()->opd_id);
-            } else {
-                $query->whereIn('opd_id', $daftarOPD);
-            }
-        })->where(function ($query) use ($tahun) {
-            if (($tahun != '') && $tahun != 'Semua') {
-                $query->where('created_at', 'LIKE', '%' . $tahun . '%');
-            }
-        })->count();
-        $perencanaanManusia = PerencanaanManusia::where('status', 1)->where(function ($query) use ($daftarOPD) {
-            if (Auth::user()->role == 'OPD') {
-                $query->where('opd_id', Auth::user()->opd_id);
-            } else {
-                $query->whereIn('opd_id', $daftarOPD);
-            }
-        })->where(function ($query) use ($tahun) {
-            if (($tahun != '') && $tahun != 'Semua') {
-                $query->where('created_at', 'LIKE', '%' . $tahun . '%');
-            }
-        })->count();
-        $perencanaanTotal = $perencanaanHewan + $perencanaanKeong + $perencanaanManusia;
+    // private function _intervensi($tahun)
+    // {
+    //     $daftarOPD = OPD::orderBy('nama', 'asc')->get()->pluck('id');
+    //     $data = [];
+    //     $perencanaanKeong = PerencanaanKeong::where('status', 1)->where(function ($query) use ($daftarOPD) {
+    //         if (Auth::user()->role == 'OPD') {
+    //             $query->where('opd_id', Auth::user()->opd_id);
+    //         } else {
+    //             $query->whereIn('opd_id', $daftarOPD);
+    //         }
+    //     })->where(function ($query) use ($tahun) {
+    //         if (($tahun != '') && $tahun != 'Semua') {
+    //             $query->where('created_at', 'LIKE', '%' . $tahun . '%');
+    //         }
+    //     })->count();
+    //     $perencanaanHewan = PerencanaanHewan::where('status', 1)->where(function ($query) use ($daftarOPD) {
+    //         if (Auth::user()->role == 'OPD') {
+    //             $query->where('opd_id', Auth::user()->opd_id);
+    //         } else {
+    //             $query->whereIn('opd_id', $daftarOPD);
+    //         }
+    //     })->where(function ($query) use ($tahun) {
+    //         if (($tahun != '') && $tahun != 'Semua') {
+    //             $query->where('created_at', 'LIKE', '%' . $tahun . '%');
+    //         }
+    //     })->count();
+    //     $perencanaanManusia = PerencanaanManusia::where('status', 1)->where(function ($query) use ($daftarOPD) {
+    //         if (Auth::user()->role == 'OPD') {
+    //             $query->where('opd_id', Auth::user()->opd_id);
+    //         } else {
+    //             $query->whereIn('opd_id', $daftarOPD);
+    //         }
+    //     })->where(function ($query) use ($tahun) {
+    //         if (($tahun != '') && $tahun != 'Semua') {
+    //             $query->where('created_at', 'LIKE', '%' . $tahun . '%');
+    //         }
+    //     })->count();
+    //     $perencanaanTotal = $perencanaanHewan + $perencanaanKeong + $perencanaanManusia;
 
-        $realisasiKeong = RealisasiKeong::where('progress', '=', 100)->whereHas('perencanaanKeong', function ($query) use ($daftarOPD) {
-            $query->where(function ($query) use ($daftarOPD) {
-                if (Auth::user()->role == 'OPD') {
-                    $query->where('opd_id', Auth::user()->opd_id);
-                } else {
-                    $query->whereIn('opd_id', $daftarOPD);
-                }
-            });
-        })->where(function ($query) use ($tahun) {
-            if (($tahun != '') && $tahun != 'Semua') {
-                $query->where('created_at', 'LIKE', '%' . $tahun . '%');
-            }
-        })->count();
-        $realisasiHewan = RealisasiHewan::where('progress', '=', 100)->whereHas('perencanaanHewan', function ($query) use ($daftarOPD) {
-            $query->where(function ($query) use ($daftarOPD) {
-                if (Auth::user()->role == 'OPD') {
-                    $query->where('opd_id', Auth::user()->opd_id);
-                } else {
-                    $query->whereIn('opd_id', $daftarOPD);
-                }
-            });
-        })->where(function ($query) use ($tahun) {
-            if (($tahun != '') && $tahun != 'Semua') {
-                $query->where('created_at', 'LIKE', '%' . $tahun . '%');
-            }
-        })->count();
-        $realisasiManusia = RealisasiManusia::where('progress', '=', 100)->whereHas('perencanaanManusia', function ($query) use ($daftarOPD) {
-            $query->where(function ($query) use ($daftarOPD) {
-                if (Auth::user()->role == 'OPD') {
-                    $query->where('opd_id', Auth::user()->opd_id);
-                } else {
-                    $query->whereIn('opd_id', $daftarOPD);
-                }
-            });
-        })->where(function ($query) use ($tahun) {
-            if (($tahun != '') && $tahun != 'Semua') {
-                $query->where('created_at', 'LIKE', '%' . $tahun . '%');
-            }
-        })->count();
-        $realisasiTotal = $realisasiHewan + $realisasiKeong + $realisasiManusia;
+    //     $realisasiKeong = RealisasiKeong::where('progress', '=', 100)->whereHas('perencanaanKeong', function ($query) use ($daftarOPD) {
+    //         $query->where(function ($query) use ($daftarOPD) {
+    //             if (Auth::user()->role == 'OPD') {
+    //                 $query->where('opd_id', Auth::user()->opd_id);
+    //             } else {
+    //                 $query->whereIn('opd_id', $daftarOPD);
+    //             }
+    //         });
+    //     })->where(function ($query) use ($tahun) {
+    //         if (($tahun != '') && $tahun != 'Semua') {
+    //             $query->where('created_at', 'LIKE', '%' . $tahun . '%');
+    //         }
+    //     })->count();
+    //     $realisasiHewan = RealisasiHewan::where('progress', '=', 100)->whereHas('perencanaanHewan', function ($query) use ($daftarOPD) {
+    //         $query->where(function ($query) use ($daftarOPD) {
+    //             if (Auth::user()->role == 'OPD') {
+    //                 $query->where('opd_id', Auth::user()->opd_id);
+    //             } else {
+    //                 $query->whereIn('opd_id', $daftarOPD);
+    //             }
+    //         });
+    //     })->where(function ($query) use ($tahun) {
+    //         if (($tahun != '') && $tahun != 'Semua') {
+    //             $query->where('created_at', 'LIKE', '%' . $tahun . '%');
+    //         }
+    //     })->count();
+    //     $realisasiManusia = RealisasiManusia::where('progress', '=', 100)->whereHas('perencanaanManusia', function ($query) use ($daftarOPD) {
+    //         $query->where(function ($query) use ($daftarOPD) {
+    //             if (Auth::user()->role == 'OPD') {
+    //                 $query->where('opd_id', Auth::user()->opd_id);
+    //             } else {
+    //                 $query->whereIn('opd_id', $daftarOPD);
+    //             }
+    //         });
+    //     })->where(function ($query) use ($tahun) {
+    //         if (($tahun != '') && $tahun != 'Semua') {
+    //             $query->where('created_at', 'LIKE', '%' . $tahun . '%');
+    //         }
+    //     })->count();
+    //     $realisasiTotal = $realisasiHewan + $realisasiKeong + $realisasiManusia;
 
-        $persentaseKeong = $perencanaanKeong == 0 ? 0 : round(($realisasiKeong / $perencanaanKeong) * 100, 2);
-        $persentaseHewan = $perencanaanHewan == 0 ? 0 : round(($realisasiHewan / $perencanaanHewan) * 100, 2);
-        $persentaseManusia = $perencanaanManusia == 0 ? 0 : round(($realisasiManusia / $perencanaanManusia) * 100, 2);
-        $persentaseTotal = $perencanaanTotal == 0 ? 0 : round(($realisasiTotal / $perencanaanTotal) * 100, 2);
+    //     $persentaseKeong = $perencanaanKeong == 0 ? 0 : round(($realisasiKeong / $perencanaanKeong) * 100, 2);
+    //     $persentaseHewan = $perencanaanHewan == 0 ? 0 : round(($realisasiHewan / $perencanaanHewan) * 100, 2);
+    //     $persentaseManusia = $perencanaanManusia == 0 ? 0 : round(($realisasiManusia / $perencanaanManusia) * 100, 2);
+    //     $persentaseTotal = $perencanaanTotal == 0 ? 0 : round(($realisasiTotal / $perencanaanTotal) * 100, 2);
 
-        $data = [
-            'perencanaanKeong' => $perencanaanKeong,
-            'perencanaanHewan' => $perencanaanHewan,
-            'perencanaanManusia' => $perencanaanManusia,
-            'perencanaanTotal' => $perencanaanTotal,
-            'realisasiKeong' => $realisasiKeong,
-            'realisasiHewan' => $realisasiHewan,
-            'realisasiManusia' => $realisasiManusia,
-            'realisasiTotal' => $realisasiTotal,
-            'persentaseKeong' => $persentaseKeong,
-            'persentaseHewan' => $persentaseHewan,
-            'persentaseManusia' => $persentaseManusia,
-            'persentaseTotal' => $persentaseTotal
-        ];
+    //     $data = [
+    //         'perencanaanKeong' => $perencanaanKeong,
+    //         'perencanaanHewan' => $perencanaanHewan,
+    //         'perencanaanManusia' => $perencanaanManusia,
+    //         'perencanaanTotal' => $perencanaanTotal,
+    //         'realisasiKeong' => $realisasiKeong,
+    //         'realisasiHewan' => $realisasiHewan,
+    //         'realisasiManusia' => $realisasiManusia,
+    //         'realisasiTotal' => $realisasiTotal,
+    //         'persentaseKeong' => $persentaseKeong,
+    //         'persentaseHewan' => $persentaseHewan,
+    //         'persentaseManusia' => $persentaseManusia,
+    //         'persentaseTotal' => $persentaseTotal
+    //     ];
 
-        return $data;
-    }
+    //     return $data;
+    // }
 
     private function _lokasi()
     {
         $desa = Desa::count();
         $lokasiKeong = LokasiKeong::count();
-        $lokasiHewan = LokasiHewan::count();
+        // $lokasiHewan = LokasiHewan::count();
 
         $data = [
             'desa' => $desa,
             'lokasiKeong' => $lokasiKeong,
-            'lokasiHewan' => $lokasiHewan
+            // 'lokasiHewan' => $lokasiHewan
         ];
 
         return $data;
     }
 
-    private function _totalHewan()
-    {
-        $arrayHewan = [];
-        $daftarHewan = Hewan::orderBy('nama', 'asc')->get();
-        foreach ($daftarHewan as $hewan) {
-            $jumlahHewan = JumlahHewan::where('hewan_id', $hewan->id)
-                ->sum('jumlah');
+    // private function _totalHewan()
+    // {
+    //     $arrayHewan = [];
+    //     $daftarHewan = Hewan::orderBy('nama', 'asc')->get();
+    //     foreach ($daftarHewan as $hewan) {
+    //         $jumlahHewan = JumlahHewan::where('hewan_id', $hewan->id)
+    //             ->sum('jumlah');
 
-            $arrayHewan[] = [
-                'nama_hewan' => $hewan->nama,
-                'jumlah' => $jumlahHewan
-            ];
-        }
+    //         $arrayHewan[] = [
+    //             'nama_hewan' => $hewan->nama,
+    //             'jumlah' => $jumlahHewan
+    //         ];
+    //     }
 
-        return $arrayHewan;
-    }
+    //     return $arrayHewan;
+    // }
 
     private function _totalData()
     {
         $penduduk = Penduduk::count();
-        $sekolah = Sekolah::count();
-        $siswaSekolah = Siswa::count();
+        // $sekolah = Sekolah::count();
+        // $siswaSekolah = Siswa::count();
         $opd = OPD::count();
 
         $data = [
             'penduduk' => $penduduk,
-            'sekolah' => $sekolah,
-            'siswaSekolah' => $siswaSekolah,
+            // 'sekolah' => $sekolah,
+            // 'siswaSekolah' => $siswaSekolah,
             'opd' => $opd
         ];
 

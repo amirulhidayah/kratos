@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Schistosomiasis | @yield('title')</title>
+    <title>STUNTING | @yield('title')</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -196,7 +196,7 @@
         @include('dashboard.layouts.sidebar')
         <div class="main-panel">
             <div class="container">
-                <div class="panel-header bg-primary-gradient">
+                <div class="panel-header bg-secondary-gradient">
                     <div class="page-inner pb-5 pt-5">
                         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                             <div>

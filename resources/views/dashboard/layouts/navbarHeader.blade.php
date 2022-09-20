@@ -1,5 +1,5 @@
  <!-- Navbar Header -->
- <nav class="navbar navbar-header navbar-expand-lg" data-background-color="blue2">
+ <nav class="navbar navbar-header navbar-expand-lg" data-background-color="purple">
      <div class="container-fluid">
          <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
              <li class="text-white font-weight-bold mr-2">

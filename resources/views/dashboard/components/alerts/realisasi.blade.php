@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-header">
             <div class="card-head-row">
-                <div class="card-title fw-bold text-primary"><i class="icon-bell"></i> Pemberitahuan</div>
+                <div class="card-title fw-bold text-secondary"><i class="icon-bell"></i> Pemberitahuan</div>
             </div>
         </div>
         <div class="card-body">
