@@ -14,7 +14,7 @@
 
 @section('buttonPanelHeader')
     @if (Auth::user()->role == 'OPD')
-        <a href="{{ route('rencana-intervensi.create') }}" class="btn btn-info btn-round"><i class="fas fa-plus"></i>
+        <a href="{{ route('rencana-intervensi.create') }}" class="btn btn-secondary btn-round"><i class="fas fa-plus"></i>
             Tambah</a>
     @endif
 @endsection
@@ -35,7 +35,7 @@
                         <div class="card-tools">
                             <form action="{{ url('export-perencanaan-keong') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-info btn-border btn-round btn-sm mr-2"
+                                <button type="submit" class="btn btn-secondary btn-border btn-round btn-sm mr-2"
                                     id="export-penduduk" value="" name="desa_id">
                                     <i class="fas fa-lg fa-download"></i>
                                     Export Data Perencanaan

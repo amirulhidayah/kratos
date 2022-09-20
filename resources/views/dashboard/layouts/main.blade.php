@@ -196,7 +196,7 @@
         @include('dashboard.layouts.sidebar')
         <div class="main-panel">
             <div class="container">
-                <div class="panel-header bg-info-gradient">
+                <div class="panel-header bg-secondary-gradient">
                     <div class="page-inner pb-5 pt-5">
                         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                             <div>
