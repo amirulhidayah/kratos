@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\masterData;
 
 use App\Http\Controllers\Controller;
-use App\Models\Hewan;
+use App\Models\Indikator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 
-class HewanController extends Controller
+class IndikatorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class HewanController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Hewan::orderBy('created_at', 'desc')->get();
+            $data = Indikator::orderBy('created_at', 'desc')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -30,7 +30,7 @@ class HewanController extends Controller
                 ->make(true);
         }
 
-        return view('dashboard.pages.masterData.hewan.index');
+        return view('dashboard.pages.masterData.indikator.index');
     }
 
     /**
@@ -54,11 +54,10 @@ class HewanController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'nama' => ['required', Rule::unique('hewan')->withoutTrashed()],
+                'nama' => 'required'
             ],
             [
-                'nama.required' => 'Nama Hewan tidak boleh kosong',
-                'nama.unique' => 'Nama Hewan sudah ada',
+                'nama.required' => 'Indikator tidak boleh kosong',
             ]
         );
 
@@ -66,9 +65,9 @@ class HewanController extends Controller
             return response()->json(['error' => $validator->errors()]);
         }
 
-        $hewan = new Hewan();
-        $hewan->nama = $request->nama;
-        $hewan->save();
+        $indikator = new Indikator();
+        $indikator->nama = $request->nama;
+        $indikator->save();
 
         return response()->json(['status' => 'success']);
     }
@@ -76,10 +75,10 @@ class HewanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Hewan  $hewan
+     * @param  \App\Models\Indikator  $indikator
      * @return \Illuminate\Http\Response
      */
-    public function show(Hewan $hewan)
+    public function show(Indikator $indikator)
     {
         //
     }
@@ -87,31 +86,30 @@ class HewanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Hewan  $hewan
+     * @param  \App\Models\Indikator  $indikator
      * @return \Illuminate\Http\Response
      */
-    public function edit(Hewan $hewan)
+    public function edit(Indikator $indikator)
     {
-        return response()->json($hewan);
+        return response()->json($indikator);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Hewan  $hewan
+     * @param  \App\Models\Indikator  $indikator
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hewan $hewan)
+    public function update(Request $request, Indikator $indikator)
     {
         $validator = Validator::make(
             $request->all(),
             [
-                'nama' => ['required', Rule::unique('hewan')->ignore($hewan->id)->withoutTrashed()],
+                'nama' => 'required'
             ],
             [
-                'nama.required' => 'Nama Hewan tidak boleh kosong',
-                'nama.unique' => 'Nama Hewan sudah ada',
+                'nama.required' => 'Indikator tidak boleh kosong',
             ]
         );
 
@@ -119,8 +117,8 @@ class HewanController extends Controller
             return response()->json(['error' => $validator->errors()]);
         }
 
-        $hewan->nama = $request->nama;
-        $hewan->save();
+        $indikator->nama = $request->nama;
+        $indikator->save();
 
         return response()->json(['status' => 'success']);
     }
@@ -128,12 +126,12 @@ class HewanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Hewan  $hewan
+     * @param  \App\Models\Indikator  $indikator
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hewan $hewan)
+    public function destroy(Indikator $indikator)
     {
-        $hewan->delete();
+        $indikator->delete();
 
         return response()->json(['status' => 'success']);
     }

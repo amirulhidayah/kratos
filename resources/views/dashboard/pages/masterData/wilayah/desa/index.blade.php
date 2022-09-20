@@ -16,7 +16,7 @@
     @if (Auth::user()->role == 'Admin')
         @component('dashboard.components.buttons.add',
             [
-                'url' => url('master-data/lokasi/desa/create'),
+                'url' => url('master-data/wilayah/desa/' . '/' . $kecamatanId . '/create'),
             ])
         @endcomponent
     @endif
@@ -39,7 +39,8 @@
                     <div class="card-head-row">
                         <div class="card-title">Data Desa</div>
                         <div class="card-tools">
-                            <form action="{{ url('master-data/lokasi/desa/export') }}" method="POST">
+                            <form action="{{ url('master-data/wilayah/desa/' . ' / ' . $kecamatanId . '/export') }}"
+                                method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-info btn-border btn-round btn-sm mr-2"
                                     id="export-lokasi-hewan">
@@ -111,48 +112,60 @@
                 map.remove();
             }
 
-            var center = [-1.3618072, 120.1619337];
+            var center = {{ env('MAP_CENTER') }};
 
             map = L.map("peta", {
                 maxBounds: [
-                    [-1.511127, 119.9637063],
-                    [-1.21458, 120.2912363]
+                    {{ env('MAP_BOUNDS_1') }},
+                    {{ env('MAP_BOUNDS_2') }}
                 ]
-            }).setView(center, 11);
+            }).setView(center, {{ env('MAP_ZOOM') }});
             map.addControl(new L.Control.Fullscreen());
 
             L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                 attribution: 'Data © <a href="http://osm.org/copyright">OpenStreetMap</a>',
-                maxZoom: 18,
-                minZoom: 11
+                maxZoom: {{ env('MAP_MAX_ZOOM') }},
+                minZoom: {{ env('MAP_MIN_ZOOM') }}
             }).addTo(map);
 
             map.invalidateSize();
 
             $.ajax({
                 url: "{{ url('/map/desa') }}",
+                data: {
+                    kecamatanId: "{{ $kecamatanId }}"
+                },
                 type: "GET",
                 success: function(response) {
                     if (response.status == 'success') {
                         for (var i = 0; i < response.data.length; i++) {
                             L.polygon(response.data[i].koordinatPolygon, {
-                                    color: response.data[i].warna_polygon,
-                                    weight: 1,
-                                    opacity: 1,
-                                    fillOpacity: 1
+                                    color: "{{ env('MAP_POLYGON_COLOR') }}",
+                                    fillColor: response.data[i].warna_polygon,
+                                    weight: {{ env('MAP_POLYGON_WEIGHT') }},
+                                    opacity: {{ env('MAP_POLYGON_OPACITY') }},
+                                    fillOpacity: {{ env('MAP_POLYGON_FILLOPACITY') }}
                                 })
                                 .addTo(map)
-                                .bindTooltip(response.data[i].nama + " (" + response.data[i].luas +
-                                    " Km<sup>2</sup>) ", {
-                                        permanent: true,
-                                        direction: "center"
-                                    })
-                                .bindPopup(
-                                    "<p class='fw-bold my-0 text-center'>" + response.data[i].nama +
-                                    "</p><hr>" +
-                                    "<p class='my-0'>Kode : " + response.data[i].kode + "</p>" +
-                                    "<p class='my-0'>Luas : " + response.data[i].luas + " Km<sup>2</sup></p>"
-                                );
+                                .bindTooltip(response.data[i].nama, {
+                                    permanent: true,
+                                    direction: "center",
+                                    className: 'labelPolygon'
+                                })
+                            // .bindTooltip(
+                            //     response.data[i].nama + " (" + response.data[i].luas +
+                            //     " Km<sup>2</sup>) ", {
+                            //         permanent: true,
+                            //         direction: "center"
+                            //     }
+                            // )
+                            // .bindPopup(
+                            //     "<p class='fw-bold my-0 text-center'>" + response.data[i].nama +
+                            //     "</p><hr>" +
+                            //     "<p class='my-0'>Kode : " + response.data[i].kode + "</p>" +
+                            //     "<p class='my-0'>Luas : " + response.data[i].luas + " Km<sup>2</sup></p>"
+                            // )
+                            ;
                         }
                     }
                 },
@@ -180,7 +193,8 @@
             }).then((Delete) => {
                 if (Delete) {
                     $.ajax({
-                        url: "{{ url('master-data/lokasi/desa') }}" + '/' + id,
+                        url: "{{ url('master-data/wilayah/desa' . '/' . $kecamatanId) }}" + '/' +
+                            id,
                         type: 'DELETE',
                         data: {
                             '_token': '{{ csrf_token() }}'
@@ -220,7 +234,7 @@
         var table = $('#table-data').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ url('master-data/lokasi/desa') }}",
+            ajax: "{{ url('master-data/wilayah/desa' . '/' . $kecamatanId) }}",
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
@@ -271,8 +285,6 @@
     </script>
 
     <script>
-        $('#nav-master-lokasi').addClass('active');
-        $('#nav-master-lokasi .collapse').addClass('show');
-        $('#nav-master-lokasi .collapse #li-lokasi-desa').addClass('active');
+        $('#nav-master-wilayah').addClass('active');
     </script>
 @endpush

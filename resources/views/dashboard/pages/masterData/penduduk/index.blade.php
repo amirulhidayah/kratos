@@ -115,7 +115,7 @@
                                     aria-labelledby="pills-jumlah-tab-nobd">
                                     <div class="my-2">
                                         <div class="owl-carousel owl-theme owl-img-responsive">
-                                            @foreach ($daftarJumlahPenduduk as $jumlahPenduduk)
+                                            {{-- @foreach ($daftarJumlahPenduduk as $jumlahPenduduk)
                                                 <div class="col-sm-12 col-md-12 item">
                                                     <div class="card card-stats card-round border">
                                                         <div class="card-body ">
@@ -355,7 +355,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @endforeach
+                                            @endforeach --}}
                                         </div>
 
                                     </div>

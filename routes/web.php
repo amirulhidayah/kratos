@@ -11,6 +11,10 @@ use App\Http\Controllers\masterData\lokasi\LokasiDesaController;
 use App\Http\Controllers\intervensi\RealisasiController;
 use App\Http\Controllers\intervensi\PerencanaanController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\masterData\IndikatorController;
+use App\Http\Controllers\masterData\wilayah\DesaController;
+use App\Http\Controllers\masterData\wilayah\KecamatanController;
+use App\Http\Controllers\masterData\AkunController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,10 +67,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     // Master Data
-    // Lokasi
-    Route::get('master-data/lokasi/desa/tabel', [LokasiDesaController::class, 'tabel']);
-    Route::post('master-data/lokasi/desa/export', [LokasiDesaController::class, 'export']);
-    Route::resource('master-data/lokasi/desa', LokasiDesaController::class);
 
     Route::group(['middleware' => ['role:Admin|Pimpinan']], function () {
         Route::resource('master-data/opd', OPDController::class)->only(
@@ -85,12 +85,20 @@ Route::group(['middleware' => 'auth'], function () {
             'index',
             'show'
         );
+        // Indikator
+        Route::resource('master-data/indikator', IndikatorController::class);
+
+        // Wilayah
+        Route::get('map/kecamatan', [KecamatanController::class, 'getMapData']);
+        Route::get('map/desa', [DesaController::class, 'getMapData']);
+        Route::resource('master-data/wilayah/kecamatan', KecamatanController::class);
+        Route::resource('master-data/wilayah/desa/{kecamatan}', DesaController::class)->parameters([
+            '{kecamatan}' => 'desa'
+        ]);
+        Route::resource('master-data/akun', AkunController::class)->parameters(['akun' => 'user']);
     });
 
-    Route::get('map/desa', [LokasiDesaController::class, 'getMapData']);
 
-    // List
-    Route::get('list/desa', [ListController::class, 'desa']);
 
     // Pengaturan Akun
     Route::get('pengaturan-akun', [PengaturanAkunController::class, 'index']);

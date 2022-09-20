@@ -41,8 +41,8 @@
                      <h4 class="text-section">Master Data</h4>
                  </li>
 
-                 <li class="nav-item" id="nav-hasil-realisasi">
-                     <a href="{{ url('master-data/lokasi/desa') }}">
+                 <li class="nav-item" id="nav-master-wilayah">
+                     <a href="{{ url('master-data/wilayah/kecamatan') }}">
                          <i class="far fa-map"></i>
                          <p>Wilayah</p>
                      </a>
@@ -64,6 +64,12 @@
                      </li>
                  @endif
                  @if (Auth::user()->role == 'Admin')
+                     <li class="nav-item" id="nav-master-indikator">
+                         <a href="{{ url('master-data/indikator') }}">
+                             <i class="fas fa-tasks"></i>
+                             <p>Indikator</p>
+                         </a>
+                     </li>
                      <li class="nav-item" id="nav-master-akun">
                          <a href="{{ url('master-data/akun') }}">
                              <i class="fas fa-users"></i>

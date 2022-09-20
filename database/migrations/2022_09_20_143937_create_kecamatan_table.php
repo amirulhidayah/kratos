@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('nama');
             $table->string('kode')->nullable();
             $table->json('polygon')->nullable();
+            $table->string('luas')->default(0)->nullable();
             $table->string('warna_polygon')->nullable();
             $table->softDeletes();
             $table->timestamps();
