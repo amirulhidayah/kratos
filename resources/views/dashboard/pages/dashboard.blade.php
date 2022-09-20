@@ -9,7 +9,7 @@
 @endsection
 
 @section('subTitlePanelHeader')
-    <p style="font-size: 15px">Tahun :
+    {{-- <p style="font-size: 15px">Tahun :
         @php
             if ($tahun != '' && $tahun != 'Semua') {
                 echo $tahun;
@@ -17,7 +17,7 @@
                 echo 'Semua';
             }
         @endphp
-    </p>
+    </p> --}}
 @endsection
 
 @section('buttonPanelHeader')
@@ -37,228 +37,217 @@
     <div class="row">
         <div class="col-md-9">
             <div class="row">
-                @if (!(
-                    $totalMenungguKonfirmasiPerencanaanKeong == 0 &&
-                    $totalMenungguKonfirmasiPerencanaanManusia == 0 &&
-                    $totalMenungguKonfirmasiPerencanaanHewan == 0 &&
-                    $totalMenungguKonfirmasiRealisasiKeong == 0 &&
-                    $totalMenungguKonfirmasiRealisasiManusia == 0 &&
-                    $totalMenungguKonfirmasiRealisasiManusia == 0 &&
-                    $totalPerencanaanKeongTidakTerselesaikan == 0 &&
-                    $totalPerencanaanManusiaTidakTerselesaikan == 0 &&
-                    $totalPerencanaanHewanTidakTerselesaikan == 0
-                ))
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-head-row">
-                                    <div class="card-title fw-bold text-primary"><i class="icon-bell"></i> Pemberitahuan
-                                    </div>
+                {{-- @if (!($totalMenungguKonfirmasiPerencanaanKeong == 0 && $totalMenungguKonfirmasiPerencanaanManusia == 0 && $totalMenungguKonfirmasiPerencanaanHewan == 0 && $totalMenungguKonfirmasiRealisasiKeong == 0 && $totalMenungguKonfirmasiRealisasiManusia == 0 && $totalMenungguKonfirmasiRealisasiManusia == 0 && $totalPerencanaanKeongTidakTerselesaikan == 0 && $totalPerencanaanManusiaTidakTerselesaikan == 0 && $totalPerencanaanHewanTidakTerselesaikan == 0))
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-head-row">
+                                <div class="card-title fw-bold text-primary"><i class="icon-bell"></i> Pemberitahuan
+                                </div>
 
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-secondary {{ $totalPerencanaanKeongTidakTerselesaikan == 0 ? 'd-none' : '' }}"
+                                role="alert">
+                                <div class="row">
+                                    <div class="col-10 pr-0">
+                                        <span>
+                                            <b>Perencanaan Habitat Keong:</b> Terdapat
+                                            <b>{{ $totalPerencanaanKeongTidakTerselesaikan }}</b>
+                                            perencanaan yang
+                                            {{ Auth::user()->role == 'OPD'
+                                                ? ' belum diselesaikan pada tahun sebelumnya dan belum ditambahkan alasan mengapa tidak di selesaikan. Silahkan tambahkan alasan mengapa tidak menyelesaikannya'
+                                                : ' memberikan informasi mengenai alasan mengapa tidak menyelesaikan perencanaan tersebut pada tahun sebelumnya' }}.
+                                        </span>
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center pl-0">
+                                        <a href="{{ url('rencana-intervensi-keong') }}"
+                                            class="badge badge-secondary float-right"><i class="fas fa-info-circle"></i>
+                                            Lihat
+                                        </a>
+
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="alert alert-secondary {{ $totalPerencanaanKeongTidakTerselesaikan == 0 ? 'd-none' : '' }}"
-                                    role="alert">
-                                    <div class="row">
-                                        <div class="col-10 pr-0">
-                                            <span>
-                                                <b>Perencanaan Habitat Keong:</b> Terdapat
-                                                <b>{{ $totalPerencanaanKeongTidakTerselesaikan }}</b>
-                                                perencanaan yang
-                                                {{ Auth::user()->role == 'OPD'
-                                                    ? ' belum diselesaikan pada tahun sebelumnya dan belum ditambahkan alasan mengapa tidak di selesaikan. Silahkan tambahkan alasan mengapa tidak menyelesaikannya'
-                                                    : ' memberikan informasi mengenai alasan mengapa tidak menyelesaikan perencanaan tersebut pada tahun sebelumnya' }}.
-                                            </span>
-                                        </div>
-                                        <div class="col-2 d-flex align-items-center pl-0">
-                                            <a href="{{ url('rencana-intervensi-keong') }}"
-                                                class="badge badge-secondary float-right"><i class="fas fa-info-circle"></i>
-                                                Lihat
-                                            </a>
+                            <div class="alert alert-secondary {{ $totalPerencanaanManusiaTidakTerselesaikan == 0 ? 'd-none' : '' }}"
+                                role="alert">
+                                <div class="row">
+                                    <div class="col-10 pr-0">
+                                        <span>
+                                            <b>Perencanaan Manusia:</b> Terdapat
+                                            <b>{{ $totalPerencanaanManusiaTidakTerselesaikan }}</b>
+                                            perencanaan yang
+                                            {{ Auth::user()->role == 'OPD'
+                                                ? ' belum diselesaikan pada tahun sebelumnya dan belum ditambahkan alasan mengapa tidak di selesaikan. Silahkan tambahkan alasan mengapa tidak menyelesaikannya'
+                                                : ' memberikan informasi mengenai alasan mengapa tidak menyelesaikan perencanaan tersebut pada tahun sebelumnya' }}.
+                                        </span>
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center pl-0">
+                                        <a href="{{ url('rencana-intervensi-manusia') }}"
+                                            class="badge badge-secondary float-right"><i class="fas fa-info-circle"></i>
+                                            Lihat
+                                        </a>
 
-                                        </div>
                                     </div>
                                 </div>
-                                <div class="alert alert-secondary {{ $totalPerencanaanManusiaTidakTerselesaikan == 0 ? 'd-none' : '' }}"
-                                    role="alert">
-                                    <div class="row">
-                                        <div class="col-10 pr-0">
-                                            <span>
-                                                <b>Perencanaan Manusia:</b> Terdapat
-                                                <b>{{ $totalPerencanaanManusiaTidakTerselesaikan }}</b>
-                                                perencanaan yang
-                                                {{ Auth::user()->role == 'OPD'
-                                                    ? ' belum diselesaikan pada tahun sebelumnya dan belum ditambahkan alasan mengapa tidak di selesaikan. Silahkan tambahkan alasan mengapa tidak menyelesaikannya'
-                                                    : ' memberikan informasi mengenai alasan mengapa tidak menyelesaikan perencanaan tersebut pada tahun sebelumnya' }}.
-                                            </span>
-                                        </div>
-                                        <div class="col-2 d-flex align-items-center pl-0">
-                                            <a href="{{ url('rencana-intervensi-manusia') }}"
-                                                class="badge badge-secondary float-right"><i class="fas fa-info-circle"></i>
-                                                Lihat
-                                            </a>
+                            </div>
+                            <div class="alert alert-secondary {{ $totalPerencanaanHewanTidakTerselesaikan == 0 ? 'd-none' : '' }}"
+                                role="alert">
+                                <div class="row">
+                                    <div class="col-10 pr-0">
+                                        <span>
+                                            <b>Perencanaan Lokasi Hewan Ternak:</b> Terdapat
+                                            <b>{{ $totalPerencanaanHewanTidakTerselesaikan }}</b>
+                                            perencanaan yang
+                                            {{ Auth::user()->role == 'OPD'
+                                                ? ' belum diselesaikan pada tahun sebelumnya dan belum ditambahkan alasan mengapa tidak di selesaikan. Silahkan tambahkan alasan mengapa tidak menyelesaikannya'
+                                                : ' memberikan informasi mengenai alasan mengapa tidak menyelesaikan perencanaan tersebut pada tahun sebelumnya' }}.
+                                        </span>
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center pl-0">
+                                        <a href="{{ url('rencana-intervensi-hewan') }}"
+                                            class="badge badge-secondary float-right"><i class="fas fa-info-circle"></i>
+                                            Lihat
+                                        </a>
 
-                                        </div>
                                     </div>
                                 </div>
-                                <div class="alert alert-secondary {{ $totalPerencanaanHewanTidakTerselesaikan == 0 ? 'd-none' : '' }}"
-                                    role="alert">
-                                    <div class="row">
-                                        <div class="col-10 pr-0">
-                                            <span>
-                                                <b>Perencanaan Lokasi Hewan Ternak:</b> Terdapat
-                                                <b>{{ $totalPerencanaanHewanTidakTerselesaikan }}</b>
-                                                perencanaan yang
-                                                {{ Auth::user()->role == 'OPD'
-                                                    ? ' belum diselesaikan pada tahun sebelumnya dan belum ditambahkan alasan mengapa tidak di selesaikan. Silahkan tambahkan alasan mengapa tidak menyelesaikannya'
-                                                    : ' memberikan informasi mengenai alasan mengapa tidak menyelesaikan perencanaan tersebut pada tahun sebelumnya' }}.
-                                            </span>
-                                        </div>
-                                        <div class="col-2 d-flex align-items-center pl-0">
-                                            <a href="{{ url('rencana-intervensi-hewan') }}"
-                                                class="badge badge-secondary float-right"><i class="fas fa-info-circle"></i>
-                                                Lihat
-                                            </a>
+                            </div>
 
-                                        </div>
+                            <div class="alert alert-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} {{ $totalMenungguKonfirmasiPerencanaanKeong == 0 ? 'd-none' : '' }}"
+                                role="alert">
+                                <div class="row">
+                                    <div class="col-10 pr-0">
+                                        <span>
+                                            <b>Perencanaan Habitat Keong:</b> Terdapat
+                                            <b>{{ $totalMenungguKonfirmasiPerencanaanKeong }}</b>
+                                            perencanaan yang
+                                            {{ Auth::user()->role == 'OPD' ? 'ditolak' : 'menunggu konfirmasi' }}.
+                                            {{ Auth::user()->role == 'OPD' ? 'Silahkan ubah data tersebut dan kemudian perbarui datanya.' : '' }}
+                                        </span>
                                     </div>
-                                </div>
+                                    <div class="col-2 d-flex align-items-center pl-0">
+                                        <a href="{{ url('rencana-intervensi-keong') }}"
+                                            class="badge badge-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} float-right"><i
+                                                class="fas fa-info-circle"></i>
+                                            Lihat
+                                        </a>
 
-                                {{-- Batas --}}
-                                <div class="alert alert-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} {{ $totalMenungguKonfirmasiPerencanaanKeong == 0 ? 'd-none' : '' }}"
-                                    role="alert">
-                                    <div class="row">
-                                        <div class="col-10 pr-0">
-                                            <span>
-                                                <b>Perencanaan Habitat Keong:</b> Terdapat
-                                                <b>{{ $totalMenungguKonfirmasiPerencanaanKeong }}</b>
-                                                perencanaan yang
-                                                {{ Auth::user()->role == 'OPD' ? 'ditolak' : 'menunggu konfirmasi' }}.
-                                                {{ Auth::user()->role == 'OPD' ? 'Silahkan ubah data tersebut dan kemudian perbarui datanya.' : '' }}
-                                            </span>
-                                        </div>
-                                        <div class="col-2 d-flex align-items-center pl-0">
-                                            <a href="{{ url('rencana-intervensi-keong') }}"
-                                                class="badge badge-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} float-right"><i
-                                                    class="fas fa-info-circle"></i>
-                                                Lihat
-                                            </a>
-
-                                        </div>
                                     </div>
                                 </div>
-                                <div class="alert alert-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} {{ $totalMenungguKonfirmasiPerencanaanManusia == 0 ? 'd-none' : '' }}"
-                                    role="alert">
-                                    <div class="row">
-                                        <div class="col-md-10 pr-0">
-                                            <span>
-                                                <b>Perencanaan Manusia:</b> Terdapat
-                                                <b>{{ $totalMenungguKonfirmasiPerencanaanManusia }}</b>
-                                                perencanaan yang
-                                                {{ Auth::user()->role == 'OPD' ? 'ditolak' : 'menunggu konfirmasi' }}.
-                                                {{ Auth::user()->role == 'OPD' ? 'Silahkan ubah data tersebut dan kemudian perbarui datanya.' : '' }}
-                                            </span>
-                                        </div>
-                                        <div class="col-md-2 d-flex align-items-center pl-0">
-                                            <a href="{{ url('rencana-intervensi-manusia') }}"
-                                                class="badge badge-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} float-right"><i
-                                                    class="fas fa-info-circle"></i>
-                                                Lihat
-                                            </a>
-                                        </div>
+                            </div>
+                            <div class="alert alert-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} {{ $totalMenungguKonfirmasiPerencanaanManusia == 0 ? 'd-none' : '' }}"
+                                role="alert">
+                                <div class="row">
+                                    <div class="col-md-10 pr-0">
+                                        <span>
+                                            <b>Perencanaan Manusia:</b> Terdapat
+                                            <b>{{ $totalMenungguKonfirmasiPerencanaanManusia }}</b>
+                                            perencanaan yang
+                                            {{ Auth::user()->role == 'OPD' ? 'ditolak' : 'menunggu konfirmasi' }}.
+                                            {{ Auth::user()->role == 'OPD' ? 'Silahkan ubah data tersebut dan kemudian perbarui datanya.' : '' }}
+                                        </span>
+                                    </div>
+                                    <div class="col-md-2 d-flex align-items-center pl-0">
+                                        <a href="{{ url('rencana-intervensi-manusia') }}"
+                                            class="badge badge-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} float-right"><i
+                                                class="fas fa-info-circle"></i>
+                                            Lihat
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="alert alert-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} {{ $totalMenungguKonfirmasiPerencanaanHewan == 0 ? 'd-none' : '' }}"
-                                    role="alert">
-                                    <div class="row">
-                                        <div class="col-md-10 pr-0">
-                                            <span>
-                                                <b>Perencanaan Lokasi Hewan Ternak:</b> Terdapat
-                                                <b>{{ $totalMenungguKonfirmasiPerencanaanHewan }}</b>
-                                                perencanaan yang
-                                                {{ Auth::user()->role == 'OPD' ? 'ditolak' : 'menunggu konfirmasi' }}.
-                                                {{ Auth::user()->role == 'OPD' ? 'Silahkan ubah data tersebut dan kemudian perbarui datanya.' : '' }}
-                                            </span>
-                                        </div>
-                                        <div class="col-md-2 d-flex align-items-center pl-0">
-                                            <a href="{{ url('rencana-intervensi-hewan') }}"
-                                                class="badge badge-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} float-right"><i
-                                                    class="fas fa-info-circle"></i>
-                                                Lihat
-                                            </a>
-                                        </div>
+                            </div>
+                            <div class="alert alert-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} {{ $totalMenungguKonfirmasiPerencanaanHewan == 0 ? 'd-none' : '' }}"
+                                role="alert">
+                                <div class="row">
+                                    <div class="col-md-10 pr-0">
+                                        <span>
+                                            <b>Perencanaan Lokasi Hewan Ternak:</b> Terdapat
+                                            <b>{{ $totalMenungguKonfirmasiPerencanaanHewan }}</b>
+                                            perencanaan yang
+                                            {{ Auth::user()->role == 'OPD' ? 'ditolak' : 'menunggu konfirmasi' }}.
+                                            {{ Auth::user()->role == 'OPD' ? 'Silahkan ubah data tersebut dan kemudian perbarui datanya.' : '' }}
+                                        </span>
+                                    </div>
+                                    <div class="col-md-2 d-flex align-items-center pl-0">
+                                        <a href="{{ url('rencana-intervensi-hewan') }}"
+                                            class="badge badge-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} float-right"><i
+                                                class="fas fa-info-circle"></i>
+                                            Lihat
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="alert alert-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} {{ $totalMenungguKonfirmasiRealisasiKeong == 0 ? 'd-none' : '' }}"
-                                    role="alert">
-                                    <div class="row">
-                                        <div class="col-md-10 pr-0">
-                                            <span>
-                                                <b>Realisasi Habitat Keong:</b> Terdapat
-                                                <b>{{ $totalMenungguKonfirmasiRealisasiKeong }}</b>
-                                                laporan realisasi yang
-                                                {{ Auth::user()->role == 'OPD' ? 'ditolak' : 'menunggu konfirmasi' }}.
-                                                {{ Auth::user()->role == 'OPD' ? 'Silahkan ubah data tersebut dan kemudian perbarui datanya.' : '' }}
-                                            </span>
-                                        </div>
-                                        <div class="col-md-2 d-flex align-items-center pl-0">
-                                            <a href="{{ url('realisasi-intervensi-keong') }}"
-                                                class="badge badge-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} float-right"><i
-                                                    class="fas fa-info-circle"></i>
-                                                Lihat
-                                            </a>
-                                        </div>
+                            </div>
+                            <div class="alert alert-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} {{ $totalMenungguKonfirmasiRealisasiKeong == 0 ? 'd-none' : '' }}"
+                                role="alert">
+                                <div class="row">
+                                    <div class="col-md-10 pr-0">
+                                        <span>
+                                            <b>Realisasi Habitat Keong:</b> Terdapat
+                                            <b>{{ $totalMenungguKonfirmasiRealisasiKeong }}</b>
+                                            laporan realisasi yang
+                                            {{ Auth::user()->role == 'OPD' ? 'ditolak' : 'menunggu konfirmasi' }}.
+                                            {{ Auth::user()->role == 'OPD' ? 'Silahkan ubah data tersebut dan kemudian perbarui datanya.' : '' }}
+                                        </span>
+                                    </div>
+                                    <div class="col-md-2 d-flex align-items-center pl-0">
+                                        <a href="{{ url('realisasi-intervensi-keong') }}"
+                                            class="badge badge-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} float-right"><i
+                                                class="fas fa-info-circle"></i>
+                                            Lihat
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="alert alert-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} {{ $totalMenungguKonfirmasiRealisasiManusia == 0 ? 'd-none' : '' }}"
-                                    role="alert">
-                                    <div class="row">
-                                        <div class="col-md-10 pr-0">
-                                            <span>
-                                                <b>Realisasi Manusia:</b> Terdapat
-                                                <b>{{ $totalMenungguKonfirmasiRealisasiManusia }}</b>
-                                                laporan realisasi yang
-                                                {{ Auth::user()->role == 'OPD' ? 'ditolak' : 'menunggu konfirmasi' }}.
-                                                {{ Auth::user()->role == 'OPD' ? 'Silahkan ubah data tersebut dan kemudian perbarui datanya.' : '' }}
-                                            </span>
-                                        </div>
-                                        <div class="col-md-2 d-flex align-items-center pl-0">
-                                            <a href="{{ url('realisasi-intervensi-manusia') }}"
-                                                class="badge badge-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} float-right"><i
-                                                    class="fas fa-info-circle"></i>
-                                                Lihat
-                                            </a>
-                                        </div>
+                            </div>
+                            <div class="alert alert-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} {{ $totalMenungguKonfirmasiRealisasiManusia == 0 ? 'd-none' : '' }}"
+                                role="alert">
+                                <div class="row">
+                                    <div class="col-md-10 pr-0">
+                                        <span>
+                                            <b>Realisasi Manusia:</b> Terdapat
+                                            <b>{{ $totalMenungguKonfirmasiRealisasiManusia }}</b>
+                                            laporan realisasi yang
+                                            {{ Auth::user()->role == 'OPD' ? 'ditolak' : 'menunggu konfirmasi' }}.
+                                            {{ Auth::user()->role == 'OPD' ? 'Silahkan ubah data tersebut dan kemudian perbarui datanya.' : '' }}
+                                        </span>
+                                    </div>
+                                    <div class="col-md-2 d-flex align-items-center pl-0">
+                                        <a href="{{ url('realisasi-intervensi-manusia') }}"
+                                            class="badge badge-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} float-right"><i
+                                                class="fas fa-info-circle"></i>
+                                            Lihat
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="alert alert-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} {{ $totalMenungguKonfirmasiRealisasiHewan == 0 ? 'd-none' : '' }}"
-                                    role="alert">
-                                    <div class="row">
-                                        <div class="col-md-10 pr-0">
-                                            <span>
-                                                <b>Realisasi Lokasi Hewan Ternak:</b> Terdapat
-                                                <b>{{ $totalMenungguKonfirmasiRealisasiHewan }}</b>
-                                                laporan realisasi yang
-                                                {{ Auth::user()->role == 'OPD' ? 'ditolak' : 'menunggu konfirmasi' }}.
-                                                {{ Auth::user()->role == 'OPD' ? 'Silahkan ubah data tersebut dan kemudian perbarui datanya.' : '' }}
-                                            </span>
-                                        </div>
-                                        <div class="col-md-2 d-flex align-items-center pl-0">
-                                            <a href="{{ url('realisasi-intervensi-hewan') }}"
-                                                class="badge badge-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} float-right"><i
-                                                    class="fas fa-info-circle"></i>
-                                                Lihat
-                                            </a>
-                                        </div>
+                            </div>
+                            <div class="alert alert-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} {{ $totalMenungguKonfirmasiRealisasiHewan == 0 ? 'd-none' : '' }}"
+                                role="alert">
+                                <div class="row">
+                                    <div class="col-md-10 pr-0">
+                                        <span>
+                                            <b>Realisasi Lokasi Hewan Ternak:</b> Terdapat
+                                            <b>{{ $totalMenungguKonfirmasiRealisasiHewan }}</b>
+                                            laporan realisasi yang
+                                            {{ Auth::user()->role == 'OPD' ? 'ditolak' : 'menunggu konfirmasi' }}.
+                                            {{ Auth::user()->role == 'OPD' ? 'Silahkan ubah data tersebut dan kemudian perbarui datanya.' : '' }}
+                                        </span>
+                                    </div>
+                                    <div class="col-md-2 d-flex align-items-center pl-0">
+                                        <a href="{{ url('realisasi-intervensi-hewan') }}"
+                                            class="badge badge-{{ Auth::user()->role == 'OPD' ? 'danger' : 'warning' }} float-right"><i
+                                                class="fas fa-info-circle"></i>
+                                            Lihat
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endif
+                </div>
+                @endif --}}
 
-                <div class="col-12">
+                {{-- <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-head-row">
@@ -369,8 +358,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12">
+                </div> --}}
+                {{-- <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-head-row">
@@ -539,21 +528,17 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
         </div>
-        <div class="col-md-3">
+        {{-- <div class="col-md-3">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-head-row">
                                 <div class="card-title fw-bold">Lokasi</div>
-                                {{-- <div class="card-tools">
-                            @component('dashboard.components.buttons.export')
-                            @endcomponent
-                        </div> --}}
                             </div>
                         </div>
                         <div class="card-body px-4">
@@ -624,10 +609,6 @@
                         <div class="card-header">
                             <div class="card-head-row">
                                 <div class="card-title fw-bold">Total Hewan Ternak</div>
-                                {{-- <div class="card-tools">
-                            @component('dashboard.components.buttons.export')
-                            @endcomponent
-                        </div> --}}
                             </div>
                         </div>
                         <div class="card-body px-4">
@@ -666,10 +647,6 @@
                         <div class="card-header">
                             <div class="card-head-row">
                                 <div class="card-title fw-bold">Total Data</div>
-                                {{-- <div class="card-tools">
-                            @component('dashboard.components.buttons.export')
-                            @endcomponent
-                        </div> --}}
                             </div>
                         </div>
                         <div class="card-body px-4">
@@ -756,12 +733,11 @@
                 </div>
             </div>
 
-        </div>
+        </div> --}}
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modal-intervensi" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modal-intervensi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -787,8 +763,8 @@
                                 aria-controls="content-keong" aria-selected="true">Habitat Keong</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="tab-manusia" data-toggle="pill" href="#content-manusia"
-                                role="tab" aria-controls="content-manusia" aria-selected="false">Manusia</a>
+                            <a class="nav-link" id="tab-manusia" data-toggle="pill" href="#content-manusia" role="tab"
+                                aria-controls="content-manusia" aria-selected="false">Manusia</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="tab-hewan" data-toggle="pill" href="#content-hewan" role="tab"
@@ -796,9 +772,8 @@
                         </li>
 
                     </ul>
-                    <div class="tab-content mt-2 mb-3" id="pills-without-border-tabContent">
-                        <div class="tab-pane fade" id="content-keong" role="tabpanel"
-                            aria-labelledby="pills-home-tab-nobd">
+                    {{-- <div class="tab-content mt-2 mb-3" id="pills-without-border-tabContent">
+                        <div class="tab-pane fade" id="content-keong" role="tabpanel" aria-labelledby="pills-home-tab-nobd">
                             <table class="table table-bordered mt-3">
                                 <thead>
                                     <tr class="text-center">
@@ -1010,7 +985,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="modal-footer">
                     @component('dashboard.components.buttons.close')
@@ -1018,8 +993,8 @@
                     <form action="{{ url('/dashboard/export/intervensi/semua') }}" method="POST"
                         id="form-export-intervensi">
                         @csrf
-                        <button class="btn btn-primary" type="submit" name="tahun"
-                            value="{{ $_GET['tahun'] ?? '' }}"><i class="fas fa-file-download"></i> Export</button>
+                        <button class="btn btn-primary" type="submit" name="tahun" value="{{ $_GET['tahun'] ?? '' }}"><i
+                                class="fas fa-file-download"></i> Export</button>
                     </form>
                 </div>
             </div>
@@ -1062,7 +1037,7 @@
                         </li>
 
                     </ul>
-                    <div class="tab-content mt-2 mb-3" id="pills-without-border-tabContent">
+                    {{-- <div class="tab-content mt-2 mb-3" id="pills-without-border-tabContent">
                         <div class="tab-pane fade" id="anggaran-keong" role="tabpanel"
                             aria-labelledby="pills-home-tab-nobd">
                             <div style="overflow: auto">
@@ -1615,7 +1590,7 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="modal-footer">
                     @component('dashboard.components.buttons.close')
@@ -1631,7 +1606,7 @@
         </div>
     </div>
 
-    <form action="" method="GET">
+    {{-- <form action="" method="GET">
         <div class="modal fade" id="modal-filter" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -1642,19 +1617,17 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        @component('dashboard.components.formElements.select',
-                            [
-                                'label' => 'Tahun',
-                                'id' => 'tahun',
-                                'name' => 'tahun',
-                                'class' => 'select2',
-                                'wajib' => '<sup class="text-danger">*</sup>',
-                            ])
+                        @component('dashboard.components.formElements.select', [
+    'label' => 'Tahun',
+    'id' => 'tahun',
+    'name' => 'tahun',
+    'class' => 'select2',
+    'wajib' => '<sup class="text-danger">*</sup>',
+])
                             @slot('options')
                                 <option value="Semua">Semua</option>
                                 @foreach ($daftarTahun as $tahun)
-                                    <option value="{{ $tahun }}"
-                                        {{ ($_GET['tahun'] ?? '') == $tahun ? 'selected' : '' }}>
+                                    <option value="{{ $tahun }}" {{ ($_GET['tahun'] ?? '') == $tahun ? 'selected' : '' }}>
                                         {{ $tahun }}</option>
                                 @endforeach
                             @endslot
@@ -1667,7 +1640,7 @@
                 </div>
             </div>
         </div>
-    </form>
+    </form> --}}
 @endsection
 
 @push('scripts')
@@ -1705,7 +1678,7 @@
         })
     </script>
 
-    <script>
+    {{-- <script>
         Circles.create({
             id: 'realisasi-keong',
             radius: 45,
@@ -1840,7 +1813,7 @@
             styleWrapper: true,
             styleText: true
         })
-    </script>
+    </script> --}}
 
     <script>
         $('.select2').select2({

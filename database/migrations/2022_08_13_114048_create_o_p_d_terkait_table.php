@@ -13,15 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('realisasi', function (Blueprint $table) {
+        Schema::create('opd_terkait', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('perencanaan_id');
-            $table->bigInteger('penggunaan_anggaran');
-            $table->integer('tw');
-            $table->float('progress');
-            $table->integer('status'); // 0/1/2
-            $table->date('tanggal_konfirmasi')->nullable();
-            $table->text('alasan_ditolak')->nullable(); // 0/1/2
+            $table->uuid('perencanaan_id'); // keong / hewan / manusia
+            $table->uuid('opd_id');
             $table->timestamps();
         });
     }
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('realisasi');
+        Schema::dropIfExists('opd_terkait');
     }
 };

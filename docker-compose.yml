@@ -27,6 +27,7 @@ services:
             - redis
             - meilisearch
             - selenium
+
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -51,7 +52,7 @@ services:
     phpmyadmin:
         image: 'phpmyadmin:latest'
         ports:
-            - 8686:80
+            - 8787:80
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             UPLOAD_LIMIT: 300M

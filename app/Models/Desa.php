@@ -21,9 +21,9 @@ class Desa extends Model
         return json_decode($this->polygon);
     }
 
-    public function lokasiKeong()
+    public function lokasi()
     {
-        return $this->hasMany(LokasiKeong::class, 'desa_id')->orderBy('nama');
+        return $this->hasMany(Lokasi::class, 'desa_id')->orderBy('nama');
     }
 
     public function lokasiHewan()
