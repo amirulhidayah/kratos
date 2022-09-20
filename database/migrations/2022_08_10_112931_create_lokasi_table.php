@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('realisasi', function (Blueprint $table) {
+        Schema::create('lokasi', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('perencanaan_id');
-            $table->bigInteger('penggunaan_anggaran');
-            $table->integer('tw');
-            $table->float('progress');
-            $table->integer('status'); // 0/1/2
-            $table->date('tanggal_konfirmasi')->nullable();
-            $table->text('alasan_ditolak')->nullable(); // 0/1/2
+            $table->uuid('desa_id');
+            $table->string('nama');
+            $table->string('latitude');
+            $table->string('longitude');
+            $table->text('deskripsi')->nullable();
+            $table->integer('status'); // 0/1 = aktif/tidak_aktif
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('realisasi');
+        Schema::dropIfExists('lokasi');
     }
 };
