@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('lokasi_perencanaan', function (Blueprint $table) {
+        Schema::create('desa_perencanaan', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('perencanaan_id');
             $table->uuid('realisasi_id')->nullable();
-            $table->uuid('lokasi_id');
+            $table->uuid('desa_id');
             $table->integer('status')->default(0); // 0/1/2
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lokasi_perencanaan');
+        Schema::dropIfExists('desa_perencanaan');
     }
 };

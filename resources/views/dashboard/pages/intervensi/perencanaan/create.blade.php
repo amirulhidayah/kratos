@@ -32,6 +32,8 @@
                             @component('dashboard.components.forms.perencanaan',
                                 [
                                     'action' => route('rencana-intervensi.store'),
+                                    'sub_indikator' => $sub_indikator,
+                                    'kecamatan' => $kecamatan,
                                     'desa' => $desa,
                                     'opd' => $opd,
                                     'method' => 'POST',

@@ -33,7 +33,7 @@
                     <div class="card-head-row">
                         <div class="card-title">Data Perencanaan Intervensi</div>
                         <div class="card-tools">
-                            <form action="{{ url('export-perencanaan-keong') }}" method="POST">
+                            <form action="{{ url('export-perencanaan') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-secondary btn-border btn-round btn-sm mr-2"
                                     id="export-penduduk" value="" name="desa_id">
@@ -126,13 +126,13 @@
 
     @component('dashboard.components.modals.buatAlasanTidakTerselesaikan',
         [
-            'action' => url('rencana-intervensi-keong/buat-alasan-tidak-terselesaikan/'),
+            'action' => url('rencana-intervensi/buat-alasan-tidak-terselesaikan/'),
         ])
     @endcomponent
 
     @component('dashboard.components.modals.lihatAlasanTidakTerselesaikan',
         [
-            'action' => url('rencana-intervensi-keong/baca-alasan-tidak-terselesaikan/'),
+            'action' => url('rencana-intervensi/baca-alasan-tidak-terselesaikan/'),
         ])
     @endcomponent
 
@@ -251,7 +251,7 @@
                         if (result) {
                             $.ajax({
                                 type: 'DELETE',
-                                url: "{{ url('rencana-intervensi-keong') }}" + '/' + id,
+                                url: "{{ url('rencana-intervensi') }}" + '/' + id,
                                 data: {
                                     _token: _token
                                 },

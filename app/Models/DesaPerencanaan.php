@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\TraitUuid;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class LokasiPerencanaan extends Model
+class DesaPerencanaan extends Model
 {
     use HasFactory, TraitUuid;
 
-    protected $table = 'lokasi_perencanaan';
+    protected $table = 'desa_perencanaan';
     protected $guarded = ['id'];
 
-    public function lokasi()
+    public function desa()
     {
-        return $this->belongsTo(Lokasi::class, 'lokasi_id')->withTrashed();
+        return $this->belongsTo(Desa::class);
     }
 
     public function perencanaan()

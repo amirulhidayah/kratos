@@ -19,6 +19,6 @@ class PerencanaanExport implements FromView
 
     public function view(): View
     {
-        return view('dashboard.pages.intervensi.perencanaan.keong.subIndikator.export', ['dataPerencanaan' => $this->dataPerencanaan]);
+        return view('dashboard.pages.intervensi.perencanaan.export', ['dataPerencanaan' => $this->dataPerencanaan]);
     }
 }

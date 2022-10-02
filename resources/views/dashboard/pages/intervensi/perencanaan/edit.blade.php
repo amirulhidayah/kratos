@@ -9,7 +9,7 @@
 @endsection
 
 @section('subTitlePanelHeader')
-    {{ $rencanaIntervensi->sub_indikator }}
+    {{ $rencanaIntervensi->indikator->nama }}
 @endsection
 
 @section('buttonPanelHeader')
@@ -41,9 +41,10 @@
                                 [
                                     'action' => route('rencana-intervensi.update', $rencanaIntervensi->id),
                                     'rencanaIntervensi' => $rencanaIntervensi,
-                                    'lokasi' => $lokasiPerencanaan,
+                                    'sub_indikator' => $sub_indikator,
+                                    'kecamatan' => $kecamatan,
                                     'opdTerkait' => $opdTerkait,
-                                    'desa' => $desa,
+                                    'desaPerencanaan' => $desaPerencanaan,
                                     'opd' => $opd,
                                     'maxDokumen' => $rencanaIntervensi->dokumenPerencanaan()->count(),
                                     'method' => 'PUT',

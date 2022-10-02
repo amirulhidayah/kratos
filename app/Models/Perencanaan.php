@@ -20,14 +20,19 @@ class Perencanaan extends Model
         return $this->belongsTo(OPD::class, 'opd_id')->withTrashed();
     }
 
+    public function indikator()
+    {
+        return $this->belongsTo(Indikator::class)->withTrashed();
+    }
+
     public function opdTerkait()
     {
         return $this->hasMany(OPDTerkait::class, 'perencanaan_id');
     }
 
-    public function lokasiPerencanaan()
+    public function desaPerencanaan()
     {
-        return $this->hasMany(LokasiPerencanaan::class, 'perencanaan_id')->orderBy('updated_at', 'DESC');
+        return $this->hasMany(DesaPerencanaan::class, 'perencanaan_id')->orderBy('updated_at', 'DESC');
     }
 
     public function dokumenPerencanaan()

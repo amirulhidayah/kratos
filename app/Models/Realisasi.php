@@ -19,9 +19,9 @@ class Realisasi extends Model
         return $this->belongsTo(Perencanaan::class, 'perencanaan_id');
     }
 
-    public function lokasiRealisasi()
+    public function desaRealisasi()
     {
-        return $this->hasMany(LokasiPerencanaan::class, 'realisasi_id')->orderBy('updated_at', 'DESC');
+        return $this->hasMany(DesaPerencanaan::class, 'realisasi_id')->orderBy('updated_at', 'DESC');
     }
 
     public function dokumenRealisasi()

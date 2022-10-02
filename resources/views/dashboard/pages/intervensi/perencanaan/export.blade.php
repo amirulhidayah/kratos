@@ -16,9 +16,7 @@
                 <th scope="col" align="center"
                     style="vertical-align: center;border: 1px solid black;font-weight : bold">Sumber Dana</th>
                 <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Jumlah Lokasi</th>
-                <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">List Lokasi</th>
+                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Jumlah Desa</th>
                 <th scope="col" align="center"
                     style="vertical-align: center;border: 1px solid black;font-weight : bold">Status</th>
                 <th scope="col" align="center"
@@ -34,11 +32,11 @@
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
                         {{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y') }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="left">
-                        {{ $item->sub_indikator }}</td>
+                        {{ $item->indikator->nama }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
                         {{ $item->opd->nama }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="left">
-                        @forelse ($item->opdTerkaitKeong as $item2)
+                        @forelse ($item->opdTerkait as $item2)
                             <p>{{ $loop->iteration }}. {{ $item2->opd->nama }}</p>
                         @empty
                             <p>-</p>
@@ -49,14 +47,7 @@
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
                         {{ $item->sumber_dana }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $item->lokasiPerencanaanKeong->count() }}</td>
-                    <td style="vertical-align: center;border: 1px solid black;" align="left">
-                        @forelse ($item->lokasiPerencanaanKeong as $item2)
-                            <p>{{ $loop->iteration }}. {{ $item2->lokasiKeong->nama }}</p>
-                        @empty
-                            <p>-</p>
-                        @endforelse
-                    </td>
+                        {{ $item->desaPerencanaan->count() }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
                         @if ($item->status == 0)
                             Menunggu Konfirmasi

@@ -17,17 +17,18 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\RealisasiExport;
 use App\Models\DokumenRealisasi;
-use App\Models\LokasiPerencanaan;
+use App\Models\DesaPerencanaan;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use App\Exports\HasilRealisasiExport;
+use App\Models\Kecamatan;
 
 class RealisasiController extends Controller
 {
     public function dataPerencanaan()
     {
-        $query = Perencanaan::with('opd', 'lokasiPerencanaan', 'realisasi', 'opdTerkait')
+        $query = Perencanaan::with('opd', 'desaPerencanaan', 'realisasi', 'opdTerkait')
             ->where('status', 1)
             ->where(function ($query) {
                 if (Auth::user()->role == 'OPD') {
@@ -103,6 +104,10 @@ class RealisasiController extends Controller
 
             return DataTables::of($data)
                 ->addIndexColumn()
+
+                ->addColumn('sub_indikator', function ($row) {
+                    return $row->indikator->nama;
+                })
 
                 ->addColumn('penggunaan_anggaran', function ($row) {
                     $penggunaanAnggaran = 0;
@@ -220,8 +225,8 @@ class RealisasiController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
 
-                ->addColumn('jumlah_lokasi', function ($row) {
-                    return $row->lokasiRealisasi->count();
+                ->addColumn('jumlah_desa', function ($row) {
+                    return $row->desaRealisasi->count();
                 })
 
                 ->addColumn('status', function ($row) {
@@ -305,8 +310,8 @@ class RealisasiController extends Controller
             }
         }
 
-        $getLokasiBelumTerealisasi = $rencana_intervensi->lokasiPerencanaan->whereNull('realisasi_id')->pluck('lokasi_id')->toArray();
-        $lokasiKeong = Lokasi::with(['desa', 'pemilikLokasi', 'pemilikLokasi.penduduk'])->whereIn('id', $getLokasiBelumTerealisasi)->get();
+        $getLokasiBelumTerealisasi = $rencana_intervensi->desaPerencanaan->whereNull('realisasi_id')->pluck('desa_id')->toArray();
+        $desa = Desa::whereIn('id', $getLokasiBelumTerealisasi)->get();
 
         $penggunaanAnggaran = 0;
         foreach ($rencana_intervensi->realisasi->where('status', 1) as $item) {
@@ -315,11 +320,11 @@ class RealisasiController extends Controller
         $sisaAnggaran = $rencana_intervensi->nilai_pembiayaan - $penggunaanAnggaran;
         $data = [
             'rencanaIntervensi' => $rencana_intervensi,
-            'desa' => Desa::all(),
-            'lokasiPerencanaan' => json_encode($rencana_intervensi->lokasiPerencanaan->pluck('lokasi_id')->toArray()),
-            'lokasiPerencanaanArr' => $rencana_intervensi->lokasiPerencanaan->whereNull('realisasi_id')->pluck('lokasi_id')->toArray(),
+            'kecamatan' => Kecamatan::orderBy('nama', 'asc')->get(),
+            'desaPerencanaan' => json_encode($rencana_intervensi->desaPerencanaan->pluck('desa_id')->toArray()),
+            'desaPerencanaanArr' => $rencana_intervensi->desaPerencanaan->whereNull('realisasi_id')->pluck('desa_id')->toArray(),
             'opdTerkait' => json_encode($rencana_intervensi->opdTerkait->pluck('opd_id')->toArray()),
-            'dataMap' => $lokasiKeong,
+            'dataMap' => $desa,
             'countSisaAnggaran' => $sisaAnggaran,
         ];
 
@@ -360,11 +365,11 @@ class RealisasiController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'lokasi' => 'required',
+                'desa' => 'required',
                 'penggunaan_anggaran' => 'required',
             ],
             [
-                'lokasi.required' => 'Lokasi harus dipilih',
+                'desa.required' => 'Desa harus dipilih',
                 'penggunaan_anggaran.required' => 'Penggunaan Anggaran harus diisi',
             ]
         );
@@ -402,10 +407,10 @@ class RealisasiController extends Controller
             $tw = 4;
         }
 
-        $countTotalLokasiPerencanaan = LokasiPerencanaan::where('perencanaan_id', $request->id_perencanaan)->count();
-        $countLokasiTerealisasi = LokasiPerencanaan::where('perencanaan_id', $request->id_perencanaan)->whereNotNull('realisasi_id')->count();
-        $countLokasiDipilih = count($request->lokasi);
-        $countPencapaian = ((100 / $countTotalLokasiPerencanaan) * ($countLokasiTerealisasi + $countLokasiDipilih));
+        $countTotalDesaPerencanaan = DesaPerencanaan::where('perencanaan_id', $request->id_perencanaan)->count();
+        $countLokasiTerealisasi = DesaPerencanaan::where('perencanaan_id', $request->id_perencanaan)->whereNotNull('realisasi_id')->count();
+        $countLokasiDipilih = count($request->desa);
+        $countPencapaian = ((100 / $countTotalDesaPerencanaan) * ($countLokasiTerealisasi + $countLokasiDipilih));
 
         $dataRealisasi = [
             'perencanaan_id' => $request->id_perencanaan,
@@ -417,10 +422,10 @@ class RealisasiController extends Controller
 
         $insertRealisasi = Realisasi::create($dataRealisasi);
 
-        $updateLokasiPerencanaan = LokasiPerencanaan::whereIn('lokasi_id', $request->lokasi)->where('perencanaan_id', $request->id_perencanaan)->get();
+        $updateDesaPerencanaan = DesaPerencanaan::whereIn('desa_id', $request->desa)->where('perencanaan_id', $request->id_perencanaan)->get();
 
         // update realisasi_id
-        foreach ($updateLokasiPerencanaan as $item) {
+        foreach ($updateDesaPerencanaan as $item) {
             $item->realisasi_id = $insertRealisasi->id;
             $item->save();
         }
@@ -429,10 +434,10 @@ class RealisasiController extends Controller
         $perencanaan = Perencanaan::find($request->id_perencanaan);
         if ($request->nama_dokumen != null) {
             for ($i = 0; $i < $countFileDokumen; $i++) {
-                $namaFile = mt_rand() . '-' . $request->nama_dokumen[$i] . '-' . $perencanaan->sub_indikator . '-' . $no_dokumen . '.' . $request->file_dokumen[$i]->getClientOriginalExtension();
+                $namaFile = mt_rand() . '-' . $request->nama_dokumen[$i] . '-' . Auth::user()->opd->nama . '-' . $no_dokumen . '.' . $request->file_dokumen[$i]->getClientOriginalExtension();
 
                 $request->file_dokumen[$i]->storeAs(
-                    'uploads/dokumen/realisasi/keong',
+                    'uploads/dokumen/realisasi',
                     $namaFile
                 );
 
@@ -468,14 +473,12 @@ class RealisasiController extends Controller
             abort('403', 'Oops! anda tidak memiliki akses ke sini.');
         }
 
-        $lokasiPerencanaanArr = LokasiPerencanaan::where('perencanaan_id', $realisasi_intervensi->perencanaan_id)
+        $desaPerencanaanArr = DesaPerencanaan::where('perencanaan_id', $realisasi_intervensi->perencanaan_id)
             ->where(function ($query) use ($realisasi_intervensi) {
                 $query->where('realisasi_id', $realisasi_intervensi->id);
                 $query->orWhereNull('realisasi_id');
-            })->pluck('lokasi_id')->toArray();
+            })->pluck('desa_id')->toArray();
 
-        $getLokasiBelumTerealisasi = $realisasi_intervensi->perencanaan->lokasiPerencanaan->whereNull('realisasi_id')->pluck('lokasi_id')->toArray();
-        $lokasi = Lokasi::with(['desa', 'pemilikLokasi', 'pemilikLokasi.penduduk'])->whereIn('id', $getLokasiBelumTerealisasi)->get();
 
         $rencana_intervensi = $realisasi_intervensi->perencanaan;
         $penggunaanAnggaran = 0;
@@ -487,12 +490,11 @@ class RealisasiController extends Controller
         $data = [
             'realisasiIntervensi' => $realisasi_intervensi,
             'rencanaIntervensi' => $realisasi_intervensi->perencanaan,
-            'desa' => Desa::all(),
-            'lokasiPerencanaan' => json_encode($realisasi_intervensi->perencanaan->lokasiPerencanaan->where('realisasi_id', $realisasi_intervensi->id)->pluck('lokasi_id')->toArray()),
-            'lokasiPerencanaanArr' => $lokasiPerencanaanArr,
+            'kecamatan' => Kecamatan::orderBy('nama', 'asc')->get(),
+            'desaPerencanaan' => json_encode($realisasi_intervensi->perencanaan->desaPerencanaan->where('realisasi_id', $realisasi_intervensi->id)->pluck('desa_id')->toArray()),
+            'desaPerencanaanArr' => $desaPerencanaanArr,
             'opdTerkait' => json_encode($realisasi_intervensi->perencanaan->opdTerkait->pluck('opd_id')->toArray()),
             'opd' => OPD::orderBy('nama')->whereNot('id', Auth::user()->opd_id)->get(),
-            'dataMap' => $lokasi,
             'countSisaAnggaran' => $sisaAnggaran,
         ];
 
@@ -511,11 +513,11 @@ class RealisasiController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'lokasi' => $realisasi_intervensi->status != 1 ? 'required' : '',
+                'desa' => $realisasi_intervensi->status != 1 ? 'required' : '',
                 'penggunaan_anggaran' => $realisasi_intervensi->status != 1 ? 'required' : '',
             ],
             [
-                'lokasi.required' => 'Lokasi harus dipilih',
+                'desa.required' => 'Lokasi harus dipilih',
                 'penggunaan_anggaran.required' => 'Penggunaan Anggaran harus diisi',
             ]
         );
@@ -549,15 +551,15 @@ class RealisasiController extends Controller
 
         // update lokasi perencanaan
         if ($realisasi_intervensi->status != 1) {
-            foreach ($realisasi_intervensi->lokasiRealisasi as $item) {
+            foreach ($realisasi_intervensi->desaRealisasi as $item) {
                 $item->realisasi_id = NULL;
                 $item->status = 0;
                 $item->save();
             }
 
-            $updateLokasiPerencanaan = LokasiPerencanaan::whereIn('lokasi_id', $request->lokasi)->where('perencanaan_id', $request->id_perencanaan)->get();
+            $updateDesaPerencanaan = DesaPerencanaan::whereIn('desa_id', $request->desa)->where('perencanaan_id', $request->id_perencanaan)->get();
 
-            foreach ($updateLokasiPerencanaan as $item) {
+            foreach ($updateDesaPerencanaan as $item) {
                 $item->realisasi_id = $realisasi_intervensi->id;
                 $item->save();
             }
@@ -568,8 +570,8 @@ class RealisasiController extends Controller
             $deleteDocumentOld = explode(',', $request->deleteDocumentOld);
             foreach ($deleteDocumentOld as $item) {
                 $namaFile = DokumenRealisasi::where('id', $item)->first()->file;
-                if (Storage::exists('uploads/dokumen/realisasi/keong/' . $namaFile)) {
-                    Storage::delete('uploads/dokumen/realisasi/keong/' . $namaFile);
+                if (Storage::exists('uploads/dokumen/realisasi/' . $namaFile)) {
+                    Storage::delete('uploads/dokumen/realisasi/' . $namaFile);
                 }
                 DokumenRealisasi::where('id', $item)->delete();
             }
@@ -592,12 +594,12 @@ class RealisasiController extends Controller
             foreach ($request->file_dokumen_old as $key => $value) {
                 $idUpdateDokumen = $realisasi_intervensi->dokumenRealisasi[$key]->id;
                 $dataDokumen = DokumenRealisasi::find($idUpdateDokumen);
-                if (Storage::exists('uploads/dokumen/realisasi/keong/' . $dataDokumen->file)) {
-                    Storage::delete('uploads/dokumen/realisasi/keong/' . $dataDokumen->file);
+                if (Storage::exists('uploads/dokumen/realisasi/' . $dataDokumen->file)) {
+                    Storage::delete('uploads/dokumen/realisasi/' . $dataDokumen->file);
                 }
 
-                $namaFile = mt_rand() . '-' . $request->nama_dokumen_old[$key] . '-' . $realisasi_intervensi->perencanaan->sub_indikator . '-' .  $dataDokumen->no_urut . '.' . $value->getClientOriginalExtension();
-                $value->storeAs('uploads/dokumen/realisasi/keong/', $namaFile);
+                $namaFile = mt_rand() . '-' . $request->nama_dokumen_old[$key] . '-' . $realisasi_intervensi->perencanaan->opd->nama . '-' .  $dataDokumen->no_urut . '.' . $value->getClientOriginalExtension();
+                $value->storeAs('uploads/dokumen/realisasi/', $namaFile);
 
                 $update = [
                     'nama' => $request->nama_dokumen_old[$key],
@@ -612,9 +614,9 @@ class RealisasiController extends Controller
         $no_dokumen = $realisasi_intervensi->dokumenRealisasi->max('no_urut') + 1;
         if ($request->nama_dokumen != null) {
             for ($i = 0; $i < $countFileDokumen; $i++) {
-                $namaFile = mt_rand() . '-' . $request->nama_dokumen[$i] . '-' . $realisasi_intervensi->perencanaan->sub_indikator . '-' .  $no_dokumen . '.' . $request->file_dokumen[$i]->getClientOriginalExtension();
+                $namaFile = mt_rand() . '-' . $request->nama_dokumen[$i] . '-' . $realisasi_intervensi->perencanaan->opd->nama . '-' .  $no_dokumen . '.' . $request->file_dokumen[$i]->getClientOriginalExtension();
                 $request->file_dokumen[$i]->storeAs(
-                    'uploads/dokumen/realisasi/keong/',
+                    'uploads/dokumen/realisasi/',
                     $namaFile
                 );
 
@@ -631,10 +633,10 @@ class RealisasiController extends Controller
         }
 
         // update data laporan
-        $countTotalLokasiPerencanaan = LokasiPerencanaan::where('perencanaan_id', $request->id_perencanaan)->count();
-        $countLokasiTerealisasi = LokasiPerencanaan::where('perencanaan_id', $request->id_perencanaan)->whereNotNull('realisasi_id')->count();
-        // $countLokasiDipilih = count($request->lokasi);
-        $countPencapaian = ((100 / $countTotalLokasiPerencanaan) * $countLokasiTerealisasi);
+        $countTotalDesaPerencanaan = DesaPerencanaan::where('perencanaan_id', $request->id_perencanaan)->count();
+        $countLokasiTerealisasi = DesaPerencanaan::where('perencanaan_id', $request->id_perencanaan)->whereNotNull('realisasi_id')->count();
+        // $countLokasiDipilih = count($request->desa);
+        $countPencapaian = ((100 / $countTotalDesaPerencanaan) * $countLokasiTerealisasi);
 
         $dataRealisasi = [];
         if ($realisasi_intervensi->status != 1) {
@@ -655,19 +657,19 @@ class RealisasiController extends Controller
 
     public function showLaporan(Realisasi $realisasi_intervensi)
     {
-        $getLokasiTerealisasi = $realisasi_intervensi->lokasiRealisasi->pluck('lokasi_id')->toArray();
-        $lokasiKeong = Lokasi::with(['desa', 'pemilikLokasi', 'pemilikLokasi.penduduk'])->whereIn('id', $getLokasiTerealisasi)->get();
+        $getDesaTerealisasi = $realisasi_intervensi->desaRealisasi->pluck('desa_id')->toArray();
+        $desa = Desa::whereIn('id', $getDesaTerealisasi)->get();
         $data = [
             'rencana_intervensi' => $realisasi_intervensi->perencanaan,
             'realisasi_intervensi' => $realisasi_intervensi,
-            'dataMap' => $lokasiKeong,
-
+            'dataDesaRealisasi' => $desa,
         ];
         return view('dashboard.pages.intervensi.realisasi.pelaporan.show', $data);
     }
 
     public function konfirmasi(Realisasi $realisasi_intervensi, Request $request)
     {
+
         $validator = Validator::make(
             $request->all(),
             [
@@ -675,7 +677,7 @@ class RealisasiController extends Controller
                 'alasan_ditolak' => $request->status == 2 ? 'required' : '',
             ],
             [
-                'status.required' => 'Status harus diisi',
+                'status.required' => 'Konfirmasi harus diisi',
                 'alasan_ditolak.required' => 'Alasan ditolak harus diisi',
             ]
         );
@@ -693,7 +695,7 @@ class RealisasiController extends Controller
         $realisasi_intervensi->update($data);
 
         // update lokasi perencanaan
-        foreach ($realisasi_intervensi->lokasiRealisasi as $item) {
+        foreach ($realisasi_intervensi->desaRealisasi as $item) {
             if ($request->status == 1) {
                 $item->status = 1;
             } else {
@@ -728,8 +730,8 @@ class RealisasiController extends Controller
 
     public function deleteLaporan(Realisasi $realisasi_intervensi)
     {
-        if ($realisasi_intervensi->lokasiRealisasi) {
-            foreach ($realisasi_intervensi->lokasiRealisasi as $item) {
+        if ($realisasi_intervensi->desaRealisasi) {
+            foreach ($realisasi_intervensi->desaRealisasi as $item) {
                 $data = [
                     'status' => 0,
                     'realisasi_id' => NULL,
@@ -741,8 +743,8 @@ class RealisasiController extends Controller
         if ($realisasi_intervensi->dokumenRealisasi) {
             foreach ($realisasi_intervensi->dokumenRealisasi as $item) {
                 $namaFile = $item->file;
-                if (Storage::exists('uploads/dokumen/realisasi/keong/' . $namaFile)) {
-                    Storage::delete('uploads/dokumen/realisasi/keong/' . $namaFile);
+                if (Storage::exists('uploads/dokumen/realisasi/' . $namaFile)) {
+                    Storage::delete('uploads/dokumen/realisasi/' . $namaFile);
                 }
             }
             $realisasi_intervensi->dokumenRealisasi()->delete();
@@ -758,7 +760,7 @@ class RealisasiController extends Controller
 
         if ($rencana_intervensi->realisasi) {
             foreach ($rencana_intervensi->realisasi as $item) {
-                foreach ($item->lokasiRealisasi as $item2) {
+                foreach ($item->desaRealisasi as $item2) {
                     $data = [
                         'status' => 0,
                         'realisasi_id' => NULL,
@@ -767,8 +769,8 @@ class RealisasiController extends Controller
                 }
                 foreach ($item->dokumenRealisasi as $item3) {
                     $namaFile = $item3->file;
-                    if (Storage::exists('uploads/dokumen/realisasi/keong/' . $namaFile)) {
-                        Storage::delete('uploads/dokumen/realisasi/keong/' . $namaFile);
+                    if (Storage::exists('uploads/dokumen/realisasi/' . $namaFile)) {
+                        Storage::delete('uploads/dokumen/realisasi/' . $namaFile);
                     }
                 }
                 $item->dokumenRealisasi()->delete();
@@ -797,9 +799,9 @@ class RealisasiController extends Controller
 
     public function hasilRealisasi(Request $request)
     {
-        $habitatKeong = LokasiPerencanaan::where('status', 1)
-            ->groupBy('lokasi_id')
-            ->pluck('lokasi_id')
+        $habitatKeong = DesaPerencanaan::where('status', 1)
+            ->groupBy('desa_id')
+            ->pluck('desa_id')
             ->toArray();
 
         $dataHabitatKeong = Lokasi::with('listIndikator', 'desa')->whereIn('id', $habitatKeong);
@@ -955,7 +957,7 @@ class RealisasiController extends Controller
 
     public function export()
     {
-        $dataRealisasi = Perencanaan::with('opd', 'lokasiPerencanaan', 'realisasi')
+        $dataRealisasi = Perencanaan::with('opd', 'desaPerencanaan', 'realisasi')
             ->where('status', 1)
             ->where(function ($query) {
                 if (Auth::user()->role == 'OPD') {
@@ -976,9 +978,9 @@ class RealisasiController extends Controller
 
     public function exportHasilRealisasi()
     {
-        $habitatKeong = LokasiPerencanaan::where('status', 1)
-            ->groupBy('lokasi_id')
-            ->pluck('lokasi_id')
+        $habitatKeong = DesaPerencanaan::where('status', 1)
+            ->groupBy('desa_id')
+            ->pluck('desa_id')
             ->toArray();
 
         $dataRealisasi = Lokasi::with('listIndikator', 'desa')->whereIn('id', $habitatKeong)->get();

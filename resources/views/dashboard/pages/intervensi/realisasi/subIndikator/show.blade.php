@@ -9,7 +9,7 @@
 @endsection
 
 @section('subTitlePanelHeader')
-    {{ $rencana_intervensi->sub_indikator }}
+    {{ $rencana_intervensi->indikator->nama }}
 @endsection
 
 @section('buttonPanelHeader')
@@ -25,17 +25,6 @@
 
 @push('styles')
     <style>
-        #peta {
-            height: 600px;
-            margin-top: 0px;
-        }
-
-        #tabelLokasi_wrapper .dataTables_filter {
-            width: 100% !important;
-            margin-bottom: 10px !important;
-            text-align: center !important;
-        }
-
         .select2-container {
             width: 100% !important;
             padding: 0;
@@ -88,7 +77,7 @@
                                 <tr class="text-center fw-bold">
                                     <th>No</th>
                                     <th>Tanggal Laporan</th>
-                                    <th>Jumlah Lokasi</th>
+                                    <th>Jumlah Desa</th>
                                     <th>Penggunaan Anggaran</th>
                                     <th>Progress</th>
                                     <th>Status</th>
@@ -105,7 +94,7 @@
         </div>
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-lg-4">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-head-row">
@@ -211,7 +200,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-4">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-head-row">
@@ -237,7 +226,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-4">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-head-row">
@@ -281,11 +270,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4 order-md-2">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
-                        <div class="card-title">Status Lokasi Realisasi</div>
+                        <div class="card-title">Status Realisasi Desa</div>
                     </div>
                 </div>
                 <div class="card-body px-2">
@@ -294,25 +283,27 @@
                             <thead>
                                 <tr class="text-center fw-bold">
                                     <th>No</th>
-                                    <th>Nama Lokasi</th>
+                                    <th>Desa</th>
+                                    <th>Kecamatan</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($rencana_intervensi->lokasiPerencanaan as $item)
+                                @foreach ($rencana_intervensi->desaPerencanaan as $item)
                                     <tr>
                                         <td class="text-center">
                                             {{ $loop->iteration }}
                                         </td>
-                                        <td>{{ $item->lokasi->nama }}</td>
+                                        <td>{{ $item->desa->nama }}</td>
+                                        <td>{{ $item->desa->kecamatan->nama }}</td>
                                         <td class="text-center">
-                                            @if ($item->realisasi_keong_id == null && $item->status == 0)
+                                            @if ($item->realisasi_id == null && $item->status == 0)
                                                 <span class="badge badge-dark">Belum Terealisasi</span>
-                                            @elseif($item->realisasi_keong_id != null && $item->status == 0)
+                                            @elseif($item->realisasi_id != null && $item->status == 0)
                                                 <span class="badge badge-warning">Menunggu Konfirmasi</span>
-                                            @elseif($item->realisasi_keong_id != null && $item->status == 1)
+                                            @elseif($item->realisasi_id != null && $item->status == 1)
                                                 <span class="badge badge-success">Sudah Terealisasi</span>
-                                            @elseif($item->realisasi_keong_id != null && $item->status == 2)
+                                            @elseif($item->realisasi_id != null && $item->status == 2)
                                                 <span class="badge badge-danger">Ditolak</span>
                                             @endif
                                         </td>
@@ -321,20 +312,6 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-head-row">
-                        <div class="card-title">Titik Koordinat Realisasi Intervensi</div>
-
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div id="peta"></div>
                 </div>
             </div>
         </div>
@@ -581,10 +558,6 @@
             }
         }
 
-        $(document).ready(function() {
-            initializeMap();
-        })
-
         var tableLaporan = $('#tableLaporan').DataTable({
             processing: true,
             serverSide: true,
@@ -614,8 +587,8 @@
 
                 },
                 {
-                    data: 'jumlah_lokasi',
-                    name: 'jumlah_lokasi',
+                    data: 'jumlah_desa',
+                    name: 'jumlah_desa',
                     className: 'text-center'
                 },
                 {
@@ -659,114 +632,8 @@
         });
 
         var tableLokasi = $('#tabelLokasi').DataTable({
-            "dom": "ftip",
-            "bPaginate": false,
+            // "dom": "ftip",
+            // "bPaginate": false,
         });
-
-        var map = null;
-
-        function initializeMap() {
-            if (map != undefined || map != null) {
-                map.remove();
-            }
-
-            var center = [-1.3618072, 120.1619337];
-
-            map = L.map("peta", {
-                maxBounds: [
-                    [-1.511127, 119.9637063],
-                    [-1.21458, 120.2912363]
-                ]
-            }).setView(center, 11);
-            map.addControl(new L.Control.Fullscreen());
-
-            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                attribution: 'Data © <a href="http://osm.org/copyright">OpenStreetMap</a>',
-                maxZoom: 18,
-                minZoom: 11
-            }).addTo(map);
-
-            var pin = L.Icon.extend({
-                options: {
-                    iconSize: [50, 50],
-                    iconAnchor: [22, 94],
-                    shadowAnchor: [4, 62],
-                    popupAnchor: [-3, -76],
-                },
-            });
-
-            var pinIcon = new pin({
-                iconUrl: "{{ asset('assets/dashboard/img/pin/pin_red_x.png') }}",
-                iconSize: [40, 40],
-                iconAnchor: [25, 20],
-                popupAnchor: [-4, -20]
-            });
-
-            map.invalidateSize();
-
-            $.ajax({
-                url: "{{ url('/map/desa') }}",
-                type: "GET",
-                success: function(response) {
-                    if (response.status == 'success') {
-                        for (var i = 0; i < response.data.length; i++) {
-                            L.polygon(response.data[i].koordinatPolygon, {
-                                    color: response.data[i].warna_polygon,
-                                    weight: 1,
-                                    opacity: 1,
-                                    fillOpacity: 1
-                                })
-                                .bindTooltip(response.data[i].nama, {
-                                    permanent: true,
-                                    direction: "center",
-                                    className: 'labelPolygon'
-                                })
-                                .addTo(map);
-                        }
-                    }
-                },
-            })
-
-            $.ajax({
-                url: "{{ url('rencana-intervensi/map/' . $rencana_intervensi->id) }}",
-                type: "GET",
-                success: function(response) {
-                    if (response.status == 'success') {
-
-                        for (var i = 0; i < response.data.length; i++) {
-                            var pemilikKeong = '';
-                            if (response.data[i].pemilik_lokasi_keong.length > 0) {
-                                pemilikKeong += '<hr class="my-1">';
-                                pemilikKeong += "<p class='my-0 fw-bold'>Pemilik Lahan : </p>";
-                                for (var j = 0; j < response.data[i].pemilik_lokasi_keong.length; j++) {
-                                    pemilikKeong += "<p class='my-0'> -" + response.data[i]
-                                        .pemilik_lokasi_keong[
-                                            j].penduduk.nama + "</p>";
-                                }
-                            }
-
-                            icon = pinIcon;
-                            L.marker([response.data[i].latitude, response.data[i].longitude], {
-                                    icon: icon
-                                })
-                                .bindPopup(
-                                    "<p class='fw-bold my-0 text-center'>" + response.data[i].nama +
-                                    "</p><hr class='my-1'>" +
-                                    "<p class='my-0 fw-bold'>Desa : </p>" +
-                                    "<p class='my-0'>" + response.data[i].desa
-                                    .nama + "</p>" +
-                                    "<p class='my-0 fw-bold'>Latitude : </p>" +
-                                    "<p class='my-0'>" + response.data[i].latitude + "</p>" +
-                                    "<p class='my-0 fw-bold'>Longitude : </p>" +
-                                    "<p class='my-0'>" + response.data[i].longitude + "</p>" +
-                                    pemilikKeong
-                                )
-                                // .on('click', L.bind(petaKlik, null, data[0][i].id))
-                                .addTo(map);
-                        }
-                    }
-                },
-            })
-        }
     </script>
 @endpush

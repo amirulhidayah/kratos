@@ -22,27 +22,24 @@
     <div class="row">
         <div class="col-md-8">
             <div class="form-group p-0 pb-2">
-                <label class="my-2">Pilih Titik Lokasi <sup class="text-danger">*</sup></label>
+                <label class="my-2">Pilih Desa (Desa - Kecamatan) <sup class="text-danger">*</sup></label>
                 <div class="select2-input select2-danger">
-                    <input type="hidden" name="lokasi_hidden" id="lokasi-hidden" data-label="Titik Lokasi"
-                        value="">
-                    <select id="lokasi-perencanaan" name="lokasi[]" class="form-control multiple" multiple="multiple"
-                        data-label="Titik Lokasi"
-                        {{ isset($realisasiIntervensiKeong) && $realisasiIntervensiKeong->status == 1 ? 'disabled' : '' }}>
-                        @foreach ($desa as $item)
+                    <input type="hidden" name="desa_hidden" id="desa-hidden" data-label="Desa" value="">
+                    <select id="desa-perencanaan" name="desa[]" class="form-control multiple" multiple="multiple"
+                        data-label="Desa"
+                        {{ isset($realisasiIntervensi) && $realisasiIntervensi->status == 1 ? 'disabled' : '' }}>
+                        @foreach ($kecamatan as $item)
                             <optgroup label="{{ $item->nama }}">
-                                @foreach ($item->lokasi->whereIn('id', $lokasiArr) as $item2)
-                                    <option value="{{ $item2->id }}" data-latitude="{{ $item2->latitude }}"
-                                        data-longitude="{{ $item2->longitude }}" data-nama-lokasi="{{ $item2->nama }}"
-                                        data-nama-desa="{{ $item->nama }}">
-                                        {{ $item2->nama }} - {{ $item2->desa->nama }}</option>
+                                @foreach ($item->desa->whereIn('id', $desaArr) as $item2)
+                                    <option value="{{ $item2->id }}">
+                                        {{ $item2->nama }} - {{ $item->nama }}</option>
                                 @endforeach
                             </optgroup>
                         @endforeach
                     </select>
                 </div>
-                <span class="text-danger error-text lokasi_hidden-error"></span>
-                <span class="text-danger error-text lokasi-error"></span>
+                <span class="text-danger error-text desa_hidden-error"></span>
+                <span class="text-danger error-text desa-error"></span>
             </div>
             <div class="form-group p-0 pb-3">
                 @component('dashboard.components.formElements.input',
@@ -53,7 +50,7 @@
                         'class' => 'rupiah req',
                         'placeholder' => 'Masukkan Penggunaan Anggaran',
                         'wajib' => '<sup class="text-danger">*</sup>',
-                        'value' => $realisasiIntervensiKeong->penggunaan_anggaran ?? '',
+                        'value' => $realisasiIntervensi->penggunaan_anggaran ?? '',
                         'attribute' => Auth::user()->role != 'OPD' ? 'disabled' : '',
                     ])
                     @if (Auth::user()->role == 'OPD')
@@ -70,9 +67,9 @@
             <div class="form-group  p-0 pb-2">
                 <label for="" class="mt-1 mb-2">Dokumen Pendukung <sup class="text-danger">*</sup></label>
                 {{-- <label for="">(Surat-surat Kendaraan, Berita Acara, dan Lainnya)</label> --}}
-                <div class="row" id="dokumen-keong">
-                    @if (isset($realisasiIntervensiKeong) && $realisasiIntervensiKeong->dokumenRealisasiKeong && $method == 'PUT')
-                        @foreach ($realisasiIntervensiKeong->dokumenRealisasiKeong as $item)
+                <div class="row" id="dokumen">
+                    @if (isset($realisasiIntervensi) && $realisasiIntervensi->dokumenRealisasi && $method == 'PUT')
+                        @foreach ($realisasiIntervensi->dokumenRealisasi as $item)
                             <div class="col-md-12 col-lg-12 col-xl-12 col-document"
                                 id="col-document-old-{{ $loop->iteration }}">
                                 <div class="card box-upload mb-3 pegawai" id="box-upload-{{ $loop->iteration }}"
@@ -106,7 +103,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <a type="button"
-                                                        href="{{ Storage::exists('uploads/dokumen/realisasi/keong/' . $item->file) ? Storage::url('uploads/dokumen/realisasi/keong/' . $item->file) : 'tidak-ditemukan' }}"
+                                                        href="{{ Storage::exists('uploads/dokumen/realisasi/' . $item->file) ? Storage::url('uploads/dokumen/realisasi/' . $item->file) : 'tidak-ditemukan' }}"
                                                         target="_blank" class="btn btn-primary shadow-sm w-100"><i
                                                             class="fas fa-eye"></i> Lihat
                                                         Dokumen</a>
@@ -218,6 +215,18 @@
 </form>
 
 @push('scripts')
+    {{-- Lokasi Titik --}}
+    <script>
+        if ('{{ isset($desa) }}' || '{{ isset($rencanaIntervensi) }}') {
+            const desa = {!! $desa ?? '[]' !!};
+            for (let i = 0; i < desa.length; i++) {
+                $('#desa-perencanaan option[value="' + desa[i] + '"]').prop('selected', true);
+            }
+            $('#desa-perencanaan').trigger('change');
+            temp = 0;
+        }
+    </script>
+
     <script>
         $('.sumber-dana').click(function() {
             $('#sumber-dana-hidden').val($(this).val());
@@ -232,11 +241,11 @@
             e.preventDefault();
             clearTextError()
 
-            $('#lokasi-perencanaan').val() == '' ? $('#lokasi-hidden').addClass('req') : $('#lokasi-hidden')
+            $('#desa-perencanaan').val() == '' ? $('#desa-hidden').addClass('req') : $('#desa-hidden')
                 .removeClass('req');
 
             const formValidation = $('#form .req').serializeArray()
-            validation(formValidation)
+            // validation(formValidation)
 
             if ('{{ $method == 'POST' }}') {
                 var title = 'Kirim Data?'
@@ -272,7 +281,6 @@
                         processData: false,
                         contentType: false,
                         success: function(response) {
-                            console.log(response)
                             $('.rupiah').mask('000.000.000.000.000', {
                                 reverse: true
                             })
@@ -411,126 +419,6 @@
         }
     </script>
 
-    {{-- Lokasi Titik --}}
-    <script>
-        if ('{{ isset($lokasi) }}' || '{{ isset($rencanaIntervensi) }}') {
-            const lokasi = {!! $lokasi ?? '[]' !!};
-            for (let i = 0; i < lokasi.length; i++) {
-                $('#lokasi-perencanaan option[value="' + lokasi[i] + '"]').prop('selected', true);
-            }
-            $('#lokasi-perencanaan').trigger('change');
-            temp = 0;
-        }
-    </script>
-
-    {{-- Lokasi Titik --}}
-    <script>
-        $(document).ready(function() {
-            initializeMap();
-        })
-
-        let lokasiPerencanaan = [];
-
-        var map = null;
-
-        function initializeMap() {
-            if (map != undefined || map != null) {
-                map.remove();
-            }
-
-            var center = [-1.3618072, 120.1619337];
-
-            map = L.map("peta", {
-                maxBounds: [
-                    [-1.511127, 119.9637063],
-                    [-1.21458, 120.2912363]
-                ]
-            }).setView(center, 11);
-            map.addControl(new L.Control.Fullscreen());
-
-            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                attribution: 'Data © <a href="http://osm.org/copyright">OpenStreetMap</a>',
-                maxZoom: 18,
-                minZoom: 11
-            }).addTo(map);
-
-            var pin = L.Icon.extend({
-                options: {
-                    iconSize: [50, 50],
-                    iconAnchor: [22, 94],
-                    shadowAnchor: [4, 62],
-                    popupAnchor: [-3, -76],
-                },
-            });
-
-            var pinIcon = new pin({
-                iconUrl: "{{ asset('assets/dashboard/img/pin/pin_red_x.png') }}",
-                iconSize: [40, 40],
-                iconAnchor: [25, 20],
-                popupAnchor: [-4, -20]
-            });
-
-            map.invalidateSize();
-
-            $.ajax({
-                url: "{{ url('/map/desa') }}",
-                type: "GET",
-                success: function(response) {
-                    if (response.status == 'success') {
-                        for (var i = 0; i < response.data.length; i++) {
-                            L.polygon(response.data[i].koordinatPolygon, {
-                                    color: response.data[i].warna_polygon,
-                                    weight: 1,
-                                    opacity: 1,
-                                    fillOpacity: 1
-                                })
-                                .bindTooltip(response.data[i].nama, {
-                                    permanent: true,
-                                    direction: "center",
-                                    className: 'labelPolygon'
-                                })
-                                .addTo(map);
-                        }
-                    }
-                },
-            })
-
-            const data = {!! $dataMap !!};
-
-            for (var i = 0; i < data.length; i++) {
-                var pemilikKeong = '';
-                if (data[i].pemilik_lokasi.length > 0) {
-                    pemilikKeong += '<hr class="my-1">';
-                    pemilikKeong += "<p class='my-0 fw-bold'>Pemilik Lahan : </p>";
-                    for (var j = 0; j < data[i].pemilik_lokasi.length; j++) {
-                        pemilikKeong += "<p class='my-0'> -" + data[i]
-                            .pemilik_lokasi[
-                                j].penduduk.nama + "</p>";
-                    }
-                }
-
-                icon = pinIcon;
-                L.marker([data[i].latitude, data[i].longitude], {
-                        icon: icon
-                    })
-                    .bindPopup(
-                        "<p class='fw-bold my-0 text-center'>" + data[i].nama +
-                        "</p><hr class='my-1'>" +
-                        "<p class='my-0 fw-bold'>Desa : </p>" +
-                        "<p class='my-0'>" + data[i].desa
-                        .nama + "</p>" +
-                        "<p class='my-0 fw-bold'>Latitude : </p>" +
-                        "<p class='my-0'>" + data[i].latitude + "</p>" +
-                        "<p class='my-0 fw-bold'>Longitude : </p>" +
-                        "<p class='my-0'>" + data[i].longitude + "</p>" +
-                        pemilikKeong
-                    )
-                    // .on('click', L.bind(petaKlik, null, data[0][i].id))
-                    .addTo(map);
-            }
-        }
-    </script>
-
     {{-- Dokumen --}}
     <script>
         // Dokumen
@@ -603,7 +491,7 @@
                 iterDokumen = count + 1;
             }
             $('.col-add-dokumen').remove();
-            $('#dokumen-keong').append(`
+            $('#dokumen').append(`
             <div class="col-md-6 col-lg-12 col-xl-12 col-document" id="col-dokumen-` + iterDokumen + `">
                 <div class="card box-upload mb-3" id="box-upload-` +
                 iterDokumen + `" class="box-upload">

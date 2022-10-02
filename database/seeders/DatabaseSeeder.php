@@ -35,16 +35,15 @@ class DatabaseSeeder extends Seeder
 
         $this->call(PerencanaanTableSeeder::class);
         $this->call(RealisasiTableSeeder::class);
+        $this->call(DesaPerencanaanTableSeeder::class);
+        $this->call(OpdTerkaitTableSeeder::class);
+        $this->call(DokumenPerencanaanTableSeeder::class);
         $this->call(OPDSeeder::class);
         $this->call(DesaTableSeeder::class);
         $this->call(KecamatanTableSeeder::class);
         $this->call(PendudukSeeder::class);
-        $this->call(LokasiTableSeeder::class);
         $this->call(IndikatorTableSeeder::class);
-        $this->call(DokumenPerencanaanTableSeeder::class);
         $this->call(DokumenRealisasiTableSeeder::class);
-        $this->call(LokasiPerencanaanTableSeeder::class);
-        $this->call(OpdTerkaitTableSeeder::class);
         // $this->call(PemilikLokasiSeeder::class);
         // $this->call(PendudukTableSeeder::class); // new
         $this->call(UserSeeder::class);

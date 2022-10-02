@@ -5,14 +5,14 @@ namespace App\Http\Controllers\intervensi;
 use App\Models\OPD;
 use App\Models\Desa;
 use App\Models\Lokasi;
+use App\Models\Indikator;
+use App\Models\Kecamatan;
 use App\Models\OPDTerkait;
-use App\Models\LokasiKeong;
 use App\Models\Perencanaan;
 use Illuminate\Http\Request;
-use App\Models\RealisasiKeong;
 use Illuminate\Support\Carbon;
-use Illuminate\Validation\Rule;
-use App\Models\LokasiPerencanaan;
+use App\Models\DokumenRealisasi;
+use App\Models\DesaPerencanaan;
 use App\Exports\PerencanaanExport;
 use App\Models\DokumenPerencanaan;
 use Illuminate\Support\Facades\DB;
@@ -23,9 +23,6 @@ use App\Models\DokumenRealisasiKeong;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Requests\StorePerencanaanRequest;
-use App\Http\Requests\UpdatePerencanaanRequest;
-
 
 class PerencanaanController extends Controller
 {
@@ -36,7 +33,7 @@ class PerencanaanController extends Controller
      */
     public function dataPerencanaan()
     {
-        $query = Perencanaan::with('opd', 'lokasiPerencanaan', 'opdTerkait', 'realisasi')
+        $query = Perencanaan::with('opd', 'desaPerencanaan', 'opdTerkait', 'realisasi')
             ->where(function ($query) {
                 if (Auth::user()->role == 'OPD') {
                     $query->where('opd_id', Auth::user()->opd_id);
@@ -77,9 +74,13 @@ class PerencanaanController extends Controller
                             if ($filter == 3) {
                                 // $query->created_at->year != Carbon::now()->year;
                                 $query->whereYear('created_at', '!=', Carbon::now()->year);
-                                $query->whereHas('realisasi', function ($q) {
-                                    $q->where('status', 1);
-                                    $q->havingRaw('max(progress) != ?', [100]);
+                                $query->where(function ($query) {
+                                    $query->whereHas('realisasi', function ($q) {
+                                        $q->where('status', 1);
+                                        $q->havingRaw('max(progress) != ?', [100]);
+                                    });
+
+                                    $query->orDoesntHave('realisasi');
                                 });
                             }
                         }
@@ -94,6 +95,10 @@ class PerencanaanController extends Controller
 
             return DataTables::of($data)
                 ->addIndexColumn()
+
+                ->addColumn('sub_indikator', function ($row) {
+                    return $row->indikator->nama;
+                })
 
                 ->addColumn('status', function ($row) {
                     if ($row->status == 0) {
@@ -133,7 +138,7 @@ class PerencanaanController extends Controller
                 })
 
                 ->addColumn('jumlah_lokasi', function ($row) {
-                    return $row->lokasiPerencanaan->count();
+                    return $row->desaPerencanaan->count();
                 })
 
                 ->addColumn('opd', function ($row) {
@@ -185,7 +190,7 @@ class PerencanaanController extends Controller
                     'status',
                     'opd',
                     'action',
-                    'lokasi_keong',
+                    'lokasi',
                 ])
                 ->make(true);
         }
@@ -250,6 +255,8 @@ class PerencanaanController extends Controller
         }
 
         $data = [
+            'sub_indikator' => Indikator::all(),
+            'kecamatan' => Kecamatan::orderBy('nama', 'asc')->get(),
             'desa' => Desa::all(),
             'opd' => OPD::orderBy('nama')->whereNot('id', Auth::user()->opd_id)->get(),
         ];
@@ -268,14 +275,14 @@ class PerencanaanController extends Controller
             $request->all(),
             [
                 'sub_indikator' => 'required',
-                'lokasi' => 'required',
+                'desa' => 'required',
                 'nilai_pembiayaan' => 'required',
                 'sumber_dana' => 'required',
             ],
             [
                 'sub_indikator.required' => 'Sub Indikator harus diisi',
-                'lokasi.required' => 'Lokasi harus dipilih',
-                'nilai_pembiayaan.required' => 'Nilai Pembiayaan harus diisi',
+                'desa.required' => 'Desa harus dipilih',
+                'nilai_pembiayaan.required' => 'Rencana Anggaran harus diisi',
                 'sumber_dana.required' => 'Sumber Dana harus dipilih',
             ]
         );
@@ -300,27 +307,27 @@ class PerencanaanController extends Controller
 
         $dataPerencanaan = [
             'opd_id' => Auth::user()->opd_id,
-            'sub_indikator' => $request->sub_indikator,
+            'indikator_id' => $request->sub_indikator,
             'nilai_pembiayaan' => $request->nilai_pembiayaan,
             'sumber_dana' => $request->sumber_dana,
         ];
 
         $insertPerencanaan = Perencanaan::create($dataPerencanaan);
 
-        if ($request->lokasi != null) {
-            foreach ($request->lokasi as $lokasi) {
+        if ($request->desa != null) {
+            foreach ($request->desa as $desa) {
                 $dataLokasi = [
-                    'perencanaan_keong_id' => $insertPerencanaan->id,
-                    'lokasi_keong_id' => $lokasi,
+                    'perencanaan_id' => $insertPerencanaan->id,
+                    'desa_id' => $desa,
                 ];
-                $insertLokasi = LokasiPerencanaan::create($dataLokasi);
+                $insertLokasi = DesaPerencanaan::create($dataLokasi);
             }
         }
 
         if ($request->opd_terkait != null) {
             foreach ($request->opd_terkait as $opd) {
                 $dataOPDTerkait = [
-                    'perencanaan_keong_id' => $insertPerencanaan->id,
+                    'perencanaan_id' => $insertPerencanaan->id,
                     'opd_id' => $opd,
                 ];
                 $insertOPDTerkait = OPDTerkait::create($dataOPDTerkait);
@@ -330,15 +337,15 @@ class PerencanaanController extends Controller
         $no_dokumen = 1;
         if ($request->nama_dokumen != null) {
             for ($i = 0; $i < $countFileDokumen; $i++) {
-                $namaFile = mt_rand() . '-' . $request->nama_dokumen[$i] . '-' . $request->sub_indikator . '-' . $no_dokumen . '.' . $request->file_dokumen[$i]->getClientOriginalExtension();
+                $namaFile = mt_rand() . '-' . $request->nama_dokumen[$i] . '-' . Auth::user()->opd->nama . '-' . $no_dokumen . '.' . $request->file_dokumen[$i]->getClientOriginalExtension();
 
                 $request->file_dokumen[$i]->storeAs(
-                    'uploads/dokumen/perencanaan/keong',
+                    'uploads/dokumen/perencanaan',
                     $namaFile
                 );
 
                 $dataDokumen = [
-                    'perencanaan_keong_id' => $insertPerencanaan->id,
+                    'perencanaan_id' => $insertPerencanaan->id,
                     'nama' => $request->nama_dokumen[$i],
                     'file' => $namaFile,
                     'no_urut' => $no_dokumen,
@@ -355,7 +362,7 @@ class PerencanaanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Perencanaan  $realisasi_intervensi_keong
+     * @param  \App\Models\Perencanaan  $realisasi_intervensi
      * @return \Illuminate\Http\Response
      */
     public function show(Perencanaan $rencana_intervensi)
@@ -366,7 +373,7 @@ class PerencanaanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Perencanaan  $realisasi_intervensi_keong
+     * @param  \App\Models\Perencanaan  $realisasi_intervensi
      * @return \Illuminate\Http\Response
      */
     public function edit(Perencanaan $rencana_intervensi)
@@ -387,9 +394,11 @@ class PerencanaanController extends Controller
         }
 
         $data = [
+            'sub_indikator' => Indikator::all(),
+            'kecamatan' => Kecamatan::orderBy('nama', 'asc')->get(),
             'rencanaIntervensi' => $rencana_intervensi,
             'desa' => Desa::all(),
-            'lokasiPerencanaan' => json_encode($rencana_intervensi->lokasiPerencanaan->pluck('lokasi_id')->toArray()),
+            'desaPerencanaan' => json_encode($rencana_intervensi->desaPerencanaan->pluck('desa_id')->toArray()),
             'opdTerkait' => json_encode($rencana_intervensi->opdTerkait->pluck('opd_id')->toArray()),
             'opd' => OPD::whereNot('id', $rencana_intervensi->opd_id)->orderBy('nama')->get(),
 
@@ -401,7 +410,7 @@ class PerencanaanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdatePerencanaanRequest  $request
-     * @param  \App\Models\Perencanaan  $realisasi_intervensi_keong
+     * @param  \App\Models\Perencanaan  $realisasi_intervensi
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Perencanaan $rencana_intervensi)
@@ -410,14 +419,14 @@ class PerencanaanController extends Controller
             $request->all(),
             [
                 'sub_indikator' => 'required',
-                'lokasi' => $rencana_intervensi->realisasi->count() == 0 ? 'required' : '',
+                'desa' => $rencana_intervensi->realisasi->count() == 0 ? 'required' : '',
                 'nilai_pembiayaan' => $rencana_intervensi->realisasi->count() == 0 ? 'required' : '',
                 'sumber_dana' => 'required',
             ],
             [
                 'sub_indikator.required' => 'Sub Indikator harus diisi',
-                'lokasi.required' => 'Lokasi harus dipilih',
-                'nilai_pembiayaan.required' => 'Nilai Pembiayaan harus diisi',
+                'desa.required' => 'Desa harus dipilih',
+                'nilai_pembiayaan.required' => 'Rencana Anggaran harus diisi',
                 'sumber_dana.required' => 'Sumber Dana harus dipilih',
             ]
         );
@@ -447,14 +456,14 @@ class PerencanaanController extends Controller
 
         // update lokasi perencanaan
         if ($rencana_intervensi->realisasi->count() == 0) {
-            $rencana_intervensi->lokasiPerencanaan()->delete();
-            if ($request->lokasi != null) {
-                foreach ($request->lokasi as $lokasi) {
+            $rencana_intervensi->desaPerencanaan()->delete();
+            if ($request->desa != null) {
+                foreach ($request->desa as $desa) {
                     $dataLokasi = [
-                        'perencanaan_keong_id' => $rencana_intervensi->id,
-                        'lokasi_keong_id' => $lokasi,
+                        'perencanaan_id' => $rencana_intervensi->id,
+                        'desa_id' => $desa,
                     ];
-                    $insertLokasi = LokasiPerencanaan::create($dataLokasi);
+                    $insertLokasi = DesaPerencanaan::create($dataLokasi);
                 }
             }
         }
@@ -464,7 +473,7 @@ class PerencanaanController extends Controller
         if ($request->opd_terkait != null) {
             foreach ($request->opd_terkait as $opd) {
                 $dataOPDTerkait = [
-                    'perencanaan_keong_id' => $rencana_intervensi->id,
+                    'perencanaan_id' => $rencana_intervensi->id,
                     'opd_id' => $opd,
                 ];
                 $insertOPDTerkait = OPDTerkait::create($dataOPDTerkait);
@@ -476,8 +485,8 @@ class PerencanaanController extends Controller
             $deleteDocumentOld = explode(',', $request->deleteDocumentOld);
             foreach ($deleteDocumentOld as $item) {
                 $namaFile = DokumenPerencanaan::where('id', $item)->first()->file;
-                if (Storage::exists('uploads/dokumen/perencanaan/keong/' . $namaFile)) {
-                    Storage::delete('uploads/dokumen/perencanaan/keong/' . $namaFile);
+                if (Storage::exists('uploads/dokumen/perencanaan/' . $namaFile)) {
+                    Storage::delete('uploads/dokumen/perencanaan/' . $namaFile);
                 }
                 DokumenPerencanaan::where('id', $item)->delete();
             }
@@ -500,12 +509,12 @@ class PerencanaanController extends Controller
             foreach ($request->file_dokumen_old as $key => $value) {
                 $idUpdateDokumen = $rencana_intervensi->dokumenPerencanaan[$key]->id;
                 $dataDokumen = DokumenPerencanaan::find($idUpdateDokumen);
-                if (Storage::exists('uploads/dokumen/perencanaan/keong/' . $dataDokumen->file)) {
-                    Storage::delete('uploads/dokumen/perencanaan/keong/' . $dataDokumen->file);
+                if (Storage::exists('uploads/dokumen/perencanaan/' . $dataDokumen->file)) {
+                    Storage::delete('uploads/dokumen/perencanaan/' . $dataDokumen->file);
                 }
 
-                $namaFile = mt_rand() . '-' . $request->nama_dokumen_old[$key] . '-' . $request->sub_indikator . '-' .  $dataDokumen->no_urut . '.' . $value->getClientOriginalExtension();
-                $value->storeAs('uploads/dokumen/perencanaan/keong/', $namaFile);
+                $namaFile = mt_rand() . '-' . $request->nama_dokumen_old[$key] . '-' . Auth::user()->opd->nama . '-' .  $dataDokumen->no_urut . '.' . $value->getClientOriginalExtension();
+                $value->storeAs('uploads/dokumen/perencanaan/', $namaFile);
 
                 $update = [
                     'nama' => $request->nama_dokumen_old[$key],
@@ -518,7 +527,7 @@ class PerencanaanController extends Controller
 
         // update data perencanaan
         $dataPerencanaan = [
-            'sub_indikator' => $request->sub_indikator,
+            'indikator_id' => $request->sub_indikator,
             'sumber_dana' => $request->sumber_dana
         ];
 
@@ -536,14 +545,14 @@ class PerencanaanController extends Controller
         $no_dokumen = $rencana_intervensi->dokumenPerencanaan->max('no_urut') + 1;
         if ($request->nama_dokumen != null) {
             for ($i = 0; $i < $countFileDokumen; $i++) {
-                $namaFile = mt_rand() . '-' . $request->nama_dokumen[$i] . '-' . $request->sub_indikator . '-' .  $no_dokumen . '.' . $request->file_dokumen[$i]->getClientOriginalExtension();
+                $namaFile = mt_rand() . '-' . $request->nama_dokumen[$i] . '-' . Auth::user()->opd->nama . '-' .  $no_dokumen . '.' . $request->file_dokumen[$i]->getClientOriginalExtension();
                 $request->file_dokumen[$i]->storeAs(
-                    'uploads/dokumen/perencanaan/keong/',
+                    'uploads/dokumen/perencanaan/',
                     $namaFile
                 );
 
                 $dataDokumen = [
-                    'perencanaan_keong_id' => $rencana_intervensi->id,
+                    'perencanaan_id' => $rencana_intervensi->id,
                     'nama' => $request->nama_dokumen[$i],
                     'file' => $namaFile,
                     'no_urut' => $no_dokumen,
@@ -560,18 +569,18 @@ class PerencanaanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Perencanaan  $realisasi_intervensi_keong
+     * @param  \App\Models\Perencanaan  $realisasi_intervensi
      * @return \Illuminate\Http\Response
      */
     public function destroy(Perencanaan $rencana_intervensi)
     {
         $rencana_intervensi->opdTerkait()->delete();
-        $rencana_intervensi->lokasiPerencanaan()->delete();
+        $rencana_intervensi->desaPerencanaan()->delete();
 
         if ($rencana_intervensi->dokumenPerencanaan) {
             foreach ($rencana_intervensi->dokumenPerencanaan as $item) {
-                if (Storage::exists('uploads/dokumen/perencanaan/keong/' . $item->file)) {
-                    Storage::delete('uploads/dokumen/perencanaan/keong/' . $item->file);
+                if (Storage::exists('uploads/dokumen/perencanaan/' . $item->file)) {
+                    Storage::delete('uploads/dokumen/perencanaan/' . $item->file);
                 }
             }
         }
@@ -579,13 +588,13 @@ class PerencanaanController extends Controller
 
         if ($rencana_intervensi->realisasi) {
             foreach ($rencana_intervensi->realisasi as $item) {
-                foreach ($item->dokumenRealisasiKeong as $doc) {
-                    if (Storage::exists('uploads/dokumen/realisasi/keong/' . $doc->file)) {
-                        Storage::delete('uploads/dokumen/realisasi/keong/' . $doc->file);
+                foreach ($item->dokumenRealisasi as $doc) {
+                    if (Storage::exists('uploads/dokumen/realisasi/' . $doc->file)) {
+                        Storage::delete('uploads/dokumen/realisasi/' . $doc->file);
                     }
-                    DokumenRealisasiKeong::where('id', $item->id)->delete();
+                    DokumenRealisasi::where('id', $item->id)->delete();
                 }
-                $item->dokumenRealisasiKeong()->delete();
+                $item->dokumenRealisasi()->delete();
             }
         }
 
@@ -604,7 +613,7 @@ class PerencanaanController extends Controller
                 'alasan_ditolak' => $request->status == 2 ? 'required' : '',
             ],
             [
-                'status.required' => 'Status harus diisi',
+                'status.required' => 'Konfirmasi harus diisi',
                 'alasan_ditolak.required' => 'Alasan ditolak harus diisi',
             ]
         );
@@ -624,16 +633,9 @@ class PerencanaanController extends Controller
         return response()->json(['success' => 'Berhasil mengkonfirmasi']);
     }
 
-    public function map(Perencanaan $rencana_intervensi)
-    {
-        $getLokasiKeong = $rencana_intervensi->lokasiPerencanaan->pluck('lokasi_keong_id')->toArray();
-        $lokasiKeong = Lokasi::with(['desa', 'pemilikLokasiKeong', 'pemilikLokasiKeong.penduduk'])->whereIn('id', $getLokasiKeong)->get();
-        return response()->json(['status' => 'success', 'data' => $lokasiKeong]);
-    }
-
     public function export()
     {
-        $dataPerencanaan = Perencanaan::with('opd', 'lokasiPerencanaan')
+        $dataPerencanaan = Perencanaan::with('opd', 'desaPerencanaan')
             ->where(function ($query) {
                 if (Auth::user()->role == 'OPD') {
                     $query->where('opd_id', Auth::user()->opd_id);
@@ -644,11 +646,11 @@ class PerencanaanController extends Controller
                 }
             })
             ->latest()->get();
-        // return view('dashboard.pages.intervensi.perencanaan.keong.subIndikator.export', ['dataPerencanaan' => $dataPerencanaan]);
+        // return view('dashboard.pages.intervensi.perencanaan.subIndikator.export', ['dataPerencanaan' => $dataPerencanaan]);
 
         $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
 
-        return Excel::download(new PerencanaanExport($dataPerencanaan), "Export Data Perencanaan Habitat Keong" . "-" . $tanggal . "-" . rand(1, 9999) . '.xlsx');
+        return Excel::download(new PerencanaanExport($dataPerencanaan), "Export Data Perencanaan" . " - " . $tanggal . "-" . rand(1, 9999) . '.xlsx');
     }
 
     public function buatAlasanTidakTerselesaikan(Perencanaan $rencana_intervensi, Request $request)

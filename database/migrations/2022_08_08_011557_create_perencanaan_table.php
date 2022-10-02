@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('perencanaan', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('opd_id');
-            $table->string('sub_indikator');
+            $table->string('indikator_id');
             $table->bigInteger('nilai_pembiayaan');
             $table->string('sumber_dana');
             $table->integer('status')->default(0); // 0/1/2
