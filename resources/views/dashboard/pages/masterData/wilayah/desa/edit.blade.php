@@ -143,7 +143,7 @@
             }).then((Update) => {
                 if (Update) {
                     $.ajax({
-                        url: "{{ url('master-data/lokasi/desa' . '/' . $desa->id) }}",
+                        url: "{{ url('master-data/wilayah/desa' . '/' . $kecamatanId . '/' . $desa->id) }}",
                         type: 'POST',
                         data: $(this).serialize(),
                         success: function(response) {
@@ -154,7 +154,7 @@
                                     timer: 1000,
                                 }).then(function() {
                                     window.location.href =
-                                        "{{ url('master-data/lokasi/desa') }}";
+                                        "{{ url('master-data/wilayah/desa' . '/' . $kecamatanId) }}";
                                 })
                             } else {
                                 swal("Periksa Kembali Data Anda", {
@@ -182,21 +182,25 @@
             $.ajax({
                 url: "{{ url('/map/desa') }}",
                 type: "GET",
+                data: {
+                    kecamatanId: "{{ $kecamatanId }}"
+                },
                 success: function(response) {
                     if (response.status == 'success') {
                         for (var i = 0; i < response.data.length; i++) {
                             if (response.data[i].id != '{{ $desa->id }}') {
                                 L.polygon(response.data[i].koordinatPolygon, {
-                                        color: response.data[i].warna_polygon,
-                                        weight: 1,
-                                        opacity: 1,
-                                        fillOpacity: 1
+                                        color: "{{ env('MAP_POLYGON_COLOR') }}",
+                                        fillColor: response.data[i].warna_polygon,
+                                        weight: {{ env('MAP_POLYGON_WEIGHT') }},
+                                        opacity: {{ env('MAP_POLYGON_OPACITY') }},
+                                        fillOpacity: {{ env('MAP_POLYGON_FILLOPACITY') }}
                                     })
-                                    .bindTooltip(response.data[i].nama + " (" + response.data[i].luas +
-                                        " Km<sup>2</sup>) ", {
-                                            permanent: true,
-                                            direction: "center"
-                                        })
+                                    .bindTooltip(response.data[i].nama, {
+                                        permanent: true,
+                                        direction: "center",
+                                        className: 'labelPolygon'
+                                    })
                                     .addTo(map)
                                     .bindPopup(response.data[i].nama);
                             }
@@ -229,19 +233,19 @@
 
     <script>
         var warna = $('#warna').val();
-        var center = [-1.3618072, 120.1619337];
+        var center = {{ env('MAP_CENTER') }};
 
         var map = L.map("map", {
             maxBounds: [
-                [-1.511127, 119.9637063],
-                [-1.21458, 120.2912363]
+                {{ env('MAP_BOUNDS_1') }},
+                {{ env('MAP_BOUNDS_2') }}
             ]
-        }).setView(center, 11);
+        }).setView(center, {{ env('MAP_ZOOM') }});
 
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             attribution: 'Data © <a href="http://osm.org/copyright">OpenStreetMap</a>',
-            maxZoom: 18,
-            minZoom: 11
+            maxZoom: {{ env('MAP_MAX_ZOOM') }},
+            minZoom: {{ env('MAP_MIN_ZOOM') }}
         }).addTo(map);
 
         var drawnItems = new L.FeatureGroup();
@@ -307,11 +311,11 @@
                                 opacity: 1,
                                 fillOpacity: 1
                             })
-                            .bindTooltip(response.data.nama + " (" + response.data.luas +
-                                " Km<sup>2</sup>) ", {
-                                    permanent: true,
-                                    direction: "center"
-                                })
+                            .bindTooltip(response.data.nama, {
+                                permanent: true,
+                                direction: "center",
+                                className: 'labelPolygon'
+                            })
                             .addTo(drawnItems);
                         map.addControl(drawControlEdit);
                     } else {
@@ -349,47 +353,6 @@
     </script>
 
     <script>
-        var table = $('#table-data').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ url('master-data/lokasi/desa') }}",
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                },
-                {
-                    data: 'nama',
-                    name: 'nama'
-                },
-                {
-                    data: 'luas',
-                    name: 'luas',
-                    class: 'text-center'
-                },
-                {
-                    data: 'statusPolygon',
-                    name: 'statusPolygon',
-                    class: 'text-center'
-                },
-                {
-                    data: 'warnaPolygon',
-                    name: 'warnaPolygon',
-                    class: 'text-center'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: true,
-                    searchable: true,
-                    class: 'text-center'
-                },
-            ]
-        });
-    </script>
-
-    <script>
-        $('#nav-master-lokasi').addClass('active');
-        $('#nav-master-lokasi .collapse').addClass('show');
-        $('#nav-master-lokasi .collapse #li-lokasi-desa').addClass('active');
+        $('#nav-master-wilayah').addClass('active');
     </script>
 @endpush

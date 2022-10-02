@@ -64,6 +64,12 @@
                      </li>
                  @endif
                  @if (Auth::user()->role == 'Admin')
+                     <li class="nav-item" id="nav-master-sumber-dana">
+                         <a href="{{ url('master-data/sumber-dana') }}">
+                             <i class="fas fa-money-bill-wave"></i>
+                             <p>Sumber Dana</p>
+                         </a>
+                     </li>
                      <li class="nav-item" id="nav-master-indikator">
                          <a href="{{ url('master-data/indikator') }}">
                              <i class="fas fa-tasks"></i>

@@ -12,16 +12,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($daftarKecamatan as $kecamatan)
+            @foreach ($daftarDesa as $desa)
                 <tr style="vertical-align: center;border: 1px solid black;">
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
                         {{ $loop->iteration }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $kecamatan->nama }}</td>
+                        {{ $desa->nama }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $kecamatan->kode }}</td>
+                        {{ $desa->kode }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $kecamatan->luas }} </td>
+                        {{ $desa->luas }} </td>
                 </tr>
             @endforeach
         </tbody>

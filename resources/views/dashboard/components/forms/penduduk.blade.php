@@ -245,7 +245,20 @@
                 ])
             @endcomponent
         </div>
-        <div class="col-sm-12 col-lg-12">
+        <div class="col-sm-12 col-lg-6">
+            @component('dashboard.components.formElements.select',
+                [
+                    'label' => 'Kecamatan',
+                    'id' => 'kecamatan_id',
+                    'name' => 'kecamatan_id',
+                    'class' => 'select2',
+                    'wajib' => '<sup class="text-danger">*</sup>',
+                ])
+                @slot('options')
+                @endslot
+            @endcomponent
+        </div>
+        <div class="col-sm-12 col-lg-6">
             @component('dashboard.components.formElements.select',
                 [
                     'label' => 'Desa',
@@ -255,9 +268,6 @@
                     'wajib' => '<sup class="text-danger">*</sup>',
                 ])
                 @slot('options')
-                    @foreach ($daftarDesa as $desa)
-                        <option value="{{ $desa->id }}">{{ $desa->nama }}</option>
-                    @endforeach
                 @endslot
             @endcomponent
         </div>
@@ -276,6 +286,7 @@
         $(document).ready(function() {
             $('#tanggal_perkawinan').prop('disabled', true);
             $("#nik").prop("maxLength", 16);
+            getKecamatan();
         });
 
         $('#status_perkawinan').change(function() {
@@ -387,5 +398,58 @@
                 $('.' + key + '-error').text(value);
             });
         }
+
+        var idKecamatan = "{{ $kecamatan_id ?? '' }}";
+        var idDesa = "{{ $desa_id ?? '' }}";
+
+        let getKecamatan = () => {
+            $('#kecamatan_id').html('');
+            $('#desa_id').html('');
+            $('#kecamatan_id').append('<option value="">--Pilih Salah Satu--</option>');
+            $.ajax({
+                url: "{{ url('list/kecamatan') }}",
+                type: 'GET',
+                data: {
+                    'id': idKecamatan
+                },
+                success: function(response) {
+                    response.data.map((data) => {
+                        $('#kecamatan_id').append('<option value="' + data.id + '">' +
+                            data
+                            .nama + '</option>');
+                    });
+                    if (idKecamatan) {
+                        $('#kecamatan_id').val(idKecamatan).trigger('change');
+                    }
+                }
+            })
+        }
+
+        let getDesa = () => {
+            $('#desa_id').html('');
+            $('#desa_id').append('<option value="">--Pilih Salah Satu--</option>');
+            $.ajax({
+                url: "{{ url('list/desa') }}",
+                type: 'GET',
+                data: {
+                    'kecamatan': $('#kecamatan_id').val(),
+                    'id': idDesa
+                },
+                success: function(response) {
+                    response.data.map((data) => {
+                        $('#desa_id').append('<option value="' + data.id + '">' +
+                            data
+                            .nama + '</option>');
+                    });
+                    if (idDesa) {
+                        $('#desa_id').val(idDesa).trigger('change');
+                    }
+                }
+            })
+        }
+
+        $('#kecamatan_id').change(function() {
+            getDesa();
+        })
     </script>
 @endpush

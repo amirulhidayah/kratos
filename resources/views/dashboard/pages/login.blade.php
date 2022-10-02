@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Schistosomiasis | Login</title>
+    <title>SMAS - Stunting | Login</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <link rel="icon" href="{{ asset('assets/dashboard') }}/img/lambang-sigi.png" type="image/x-icon" />
 
@@ -94,7 +94,7 @@
 
 
         .area {
-            background: #0e3ead;
+            background: #6861ce;
             /* background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8); */
             width: 100%;
             height: 100vh;

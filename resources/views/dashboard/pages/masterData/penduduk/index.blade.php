@@ -40,22 +40,17 @@
                         <div class="card-title">Data Penduduk</div>
                         <div class="card-tools">
                             <div class="row">
-                                <form action="{{ url('master-data/penduduk/export') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-info btn-border btn-round btn-sm mr-2"
-                                        id="export-penduduk" value="" name="desa_id">
-                                        <i class="fas fa-lg fa-download"></i>
-                                        Export Penduduk
-                                    </button>
-                                </form>
-                                <form action="{{ url('master-data/penduduk/export-jumlah') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-info btn-border btn-round btn-sm mr-2"
-                                        id="export-jumlah-penduduk">
-                                        <i class="fas fa-lg fa-download"></i>
-                                        Export Demografi
-                                    </button>
-                                </form>
+                                <button type="submit" class="btn btn-info btn-border btn-round btn-sm mr-2 btn-export"
+                                    id="export-penduduk" value="" name="desa_id">
+                                    <i class="fas fa-lg fa-download"></i>
+                                    Export Penduduk
+                                </button>
+
+                                <button type="submit" class="btn btn-info btn-border btn-round btn-sm mr-2 btn-export"
+                                    id="export-jumlah-penduduk">
+                                    <i class="fas fa-lg fa-download"></i>
+                                    Export Demografi
+                                </button>
                             </div>
 
                         </div>
@@ -76,35 +71,56 @@
                                         Daerah</a>
                                 </li>
                             </ul>
+                            <form action="{{ url('master-data/penduduk/export') }}" method="POST" id="form-export">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-sm-12 col-lg-6">
+                                        @component('dashboard.components.formElements.select',
+                                            [
+                                                'label' => 'Kecamatan',
+                                                'id' => 'kecamatan_id',
+                                                'name' => 'kecamatan_id',
+                                                'class' => 'select2 filter',
+                                                'wajib' => '<sup class="text-danger">*</sup>',
+                                            ])
+                                            @slot('options')
+                                                <option value="semua">Semua</option>
+                                                @foreach ($daftarKecamatan as $kecamatan)
+                                                    <option value="{{ $kecamatan->id }}">{{ $kecamatan->nama }}</option>
+                                                @endforeach
+                                            @endslot
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-12 col-lg-6">
+                                        @component('dashboard.components.formElements.select',
+                                            [
+                                                'label' => 'Desa',
+                                                'id' => 'desa_id',
+                                                'name' => 'desa_id',
+                                                'class' => 'select2 filter',
+                                                'wajib' => '<sup class="text-danger">*</sup>',
+                                                'attribute' => 'disabled',
+                                            ])
+                                            @slot('options')
+                                                <option value="semua">Semua</option>
+                                                {{-- @foreach ($daftarDesa as $desa)
+                                                        <option value="{{ $desa->id }}">{{ $desa->nama }}</option>
+                                                    @endforeach --}}
+                                            @endslot
+                                        @endcomponent
+                                    </div>
+                                </div>
+                            </form>
                             <div class="tab-content mb-3" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-tabel" role="tabpanel"
                                     aria-labelledby="pills-profile-tab-nobd">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-lg-12">
-                                            @component('dashboard.components.formElements.select',
-                                                [
-                                                    'label' => 'Desa',
-                                                    'id' => 'desa_id',
-                                                    'name' => 'desa_id',
-                                                    'class' => 'select2 filter',
-                                                    'wajib' => '<sup class="text-danger">*</sup>',
-                                                ])
-                                                @slot('options')
-                                                    <option value="semua">Semua</option>
-                                                    @foreach ($daftarDesa as $desa)
-                                                        <option value="{{ $desa->id }}">{{ $desa->nama }}</option>
-                                                    @endforeach
-                                                @endslot
-                                            @endcomponent
-                                        </div>
-                                    </div>
                                     <div class="row mt-3">
                                         <div class="col">
                                             <div class="card fieldset">
                                                 @component('dashboard.components.dataTables.index',
                                                     [
                                                         'id' => 'table-data',
-                                                        'th' => ['No', 'Nama', 'NIK', 'Jenis Kelamin', 'Desa', 'Aksi'],
+                                                        'th' => ['No', 'Nama', 'NIK', 'Jenis Kelamin', 'Kecamatan', 'Desa', 'Aksi'],
                                                     ])
                                                 @endcomponent
                                             </div>
@@ -113,249 +129,245 @@
                                 </div>
                                 <div class="tab-pane fade" id="pills-jumlah" role="tabpanel"
                                     aria-labelledby="pills-jumlah-tab-nobd">
-                                    <div class="my-2">
-                                        <div class="owl-carousel owl-theme owl-img-responsive">
-                                            {{-- @foreach ($daftarJumlahPenduduk as $jumlahPenduduk)
-                                                <div class="col-sm-12 col-md-12 item">
-                                                    <div class="card card-stats card-round border">
-                                                        <div class="card-body ">
+                                    <div class="my-4">
+                                        <div class="col-sm-12 col-md-12">
+                                            <div class="card card-stats card-round border">
+                                                <div class="card-body ">
+                                                    <div class="row">
+                                                        <div class="col-6">
                                                             <div class="row">
-                                                                <div class="col-6">
-                                                                    <div class="row">
-                                                                        <div class="col-2">
-                                                                            <div class="icon-big text-center">
-                                                                                <i
-                                                                                    class="flaticon-placeholder-1 text-primary"></i>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-10 col-stats">
-                                                                            <div class="numbers">
-                                                                                <p class="card-category">Desa</p>
-                                                                                <h4 class="card-title">
-                                                                                    {{ $jumlahPenduduk['desa'] }}
-                                                                                </h4>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <hr>
-                                                                    <div class="d-flex justify-content-center mt-2">
-                                                                        <p class="fw-bold mb-0">Total Penduduk :
-                                                                            {{ $jumlahPenduduk['total_penduduk'] }}</p>
-                                                                    </div>
-                                                                    <hr>
-                                                                    <div class="d-flex justify-content-center mt-2">
-                                                                        <p class="fw-bold mb-0">Berdasarkan Jenis Kelamin
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Laki - Laki : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['penduduk_laki_laki'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Perempuan : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['penduduk_perempuan'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <hr>
-                                                                    <div class="d-flex justify-content-center mt-2">
-                                                                        <p class="fw-bold mb-0">Berdasarkan Pendidikan
-                                                                            Terakhir</p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Tidak Sekolah : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['tidak_sekolah'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">SD : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['sd'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">SMP : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['smp'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">SMA : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['sma'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Diploma 1 : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['diploma_1'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Diploma 2 : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['diploma_2'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Diploma 3 : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['diploma_3'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Diploma 4 / S1 : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['s1'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">S2 : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['s2'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">S3 : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['s3'] }}
-                                                                        </p>
+                                                                <div class="col-2">
+                                                                    <div class="icon-big text-center">
+                                                                        <i class="flaticon-placeholder-1 text-primary"></i>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-6">
-                                                                    <div class="d-flex justify-content-center mt-2">
-                                                                        <p class="fw-bold mb-0">Berdasarkan Umur</p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Bayi Dua Tahun (0 - 24 Bulan) :
-                                                                        </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['baduta'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Bayi Lima Tahun (24 - 60 Bulan) :
-                                                                        </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['balita'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Anak (5 - 12 Tahun) :
-                                                                        </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['anak'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Remaja (12 - 18 Tahun) :
-                                                                        </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['remaja'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Dewasa (> 18 Tahun) :
-                                                                        </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['dewasa'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Lansia (> 60 Tahun) :
-                                                                        </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['lansia'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <hr>
-                                                                    <div class="d-flex justify-content-center mt-2">
-                                                                        <p class="fw-bold mb-0">Berdasarkan Pekerjaan</p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Tidak Bekerja : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['tidak_bekerja'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Ibu Rumah Tangga : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['irt'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Karyawan Swasta : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['karyawan_swasta'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">PNS / TNI-POLRI : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['pns'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Wiraswasta / Wirausaha : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['wiraswasta'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Petani / Pekebun : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['petani'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Pekerjaan Tidak Tetap : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['pekerjaan_tidak_tetap'] }}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="d-flex justify-content-between mt-2">
-                                                                        <p class=" mb-0">Pelajar / Mahasiswa : </p>
-                                                                        <p
-                                                                            class="badge bg-primary text-light border-0 mb-0">
-                                                                            {{ $jumlahPenduduk['pelajar'] }}
-                                                                        </p>
+                                                                <div class="col-10 col-stats">
+                                                                    <div class="numbers">
+                                                                        <p class="card-category" id="wilayah">-</p>
+                                                                        <h4 class="card-title" id="nama-wilayah">
+                                                                            -
+                                                                        </h4>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <hr>
+                                                            <div class="d-flex justify-content-center mt-2">
+                                                                <p class="fw-bold mb-0">Total Penduduk :
+                                                                    <span id="total-penduduk"></span>
+                                                                </p>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="d-flex justify-content-center mt-2">
+                                                                <p class="fw-bold mb-0">Berdasarkan Jenis Kelamin
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Laki - Laki : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="penduduk-laki-laki">
 
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Perempuan : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="penduduk-perempuan">
+
+                                                                </p>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="d-flex justify-content-center mt-2">
+                                                                <p class="fw-bold mb-0">Berdasarkan Pendidikan
+                                                                    Terakhir</p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Tidak Sekolah : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="tidak-sekolah">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">SD : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="sd">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">SMP : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="smp">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">SMA : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="sma">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Diploma 1 : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="diploma-1">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Diploma 2 : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="diploma-2">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Diploma 3 : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="diploma-3">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Diploma 4 / S1 : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="s1">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">S2 : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="s2">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">S3 : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="s3">
+
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="d-flex justify-content-center mt-2">
+                                                                <p class="fw-bold mb-0">Berdasarkan Umur</p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Bayi Dua Tahun (0 - 24 Bulan) :
+                                                                </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="baduta">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Bayi Lima Tahun (24 - 60 Bulan) :
+                                                                </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="balita">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Anak (5 - 12 Tahun) :
+                                                                </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="anak">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Remaja (12 - 18 Tahun) :
+                                                                </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="remaja">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Dewasa (> 18 Tahun) :
+                                                                </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="dewasa">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Lansia (> 60 Tahun) :
+                                                                </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="lansia">
+
+                                                                </p>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="d-flex justify-content-center mt-2">
+                                                                <p class="fw-bold mb-0">Berdasarkan Pekerjaan</p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Tidak Bekerja : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="tidak-bekerja">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Ibu Rumah Tangga : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="irt">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Karyawan Swasta : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="karyawan-swasta">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">PNS / TNI-POLRI : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="pns">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Wiraswasta / Wirausaha : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="wiraswasta">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Petani / Pekebun : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="petani">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Pekerjaan Tidak Tetap : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="pekerjaan-tidak-tetap">
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                <p class=" mb-0">Pelajar / Mahasiswa : </p>
+                                                                <p class="badge bg-primary text-light border-0 mb-0"
+                                                                    id="pelajar">
+
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
+
                                                 </div>
-                                            @endforeach --}}
+                                            </div>
                                         </div>
 
                                     </div>
@@ -492,12 +504,18 @@
     <script>
         $('#export-jumlah-penduduk').hide();
 
+        $('.btn-export').click(function() {
+            $('#form-export').submit();
+        })
+
         $('#pills-profile-tab-nobd').click(function() {
+            $('#form-export').attr('action', "{{ url('master-data/penduduk/export') }}");
             $('#export-penduduk').show();
             $('#export-jumlah-penduduk').hide();
         })
 
         $('#pills-jumlah-tab-nobd').click(function() {
+            $('#form-export').attr('action', "{{ url('master-data/penduduk/export-jumlah') }}");
             $('#export-penduduk').hide();
             $('#export-jumlah-penduduk').show();
         })
@@ -608,6 +626,7 @@
                 url: "{{ url('master-data/penduduk') }}",
                 data: function(d) {
                     d.desa_id = $('#desa_id').val();
+                    d.kecamatan_id = $('#kecamatan_id').val();
                     d.search = $('input[type="search"]').val();
                 },
             },
@@ -631,6 +650,11 @@
                     class: 'text-center'
                 },
                 {
+                    data: 'kecamatan',
+                    name: 'kecamatan',
+                    class: 'text-center'
+                },
+                {
                     data: 'desa',
                     name: 'desa',
                     class: 'text-center'
@@ -647,31 +671,87 @@
     </script>
 
     <script>
+        $(document).on('change', '#kecamatan_id', function() {
+            $('#desa_id').html('')
+            $('#desa_id').attr('disabled', false)
+            $('#desa_id').append('<option value="semua">Semua</option>')
+            $('#desa_id').val('').trigger('change');
+            $.ajax({
+                url: "{{ url('list/desa') }}",
+                type: 'GET',
+                data: {
+                    'kecamatan': $(this).val()
+                },
+                success: function(response) {
+                    response.data.map((data) => {
+                        $('#desa_id').append('<option value="' + data.id + '">' +
+                            data
+                            .nama + '</option>');
+                    });
+                }
+            })
+        })
+    </script>
+
+    <script>
         $('#desa_id').change(function() {
             $('#export').val($(this).val());
         })
 
         $(".filter").change(function() {
             table.draw();
+            getJumlahPenduduk();
         })
+
+        let getJumlahPenduduk = () => {
+            $.ajax({
+                url: "{{ url('master-data/penduduk/jumlah-penduduk') }}",
+                type: 'GET',
+                data: {
+                    desa_id: $('#desa_id').val(),
+                    kecamatan_id: $('#kecamatan_id').val(),
+                },
+                success: function(response) {
+                    console.log(response);
+                    $('#wilayah').html(response.wilayah);
+                    $('#nama-wilayah').html(response.nama_wilayah);
+                    $('#total-penduduk').html(response.total_penduduk);
+                    $('#tidak-sekolah').html(response.tidak_sekolah);
+                    $('#sd').html(response.sd);
+                    $('#smp').html(response.smp);
+                    $('#sma').html(response.sma);
+                    $('#diploma-1').html(response.diploma_1);
+                    $('#diploma-2').html(response.diploma_2);
+                    $('#diploma-3').html(response.diploma_3);
+                    $('#s1').html(response.s1);
+                    $('#s2').html(response.s2);
+                    $('#s3').html(response.s3);
+                    $('#tidak-bekerja').html(response.tidak_bekerja);
+                    $('#irt').html(response.irt);
+                    $('#karyawan-swasta').html(response.karyawan_swasta);
+                    $('#pns').html(response.pns);
+                    $('#wiraswasta').html(response.wiraswasta);
+                    $('#petani').html(response.petani);
+                    $('#pelajar').html(response.pelajar);
+                    $('#baduta').html(response.baduta);
+                    $('#balita').html(response.balita);
+                    $('#anak').html(response.anak);
+                    $('#remaja').html(response.remaja);
+                    $('#dewasa').html(response.dewasa);
+                    $('#lansia').html(response.lansia);
+                    $('#penduduk-laki-laki').html(response.penduduk_laki_laki);
+                    $('#penduduk-perempuan').html(response.penduduk_perempuan);
+                    $('#pekerjaan-tidak-tetap').html(response.pekerjaan_tidak_tetap);
+                }
+            })
+        }
     </script>
 
     <script>
-        $('.owl-carousel').owlCarousel({
-            loop: true,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 1
-                },
-                1000: {
-                    items: 1
-                }
-            }
-        })
-
         $('#nav-master-penduduk').addClass('active');
+
+        $(document).ready(function() {
+            getJumlahPenduduk();
+        })
     </script>
 @endpush

@@ -48,5 +48,6 @@ class DatabaseSeeder extends Seeder
         // $this->call(PemilikLokasiSeeder::class);
         // $this->call(PendudukTableSeeder::class); // new
         $this->call(UserSeeder::class);
+        $this->call(SumberDanaSeeder::class);
     }
 }

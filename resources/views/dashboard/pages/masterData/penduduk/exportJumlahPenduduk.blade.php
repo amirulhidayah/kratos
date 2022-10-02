@@ -1,3 +1,14 @@
+    @if (count($daftarJumlahPenduduk['desa']) > 1)
+        <table>
+            <tr>
+                <td colspan="2" style="vertical-align: center;font-weight : bold">
+                    {{ $daftarJumlahPenduduk['wilayah'] }} : </td>
+                <td colspan="2" style="vertical-align: center;font-weight : bold">
+                    {{ $daftarJumlahPenduduk['nama_wilayah'] }}</td>
+            </tr>
+        </table>
+    @endif
+
     <table align="center" style="vertical-align: center;border: 1px solid black;font-weight : bold">
         <thead align="center" style="vertical-align: center;border: 1px solid black;font-weight : bold">
             <tr align="center" style="vertical-align: center;border: 1px solid black;font-weight : bold">
@@ -80,7 +91,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($daftarJumlahPenduduk as $penduduk)
+            @foreach ($daftarJumlahPenduduk['desa'] as $penduduk)
                 <tr style="vertical-align: center;border: 1px solid black;">
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
                         {{ $loop->iteration }}</td>
@@ -142,5 +153,66 @@
                         {{ $penduduk['pelajar'] }}</td>
                 </tr>
             @endforeach
+            @if (count($daftarJumlahPenduduk['desa']) > 1)
+                <tr>
+                    <td colspan="2" style="vertical-align: center;border: 1px solid black;font-weight : bold"
+                        align="center">Total Data
+                    </td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'total_penduduk')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'penduduk_laki_laki')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'penduduk_perempuan')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'baduta')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'balita')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'anak')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'remaja')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'dewasa')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'lansia')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'tidak_sekolah')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'sd')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'smp')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'sma')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'diploma_1')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'diploma_2')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'diploma_3')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 's1')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 's2')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 's3')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'tidak_bekerja')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'irt')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'karyawan_swasta')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'pns')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'wiraswasta')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'petani')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'pekerjaan_tidak_tetap')) }}</td>
+                    <td style="vertical-align: center;border: 1px solid black;font-weight : bold" align="center">
+                        {{ array_sum(array_column($daftarJumlahPenduduk['desa'], 'pelajar')) }}</td>
+                </tr>
+            @endif
         </tbody>
     </table>

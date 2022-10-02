@@ -18,4 +18,9 @@ class Kecamatan extends Model
     {
         return json_decode($this->polygon);
     }
+
+    public function desa()
+    {
+        return $this->hasMany(Desa::class, 'kecamatan_id', 'id');
+    }
 }
