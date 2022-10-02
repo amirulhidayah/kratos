@@ -15,6 +15,7 @@ use App\Http\Controllers\masterData\IndikatorController;
 use App\Http\Controllers\masterData\wilayah\DesaController;
 use App\Http\Controllers\masterData\wilayah\KecamatanController;
 use App\Http\Controllers\masterData\AkunController;
+use App\Http\Controllers\masterData\SumberDanaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,8 +91,12 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Wilayah
         Route::get('map/kecamatan', [KecamatanController::class, 'getMapData']);
-        Route::get('map/desa', [DesaController::class, 'getMapData']);
+
+        Route::post('master-data/wilayah/kecamatan/export', [KecamatanController::class, 'export']);
         Route::resource('master-data/wilayah/kecamatan', KecamatanController::class);
+
+        Route::post('master-data/wilayah/desa/{kecamatan}/export', [DesaController::class, 'export']);
+        Route::get('map/desa', [DesaController::class, 'getMapData']);
         Route::resource('master-data/wilayah/desa/{kecamatan}', DesaController::class)->parameters([
             '{kecamatan}' => 'desa'
         ]);
@@ -104,11 +109,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('pengaturan-akun', [PengaturanAkunController::class, 'index']);
     Route::put('pengaturan-akun', [PengaturanAkunController::class, 'update']);
 
+    Route::resource('master-data/sumber-dana', SumberDanaController::class)->parameters(['sumber-dana' => 'sumberDana']);
+
     // Penduduk
+    Route::get('master-data/penduduk/jumlah-penduduk', [PendudukController::class, 'getJumlahPenduduk']);
     Route::post('master-data/penduduk/export-jumlah', [PendudukController::class, 'exportJumlah']);
     Route::post('master-data/penduduk/export', [PendudukController::class, 'export']);
     Route::resource('master-data/penduduk', PendudukController::class)->only(
         'index',
         'show'
     );
+
+    // List
+    Route::get('list/kecamatan', [ListController::class, 'kecamatan']);
+    Route::get('list/desa', [ListController::class, 'desa']);
 });

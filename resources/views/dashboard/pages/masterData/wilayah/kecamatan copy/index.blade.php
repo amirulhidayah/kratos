@@ -1,11 +1,11 @@
 @extends('dashboard.layouts.main')
 
 @section('title')
-    Desa
+    Kecamatan
 @endsection
 
 @section('titlePanelHeader')
-    Desa
+    Kecamatan
 @endsection
 
 @section('subTitlePanelHeader')
@@ -13,13 +13,10 @@
 @endsection
 
 @section('buttonPanelHeader')
-    <a href="{{ url('master-data/wilayah/kecamatan') }}" class="btn btn-secondary btn-round" id=""><i
-            class="far fa-arrow-alt-circle-left"></i>
-        Kembali</a>
     @if (Auth::user()->role == 'Admin')
         @component('dashboard.components.buttons.add',
             [
-                'url' => url('master-data/wilayah/desa' . '/' . $kecamatanId . '/create'),
+                'url' => url('master-data/wilayah/kecamatan/create'),
             ])
         @endcomponent
     @endif
@@ -40,10 +37,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
-                        <div class="card-title">Data Desa</div>
+                        <div class="card-title">Data Kecamatan</div>
                         <div class="card-tools">
-                            <form action="{{ url('master-data/wilayah/desa/' . $kecamatanId . '/export') }}"
-                                method="POST">
+                            <form action="{{ url('master-data/wilayah/kecamatan/export') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-info btn-border btn-round btn-sm mr-2"
                                     id="export-lokasi-hewan">
@@ -134,10 +130,7 @@
             map.invalidateSize();
 
             $.ajax({
-                url: "{{ url('/map/desa') }}",
-                data: {
-                    kecamatanId: "{{ $kecamatanId }}"
-                },
+                url: "{{ url('/map/kecamatan') }}",
                 type: "GET",
                 success: function(response) {
                     if (response.status == 'success') {
@@ -155,13 +148,11 @@
                                     direction: "center",
                                     className: 'labelPolygon'
                                 })
-                            // .bindTooltip(
-                            //     response.data[i].nama + " (" + response.data[i].luas +
+                            // .bindTooltip(response.data[i].nama + " (" + response.data[i].luas +
                             //     " Km<sup>2</sup>) ", {
                             //         permanent: true,
                             //         direction: "center"
-                            //     }
-                            // )
+                            //     })
                             // .bindPopup(
                             //     "<p class='fw-bold my-0 text-center'>" + response.data[i].nama +
                             //     "</p><hr>" +
@@ -196,8 +187,7 @@
             }).then((Delete) => {
                 if (Delete) {
                     $.ajax({
-                        url: "{{ url('master-data/wilayah/kecamatan') }}" + '/' +
-                            id,
+                        url: "{{ url('master-data/wilayah/kecamatan') }}" + '/' + id,
                         type: 'DELETE',
                         data: {
                             '_token': '{{ csrf_token() }}'
@@ -237,7 +227,7 @@
         var table = $('#table-data').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ url('master-data/wilayah/desa' . '/' . $kecamatanId) }}",
+            ajax: "{{ url('master-data/wilayah/kecamatan') }}",
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
