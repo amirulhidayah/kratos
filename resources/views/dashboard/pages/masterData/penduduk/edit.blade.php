@@ -34,6 +34,8 @@
                         @slot('daftarDesa', $daftarDesa)
                         @slot('form_id', 'form-tambah')
                         @slot('action', url('/master-data/penduduk/' . $data['id']))
+                        @slot('kecamatan_id', $data['kecamatan_id'])
+                        @slot('desa_id', $data['desa_id'])
                         @slot('method', 'PUT')
                         @slot('back_url', url('/master-data/penduduk'))
                     @endcomponent
@@ -62,7 +64,6 @@
             $('#no_paspor').val("{{ $data['no_paspor'] }}");
             $('#no_kitap').val("{{ $data['no_kitap'] }}");
             $('#alamat').val("{{ $data['alamat'] }}");
-            $('#desa_id').val("{{ $data['desa_id'] }}").trigger('change');
         })
     </script>
 

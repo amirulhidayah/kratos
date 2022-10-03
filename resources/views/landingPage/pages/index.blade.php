@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('assets/landingPage') }}/css/theme.bundle.css" />
 
     <!-- Title -->
-    <title>Schistosomiasis</title>
+    <title>SMAS - Stunting</title>
 </head>
 
 <body>
@@ -60,35 +60,25 @@
     </nav>
 
     <!-- WELCOME -->
-    <section class="position-relative pt-12 pt-md-14 mt-n11">
-
-        <!-- Shape -->
-        <div class="shape shape-fluid-x shape-blur-2 text-light">
-            <svg viewBox="0 0 1313 768" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M442.794 768c163.088 0 305.568-88.227 382.317-219.556l.183.556s.249-.749.762-2.181a440.362 440.362 0 0033.192-71.389C901.996 397.81 989.306 277.09 1144.29 206l-.92-.693C1230.34 171.296 1295.63 94.049 1312.83 0H1.294v295.514c-.663 9.909-1 19.908-1 29.986 0 244.386 198.114 442.5 442.5 442.5z"
-                    fill="currentColor" />
-            </svg>
-        </div>
-
-        <!-- Content -->
+    <section class="pt-4 pt-md-11">
         <div class="container">
-            <div class="row align-items-center text-center text-md-start">
-                <div class="col-12 col-md-5 col-lg-6 order-md-1">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-5 col-lg-6 order-md-2">
 
                     <!-- Image -->
-                    <img src="{{ asset('assets/landingPage') }}/img/landing-hero.png" alt="..."
-                        class="img-fluid mw-110 float-end mb-6 mb-md-0" data-aos="fade-right">
+                    <img src="{{ asset('assets/landingPage') }}/img/landing-hero2.png"
+                        class="img-fluid mw-md-150 mw-lg-130 mb-6 mb-md-0" alt="..." data-aos="fade-up"
+                        data-aos-delay="100">
 
                 </div>
-                <div class="col-12 col-md-7 col-lg-6 order-md-2 px-6" data-aos="fade-left">
+                <div class="col-12 col-md-7 col-lg-6 order-md-1" data-aos="fade-up">
 
                     <!-- Heading -->
                     <h1 class="display-3 text-center text-md-start mb-2">
-                        Selamat Datang di Aplikasi <br> <span class="text-primary fw-bold mt-1">SMAS - Schisto</span>
+                        Selamat Datang di Aplikasi <br> <span class="text-primary fw-bold mt-1">SMAS - Stunting</span>
                     </h1>
                     <span class="text-primary mb-5" style="font-size: 22px">(Smart Monitoring Intervensi
-                        Schistosomiasis)</span>
+                        Stunting)</span>
 
                     <div class="text-center text-md-start mt-4">
                         @auth
@@ -108,7 +98,6 @@
                 </div>
             </div> <!-- / .row -->
         </div> <!-- / .container -->
-
     </section>
 
     <!-- HUB -->
@@ -186,10 +175,12 @@
                         &copy; @php
                             echo date('Y');
                         @endphp <a href="https://www.sigikab.go.id/" target="_blank"
-                            class="text-muted">Pemerintah Kabupaten Sigi</a> | Designed by vectorpocket
+                            class="text-muted">Pemerintah Kabupaten Sigi</a>
+                        {{-- | Designed by vectorpocket
                         and
                         vectorjuice on <a href="https://www.freepik.com/" class="text-muted"
-                            terget="_blank">Freepik</a>
+                            terget="_blank">Freepik --}}
+                        </a>
                         {{-- <h6 class="text-white">Copy</h6> --}}
                 </div>
             </div> <!-- / .row -->

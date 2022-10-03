@@ -21,6 +21,6 @@ class Kecamatan extends Model
 
     public function desa()
     {
-        return $this->hasMany(Desa::class)->orderBy('nama');
+        return $this->hasMany(Desa::class, 'kecamatan_id', 'id');
     }
 }

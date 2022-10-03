@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\masterData\wilayah;
 
+use App\Exports\KecamatanExport;
 use App\Http\Controllers\Controller;
 use App\Models\Kecamatan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -58,7 +60,7 @@ class KecamatanController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.pages.masterData.wilayah.kecamatan.create');
     }
 
     /**
@@ -69,7 +71,39 @@ class KecamatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'nama' => ['required', Rule::unique('kecamatan')->withoutTrashed()],
+                'kode' => ['required', Rule::unique('kecamatan')->withoutTrashed()],
+                'polygon' => 'required',
+                'luas' => 'required',
+                'warna_polygon' => 'required',
+            ],
+            [
+                'nama.required' => 'Nama kecamatan tidak boleh kosong',
+                'kode.required' => 'Kode tidak boleh kosong',
+                'nama.unique' => 'Nama kecamatan sudah ada',
+                'kode.unique' => 'Kode sudah ada',
+                'luas.required' => 'Luas wilayah tidak boleh kosong',
+                'polygon.required' => 'Polygon tidak boleh kosong',
+                'warna_polygon.required' => 'Warna tidak boleh kosong',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()]);
+        }
+
+        $kecamatan = new Kecamatan();
+        $kecamatan->nama = $request->nama;
+        $kecamatan->kode = $request->kode;
+        $kecamatan->luas = $request->luas;
+        $kecamatan->polygon = $request->polygon;
+        $kecamatan->warna_polygon = $request->warna_polygon;
+        $kecamatan->save();
+
+        return response()->json(['status' => 'success']);
     }
 
     /**
@@ -91,7 +125,7 @@ class KecamatanController extends Controller
      */
     public function edit(Kecamatan $kecamatan)
     {
-        //
+        return view('dashboard.pages.masterData.wilayah.kecamatan.edit', compact(['kecamatan']));
     }
 
     /**
@@ -103,7 +137,38 @@ class KecamatanController extends Controller
      */
     public function update(Request $request, Kecamatan $kecamatan)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'nama' => ['required', Rule::unique('kecamatan')->ignore($kecamatan->id)->withoutTrashed()],
+                'kode' => ['required', Rule::unique('kecamatan')->ignore($kecamatan->id)->withoutTrashed()],
+                'polygon' => 'required',
+                'luas' => 'required',
+                'warna_polygon' => 'required',
+            ],
+            [
+                'nama.required' => 'Nama kecamatan tidak boleh kosong',
+                'nama.unique' => 'Nama kecamatan sudah ada',
+                'kode.required' => 'Kode tidak boleh kosong',
+                'kode.unique' => 'Kode sudah ada',
+                'luas.required' => 'Luas wilayah tidak boleh kosong',
+                'polygon.required' => 'Polygon tidak boleh kosong',
+                'warna_polygon.required' => 'Warna tidak boleh kosong',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()]);
+        }
+
+        $kecamatan->nama = $request->nama;
+        $kecamatan->kode = $request->kode;
+        $kecamatan->luas = $request->luas;
+        $kecamatan->polygon = $request->polygon;
+        $kecamatan->warna_polygon = $request->warna_polygon;
+        $kecamatan->save();
+
+        return response()->json(['status' => 'success']);
     }
 
     /**
@@ -114,7 +179,10 @@ class KecamatanController extends Controller
      */
     public function destroy(Kecamatan $kecamatan)
     {
-        //
+        $kecamatan->desa()->delete();
+        $kecamatan->delete();
+
+        return response()->json(['status' => 'success']);
     }
 
     public function getMapData(Request $request)
@@ -134,5 +202,13 @@ class KecamatanController extends Controller
         } else {
             return response()->json(['status' => 'error']);
         }
+    }
+
+    public function export()
+    {
+        $daftarKecamatan = Kecamatan::orderBy('nama', 'asc')->get();
+        $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
+
+        return Excel::download(new KecamatanExport($daftarKecamatan), "Export Data Kecamatan-" . $tanggal . "-" . rand(1, 9999) . '.xlsx');
     }
 }

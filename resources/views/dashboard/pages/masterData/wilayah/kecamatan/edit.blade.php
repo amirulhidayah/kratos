@@ -1,11 +1,11 @@
 @extends('dashboard.layouts.main')
 
 @section('title')
-    Desa
+    Kecamatan
 @endsection
 
 @section('titlePanelHeader')
-    Desa
+    Kecamatan
 @endsection
 
 @section('subTitlePanelHeader')
@@ -32,7 +32,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
-                        <div class="card-title">Ubah Desa</div>
+                        <div class="card-title">Ubah Kecamatan</div>
                         <div class="card-tools">
                         </div>
                     </div>
@@ -52,13 +52,13 @@
                                         <div class="col-12">
                                             @component('dashboard.components.formElements.input',
                                                 [
-                                                    'label' => 'Nama Desa',
+                                                    'label' => 'Nama Kecamatan',
                                                     'type' => 'text',
                                                     'id' => 'nama',
                                                     'name' => 'nama',
                                                     'wajib' => '<sup class="text-danger">*</sup>',
-                                                    'value' => $desa->nama,
-                                                    'placeholder' => 'Masukkan Nama Desa',
+                                                    'value' => $kecamatan->nama,
+                                                    'placeholder' => 'Masukkan Nama Kecamatan',
                                                 ])
                                             @endcomponent
                                         </div>
@@ -70,7 +70,7 @@
                                                     'id' => 'kode',
                                                     'name' => 'kode',
                                                     'wajib' => '<sup class="text-danger">*</sup>',
-                                                    'value' => $desa->kode,
+                                                    'value' => $kecamatan->kode,
                                                     'placeholder' => 'Masukkan Kode',
                                                 ])
                                             @endcomponent
@@ -78,14 +78,14 @@
                                         <div class="col-12 my-2">
                                             @component('dashboard.components.formElements.input',
                                                 [
-                                                    'label' => 'Luas Desa (Km<sup>2</sup>)',
+                                                    'label' => 'Luas Kecamatan (Km<sup>2</sup>)',
                                                     'type' => 'text',
                                                     'id' => 'luas',
                                                     'name' => 'luas',
-                                                    'value' => $desa->luas,
+                                                    'value' => $kecamatan->luas,
                                                     'class' => 'numerik',
                                                     'wajib' => '<sup class="text-danger">*</sup>',
-                                                    'placeholder' => 'Masukkan Luas Desa',
+                                                    'placeholder' => 'Masukkan Luas Kecamatan',
                                                 ])
                                             @endcomponent
                                         </div>
@@ -94,12 +94,12 @@
                                             <br>
                                             <input type="color" id="warna" class="form-control-color"
                                                 title="Choose your color" name="warna_polygon"
-                                                value="{{ $desa->warna_polygon }}">
+                                                value="{{ $kecamatan->warna_polygon }}">
                                             <span class="badge bg-danger mt-2 d-none warna_polygon-error"></span>
                                         </div>
                                         <div class="col-12 d-none">
                                             <label for="textareaInput" class="form-label">Polygon</label>
-                                            <textarea name="polygon" cols="30" rows="5" class="form-control" id="polygon">{{ $desa->polygon }}</textarea>
+                                            <textarea name="polygon" cols="30" rows="5" class="form-control" id="polygon">{{ $kecamatan->polygon }}</textarea>
                                         </div>
                                         <div class="col-12 d-flex justify-content-end mt-3">
                                             @component('dashboard.components.buttons.submit',
@@ -143,7 +143,7 @@
             }).then((Update) => {
                 if (Update) {
                     $.ajax({
-                        url: "{{ url('master-data/lokasi/desa' . '/' . $desa->id) }}",
+                        url: "{{ url('master-data/wilayah/kecamatan' . '/' . $kecamatan->id) }}",
                         type: 'POST',
                         data: $(this).serialize(),
                         success: function(response) {
@@ -154,7 +154,7 @@
                                     timer: 1000,
                                 }).then(function() {
                                     window.location.href =
-                                        "{{ url('master-data/lokasi/desa') }}";
+                                        "{{ url('master-data/wilayah/kecamatan') }}";
                                 })
                             } else {
                                 swal("Periksa Kembali Data Anda", {
@@ -178,19 +178,20 @@
         })
 
         $(document).ready(function() {
-            $('#warna').val("{{ $desa->warna_polygon }}");
+            $('#warna').val("{{ $kecamatan->warna_polygon }}");
             $.ajax({
-                url: "{{ url('/map/desa') }}",
+                url: "{{ url('/map/kecamatan') }}",
                 type: "GET",
                 success: function(response) {
                     if (response.status == 'success') {
                         for (var i = 0; i < response.data.length; i++) {
-                            if (response.data[i].id != '{{ $desa->id }}') {
+                            if (response.data[i].id != '{{ $kecamatan->id }}') {
                                 L.polygon(response.data[i].koordinatPolygon, {
-                                        color: response.data[i].warna_polygon,
-                                        weight: 1,
-                                        opacity: 1,
-                                        fillOpacity: 1
+                                        color: "{{ env('MAP_POLYGON_COLOR') }}",
+                                        fillColor: response.data[i].warna_polygon,
+                                        weight: {{ env('MAP_POLYGON_WEIGHT') }},
+                                        opacity: {{ env('MAP_POLYGON_OPACITY') }},
+                                        fillOpacity: {{ env('MAP_POLYGON_FILLOPACITY') }}
                                     })
                                     .bindTooltip(response.data[i].nama + " (" + response.data[i].luas +
                                         " Km<sup>2</sup>) ", {
@@ -229,19 +230,19 @@
 
     <script>
         var warna = $('#warna').val();
-        var center = [-1.3618072, 120.1619337];
+        var center = {{ env('MAP_CENTER') }};
 
         var map = L.map("map", {
             maxBounds: [
-                [-1.511127, 119.9637063],
-                [-1.21458, 120.2912363]
+                {{ env('MAP_BOUNDS_1') }},
+                {{ env('MAP_BOUNDS_2') }}
             ]
-        }).setView(center, 11);
+        }).setView(center, {{ env('MAP_ZOOM') }});
 
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             attribution: 'Data © <a href="http://osm.org/copyright">OpenStreetMap</a>',
-            maxZoom: 18,
-            minZoom: 11
+            maxZoom: {{ env('MAP_MAX_ZOOM') }},
+            minZoom: {{ env('MAP_MIN_ZOOM') }}
         }).addTo(map);
 
         var drawnItems = new L.FeatureGroup();
@@ -293,10 +294,10 @@
         });
 
         $.ajax({
-            url: "{{ url('/map/desa') }}",
+            url: "{{ url('/map/kecamatan') }}",
             type: "GET",
             data: {
-                id: '{{ $desa->id }}'
+                id: '{{ $kecamatan->id }}'
             },
             success: function(response) {
                 if (response.status == 'success') {
@@ -349,47 +350,6 @@
     </script>
 
     <script>
-        var table = $('#table-data').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ url('master-data/lokasi/desa') }}",
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                },
-                {
-                    data: 'nama',
-                    name: 'nama'
-                },
-                {
-                    data: 'luas',
-                    name: 'luas',
-                    class: 'text-center'
-                },
-                {
-                    data: 'statusPolygon',
-                    name: 'statusPolygon',
-                    class: 'text-center'
-                },
-                {
-                    data: 'warnaPolygon',
-                    name: 'warnaPolygon',
-                    class: 'text-center'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: true,
-                    searchable: true,
-                    class: 'text-center'
-                },
-            ]
-        });
-    </script>
-
-    <script>
-        $('#nav-master-lokasi').addClass('active');
-        $('#nav-master-lokasi .collapse').addClass('show');
-        $('#nav-master-lokasi .collapse #li-lokasi-desa').addClass('active');
+        $('#nav-master-wilayah').addClass('active');
     </script>
 @endpush

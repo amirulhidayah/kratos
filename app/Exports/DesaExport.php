@@ -20,6 +20,6 @@ class DesaExport implements FromView
     public function view(): View
     {
         $daftarDesa = $this->daftarDesa;
-        return view('dashboard.pages.masterData.lokasi.desa.export', compact(['daftarDesa']));
+        return view('dashboard.pages.masterData.wilayah.desa.export', compact(['daftarDesa']));
     }
 }

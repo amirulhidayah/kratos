@@ -6,6 +6,7 @@ use App\Exports\JumlahPendudukExport;
 use App\Exports\PendudukExport;
 use App\Http\Controllers\Controller;
 use App\Models\Desa;
+use App\Models\Kecamatan;
 use App\Models\Penduduk;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -27,6 +28,14 @@ class PendudukController extends Controller
     {
         if ($request->ajax()) {
             $data = Penduduk::with(['desa'])->orderBy('created_at', 'desc')->where(function ($query) use ($request) {
+                if ($request->kecamatan_id && $request->kecamatan_id != "semua") {
+                    $query->whereHas('desa', function ($query) use ($request) {
+                        $query->whereHas('kecamatan', function ($query) use ($request) {
+                            $query->where('id', $request->kecamatan_id);
+                        });
+                    });
+                }
+
                 if ($request->desa_id && $request->desa_id != "semua") {
                     $query->where('desa_id', $request->desa_id);
                 }
@@ -35,6 +44,9 @@ class PendudukController extends Controller
                 ->addIndexColumn()
                 ->addColumn('desa', function ($row) {
                     return $row->desa->nama;
+                })
+                ->addColumn('kecamatan', function ($row) {
+                    return $row->desa->kecamatan->nama;
                 })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '';
@@ -50,13 +62,13 @@ class PendudukController extends Controller
                 ->make(true);
         }
 
-        $daftarDesa = Desa::orderBy('nama', 'asc')->get();
+        $daftarKecamatan = Kecamatan::orderBy('nama', 'asc')->get();
         // $daftarJumlahPenduduk = $this->_getJumlahPenduduk();
 
-        return view('dashboard.pages.masterData.penduduk.index', compact(['daftarDesa']));
+        return view('dashboard.pages.masterData.penduduk.index', compact(['daftarKecamatan']));
     }
 
-    private function _getJumlahPenduduk()
+    public function getJumlahPenduduk(Request $request)
     {
         // * 0-24 bulan baduta (bayi dua tahun)
         // * 24-60 Bulan balita (bayi lima tahun)
@@ -64,101 +76,153 @@ class PendudukController extends Controller
         // * 12-18 tahun remaja
         // * > 18 dewasa
         // * > 60 lansia
+        $namaDesa = Desa::find($request->desa_id);
+        $namaKecamatan = Kecamatan::find($request->kecamatan_id);
+        $namaWilayah = '';
+        if ($namaDesa && $namaKecamatan) {
+            $wilayah = 'Desa';
+            $namaWilayah = $namaDesa->nama;
+        } else if ($namaKecamatan) {
+            $wilayah = 'Kecamatan';
+            $namaWilayah = $namaKecamatan->nama;
+        } else {
+            $wilayah = 'Wilayah';
+            $namaWilayah = 'Semua';
+        }
 
-        $daftarDesa = Desa::orderBy('nama', 'asc')->get();
-        $arrayDesa = [];
+
+        $daftarDesa = Desa::orderBy('nama', 'asc')->whereHas('kecamatan', function ($query) use ($request) {
+            if ($request->kecamatan_id && $request->kecamatan_id != "semua") {
+                $query->where('id', $request->kecamatan_id);
+            }
+        })->where(function ($query) use ($request) {
+            if ($request->desa_id && $request->desa_id != "semua") {
+                $query->where('id', $request->desa_id);
+            }
+        })->get();
+
+        $pendudukLaki = 0;
+        $pendudukPerempuan = 0;
+        $totalPenduduk = 0;
+        $tidakSekolah = 0;
+        $sd = 0;
+        $smp = 0;
+        $sma = 0;
+        $diploma1 = 0;
+        $diploma2 = 0;
+        $diploma3 = 0;
+        $s1 = 0;
+        $s2 = 0;
+        $s3 = 0;
+        $tidakBekerja = 0;
+        $irt = 0;
+        $karyawanSwasta = 0;
+        $pns = 0;
+        $wiraswasta = 0;
+        $petani = 0;
+        $tidakTetap = 0;
+        $pelajar = 0;
+        $baduta = 0;
+        $balita = 0;
+        $anak = 0;
+        $remaja = 0;
+        $dewasa = 0;
+        $lansia = 0;
+
+        $arrayWilayah = [];
 
         foreach ($daftarDesa as $desa) {
-            $pendudukLaki = Penduduk::where('desa_id', $desa->id)->where('jenis_kelamin', 'Laki-Laki')->count();
-            $pendudukPerempuan = Penduduk::where('desa_id', $desa->id)->where('jenis_kelamin', 'Perempuan')->count();
+            $pendudukLaki += Penduduk::where('desa_id', $desa->id)->where('jenis_kelamin', 'Laki-Laki')->count();
+            $pendudukPerempuan += Penduduk::where('desa_id', $desa->id)->where('jenis_kelamin', 'Perempuan')->count();
             $totalPenduduk = $pendudukLaki + $pendudukPerempuan;
 
             // Pendidikan
-            $tidakSekolah = Penduduk::where('desa_id', $desa->id)->where(function ($query) {
+            $tidakSekolah += Penduduk::where('desa_id', $desa->id)->where(function ($query) {
                 $query->where('status_pendidikan', 'Tidak Sekolah');
                 $query->orWhere('status_pendidikan', null);
             })->count();
-            $sd = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'SD')->count();
-            $smp = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'SMP')->count();
-            $sma = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'SMA')->count();
-            $diploma1 = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'Diploma 1')->count();
-            $diploma2 = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'Diploma 2')->count();
-            $diploma3 = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'Diploma 3')->count();
-            $s1 = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'S1 / Diploma 4')->count();
-            $s2 = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'S2')->count();
-            $s3 = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'S3')->count();
+            $sd += Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'SD')->count();
+            $smp += Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'SMP')->count();
+            $sma += Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'SMA')->count();
+            $diploma1 += Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'Diploma 1')->count();
+            $diploma2 += Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'Diploma 2')->count();
+            $diploma3 += Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'Diploma 3')->count();
+            $s1 += Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'S1 / Diploma 4')->count();
+            $s2 += Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'S2')->count();
+            $s3 += Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'S3')->count();
 
             // Pekerjaan
-            $tidakBekerja = Penduduk::where('desa_id', $desa->id)->where(function ($query) {
+            $tidakBekerja += Penduduk::where('desa_id', $desa->id)->where(function ($query) {
                 $query->where('pekerjaan', 'Tidak Bekerja');
                 $query->orWhere('pekerjaan', null);
             })->count();
-            $irt = Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Ibu Rumah Tangga')->count();
-            $karyawanSwasta = Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Karyawan Swasta')->count();
-            $pns = Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'PNS / TNI-POLRI')->count();
-            $wiraswasta = Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Wiraswasta / Wirausaha')->count();
-            $petani = Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Petani / Pekebun')->count();
-            $tidakTetap = Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Pekerjaan Tidak Tetap')->count();
-            $pelajar = Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Pelajar / Mahasiswa')->count();
+            $irt += Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Ibu Rumah Tangga')->count();
+            $karyawanSwasta += Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Karyawan Swasta')->count();
+            $pns += Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'PNS / TNI-POLRI')->count();
+            $wiraswasta += Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Wiraswasta / Wirausaha')->count();
+            $petani += Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Petani / Pekebun')->count();
+            $tidakTetap += Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Pekerjaan Tidak Tetap')->count();
+            $pelajar += Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Pelajar / Mahasiswa')->count();
 
             // Umur
-            $baduta = Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>=', 0)
+            $baduta += Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>=', 0)
                 ->where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '<=', 2)
                 ->where('desa_id', $desa->id)
                 ->count();
-            $balita = Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>', 2)
+            $balita += Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>', 2)
                 ->where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '<=', 5)
                 ->where('desa_id', $desa->id)
                 ->count();
-            $anak = Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>', 5)
+            $anak += Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>', 5)
                 ->where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '<=', 12)
                 ->where('desa_id', $desa->id)
                 ->count();
-            $remaja = Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>', 12)
+            $remaja += Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>', 12)
                 ->where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '<=', 18)
                 ->where('desa_id', $desa->id)
                 ->count();
-            $dewasa = Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>', 18)
+            $dewasa += Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>', 18)
                 ->where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '<=', 60)
                 ->where('desa_id', $desa->id)
                 ->count();
-            $lansia = Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>', 60)
+            $lansia += Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>', 60)
                 ->where('desa_id', $desa->id)
                 ->count();
-
-            $arrayDesa[] = [
-                'desa' => $desa->nama,
-                'penduduk_laki_laki' => $pendudukLaki,
-                'penduduk_perempuan' => $pendudukPerempuan,
-                'total_penduduk' => $totalPenduduk,
-                'tidak_sekolah' => $tidakSekolah,
-                'sd' => $sd,
-                'smp' => $smp,
-                'sma' => $sma,
-                'diploma_1' => $diploma1,
-                'diploma_2' => $diploma2,
-                'diploma_3' => $diploma3,
-                's1' => $s1,
-                's2' => $s2,
-                's3' => $s3,
-                'tidak_bekerja' => $tidakBekerja,
-                'irt' => $irt,
-                'karyawan_swasta' => $karyawanSwasta,
-                'pns' => $pns,
-                'wiraswasta' => $wiraswasta,
-                'petani' => $petani,
-                'pekerjaan_tidak_tetap' => $tidakTetap,
-                'pelajar' => $pelajar,
-                'baduta' => $baduta,
-                'balita' => $balita,
-                'anak' => $anak,
-                'remaja' => $remaja,
-                'dewasa' => $dewasa,
-                'lansia' => $lansia
-            ];
         }
 
-        return $arrayDesa;
+        $arrayWilayah = [
+            'wilayah' =>  $wilayah,
+            'nama_wilayah' => $namaWilayah,
+            'penduduk_laki_laki' => $pendudukLaki,
+            'penduduk_perempuan' => $pendudukPerempuan,
+            'total_penduduk' => $totalPenduduk,
+            'tidak_sekolah' => $tidakSekolah,
+            'sd' => $sd,
+            'smp' => $smp,
+            'sma' => $sma,
+            'diploma_1' => $diploma1,
+            'diploma_2' => $diploma2,
+            'diploma_3' => $diploma3,
+            's1' => $s1,
+            's2' => $s2,
+            's3' => $s3,
+            'tidak_bekerja' => $tidakBekerja,
+            'irt' => $irt,
+            'karyawan_swasta' => $karyawanSwasta,
+            'pns' => $pns,
+            'wiraswasta' => $wiraswasta,
+            'petani' => $petani,
+            'pekerjaan_tidak_tetap' => $tidakTetap,
+            'pelajar' => $pelajar,
+            'baduta' => $baduta,
+            'balita' => $balita,
+            'anak' => $anak,
+            'remaja' => $remaja,
+            'dewasa' => $dewasa,
+            'lansia' => $lansia
+        ];
+
+        return $arrayWilayah;
     }
 
     /**
@@ -198,7 +262,8 @@ class PendudukController extends Controller
                 'no_paspor' => 'required',
                 'no_kitap' => 'required',
                 'alamat' => 'required',
-                'desa_id' => 'required'
+                'desa_id' => 'required',
+                'kecamatan_id' => 'required'
             ],
             [
                 'nama.required' => 'Nama tidak boleh kosong',
@@ -221,6 +286,7 @@ class PendudukController extends Controller
                 'no_kitap.required' => 'Nomor KITAP tidak boleh kosong',
                 'alamat.required' => 'Alamat tidak boleh kosong',
                 'desa_id.required' => 'Desa tidak boleh kosong',
+                'kecamatan_id.required' => 'Kecamatan tidak boleh kosong',
             ]
         );
 
@@ -307,6 +373,7 @@ class PendudukController extends Controller
             'no_paspor' => $penduduk->no_paspor,
             'no_kitap' => $penduduk->no_kitap,
             'alamat' => $penduduk->alamat,
+            'kecamatan_id' => $penduduk->desa->kecamatan->id,
             'desa_id' => $penduduk->desa_id
         ];
 
@@ -417,11 +484,17 @@ class PendudukController extends Controller
 
     public function export(Request $request)
     {
-        $desa_id = $request->desa_id;
+        $daftarPenduduk = Penduduk::with(['desa'])->orderBy('created_at', 'desc')->where(function ($query) use ($request) {
+            if ($request->kecamatan_id && $request->kecamatan_id != "semua") {
+                $query->whereHas('desa', function ($query) use ($request) {
+                    $query->whereHas('kecamatan', function ($query) use ($request) {
+                        $query->where('id', $request->kecamatan_id);
+                    });
+                });
+            }
 
-        $daftarPenduduk = Penduduk::with(['desa'])->where(function ($query) use ($desa_id) {
-            if ($desa_id && $desa_id != "semua") {
-                $query->where('desa_id', $desa_id);
+            if ($request->desa_id && $request->desa_id != "semua") {
+                $query->where('desa_id', $request->desa_id);
             }
         })->get();
 
@@ -430,9 +503,141 @@ class PendudukController extends Controller
         return Excel::download(new PendudukExport($daftarPenduduk), "Export Data Penduduk" . "-" . $tanggal . "-" . rand(1, 9999) . '.xlsx');
     }
 
-    public function exportJumlah()
+    private function _getJumlahPenduduk(Request $request)
     {
-        $daftarJumlahPenduduk = $this->_getJumlahPenduduk();
+        // * 0-24 bulan baduta (bayi dua tahun)
+        // * 24-60 Bulan balita (bayi lima tahun)
+        // * 5-12 tahun anak
+        // * 12-18 tahun remaja
+        // * > 18 dewasa
+        // * > 60 lansia
+
+        $namaDesa = Desa::find($request->desa_id);
+        $namaKecamatan = Kecamatan::find($request->kecamatan_id);
+        $namaWilayah = '';
+        if ($namaKecamatan) {
+            $wilayah = 'Kecamatan';
+            $namaWilayah = $namaKecamatan->nama;
+        } else {
+            $wilayah = 'Wilayah';
+            $namaWilayah = 'Semua';
+        }
+
+
+        $daftarDesa = Desa::orderBy('nama', 'asc')->whereHas('kecamatan', function ($query) use ($request) {
+            if ($request->kecamatan_id && $request->kecamatan_id != "semua") {
+                $query->where('id', $request->kecamatan_id);
+            }
+        })->where(function ($query) use ($request) {
+            if ($request->desa_id && $request->desa_id != "semua") {
+                $query->where('id', $request->desa_id);
+            }
+        })->get();
+
+        $arrayDesa = [];
+
+        foreach ($daftarDesa as $desa) {
+            $pendudukLaki = Penduduk::where('desa_id', $desa->id)->where('jenis_kelamin', 'Laki-Laki')->count();
+            $pendudukPerempuan = Penduduk::where('desa_id', $desa->id)->where('jenis_kelamin', 'Perempuan')->count();
+            $totalPenduduk = $pendudukLaki + $pendudukPerempuan;
+
+            // Pendidikan
+            $tidakSekolah = Penduduk::where('desa_id', $desa->id)->where(function ($query) {
+                $query->where('status_pendidikan', 'Tidak Sekolah');
+                $query->orWhere('status_pendidikan', null);
+            })->count();
+            $sd = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'SD')->count();
+            $smp = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'SMP')->count();
+            $sma = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'SMA')->count();
+            $diploma1 = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'Diploma 1')->count();
+            $diploma2 = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'Diploma 2')->count();
+            $diploma3 = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'Diploma 3')->count();
+            $s1 = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'S1 / Diploma 4')->count();
+            $s2 = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'S2')->count();
+            $s3 = Penduduk::where('desa_id', $desa->id)->where('status_pendidikan', 'S3')->count();
+
+            // Pekerjaan
+            $tidakBekerja = Penduduk::where('desa_id', $desa->id)->where(function ($query) {
+                $query->where('pekerjaan', 'Tidak Bekerja');
+                $query->orWhere('pekerjaan', null);
+            })->count();
+            $irt = Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Ibu Rumah Tangga')->count();
+            $karyawanSwasta = Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Karyawan Swasta')->count();
+            $pns = Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'PNS / TNI-POLRI')->count();
+            $wiraswasta = Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Wiraswasta / Wirausaha')->count();
+            $petani = Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Petani / Pekebun')->count();
+            $tidakTetap = Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Pekerjaan Tidak Tetap')->count();
+            $pelajar = Penduduk::where('desa_id', $desa->id)->where('pekerjaan', 'Pelajar / Mahasiswa')->count();
+
+            // Umur
+            $baduta = Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>=', 0)
+                ->where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '<=', 2)
+                ->where('desa_id', $desa->id)
+                ->count();
+            $balita = Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>', 2)
+                ->where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '<=', 5)
+                ->where('desa_id', $desa->id)
+                ->count();
+            $anak = Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>', 5)
+                ->where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '<=', 12)
+                ->where('desa_id', $desa->id)
+                ->count();
+            $remaja = Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>', 12)
+                ->where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '<=', 18)
+                ->where('desa_id', $desa->id)
+                ->count();
+            $dewasa = Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>', 18)
+                ->where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '<=', 60)
+                ->where('desa_id', $desa->id)
+                ->count();
+            $lansia = Penduduk::where(DB::raw('TIMESTAMPDIFF(YEAR,tanggal_lahir,CURDATE())'), '>', 60)
+                ->where('desa_id', $desa->id)
+                ->count();
+
+            $arrayDesa[] = [
+                'desa' => $desa->nama,
+                'penduduk_laki_laki' => $pendudukLaki,
+                'penduduk_perempuan' => $pendudukPerempuan,
+                'total_penduduk' => $totalPenduduk,
+                'tidak_sekolah' => $tidakSekolah,
+                'sd' => $sd,
+                'smp' => $smp,
+                'sma' => $sma,
+                'diploma_1' => $diploma1,
+                'diploma_2' => $diploma2,
+                'diploma_3' => $diploma3,
+                's1' => $s1,
+                's2' => $s2,
+                's3' => $s3,
+                'tidak_bekerja' => $tidakBekerja,
+                'irt' => $irt,
+                'karyawan_swasta' => $karyawanSwasta,
+                'pns' => $pns,
+                'wiraswasta' => $wiraswasta,
+                'petani' => $petani,
+                'pekerjaan_tidak_tetap' => $tidakTetap,
+                'pelajar' => $pelajar,
+                'baduta' => $baduta,
+                'balita' => $balita,
+                'anak' => $anak,
+                'remaja' => $remaja,
+                'dewasa' => $dewasa,
+                'lansia' => $lansia
+            ];
+        }
+
+        $arrayWilayah = [
+            'wilayah' =>  $wilayah,
+            'nama_wilayah' => $namaWilayah,
+            'desa' => $arrayDesa
+        ];
+
+        return $arrayWilayah;
+    }
+
+    public function exportJumlah(Request $request)
+    {
+        $daftarJumlahPenduduk = $this->_getJumlahPenduduk($request);
         $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
 
         return Excel::download(new JumlahPendudukExport($daftarJumlahPenduduk), "Export Data Jumlah Penduduk" . "-" . $tanggal . "-" . rand(1, 9999) . '.xlsx');
