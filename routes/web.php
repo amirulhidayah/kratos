@@ -15,6 +15,10 @@ use App\Http\Controllers\masterData\IndikatorController;
 use App\Http\Controllers\masterData\wilayah\DesaController;
 use App\Http\Controllers\masterData\wilayah\KecamatanController;
 use App\Http\Controllers\masterData\AkunController;
+use App\Http\Controllers\masterData\AnakController;
+use App\Http\Controllers\masterData\OrangTuaController;
+use App\Http\Controllers\masterData\PosyanduController;
+use App\Http\Controllers\masterData\PuskesmasController;
 use App\Http\Controllers\masterData\SumberDanaController;
 
 /*
@@ -82,6 +86,15 @@ Route::group(['middleware' => 'auth'], function () {
             'show'
         );
 
+        Route::resource('master-data/orang-tua', OrangTuaController::class)->except(
+            'index',
+            'show'
+        );
+
+        Route::resource('master-data/anak', AnakController::class)->except(
+            'index',
+            'show'
+        );
         Route::resource('master-data/penduduk', PendudukController::class)->except(
             'index',
             'show'
@@ -109,7 +122,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('pengaturan-akun', [PengaturanAkunController::class, 'index']);
     Route::put('pengaturan-akun', [PengaturanAkunController::class, 'update']);
 
+    Route::resource('master-data/puskesmas', PuskesmasController::class)->parameters(['puskesmas' => 'puskesmas']);
+    Route::resource('master-data/posyandu/{puskesmas}', PosyanduController::class)->parameters([
+        '{puskesmas}' => 'posyandu'
+    ]);
     Route::resource('master-data/sumber-dana', SumberDanaController::class)->parameters(['sumber-dana' => 'sumberDana']);
+
+    // Orang Tua
+    Route::resource('master-data/anak', AnakController::class)->only(
+        'index',
+        'show'
+    );
+    Route::resource('master-data/orang-tua', OrangTuaController::class)->only(
+        'index',
+        'show'
+    );
 
     // Penduduk
     Route::get('master-data/penduduk/jumlah-penduduk', [PendudukController::class, 'getJumlahPenduduk']);
