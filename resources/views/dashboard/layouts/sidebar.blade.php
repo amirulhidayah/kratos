@@ -49,10 +49,16 @@
                  </li>
 
                  </li>
-                 <li class="nav-item" id="nav-master-penduduk">
-                     <a href="{{ url('master-data/penduduk') }}">
-                         <i class="fas fa-user-edit"></i>
-                         <p>Penduduk</p>
+                 <li class="nav-item" id="nav-master-orang-tua">
+                     <a href="{{ url('master-data/orang-tua') }}">
+                         <i class="fas fa-user-friends"></i>
+                         <p>Orang Tua</p>
+                     </a>
+                 </li>
+                 <li class="nav-item" id="nav-master-anak">
+                     <a href="{{ url('master-data/anak') }}">
+                         <i class="fas fa-child"></i>
+                         <p>Anak</p>
                      </a>
                  </li>
                  @if (Auth::user()->role != 'OPD')
@@ -64,6 +70,12 @@
                      </li>
                  @endif
                  @if (Auth::user()->role == 'Admin')
+                     <li class="nav-item" id="nav-master-pelayanan-kesehatan">
+                         <a href="{{ url('master-data/puskesmas') }}">
+                             <i class="fas fa-hospital"></i>
+                             <p>Pelayanan Kesehatan</p>
+                         </a>
+                     </li>
                      <li class="nav-item" id="nav-master-sumber-dana">
                          <a href="{{ url('master-data/sumber-dana') }}">
                              <i class="fas fa-money-bill-wave"></i>
