@@ -30,11 +30,6 @@ class Perencanaan extends Model
         return $this->hasMany(OPDTerkait::class, 'perencanaan_id');
     }
 
-    public function desaPerencanaan()
-    {
-        return $this->hasMany(DesaPerencanaan::class, 'perencanaan_id')->orderBy('updated_at', 'DESC');
-    }
-
     public function dokumenPerencanaan()
     {
         return $this->hasMany(DokumenPerencanaan::class, 'perencanaan_id')->orderBy('no_urut');
@@ -42,6 +37,11 @@ class Perencanaan extends Model
 
     public function realisasi()
     {
-        return $this->hasMany(Realisasi::class, 'perencanaan_id');
+        return $this->hasOne(Realisasi::class, 'perencanaan_id');
+    }
+
+    public function sumberDana()
+    {
+        return $this->belongsTo(SumberDana::class)->withTrashed();
     }
 }

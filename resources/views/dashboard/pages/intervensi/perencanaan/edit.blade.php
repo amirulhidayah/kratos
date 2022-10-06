@@ -41,10 +41,9 @@
                                 [
                                     'action' => route('rencana-intervensi.update', $rencanaIntervensi->id),
                                     'rencanaIntervensi' => $rencanaIntervensi,
+                                    'sumberDana' => $sumberDana,
                                     'sub_indikator' => $sub_indikator,
-                                    'kecamatan' => $kecamatan,
                                     'opdTerkait' => $opdTerkait,
-                                    'desaPerencanaan' => $desaPerencanaan,
                                     'opd' => $opd,
                                     'maxDokumen' => $rencanaIntervensi->dokumenPerencanaan()->count(),
                                     'method' => 'PUT',

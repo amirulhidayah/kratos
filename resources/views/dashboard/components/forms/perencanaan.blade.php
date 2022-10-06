@@ -62,11 +62,11 @@
                         'wajib' => '<sup class="text-danger">*</sup>',
                     ])
                     @slot('options')
-                        {{-- @foreach ($sumberDana as $item)
+                        @foreach ($sumberDana as $item)
                             <option value="{{ $item->id }}"
-                                {{ isset($rencanaIntervensiKeong) && $rencanaIntervensiKeong->sumber_dana_id == $item->id ? 'selected' : '' }}>
+                                {{ isset($rencanaIntervensi) && $rencanaIntervensi->sumber_dana_id == $item->id ? 'selected' : '' }}>
                                 {{ $item->nama }}</option>
-                        @endforeach --}}
+                        @endforeach
                     @endslot
                 @endcomponent
             </div>
@@ -232,23 +232,11 @@
 
 @push('scripts')
     <script>
-        $('.sumber-dana').click(function() {
-            $('#sumber-dana-hidden').val($(this).val());
-        });
-
         if ('{{ isset($opdTerkait) }}') {
             const opdTerkait = {!! $opdTerkait ?? '[]' !!};
             for (let i = 0; i < opdTerkait.length; i++) {
                 $('#opd-terkait option[value="' + opdTerkait[i] + '"]').prop('selected', true);
                 $('#opd-terkait').trigger('change');
-            }
-        }
-
-        if ('{{ isset($desaPerencanaan) }}') {
-            const desaPerencanaan = {!! $desaPerencanaan ?? '[]' !!};
-            for (let i = 0; i < desaPerencanaan.length; i++) {
-                $('#desa-perencanaan option[value="' + desaPerencanaan[i] + '"]').prop('selected', true);
-                $('#desa-perencanaan').trigger('change');
             }
         }
 
@@ -300,7 +288,6 @@
                         processData: false,
                         contentType: false,
                         success: function(response) {
-                            console.log(response)
                             $('.rupiah').mask('000.000.000.000.000', {
                                 reverse: true
                             })

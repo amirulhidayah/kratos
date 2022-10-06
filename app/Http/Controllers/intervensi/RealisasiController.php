@@ -26,15 +26,13 @@ use App\Models\Kecamatan;
 
 class RealisasiController extends Controller
 {
-    public function dataPerencanaan()
+    public function dataRealisasi()
     {
-        $query = Perencanaan::with('opd', 'desaPerencanaan', 'realisasi', 'opdTerkait')
-            ->where('status', 1)
-            ->where(function ($query) {
+        $query = Realisasi::with('perencanaan')
+            ->whereHas('perencanaan', function ($query) {
                 if (Auth::user()->role == 'OPD') {
                     $query->where('opd_id', Auth::user()->opd_id);
                     $query->orWhereHas('opdTerkait', function ($q) {
-                        $q->where('status', 1);
                         $q->where('opd_id', Auth::user()->opd_id);
                     });
                 }
@@ -45,7 +43,7 @@ class RealisasiController extends Controller
 
     public function index(Request $request)
     {
-        $realisasi = $this->dataPerencanaan();
+        $realisasi = $this->dataRealisasi();
 
         if ($request->ajax()) {
             $data = $realisasi
@@ -56,215 +54,96 @@ class RealisasiController extends Controller
                     }
 
                     if ($request->opd_filter && $request->opd_filter != 'semua') {
-                        $query->where('opd_id', $request->opd_filter);
+                        $query->whereHas('perencanaan', function ($q) use ($request) {
+                            $q->where('opd_id', $request->opd_filter);
+                        });
                     }
 
                     if ($request->status_filter && $request->status_filter != 'semua') {
-                        if ($request->status_filter == 'selesai') {
-                            $query->whereHas('realisasi', function ($query2) use ($request) {
-                                $query2->where('status', 1);
-                                $query2->havingRaw('max(progress) = 100');
-                            });
-                        }
-                        if ($request->status_filter == 'belum_selesai') {
-                            $query->where(function ($query2) use ($request) {
-                                $query2->whereHas('realisasi', function ($query3) use ($request) {
-                                    $query3->where('status', 1);
-                                    $query3->havingRaw('max(progress) != 100');
-                                });
-                                $query2->orWhereDoesntHave('realisasi');
-                            });
-                        }
-                        if ($request->status_filter == 'belum_ada_laporan') {
-                            $query->whereDoesntHave('realisasi');
-                        }
-
-                        if (in_array($request->status_filter, array("-", 1, 2))) {
-                            $query->whereHas('realisasi', function ($query2) use ($request) {
-                                if ($request->status_filter == "-") {
-                                    $query2->where('status', 0);
+                        $filter = $request->status_filter;
+                        if (in_array($filter, array("-", 1, 2))) {
+                            if ($filter == "-") {
+                                $query->where('status', 0);
+                            } else {
+                                if ($filter == 10) {
+                                    $query->where('status', 1);
+                                    $query->doesntHave('realisasi');
+                                } else if ($filter == 11) {
+                                    $query->where('status', 1);
+                                    $query->whereHas('realisasi', function ($q) {
+                                        $q->where('status', 1);
+                                    });
                                 } else {
-                                    if ($request->status_filter == 1) {
-                                        $query2->where('status', 1);
-                                        $query2->max('progress') != 100;
-                                    } else {
-                                        $query2->where('status', $request->status_filter);
-                                    }
+                                    $query->where('status', $filter);
                                 }
-                            });
+                            }
                         }
                     }
 
                     if ($request->search_filter) {
-                        $query->where(function ($query2) use ($request) {
-                            $query2->where('sub_indikator', 'like', '%' . $request->search_filter . '%');
+                        $query->whereHas('perencanaan', function ($query) use ($request) {
+                            $query->where('sub_indikator', 'like', '%' . $request->search_filter . '%');
                         });
                     }
-                });
+                })->get();
 
             return DataTables::of($data)
                 ->addIndexColumn()
 
                 ->addColumn('sub_indikator', function ($row) {
-                    return $row->indikator->nama;
-                })
-
-                ->addColumn('penggunaan_anggaran', function ($row) {
-                    $penggunaanAnggaran = 0;
-                    foreach ($row->realisasi->where('status', 1) as $item) {
-                        $penggunaanAnggaran += $item->penggunaan_anggaran;
-                    }
-                    return $penggunaanAnggaran;
-                })
-
-                ->addColumn('sisa_anggaran', function ($row) {
-                    $penggunaanAnggaran = 0;
-                    foreach ($row->realisasi->where('status', 1) as $item) {
-                        $penggunaanAnggaran += $item->penggunaan_anggaran;
-                    }
-                    $sisaAnggaran = $row->nilai_pembiayaan - $penggunaanAnggaran;
-                    return $sisaAnggaran;
-                })
-
-                ->addColumn('progress', function ($row) {
-                    if ($row->realisasi->where('status', 1)->count() > 0) {
-                        return $row->realisasi->where('status', 1)->max('progress') . ' %';
-                    } else {
-                        return '0 %';
-                    }
-                })
-
-                ->addColumn('status', function ($row) {
-                    $status = '<div>';
-                    if ($row->realisasi->where('status', 1)->max('progress') == 100) {
-                        $status .=  '<span class="badge badge-info">Selesai Terealisasi</span>';
-                    } else {
-                        if ($row->realisasi->where('status', 0)->count() > 0) {
-                            $status .= '<span class="badge badge-warning my-1 mx-1">Menunggu Konfirmasi : <span class="font-weight-bold">' . $row->realisasi->where('status', 0)->count() . '</span></span>';
-                        }
-                        if ($row->realisasi->where('status', 1)->count() > 0) {
-                            $status .= '<span class="badge badge-success my-1 mx-1">Laporan Disetujui : <span class="font-weight-bold">' . $row->realisasi->where('status', 1)->count() . '</span></span>';
-                        }
-                        if ($row->realisasi->where('status', 2)->count() > 0) {
-                            $status .= '<span class="badge badge-danger my-1 mx-1">Laporan Ditolak : <span class="font-weight-bold">' . $row->realisasi->where('status', 2)->count() . '</span></span>';
-                        }
-
-                        if ($row->realisasi->count() == 0) {
-                            $status .= '<span class="badge badge-dark">Belum Ada Laporan</span>';
-                        }
-                    }
-                    $status .= '</div>';
-                    return $status;
+                    return $row->perencanaan->indikator->nama;
                 })
 
                 ->addColumn('opd', function ($row) {
                     if (Auth::user()->role == 'OPD') {
-                        if ($row->opd_id == Auth::user()->opd_id) {
-                            return $row->opd->nama;
+                        if ($row->perencanaan->opd_id == Auth::user()->opd_id) {
+                            return $row->perencanaan->opd->nama;
                         } else {
-                            return '<span class="badge badge-primary">' . $row->opd->nama . '</span>';
+                            return '<span class="badge badge-primary">' . $row->perencanaan->opd->nama . '</span>';
                         }
                     } else {
-                        return $row->opd->nama;
+                        return $row->perencanaan->opd->nama;
                     }
                 })
 
-                ->addColumn('action', function ($row) {
-                    $actionBtn = '<div class="text-center justify-content-center text-white my-1">';
-                    $actionBtn .= '<a href="' . route('realisasi-intervensi.show', $row->id) . '" id="btn-show" class="btn btn-rounded btn-primary btn-sm text-white shadow btn-lihat my-1" data-toggle="tooltip" data-placement="top" title="Lihat"><i class="fas fa-eye"></i></a> ';
-                    $actionBtn .= '</div>';
-                    return $actionBtn;
-                })
-
-                ->rawColumns([
-                    'status',
-                    'progress',
-                    'opd',
-                    'action',
-                    'lokasi_keong',
-                ])
-                ->make(true);
-        }
-
-        if (Auth::user()->role == 'OPD') {
-            $listPerencanaan = Perencanaan::where('opd_id', Auth::user()->opd_id)->where('status', 1)->pluck('id')->toArray();
-            $totalMenungguKonfirmasiRealisasi = Realisasi::whereIn('perencanaan_id', $listPerencanaan)->where('status', 2)->count();
-        } else {
-            $totalMenungguKonfirmasiRealisasi = Realisasi::where('status', 0)->count();
-        }
-
-        $tahun = $this->dataPerencanaan()->select(DB::raw('YEAR(created_at) year'))
-            ->groupBy('year')
-            ->pluck('year');
-
-        $realisasi = $this->dataPerencanaan()->groupBy('opd_id')->get();
-
-        return view('dashboard.pages.intervensi.realisasi.subIndikator.index', ['realisasi' => $realisasi, 'totalMenungguKonfirmasiRealisasi' => $totalMenungguKonfirmasiRealisasi, 'tahun' => $tahun]);
-    }
-
-    public function tabelLaporan(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = Realisasi::with('perencanaan')->where('perencanaan_id', $request->id_perencanaan)
-                ->where(function ($query) {
-                    if (Auth::user()->role == 'OPD') {
-                        $query->whereHas('perencanaan', function ($q) {
-                            $q->where('opd_id', Auth::user()->opd_id);
-                        });
-                        $query->orWhere(function ($q) { // OPD Terkait hanya bisa melihat yang telah di setujui
-                            $q->whereHas('perencanaan', function ($q2) {
-                                $q2->whereHas('opdTerkait', function ($q3) {
-                                    $q3->where('opd_id', Auth::user()->opd_id);
-                                });
-                            });
-                            // $q->where('status', 1);
-                        });
-                    }
-                })
-                ->latest();
-            return DataTables::of($data)
-                ->addIndexColumn()
-
-                ->addColumn('jumlah_desa', function ($row) {
-                    return $row->desaRealisasi->count();
+                ->addColumn('penggunaan_anggaran', function ($row) {
+                    return $row->perencanaan->nilai_pembiayaan;
                 })
 
                 ->addColumn('status', function ($row) {
                     if ($row->status == 0) {
-                        return '<span class="badge badge-pill badge-warning">Menunggu Konfirmasi</span>';
+                        return '<span class="badge fw-bold badge-warning">Menunggu Konfirmasi</span>';
                     } else if ($row->status == 1) {
-                        return '<span class="badge badge-pill badge-success">Disetujui</span>';
-                    } else {
-                        return '<span class="badge badge-pill badge-danger">Ditolak</span>';
+                        return '<span class="badge fw-bold badge-success">Disetujui</span>';
+                    } else if ($row->status == 2) {
+                        return '<span class="badge fw-bold badge-danger">Ditolak</span>';
                     }
                 })
 
-                ->addColumn('progress', function ($row) {
-                    return $row->progress . ' %';
-                })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '<div class="text-center justify-content-center text-white my-1">';
                     if ($row->status == 0) {
                         if (Auth::user()->role == 'OPD') {
-                            $actionBtn .= '<a href="' . url('realisasi-intervensi/show-laporan', $row->id) . '" id="btn-show" class="btn btn-rounded btn-primary btn-sm text-white shadow btn-lihat my-1" data-toggle="tooltip" data-placement="top" title="Lihat"><i class="fas fa-eye"></i></a> ';
+                            $actionBtn .= '<a href="' . route('realisasi-intervensi.show', $row->id) . '" id="btn-show" class="btn btn-rounded btn-primary btn-sm text-white shadow btn-lihat my-1" data-toggle="tooltip" data-placement="top" title="Lihat"><i class="fas fa-eye"></i></a> ';
                             if (Auth::user()->opd_id == $row->perencanaan->opd_id) {
                                 $actionBtn .= '<a href="' . route('realisasi-intervensi.edit', $row->id) . '" id="btn-edit" class="btn btn-rounded btn-warning btn-sm my-1 text-white shadow" data-toggle="tooltip" data-placement="top" title="Ubah"><i class="fas fa-edit"></i></a> ';
                                 $actionBtn .= '<button id="btn-delete" class="btn btn-rounded btn-danger btn-sm my-1 text-white shadow btn-delete" data-toggle="tooltip" data-placement="top" title="Hapus" value="' . $row->id . '"><i class="fas fa-trash"></i></button>';
                             }
                         } else { //admin & pimpinan
                             if (Auth::user()->role == 'Admin') {
-                                $actionBtn .= '<a href="' . url('realisasi-intervensi/show-laporan', $row->id) . '" id="btn-show" class="btn btn-rounded btn-secondary btn-sm text-white shadow btn-lihat my-1" data-toggle="tooltip" data-placement="top" title="Konfirmasi"><i class="fas fa-lg fa-clipboard-check"></i></a> ';
-                            } else { // pimpinan
-                                $actionBtn .= '<a href="' . url('realisasi-intervensi/show-laporan', $row->id) . '" id="btn-show" class="btn btn-rounded btn-primary btn-sm text-white shadow btn-lihat my-1" data-toggle="tooltip" data-placement="top" title="Lihat"><i class="fas fa-eye"></i></a> ';
+                                $actionBtn .= '<a href="' . route('realisasi-intervensi.show', $row->id) . '" id="btn-show" class="btn btn-rounded btn-secondary btn-sm text-white shadow btn-lihat my-1" data-toggle="tooltip" data-placement="top" title="Konfirmasi"><i class="fas fa-lg fa-clipboard-check"></i></a> ';
+                            } else {
+                                $actionBtn .= '<a href="' . route('realisasi-intervensi.show', $row->id) . '" id="btn-show" class="btn btn-rounded btn-primary btn-sm text-white shadow btn-lihat my-1" data-toggle="tooltip" data-placement="top" title="Lihat"><i class="fas fa-eye"></i></a> ';
                             }
                         }
                     } else if ($row->status == 1) {
-                        $actionBtn .= '<a href="' . url('realisasi-intervensi/show-laporan', $row->id) . '" id="btn-show" class="btn btn-rounded btn-primary btn-sm text-white shadow btn-lihat my-1" data-toggle="tooltip" data-placement="top" title="Lihat"><i class="fas fa-eye"></i></a> ';
+                        $actionBtn .= '<a href="' . route('realisasi-intervensi.show', $row->id) . '" id="btn-show" class="btn btn-rounded btn-primary btn-sm text-white shadow btn-lihat my-1" data-toggle="tooltip" data-placement="top" title="Lihat"><i class="fas fa-eye"></i></a> ';
                         if (Auth::user()->role == 'Admin') {
                             $actionBtn .= '<a href="' . route('realisasi-intervensi.edit', $row->id) . '" id="btn-edit" class="btn btn-rounded btn-warning btn-sm my-1 text-white shadow" data-toggle="tooltip" data-placement="top" title="Ubah"><i class="fas fa-edit"></i></a> ';
+                            $actionBtn .= '<button id="btn-delete" class="btn btn-rounded btn-danger btn-sm my-1 text-white shadow btn-delete" data-toggle="tooltip" data-placement="top" title="Hapus" value="' . $row->id . '"><i class="fas fa-trash"></i></button>';
                         }
                     } else { // > 2
-                        $actionBtn .= '<a href="' . url('realisasi-intervensi/show-laporan', $row->id) . '" id="btn-show" class="btn btn-rounded btn-primary btn-sm text-white shadow btn-lihat my-1" data-toggle="tooltip" data-placement="top" title="Lihat"><i class="fas fa-eye"></i></a> ';
+                        $actionBtn .= '<a href="' . route('realisasi-intervensi.show', $row->id) . '" id="btn-show" class="btn btn-rounded btn-primary btn-sm text-white shadow btn-lihat my-1" data-toggle="tooltip" data-placement="top" title="Lihat"><i class="fas fa-eye"></i></a> ';
                         if ((Auth::user()->role == 'OPD') && (Auth::user()->opd_id == $row->perencanaan->opd_id)) {
                             $actionBtn .= '<a href="' . route('realisasi-intervensi.edit', $row->id) . '" id="btn-edit" class="btn btn-rounded btn-warning btn-sm my-1 text-white shadow" data-toggle="tooltip" data-placement="top" title="Ubah"><i class="fas fa-edit"></i></a> ';
                             $actionBtn .= '<button id="btn-delete" class="btn btn-rounded btn-danger btn-sm my-1 text-white shadow btn-delete" data-toggle="tooltip" data-placement="top" title="Hapus" value="' . $row->id . '"><i class="fas fa-trash"></i></button>';
@@ -276,15 +155,62 @@ class RealisasiController extends Controller
 
                 ->rawColumns([
                     'status',
+                    'opd',
                     'action',
                 ])
                 ->make(true);
         }
+
+        if (Auth::user()->role == 'OPD') {
+            $totalMenungguKonfirmasiRealisasi = Realisasi::with('perencanaan')->whereHas('perencanaan', function ($q) {
+                $q->where('opd_id', Auth::user()->opd_id);
+            })->where('status', 2)->count();
+        } else {
+            $totalMenungguKonfirmasiRealisasi = Realisasi::where('status', 0)->count();
+        }
+
+        $tahun = $this->dataRealisasi()->select(DB::raw('YEAR(created_at) year'))
+            ->groupBy('year')
+            ->pluck('year');
+
+        $opdFilter = [];
+        $iter = 1;
+        foreach ($this->dataRealisasi()->get() as $item) {
+            $data = [
+                'id' => $item->perencanaan->opd_id,
+                'nama' => $item->perencanaan->opd->nama
+            ];
+            if ($iter == 1) {
+                array_push($opdFilter, $data);
+            } else {
+                $found_key = array_search($item->perencanaan->opd_id, array_column($opdFilter, 'id'));
+                if (!$found_key) {
+                    array_push($opdFilter, $data);
+                }
+            }
+            $iter++;
+        }
+
+        return view('dashboard.pages.intervensi.realisasi.index', ['opdFilter' => $opdFilter, 'totalMenungguKonfirmasiRealisasi' => $totalMenungguKonfirmasiRealisasi, 'tahun' => $tahun]);
     }
 
-
-    public function create(Perencanaan $realisasi_intervensi)
+    public function create()
     {
+        if (in_array(Auth::user()->role, ['Admin', 'Pimpinan'])) {
+            abort('403', 'Oops! anda tidak memiliki akses ke sini.');
+        }
+
+        $listPerencanaan = Perencanaan::with('opdTerkait')->whereDoesntHave('realisasi')->where('opd_id', Auth::user()->opd_id)->where('status', 1)->whereYear('created_at', Carbon::now()->year)->get();
+
+        $data = [
+            'desa' => Desa::all(),
+            'opd' => OPD::orderBy('nama')->whereNot('id', Auth::user()->opd_id)->get(),
+            'listPerencanaan' => $listPerencanaan
+        ];
+
+        // dd($data);
+
+        return view('dashboard.pages.intervensi.realisasi.create', $data);
     }
 
     public function createPelaporan(Perencanaan $realisasi_intervensi)

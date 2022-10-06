@@ -28,7 +28,7 @@
 
 @section('contents')
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-lg-8">
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
@@ -46,11 +46,6 @@
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">OPD:<span
                                 class="font-weight-bold">{{ $rencana_intervensi->opd->nama }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Jumlah Desa:<span
-                                class="font-weight-bold">
-                                {{ $rencana_intervensi->desaPerencanaan->count() }}
-                            </span>
                         </li>
                         @if ($rencana_intervensi->opdTerkait->count() > 0)
                             <li class="list-group-item d-flex justify-content-between align-items-center">OPD Terkait
@@ -71,7 +66,7 @@
                                 <span class="rupiah">{{ $rencana_intervensi->nilai_pembiayaan }}</span></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">Sumber Dana:<span
-                                class="font-weight-bold">{{ $rencana_intervensi->sumber_dana }}</span>
+                                class="font-weight-bold">{{ $rencana_intervensi->sumberDana->nama }}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">Status:
                             @if ($rencana_intervensi->status == 1)
@@ -98,7 +93,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4">
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
@@ -124,43 +119,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-head-row">
-                        <div class="card-title">Data Desa Perencanaan Intervensi</div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive mt-2">
-                        <table class="table table-hover table-striped table-bordered" id="{{ $id ?? 'dataTables' }}"
-                            cellspacing="0" width="100%">
-                            <thead>
-                                <tr class="text-center fw-bold">
-                                    <th>No</th>
-                                    <th>Desa</th>
-                                    <th>Kecamatan</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($rencana_intervensi->desaPerencanaan as $item)
-                                    <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $item->desa->nama }}</td>
-                                        <td>{{ $item->desa->kecamatan->nama }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @if ($rencana_intervensi->status == 0 && Auth::user()->role == 'Admin')
-            <div class="col-md-4">
+            @if ($rencana_intervensi->status == 0 && Auth::user()->role == 'Admin')
                 <div class="card">
                     <div class="card-header">
                         <div class="card-head-row">
@@ -176,8 +135,8 @@
                         @endcomponent
                     </div>
                 </div>
-            </div>
-        @endif
+            @endif
+        </div>
     </div>
 @endsection
 

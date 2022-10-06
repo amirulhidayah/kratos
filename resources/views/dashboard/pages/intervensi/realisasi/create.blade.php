@@ -1,15 +1,15 @@
 @extends('dashboard.layouts.main')
 
 @section('title')
-    Tambah Perencanaan Intervensi
+    Tambah Laporan Realisasi Intervensi
 @endsection
 
 @section('titlePanelHeader')
-    Tambah Perencanaan Intervensi
+    Tambah Laporan Realisasi Intervensi
 @endsection
 
 @section('subTitlePanelHeader')
-    {{-- * bersifat wajib --}}
+    {{-- {{ $rencanaIntervensi->indikator->nama }} --}}
 @endsection
 
 @section('buttonPanelHeader')
@@ -17,24 +17,34 @@
         Kembali</a>
 @endsection
 
+@push('styles')
+    <style>
+        #tabelLokasiTerealisasi_wrapper .dataTables_filter {
+            width: 100% !important;
+            margin-bottom: 10px !important;
+            text-align: center !important;
+        }
+    </style>
+@endpush
+
 @section('contents')
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
-                        <div class="card-title">Form Perencanaan Intervensi</div>
+                        <div class="card-title">Form Laporan Realisasi Intervensi</div>
                     </div>
                 </div>
                 <div class="card-body pt-1">
                     <div class="row">
                         <div class="col">
-                            @component('dashboard.components.forms.perencanaan',
+                            @component('dashboard.components.forms.realisasi',
                                 [
-                                    'action' => route('rencana-intervensi.store'),
-                                    'sub_indikator' => $sub_indikator,
+                                    'action' => route('realisasi-intervensi.store'),
                                     'opd' => $opd,
-                                    'sumberDana' => $sumberDana,
+                                    'desa' => $desa,
+                                    'listPerencanaan' => $listPerencanaan,
                                     'method' => 'POST',
                                     'submitLabel' => 'Kirim Data',
                                     'submitIcon' => '<i class="fas fa-paper-plane"></i> ',
@@ -50,8 +60,8 @@
 
 @push('scripts')
     <script>
-        $('#nav-perencanaan').addClass('active');
-        $('#nav-perencanaan .collapse').addClass('show');
-        $('#nav-perencanaan .collapse #li-keong').addClass('active');
+        $('#nav-realisasi').addClass('active');
+        $('#nav-realisasi .collapse').addClass('show');
+        $('#nav-realisasi .collapse #li-keong-2').addClass('active');
     </script>
 @endpush

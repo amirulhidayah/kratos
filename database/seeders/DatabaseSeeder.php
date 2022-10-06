@@ -34,8 +34,7 @@ class DatabaseSeeder extends Seeder
         );
 
         $this->call(PerencanaanTableSeeder::class);
-        $this->call(RealisasiTableSeeder::class);
-        $this->call(DesaPerencanaanTableSeeder::class);
+        // $this->call(RealisasiTableSeeder::class);
         $this->call(OpdTerkaitTableSeeder::class);
         $this->call(DokumenPerencanaanTableSeeder::class);
         $this->call(OPDSeeder::class);

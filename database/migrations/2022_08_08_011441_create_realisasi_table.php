@@ -16,9 +16,6 @@ return new class extends Migration
         Schema::create('realisasi', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('perencanaan_id');
-            $table->bigInteger('penggunaan_anggaran');
-            $table->integer('tw');
-            $table->float('progress');
             $table->integer('status'); // 0/1/2
             $table->date('tanggal_konfirmasi')->nullable();
             $table->text('alasan_ditolak')->nullable(); // 0/1/2

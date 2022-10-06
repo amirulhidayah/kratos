@@ -30,9 +30,4 @@ class Desa extends Model
     {
         return $this->hasMany(Penduduk::class, 'desa_id')->orderBy('nama');
     }
-
-    public function kecamatan()
-    {
-        return $this->belongsTo(Kecamatan::class);
-    }
 }

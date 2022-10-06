@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid('opd_id');
             $table->string('indikator_id');
             $table->bigInteger('nilai_pembiayaan');
-            $table->string('sumber_dana');
+            $table->string('sumber_dana_id');
             $table->integer('status')->default(0); // 0/1/2
             $table->date('tanggal_konfirmasi')->nullable();
             $table->text('alasan_ditolak')->nullable();

@@ -401,7 +401,8 @@
                         reverse: true
                     })
                 });
-                e.preventDefault()
+
+                throw 'Ada inputan yang kosong!';
             }
         }
 
