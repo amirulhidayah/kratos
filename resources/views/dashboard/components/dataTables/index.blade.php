@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="table-responsive {{ $class ?? '' }}">
     <table class="table table-hover table-striped" id="{{ $id }}" width="100%">
         <thead>
             <tr class="text-center fw-bold">

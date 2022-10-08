@@ -32,10 +32,11 @@
                 <div class="card-body">
                     @component('dashboard.components.forms.anak')
                         @slot('form_id', 'form-tambah')
-                        @slot('action', url('/master-data/anak/' . $anak->id))
+                        @slot('action', url('/master-data/orang-tua/anak/' . $orangTua->id . '/' . $anak->id))
                         @slot('data', $anak)
+                        @slot('orangTua', $orangTua)
                         @slot('method', 'PUT')
-                        @slot('back_url', url('/master-data/anak'))
+                        @slot('back_url', url('/master-data/orang-tua/anak/' . $orangTua->id))
                     @endcomponent
                 </div>
             </div>

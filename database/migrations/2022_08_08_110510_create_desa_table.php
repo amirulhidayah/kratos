@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('kecamatan_id');
             $table->text('nama');
-            $table->string('luas');
+            $table->string('luas')->nullable();
             $table->string('kode')->nullable();
             $table->json('polygon')->nullable();
             $table->string('warna_polygon')->nullable();

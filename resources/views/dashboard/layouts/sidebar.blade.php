@@ -47,7 +47,11 @@
                          <p>Wilayah</p>
                      </a>
                  </li>
-
+                 <li class="nav-item" id="nav-pengukuran-anak">
+                     <a href="{{ url('daftar-pengukuran-anak') }}">
+                         <i class="fas fa-user-md"></i>
+                         <p>Pengukuran Anak</p>
+                     </a>
                  </li>
                  <li class="nav-item" id="nav-master-orang-tua">
                      <a href="{{ url('master-data/orang-tua') }}">
