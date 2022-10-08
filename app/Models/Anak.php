@@ -17,4 +17,14 @@ class Anak extends Model
     {
         return $this->belongsTo(OrangTua::class);
     }
+
+    public function pengukuranAnakTerakhir()
+    {
+        return $this->hasOne(PengukuranAnak::class)->orderBy('created_at', 'desc');
+    }
+
+    public function pengukuranAnak()
+    {
+        return $this->hasMany(PengukuranAnak::class);
+    }
 }

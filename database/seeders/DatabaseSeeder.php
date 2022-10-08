@@ -49,9 +49,11 @@ class DatabaseSeeder extends Seeder
         // $this->call(PendudukTableSeeder::class); // new
         $this->call(UserSeeder::class);
         $this->call(SumberDanaSeeder::class);
-        $this->call(PuskesmasSeeder::class);
-        $this->call(PosyanduSeeder::class);
+        // $this->call(PuskesmasSeeder::class);
+        // $this->call(PosyanduSeeder::class);
         $this->call(OrangTuaSeeder::class);
+        $this->call(PuskesmasTableSeeder::class);
+        $this->call(PosyanduTableSeeder::class);
         $this->call(AnakSeeder::class);
     }
 }

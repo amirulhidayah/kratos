@@ -65,7 +65,7 @@ class OrangTuaController extends Controller
                 ->addColumn('action', function ($row) {
                     $actionBtn = '';
 
-                    $actionBtn .= '<button class="btn btn-success btn-rounded btn-sm mr-1" id="btn-lihat" value="' . $row->id . '"><i class="far fa-eye"></i></button>';
+                    $actionBtn .= '<a class="btn btn-secondary btn-rounded btn-sm mr-1 text-light" href="' . url('master-data/orang-tua/anak/' . $row->id) . '"><i class="fas fa-child"></i></a>';
 
                     if (Auth::user()->role == "Admin") {
                         $actionBtn .= '<a id="btn-edit" class="btn btn-warning btn-rounded btn-sm mr-1" href="' . url('master-data/orang-tua/' . $row->id . '/edit')  . '" ><i class="fas fa-edit"></i></a><button id="btn-delete" class="btn btn-danger btn-rounded btn-sm mr-1" value="' . $row->id . '" > <i class="fas fa-trash-alt"></i></button>';

@@ -21,6 +21,58 @@ class DesaTableSeeder extends Seeder
         \DB::table('desa')->insert(array (
             0 => 
             array (
+                'id' => 2,
+                'kecamatan_id' => 7210090,
+                'nama' => 'PEWUNU',
+                'luas' => NULL,
+                'kode' => NULL,
+                'polygon' => NULL,
+                'warna_polygon' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2022-10-06 15:23:33',
+                'updated_at' => '2022-10-06 15:53:42',
+            ),
+            1 => 
+            array (
+                'id' => 5,
+                'kecamatan_id' => 7210090,
+                'nama' => 'LUKU',
+                'luas' => NULL,
+                'kode' => NULL,
+                'polygon' => NULL,
+                'warna_polygon' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2022-10-06 15:23:33',
+                'updated_at' => '2022-10-06 15:53:42',
+            ),
+            2 => 
+            array (
+                'id' => 876,
+                'kecamatan_id' => 7210120,
+                'nama' => 'SOULOVE',
+                'luas' => NULL,
+                'kode' => NULL,
+                'polygon' => NULL,
+                'warna_polygon' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2022-10-06 15:23:33',
+                'updated_at' => '2022-10-06 15:53:41',
+            ),
+            3 => 
+            array (
+                'id' => 86623,
+                'kecamatan_id' => 7210080,
+                'nama' => 'BULUBETE',
+                'luas' => NULL,
+                'kode' => NULL,
+                'polygon' => NULL,
+                'warna_polygon' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2022-10-06 15:23:34',
+                'updated_at' => '2022-10-06 15:53:42',
+            ),
+            4 => 
+            array (
                 'id' => 7210010001,
                 'kecamatan_id' => 7210010,
                 'nama' => 'KALAMANTA',
@@ -32,7 +84,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 19:35:54',
             ),
-            1 => 
+            5 => 
             array (
                 'id' => 7210010002,
                 'kecamatan_id' => 7210010,
@@ -45,7 +97,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 18:57:47',
             ),
-            2 => 
+            6 => 
             array (
                 'id' => 7210010003,
                 'kecamatan_id' => 7210010,
@@ -58,7 +110,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 19:37:09',
             ),
-            3 => 
+            7 => 
             array (
                 'id' => 7210010004,
                 'kecamatan_id' => 7210010,
@@ -71,7 +123,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 19:37:49',
             ),
-            4 => 
+            8 => 
             array (
                 'id' => 7210010005,
                 'kecamatan_id' => 7210010,
@@ -84,7 +136,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 19:39:11',
             ),
-            5 => 
+            9 => 
             array (
                 'id' => 7210010006,
                 'kecamatan_id' => 7210010,
@@ -97,7 +149,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 19:12:04',
             ),
-            6 => 
+            10 => 
             array (
                 'id' => 7210010007,
                 'kecamatan_id' => 7210010,
@@ -110,7 +162,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 19:08:55',
             ),
-            7 => 
+            11 => 
             array (
                 'id' => 7210010008,
                 'kecamatan_id' => 7210010,
@@ -123,7 +175,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 19:44:52',
             ),
-            8 => 
+            12 => 
             array (
                 'id' => 7210010009,
                 'kecamatan_id' => 7210010,
@@ -136,7 +188,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 16:09:55',
             ),
-            9 => 
+            13 => 
             array (
                 'id' => 7210010010,
                 'kecamatan_id' => 7210010,
@@ -149,7 +201,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 19:29:12',
             ),
-            10 => 
+            14 => 
             array (
                 'id' => 7210010011,
                 'kecamatan_id' => 7210010,
@@ -162,7 +214,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 19:18:12',
             ),
-            11 => 
+            15 => 
             array (
                 'id' => 7210010012,
                 'kecamatan_id' => 7210010,
@@ -175,7 +227,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-11 13:50:00',
             ),
-            12 => 
+            16 => 
             array (
                 'id' => 7210010013,
                 'kecamatan_id' => 7210010,
@@ -188,7 +240,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 19:27:25',
             ),
-            13 => 
+            17 => 
             array (
                 'id' => 7210010014,
                 'kecamatan_id' => 7210010,
@@ -201,7 +253,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 19:36:27',
             ),
-            14 => 
+            18 => 
             array (
                 'id' => 7210010015,
                 'kecamatan_id' => 7210010,
@@ -214,7 +266,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 19:38:30',
             ),
-            15 => 
+            19 => 
             array (
                 'id' => 7210010016,
                 'kecamatan_id' => 7210010,
@@ -227,7 +279,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 19:05:58',
             ),
-            16 => 
+            20 => 
             array (
                 'id' => 7210010017,
                 'kecamatan_id' => 7210010,
@@ -240,7 +292,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            17 => 
+            21 => 
             array (
                 'id' => 7210010018,
                 'kecamatan_id' => 7210010,
@@ -253,7 +305,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-11 14:02:33',
             ),
-            18 => 
+            22 => 
             array (
                 'id' => 7210010019,
                 'kecamatan_id' => 7210010,
@@ -266,7 +318,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 19:35:29',
             ),
-            19 => 
+            23 => 
             array (
                 'id' => 7210020001,
                 'kecamatan_id' => 7210020,
@@ -279,7 +331,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-18 23:40:19',
             ),
-            20 => 
+            24 => 
             array (
                 'id' => 7210020002,
                 'kecamatan_id' => 7210020,
@@ -292,7 +344,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 09:52:28',
             ),
-            21 => 
+            25 => 
             array (
                 'id' => 7210020003,
                 'kecamatan_id' => 7210020,
@@ -305,7 +357,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-11 13:37:37',
             ),
-            22 => 
+            26 => 
             array (
                 'id' => 7210020004,
                 'kecamatan_id' => 7210020,
@@ -318,7 +370,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 10:00:30',
             ),
-            23 => 
+            27 => 
             array (
                 'id' => 7210020005,
                 'kecamatan_id' => 7210020,
@@ -331,7 +383,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 10:14:51',
             ),
-            24 => 
+            28 => 
             array (
                 'id' => 7210020006,
                 'kecamatan_id' => 7210020,
@@ -344,7 +396,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 10:03:41',
             ),
-            25 => 
+            29 => 
             array (
                 'id' => 7210020007,
                 'kecamatan_id' => 7210020,
@@ -357,7 +409,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 10:08:54',
             ),
-            26 => 
+            30 => 
             array (
                 'id' => 7210020008,
                 'kecamatan_id' => 7210020,
@@ -370,7 +422,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 16:12:46',
             ),
-            27 => 
+            31 => 
             array (
                 'id' => 7210020009,
                 'kecamatan_id' => 7210020,
@@ -383,11 +435,11 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 10:40:55',
             ),
-            28 => 
+            32 => 
             array (
                 'id' => 7210020010,
                 'kecamatan_id' => 7210020,
-                'nama' => 'O&amp;#039;O',
+                'nama' => 'O\'O',
                 'luas' => '',
                 'kode' => NULL,
                 'polygon' => '[[{"lat":-1.6003167867501022,"lng":119.98252372931557},{"lat":-1.6121567676237707,"lng":119.99522522533537},{"lat":-1.6142158877171,"lng":120.00191925702146},{"lat":-1.6104408326215438,"lng":120.01153119995537},{"lat":-1.609411270926595,"lng":120.02955359295638},{"lat":-1.60769533361339,"lng":120.03470284809953},{"lat":-1.606837364415794,"lng":120.04362822368098},{"lat":-1.6051214249396208,"lng":120.05959091462475},{"lat":-1.6051214249396208,"lng":120.07606853108285},{"lat":-1.6054646129501036,"lng":120.09254614754094},{"lat":-1.6016895416686157,"lng":120.09992674657943},{"lat":-1.5874471648080966,"lng":120.10936704767525},{"lat":-1.577323005881905,"lng":120.11297152627543},{"lat":-1.5793821608509198,"lng":120.11812078141858},{"lat":-1.5737194797842586,"lng":120.12327003656175},{"lat":-1.5620508764354228,"lng":120.13099391927643},{"lat":-1.5584473240468024,"lng":120.12996406824783},{"lat":-1.5567313445507531,"lng":120.12412824575226},{"lat":-1.557589334473454,"lng":120.11297152627543},{"lat":-1.5610212906687129,"lng":120.11022525686576},{"lat":-1.5615360836151129,"lng":120.10044167209374},{"lat":-1.5610212906687129,"lng":120.09391928224576},{"lat":-1.5557017561826165,"lng":120.09168793835039},{"lat":-1.5610212906687129,"lng":120.09065808732177},{"lat":-1.567027200522845,"lng":120.07435211270179},{"lat":-1.556559746524311,"lng":120.05650136153888},{"lat":-1.5587905197782725,"lng":120.0401953869189},{"lat":-1.5692579626571548,"lng":120.04174016346187},{"lat":-1.5706307381727493,"lng":120.03195657868986},{"lat":-1.5781809873667978,"lng":120.03281478788037},{"lat":-1.5835004646648927,"lng":120.00191925702146},{"lat":-1.582985677135219,"lng":119.99419537430677}]]',
@@ -396,7 +448,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 16:11:48',
             ),
-            29 => 
+            33 => 
             array (
                 'id' => 7210020011,
                 'kecamatan_id' => 7210020,
@@ -409,20 +461,20 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 10:12:43',
             ),
-            30 => 
+            34 => 
             array (
                 'id' => 7210020012,
                 'kecamatan_id' => 7210020,
-                'nama' => 'WANGKA',
+                'nama' => 'Wangka',
                 'luas' => '',
                 'kode' => NULL,
                 'polygon' => '[[{"lat":-1.6358263430726263,"lng":119.9432001639242},{"lat":-1.6263843907970716,"lng":119.9432001639242},{"lat":-1.6169423943420858,"lng":119.94611770578469},{"lat":-1.6143672967659974,"lng":119.96173513574354},{"lat":-1.6088737443752221,"lng":119.97031614121548},{"lat":-1.606470310549105,"lng":119.9752931243892},{"lat":-1.600118364694446,"lng":119.9821579287667},{"lat":-1.6059552886469268,"lng":119.98799301248762},{"lat":-1.6119638694187084,"lng":119.99554429730289},{"lat":-1.6135089301822028,"lng":120.00240910168041},{"lat":-1.6105904810889773,"lng":120.01150496748065},{"lat":-1.610418807482658,"lng":120.02060083328088},{"lat":-1.6092170918336028,"lng":120.02901021864338},{"lat":-1.6155690093744044,"lng":120.02832373820561},{"lat":-1.6205475254588675,"lng":120.03209938061326},{"lat":-1.6239809776990364,"lng":120.03364396159822},{"lat":-1.6243243226024267,"lng":120.02729401754898},{"lat":-1.6263843907970716,"lng":120.0166535707638},{"lat":-1.6274144241059154,"lng":120.01184820769954},{"lat":-1.6275860962729192,"lng":120.00738608485416},{"lat":-1.628787801032595,"lng":119.99691725817841},{"lat":-1.630332848956152,"lng":119.98764977226874},{"lat":-1.628787801032595,"lng":119.96997290099658},{"lat":-1.628787801032595,"lng":119.9677418395739},{"lat":-1.6339379561641698,"lng":119.95487033136602}]]',
                 'warna_polygon' => '#808000',
                 'deleted_at' => NULL,
                 'created_at' => NULL,
-                'updated_at' => '2022-09-19 10:40:09',
+                'updated_at' => '2022-10-06 15:53:42',
             ),
-            31 => 
+            35 => 
             array (
                 'id' => 7210030001,
                 'kecamatan_id' => 7210030,
@@ -435,7 +487,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 14:59:37',
             ),
-            32 => 
+            36 => 
             array (
                 'id' => 7210030002,
                 'kecamatan_id' => 7210030,
@@ -448,7 +500,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 15:32:48',
             ),
-            33 => 
+            37 => 
             array (
                 'id' => 7210030003,
                 'kecamatan_id' => 7210030,
@@ -461,7 +513,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 15:02:40',
             ),
-            34 => 
+            38 => 
             array (
                 'id' => 7210030004,
                 'kecamatan_id' => 7210030,
@@ -474,7 +526,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 15:01:30',
             ),
-            35 => 
+            39 => 
             array (
                 'id' => 7210030005,
                 'kecamatan_id' => 7210030,
@@ -487,7 +539,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 15:09:31',
             ),
-            36 => 
+            40 => 
             array (
                 'id' => 7210030006,
                 'kecamatan_id' => 7210030,
@@ -500,7 +552,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 15:12:27',
             ),
-            37 => 
+            41 => 
             array (
                 'id' => 7210030007,
                 'kecamatan_id' => 7210030,
@@ -513,7 +565,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 15:14:11',
             ),
-            38 => 
+            42 => 
             array (
                 'id' => 7210030008,
                 'kecamatan_id' => 7210030,
@@ -526,7 +578,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 15:15:37',
             ),
-            39 => 
+            43 => 
             array (
                 'id' => 7210030009,
                 'kecamatan_id' => 7210030,
@@ -539,7 +591,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:10:39',
             ),
-            40 => 
+            44 => 
             array (
                 'id' => 7210030010,
                 'kecamatan_id' => 7210030,
@@ -552,7 +604,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 15:18:45',
             ),
-            41 => 
+            45 => 
             array (
                 'id' => 7210030011,
                 'kecamatan_id' => 7210030,
@@ -565,7 +617,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 15:20:12',
             ),
-            42 => 
+            46 => 
             array (
                 'id' => 7210030013,
                 'kecamatan_id' => 7210030,
@@ -578,7 +630,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 15:27:27',
             ),
-            43 => 
+            47 => 
             array (
                 'id' => 7210030014,
                 'kecamatan_id' => 7210030,
@@ -591,7 +643,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 15:21:49',
             ),
-            44 => 
+            48 => 
             array (
                 'id' => 7210030015,
                 'kecamatan_id' => 7210030,
@@ -604,7 +656,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 15:29:28',
             ),
-            45 => 
+            49 => 
             array (
                 'id' => 7210030016,
                 'kecamatan_id' => 7210030,
@@ -617,11 +669,11 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 15:31:03',
             ),
-            46 => 
+            50 => 
             array (
                 'id' => 7210040001,
                 'kecamatan_id' => 7210040,
-                'nama' => 'PURO&#039;O',
+                'nama' => 'PURO\'O',
                 'luas' => '',
                 'kode' => NULL,
                 'polygon' => '[[{"lat":-1.3490250453061157,"lng":120.01377603438084},{"lat":-1.3530579662071258,"lng":120.01592155735715},{"lat":-1.353486999951301,"lng":120.02639170948157},{"lat":-1.3605231425079445,"lng":120.06192156996929},{"lat":-1.3691895825627518,"lng":120.07127605014603},{"lat":-1.376397291029143,"lng":120.07179097566035},{"lat":-1.3884958954917919,"lng":120.06784321338395},{"lat":-1.4041982471637653,"lng":120.05874619596435},{"lat":-1.4099471692721053,"lng":120.0545409709308},{"lat":-1.42118755799491,"lng":120.04913378409812},{"lat":-1.424791335184588,"lng":120.04904796317905},{"lat":-1.4358600440978089,"lng":120.04389870803591},{"lat":-1.432084676517259,"lng":120.03548825796877},{"lat":-1.4122638950666788,"lng":120.01652183485818},{"lat":-1.390212004597811,"lng":120.01257407258174},{"lat":-1.3799153313043464,"lng":120.00364869700029},{"lat":-1.370819899473686,"lng":120.00742481743858},{"lat":-1.3588928186163418,"lng":120.01077183328165},{"lat":-1.3576915266235565,"lng":120.01351810269135}]]',
@@ -630,7 +682,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 16:15:25',
             ),
-            47 => 
+            51 => 
             array (
                 'id' => 7210040002,
                 'kecamatan_id' => 7210040,
@@ -643,7 +695,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 16:16:57',
             ),
-            48 => 
+            52 => 
             array (
                 'id' => 7210040003,
                 'kecamatan_id' => 7210040,
@@ -656,7 +708,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-10 21:23:04',
             ),
-            49 => 
+            53 => 
             array (
                 'id' => 7210040004,
                 'kecamatan_id' => 7210040,
@@ -669,7 +721,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-10 21:16:58',
             ),
-            50 => 
+            54 => 
             array (
                 'id' => 7210040005,
                 'kecamatan_id' => 7210040,
@@ -682,7 +734,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            51 => 
+            55 => 
             array (
                 'id' => 7210050001,
                 'kecamatan_id' => 7210050,
@@ -695,7 +747,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 20:46:52',
             ),
-            52 => 
+            56 => 
             array (
                 'id' => 7210050002,
                 'kecamatan_id' => 7210050,
@@ -708,7 +760,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 20:47:55',
             ),
-            53 => 
+            57 => 
             array (
                 'id' => 7210050003,
                 'kecamatan_id' => 7210050,
@@ -721,7 +773,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 20:48:42',
             ),
-            54 => 
+            58 => 
             array (
                 'id' => 7210050004,
                 'kecamatan_id' => 7210050,
@@ -734,7 +786,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 20:49:53',
             ),
-            55 => 
+            59 => 
             array (
                 'id' => 7210050005,
                 'kecamatan_id' => 7210050,
@@ -747,7 +799,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:01:34',
             ),
-            56 => 
+            60 => 
             array (
                 'id' => 7210060001,
                 'kecamatan_id' => 7210060,
@@ -760,7 +812,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 20:57:23',
             ),
-            57 => 
+            61 => 
             array (
                 'id' => 7210060002,
                 'kecamatan_id' => 7210060,
@@ -773,7 +825,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:06:16',
             ),
-            58 => 
+            62 => 
             array (
                 'id' => 7210060003,
                 'kecamatan_id' => 7210060,
@@ -786,7 +838,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:05:20',
             ),
-            59 => 
+            63 => 
             array (
                 'id' => 7210060004,
                 'kecamatan_id' => 7210060,
@@ -799,7 +851,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:07:25',
             ),
-            60 => 
+            64 => 
             array (
                 'id' => 7210060005,
                 'kecamatan_id' => 7210060,
@@ -812,7 +864,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:00:22',
             ),
-            61 => 
+            65 => 
             array (
                 'id' => 7210060006,
                 'kecamatan_id' => 7210060,
@@ -825,7 +877,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:04:02',
             ),
-            62 => 
+            66 => 
             array (
                 'id' => 7210060007,
                 'kecamatan_id' => 7210060,
@@ -838,7 +890,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:41:47',
             ),
-            63 => 
+            67 => 
             array (
                 'id' => 7210060008,
                 'kecamatan_id' => 7210060,
@@ -851,7 +903,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:17:40',
             ),
-            64 => 
+            68 => 
             array (
                 'id' => 7210060009,
                 'kecamatan_id' => 7210060,
@@ -864,7 +916,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-10 16:05:20',
             ),
-            65 => 
+            69 => 
             array (
                 'id' => 7210060010,
                 'kecamatan_id' => 7210060,
@@ -877,7 +929,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:08:41',
             ),
-            66 => 
+            70 => 
             array (
                 'id' => 7210060011,
                 'kecamatan_id' => 7210060,
@@ -890,7 +942,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:10:21',
             ),
-            67 => 
+            71 => 
             array (
                 'id' => 7210060012,
                 'kecamatan_id' => 7210060,
@@ -903,7 +955,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-10 15:22:32',
             ),
-            68 => 
+            72 => 
             array (
                 'id' => 7210060013,
                 'kecamatan_id' => 7210060,
@@ -916,7 +968,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-10 15:43:58',
             ),
-            69 => 
+            73 => 
             array (
                 'id' => 7210060014,
                 'kecamatan_id' => 7210060,
@@ -929,7 +981,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:11:50',
             ),
-            70 => 
+            74 => 
             array (
                 'id' => 7210060015,
                 'kecamatan_id' => 7210060,
@@ -942,7 +994,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-10 15:38:54',
             ),
-            71 => 
+            75 => 
             array (
                 'id' => 7210060016,
                 'kecamatan_id' => 7210060,
@@ -955,7 +1007,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:13:45',
             ),
-            72 => 
+            76 => 
             array (
                 'id' => 7210060017,
                 'kecamatan_id' => 7210060,
@@ -966,9 +1018,9 @@ class DesaTableSeeder extends Seeder
                 'warna_polygon' => '#408080',
                 'deleted_at' => NULL,
                 'created_at' => NULL,
-                'updated_at' => '2022-04-10 16:00:53',
+                'updated_at' => '2022-10-06 15:53:42',
             ),
-            73 => 
+            77 => 
             array (
                 'id' => 7210060018,
                 'kecamatan_id' => 7210060,
@@ -981,7 +1033,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-10 15:57:02',
             ),
-            74 => 
+            78 => 
             array (
                 'id' => 7210060019,
                 'kecamatan_id' => 7210060,
@@ -994,7 +1046,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:19:04',
             ),
-            75 => 
+            79 => 
             array (
                 'id' => 7210060020,
                 'kecamatan_id' => 7210060,
@@ -1007,7 +1059,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            76 => 
+            80 => 
             array (
                 'id' => 7210060021,
                 'kecamatan_id' => 7210060,
@@ -1020,7 +1072,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            77 => 
+            81 => 
             array (
                 'id' => 7210060022,
                 'kecamatan_id' => 7210060,
@@ -1033,7 +1085,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            78 => 
+            82 => 
             array (
                 'id' => 7210070001,
                 'kecamatan_id' => 7210070,
@@ -1046,7 +1098,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:46:28',
             ),
-            79 => 
+            83 => 
             array (
                 'id' => 7210070002,
                 'kecamatan_id' => 7210070,
@@ -1059,7 +1111,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:31:08',
             ),
-            80 => 
+            84 => 
             array (
                 'id' => 7210070003,
                 'kecamatan_id' => 7210070,
@@ -1072,7 +1124,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:32:16',
             ),
-            81 => 
+            85 => 
             array (
                 'id' => 7210070004,
                 'kecamatan_id' => 7210070,
@@ -1085,7 +1137,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 21:36:25',
             ),
-            82 => 
+            86 => 
             array (
                 'id' => 7210070005,
                 'kecamatan_id' => 7210070,
@@ -1098,7 +1150,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:45:27',
             ),
-            83 => 
+            87 => 
             array (
                 'id' => 7210070006,
                 'kecamatan_id' => 7210070,
@@ -1111,7 +1163,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:42:16',
             ),
-            84 => 
+            88 => 
             array (
                 'id' => 7210070007,
                 'kecamatan_id' => 7210070,
@@ -1124,7 +1176,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            85 => 
+            89 => 
             array (
                 'id' => 7210080001,
                 'kecamatan_id' => 7210080,
@@ -1137,7 +1189,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:08:43',
             ),
-            86 => 
+            90 => 
             array (
                 'id' => 7210080002,
                 'kecamatan_id' => 7210080,
@@ -1150,7 +1202,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:07:32',
             ),
-            87 => 
+            91 => 
             array (
                 'id' => 7210080004,
                 'kecamatan_id' => 7210080,
@@ -1163,7 +1215,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:03:37',
             ),
-            88 => 
+            92 => 
             array (
                 'id' => 7210080005,
                 'kecamatan_id' => 7210080,
@@ -1176,7 +1228,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:02:41',
             ),
-            89 => 
+            93 => 
             array (
                 'id' => 7210080007,
                 'kecamatan_id' => 7210080,
@@ -1189,7 +1241,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:36:36',
             ),
-            90 => 
+            94 => 
             array (
                 'id' => 7210080008,
                 'kecamatan_id' => 7210080,
@@ -1202,7 +1254,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:58:45',
             ),
-            91 => 
+            95 => 
             array (
                 'id' => 7210080009,
                 'kecamatan_id' => 7210080,
@@ -1215,7 +1267,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:35:35',
             ),
-            92 => 
+            96 => 
             array (
                 'id' => 7210080010,
                 'kecamatan_id' => 7210080,
@@ -1228,7 +1280,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:56:14',
             ),
-            93 => 
+            97 => 
             array (
                 'id' => 7210080011,
                 'kecamatan_id' => 7210080,
@@ -1241,7 +1293,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:40:50',
             ),
-            94 => 
+            98 => 
             array (
                 'id' => 7210080012,
                 'kecamatan_id' => 7210080,
@@ -1254,7 +1306,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            95 => 
+            99 => 
             array (
                 'id' => 7210090001,
                 'kecamatan_id' => 7210090,
@@ -1267,7 +1319,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:54:33',
             ),
-            96 => 
+            100 => 
             array (
                 'id' => 7210090002,
                 'kecamatan_id' => 7210090,
@@ -1280,7 +1332,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:27:00',
             ),
-            97 => 
+            101 => 
             array (
                 'id' => 7210090003,
                 'kecamatan_id' => 7210090,
@@ -1293,7 +1345,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:24:40',
             ),
-            98 => 
+            102 => 
             array (
                 'id' => 7210090004,
                 'kecamatan_id' => 7210090,
@@ -1306,7 +1358,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:37:40',
             ),
-            99 => 
+            103 => 
             array (
                 'id' => 7210090005,
                 'kecamatan_id' => 7210090,
@@ -1319,7 +1371,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:26:10',
             ),
-            100 => 
+            104 => 
             array (
                 'id' => 7210090006,
                 'kecamatan_id' => 7210090,
@@ -1332,7 +1384,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:28:05',
             ),
-            101 => 
+            105 => 
             array (
                 'id' => 7210090007,
                 'kecamatan_id' => 7210090,
@@ -1345,7 +1397,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:28:50',
             ),
-            102 => 
+            106 => 
             array (
                 'id' => 7210090009,
                 'kecamatan_id' => 7210090,
@@ -1358,7 +1410,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:29:49',
             ),
-            103 => 
+            107 => 
             array (
                 'id' => 7210090010,
                 'kecamatan_id' => 7210090,
@@ -1371,7 +1423,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:31:21',
             ),
-            104 => 
+            108 => 
             array (
                 'id' => 7210090012,
                 'kecamatan_id' => 7210090,
@@ -1384,7 +1436,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:32:14',
             ),
-            105 => 
+            109 => 
             array (
                 'id' => 7210100001,
                 'kecamatan_id' => 7210100,
@@ -1397,7 +1449,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 22:30:57',
             ),
-            106 => 
+            110 => 
             array (
                 'id' => 7210100002,
                 'kecamatan_id' => 7210100,
@@ -1410,7 +1462,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 22:29:01',
             ),
-            107 => 
+            111 => 
             array (
                 'id' => 7210100003,
                 'kecamatan_id' => 7210100,
@@ -1423,7 +1475,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 22:34:16',
             ),
-            108 => 
+            112 => 
             array (
                 'id' => 7210100004,
                 'kecamatan_id' => 7210100,
@@ -1436,7 +1488,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 22:35:35',
             ),
-            109 => 
+            113 => 
             array (
                 'id' => 7210100005,
                 'kecamatan_id' => 7210100,
@@ -1449,7 +1501,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-19 22:36:08',
             ),
-            110 => 
+            114 => 
             array (
                 'id' => 7210110001,
                 'kecamatan_id' => 7210110,
@@ -1462,7 +1514,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 15:30:42',
             ),
-            111 => 
+            115 => 
             array (
                 'id' => 7210110002,
                 'kecamatan_id' => 7210110,
@@ -1475,7 +1527,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 15:29:22',
             ),
-            112 => 
+            116 => 
             array (
                 'id' => 7210110003,
                 'kecamatan_id' => 7210110,
@@ -1488,7 +1540,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:48:17',
             ),
-            113 => 
+            117 => 
             array (
                 'id' => 7210110004,
                 'kecamatan_id' => 7210110,
@@ -1501,7 +1553,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 15:26:24',
             ),
-            114 => 
+            118 => 
             array (
                 'id' => 7210110005,
                 'kecamatan_id' => 7210110,
@@ -1514,7 +1566,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 15:16:18',
             ),
-            115 => 
+            119 => 
             array (
                 'id' => 7210110006,
                 'kecamatan_id' => 7210110,
@@ -1527,7 +1579,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 15:17:38',
             ),
-            116 => 
+            120 => 
             array (
                 'id' => 7210110007,
                 'kecamatan_id' => 7210110,
@@ -1540,7 +1592,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 15:20:42',
             ),
-            117 => 
+            121 => 
             array (
                 'id' => 7210110008,
                 'kecamatan_id' => 7210110,
@@ -1553,7 +1605,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 15:19:15',
             ),
-            118 => 
+            122 => 
             array (
                 'id' => 7210110009,
                 'kecamatan_id' => 7210110,
@@ -1566,7 +1618,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:49:33',
             ),
-            119 => 
+            123 => 
             array (
                 'id' => 7210110010,
                 'kecamatan_id' => 7210110,
@@ -1579,7 +1631,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 15:25:09',
             ),
-            120 => 
+            124 => 
             array (
                 'id' => 7210110011,
                 'kecamatan_id' => 7210110,
@@ -1592,7 +1644,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 15:13:13',
             ),
-            121 => 
+            125 => 
             array (
                 'id' => 7210120001,
                 'kecamatan_id' => 7210120,
@@ -1605,7 +1657,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:12:51',
             ),
-            122 => 
+            126 => 
             array (
                 'id' => 7210120002,
                 'kecamatan_id' => 7210120,
@@ -1618,7 +1670,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:15:02',
             ),
-            123 => 
+            127 => 
             array (
                 'id' => 7210120003,
                 'kecamatan_id' => 7210120,
@@ -1631,7 +1683,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-10 12:51:31',
             ),
-            124 => 
+            128 => 
             array (
                 'id' => 7210120004,
                 'kecamatan_id' => 7210120,
@@ -1644,7 +1696,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:32:23',
             ),
-            125 => 
+            129 => 
             array (
                 'id' => 7210120005,
                 'kecamatan_id' => 7210120,
@@ -1657,7 +1709,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:30:12',
             ),
-            126 => 
+            130 => 
             array (
                 'id' => 7210120006,
                 'kecamatan_id' => 7210120,
@@ -1670,7 +1722,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:27:21',
             ),
-            127 => 
+            131 => 
             array (
                 'id' => 7210120007,
                 'kecamatan_id' => 7210120,
@@ -1683,7 +1735,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:11:49',
             ),
-            128 => 
+            132 => 
             array (
                 'id' => 7210120008,
                 'kecamatan_id' => 7210120,
@@ -1696,7 +1748,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-10 13:03:29',
             ),
-            129 => 
+            133 => 
             array (
                 'id' => 7210120009,
                 'kecamatan_id' => 7210120,
@@ -1709,7 +1761,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-10 12:43:16',
             ),
-            130 => 
+            134 => 
             array (
                 'id' => 7210120010,
                 'kecamatan_id' => 7210120,
@@ -1722,7 +1774,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:21:35',
             ),
-            131 => 
+            135 => 
             array (
                 'id' => 7210120011,
                 'kecamatan_id' => 7210120,
@@ -1735,7 +1787,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-10 12:48:12',
             ),
-            132 => 
+            136 => 
             array (
                 'id' => 7210120012,
                 'kecamatan_id' => 7210120,
@@ -1748,7 +1800,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-10 12:46:50',
             ),
-            133 => 
+            137 => 
             array (
                 'id' => 7210120013,
                 'kecamatan_id' => 7210120,
@@ -1761,7 +1813,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-10 12:52:47',
             ),
-            134 => 
+            138 => 
             array (
                 'id' => 7210120014,
                 'kecamatan_id' => 7210120,
@@ -1774,7 +1826,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:19:31',
             ),
-            135 => 
+            139 => 
             array (
                 'id' => 7210120015,
                 'kecamatan_id' => 7210120,
@@ -1787,7 +1839,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:17:19',
             ),
-            136 => 
+            140 => 
             array (
                 'id' => 7210120016,
                 'kecamatan_id' => 7210120,
@@ -1800,7 +1852,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:16:02',
             ),
-            137 => 
+            141 => 
             array (
                 'id' => 7210120017,
                 'kecamatan_id' => 7210120,
@@ -1813,7 +1865,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:33:46',
             ),
-            138 => 
+            142 => 
             array (
                 'id' => 7210120018,
                 'kecamatan_id' => 7210120,
@@ -1826,7 +1878,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 10:26:21',
             ),
-            139 => 
+            143 => 
             array (
                 'id' => 7210130001,
                 'kecamatan_id' => 7210130,
@@ -1839,7 +1891,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:43:44',
             ),
-            140 => 
+            144 => 
             array (
                 'id' => 7210130002,
                 'kecamatan_id' => 7210130,
@@ -1852,7 +1904,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:44:23',
             ),
-            141 => 
+            145 => 
             array (
                 'id' => 7210130003,
                 'kecamatan_id' => 7210130,
@@ -1865,7 +1917,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 14:09:20',
             ),
-            142 => 
+            146 => 
             array (
                 'id' => 7210130004,
                 'kecamatan_id' => 7210130,
@@ -1878,7 +1930,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 14:31:33',
             ),
-            143 => 
+            147 => 
             array (
                 'id' => 7210130005,
                 'kecamatan_id' => 7210130,
@@ -1891,7 +1943,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 14:24:17',
             ),
-            144 => 
+            148 => 
             array (
                 'id' => 7210130006,
                 'kecamatan_id' => 7210130,
@@ -1904,7 +1956,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 14:10:48',
             ),
-            145 => 
+            149 => 
             array (
                 'id' => 7210130008,
                 'kecamatan_id' => 7210130,
@@ -1917,7 +1969,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 15:07:57',
             ),
-            146 => 
+            150 => 
             array (
                 'id' => 7210130009,
                 'kecamatan_id' => 7210130,
@@ -1930,7 +1982,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 13:52:05',
             ),
-            147 => 
+            151 => 
             array (
                 'id' => 7210130010,
                 'kecamatan_id' => 7210130,
@@ -1943,7 +1995,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 14:27:01',
             ),
-            148 => 
+            152 => 
             array (
                 'id' => 7210130011,
                 'kecamatan_id' => 7210130,
@@ -1956,7 +2008,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 15:09:14',
             ),
-            149 => 
+            153 => 
             array (
                 'id' => 7210140001,
                 'kecamatan_id' => 7210140,
@@ -1969,7 +2021,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:33:44',
             ),
-            150 => 
+            154 => 
             array (
                 'id' => 7210140002,
                 'kecamatan_id' => 7210140,
@@ -1982,7 +2034,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-10 12:39:19',
             ),
-            151 => 
+            155 => 
             array (
                 'id' => 7210140003,
                 'kecamatan_id' => 7210140,
@@ -1995,7 +2047,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 15:45:40',
             ),
-            152 => 
+            156 => 
             array (
                 'id' => 7210140004,
                 'kecamatan_id' => 7210140,
@@ -2008,7 +2060,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-17 22:08:26',
             ),
-            153 => 
+            157 => 
             array (
                 'id' => 7210140005,
                 'kecamatan_id' => 7210140,
@@ -2021,7 +2073,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-17 22:19:45',
             ),
-            154 => 
+            158 => 
             array (
                 'id' => 7210140006,
                 'kecamatan_id' => 7210140,
@@ -2034,7 +2086,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 15:38:51',
             ),
-            155 => 
+            159 => 
             array (
                 'id' => 7210140007,
                 'kecamatan_id' => 7210140,
@@ -2047,7 +2099,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-10 12:34:30',
             ),
-            156 => 
+            160 => 
             array (
                 'id' => 7210140008,
                 'kecamatan_id' => 7210140,
@@ -2060,7 +2112,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-17 22:26:11',
             ),
-            157 => 
+            161 => 
             array (
                 'id' => 7210140009,
                 'kecamatan_id' => 7210140,
@@ -2073,7 +2125,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 15:43:57',
             ),
-            158 => 
+            162 => 
             array (
                 'id' => 7210140010,
                 'kecamatan_id' => 7210140,
@@ -2086,7 +2138,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-17 22:24:56',
             ),
-            159 => 
+            163 => 
             array (
                 'id' => 7210140011,
                 'kecamatan_id' => 7210140,
@@ -2099,7 +2151,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-17 22:12:23',
             ),
-            160 => 
+            164 => 
             array (
                 'id' => 7210140012,
                 'kecamatan_id' => 7210140,
@@ -2112,7 +2164,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-17 22:18:09',
             ),
-            161 => 
+            165 => 
             array (
                 'id' => 7210150001,
                 'kecamatan_id' => 7210150,
@@ -2125,7 +2177,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:39:34',
             ),
-            162 => 
+            166 => 
             array (
                 'id' => 7210150002,
                 'kecamatan_id' => 7210150,
@@ -2138,7 +2190,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 13:39:16',
             ),
-            163 => 
+            167 => 
             array (
                 'id' => 7210150003,
                 'kecamatan_id' => 7210150,
@@ -2151,7 +2203,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-20 09:40:35',
             ),
-            164 => 
+            168 => 
             array (
                 'id' => 7210150004,
                 'kecamatan_id' => 7210150,
@@ -2164,7 +2216,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 13:40:53',
             ),
-            165 => 
+            169 => 
             array (
                 'id' => 7210150005,
                 'kecamatan_id' => 7210150,
@@ -2177,7 +2229,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-04-09 13:25:31',
             ),
-            166 => 
+            170 => 
             array (
                 'id' => 7210150006,
                 'kecamatan_id' => 7210150,
@@ -2190,7 +2242,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-17 22:33:50',
             ),
-            167 => 
+            171 => 
             array (
                 'id' => 7210150007,
                 'kecamatan_id' => 7210150,
@@ -2203,7 +2255,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-17 22:33:00',
             ),
-            168 => 
+            172 => 
             array (
                 'id' => 7210150008,
                 'kecamatan_id' => 7210150,
@@ -2216,7 +2268,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-17 22:31:49',
             ),
-            169 => 
+            173 => 
             array (
                 'id' => 7210150009,
                 'kecamatan_id' => 7210150,
@@ -2229,7 +2281,7 @@ class DesaTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2022-09-17 22:30:26',
             ),
-            170 => 
+            174 => 
             array (
                 'id' => 7210150010,
                 'kecamatan_id' => 7210150,
@@ -2241,6 +2293,71 @@ class DesaTableSeeder extends Seeder
                 'deleted_at' => NULL,
                 'created_at' => NULL,
                 'updated_at' => NULL,
+            ),
+            175 => 
+            array (
+                'id' => 7210150011,
+                'kecamatan_id' => 7210130,
+                'nama' => 'SUNJU',
+                'luas' => NULL,
+                'kode' => NULL,
+                'polygon' => NULL,
+                'warna_polygon' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2022-10-06 15:23:33',
+                'updated_at' => '2022-10-06 15:53:41',
+            ),
+            176 => 
+            array (
+                'id' => 7210150012,
+                'kecamatan_id' => 7210030,
+                'nama' => 'SUNGKU',
+                'luas' => NULL,
+                'kode' => NULL,
+                'polygon' => NULL,
+                'warna_polygon' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2022-10-06 15:23:34',
+                'updated_at' => '2022-10-06 15:53:42',
+            ),
+            177 => 
+            array (
+                'id' => 7210150013,
+                'kecamatan_id' => 7210010,
+                'nama' => 'TUWO TANI JAYA',
+                'luas' => NULL,
+                'kode' => NULL,
+                'polygon' => NULL,
+                'warna_polygon' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2022-10-06 15:23:34',
+                'updated_at' => '2022-10-06 15:53:42',
+            ),
+            178 => 
+            array (
+                'id' => 7210150014,
+                'kecamatan_id' => 7210060,
+                'nama' => 'TANAHARAPAN',
+                'luas' => NULL,
+                'kode' => NULL,
+                'polygon' => NULL,
+                'warna_polygon' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2022-10-06 15:23:34',
+                'updated_at' => '2022-10-06 15:23:34',
+            ),
+            179 => 
+            array (
+                'id' => 7210150015,
+                'kecamatan_id' => 7210080,
+                'nama' => 'PULU',
+                'luas' => NULL,
+                'kode' => NULL,
+                'polygon' => NULL,
+                'warna_polygon' => NULL,
+                'deleted_at' => NULL,
+                'created_at' => '2022-10-06 15:23:34',
+                'updated_at' => '2022-10-06 15:53:42',
             ),
         ));
         

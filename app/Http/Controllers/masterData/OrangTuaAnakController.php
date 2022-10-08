@@ -5,6 +5,7 @@ namespace App\Http\Controllers\masterData;
 use App\Http\Controllers\Controller;
 use App\Models\Anak;
 use App\Models\Kecamatan;
+use App\Models\OrangTua;
 use App\Models\PengukuranAnak;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
-class AnakController extends Controller
+class OrangTuaAnakController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,6 +24,7 @@ class AnakController extends Controller
      */
     public function index(Request $request)
     {
+        $orangTua = OrangTua::where('id', $request->orangTua)->first();
         if ($request->ajax()) {
             $data = Anak::with(['orangTua'], function ($query) use ($request) {
                 $query->with(['desa'])->where(function ($query) use ($request) {
@@ -38,7 +40,7 @@ class AnakController extends Controller
                         $query->where('desa_id', $request->desa_id);
                     }
                 });
-            })->orderBy('created_at', 'desc')->get();
+            })->where('orang_tua_id', $orangTua->id)->orderBy('created_at', 'desc')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('tanggal_lahir', function ($row) {
@@ -64,12 +66,6 @@ class AnakController extends Controller
                 ->addColumn('alamat', function ($row) {
                     return $row->orangTua->alamat;
                 })
-                ->addColumn('bb_lahir', function ($row) {
-                    return $row->bb_lahir . ' Kg';
-                })
-                ->addColumn('tb_lahir', function ($row) {
-                    return $row->tb_lahir . ' Cm';
-                })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '';
 
@@ -81,7 +77,7 @@ class AnakController extends Controller
                         } else {
                             $actionBtn .= '<a class="btn btn-secondary btn-rounded btn-sm mr-1 my-1" href="' . url('pengukuran-anak/' . $row->id . '/create')  . '" ><i class="fas fa-ruler"></i></a>';
                         }
-                        $actionBtn .= '<a id="btn-edit" class="btn btn-warning btn-rounded btn-sm mr-1" href="' . url('master-data/anak/' . $row->id . '/edit')  . '" ><i class="fas fa-edit"></i></a><button id="btn-delete" class="btn btn-danger btn-rounded btn-sm mr-1" value="' . $row->id . '" > <i class="fas fa-trash-alt"></i></button>';
+                        $actionBtn .= '<a id="btn-edit" class="btn btn-warning btn-rounded btn-sm mr-1" href="' . url('master-data/orang-tua/anak/' . $row->orang_tua_id . '/' . $row->id . '/edit')  . '" ><i class="fas fa-edit"></i></a><button id="btn-delete" class="btn btn-danger btn-rounded btn-sm mr-1" value="' . $row->id . '" > <i class="fas fa-trash-alt"></i></button>';
                     }
                     return $actionBtn;
                 })
@@ -90,9 +86,8 @@ class AnakController extends Controller
         }
 
         $daftarKecamatan = Kecamatan::orderBy('nama', 'asc')->get();
-        // $daftarJumlahPenduduk = $this->_getJumlahPenduduk();
 
-        return view('dashboard.pages.masterData.anak.index', compact(['daftarKecamatan']));
+        return view('dashboard.pages.masterData.orangTuaAnak.index', compact(['daftarKecamatan', 'orangTua']));
     }
 
     /**
@@ -100,9 +95,10 @@ class AnakController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('dashboard.pages.masterData.anak.create');
+        $orangTua = OrangTua::where('id', $request->orangTua)->first();
+        return view('dashboard.pages.masterData.orangTuaAnak.create', compact(['orangTua']));
     }
 
     /**
@@ -120,7 +116,6 @@ class AnakController extends Controller
                 'nik' => ['required', Rule::unique('anak')->withoutTrashed(), 'digits:16'],
                 'jenis_kelamin' => 'required',
                 'tanggal_lahir' => 'required|date',
-                'orang_tua_id' => 'required',
                 'bb_lahir' => 'required|numeric|min:0',
                 'tb_lahir' => 'required|numeric|min:0',
                 'data_pengukuran' => 'required',
@@ -140,7 +135,6 @@ class AnakController extends Controller
                 'jenis_kelamin.required' => 'Jenis kelamin tidak boleh kosong',
                 'tanggal_lahir.required' => 'Tanggal lahir tidak boleh kosong',
                 'tanggal_lahir.date' => 'Format tanggal lahir harus benar',
-                'orang_tua_id.required' => 'Orang tua tidak boleh kosong',
                 'bb_lahir.required' => 'Berat badan lahir tidak boleh kosong',
                 'bb_lahir.numeric' => 'Berat badan lahir harus angka',
                 'bb_lahir.min' => 'Berat badan lahir tidak boleh bernilai negatif',
@@ -195,7 +189,7 @@ class AnakController extends Controller
         $anak->tanggal_lahir = Carbon::parse($request->tanggal_lahir)->format('Y-m-d');
         $anak->bb_lahir = $request->bb_lahir;
         $anak->tb_lahir = $request->tb_lahir;
-        $anak->orang_tua_id = $request->orang_tua_id;
+        $anak->orang_tua_id = $request->orangTua;
         $anak->save();
 
         if ($request->data_pengukuran == 'Ya') {
@@ -226,17 +220,7 @@ class AnakController extends Controller
      */
     public function show(Anak $anak)
     {
-        return response()->json([
-            'status' => 'success',
-            'anak' => $anak,
-            'orangTua' => $anak->orangTua,
-            'kecamatan' => $anak->orangTua->desa->kecamatan->nama,
-            'desa' => $anak->orangTua->desa->nama,
-            'pengukuranAnakTerakhir' => $anak->pengukuranAnakTerakhir,
-            'tanggalPengukuran' => $anak->pengukuranAnakTerakhir->tanggal_pengukuran ?? '' ? Carbon::parse($anak->pengukuranAnakTerakhir->tanggal_pengukuran)->translatedFormat('d F Y') : '-',
-            'tanggalLahir' => $anak->tanggal_lahir ?? '' ? Carbon::parse($anak->tanggal_lahir)->translatedFormat('d F Y') : '-',
-
-        ]);
+        //
     }
 
     /**
@@ -245,9 +229,11 @@ class AnakController extends Controller
      * @param  \App\Models\Anak  $anak
      * @return \Illuminate\Http\Response
      */
-    public function edit(Anak $anak)
+    public function edit(Request $request)
     {
-        return view('dashboard.pages.masterData.anak.edit', compact(['anak']));
+        $anak = Anak::where('id', $request->anak)->first();
+        $orangTua = OrangTua::where('id', $request->orangTua)->first();
+        return view('dashboard.pages.masterData.orangTuaAnak.edit', compact(['anak', 'orangTua']));
     }
 
     /**
@@ -257,16 +243,15 @@ class AnakController extends Controller
      * @param  \App\Models\Anak  $anak
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Anak $anak)
+    public function update(Request $request)
     {
         $validator = Validator::make(
             $request->all(),
             [
                 'nama' => 'required',
-                'nik' => ['required', Rule::unique('anak')->ignore($anak->id)->withoutTrashed(), 'digits:16'],
+                'nik' => ['required', Rule::unique('anak')->withoutTrashed(), 'digits:16'],
                 'jenis_kelamin' => 'required',
                 'tanggal_lahir' => 'required|date',
-                'orang_tua_id' => 'required',
                 'bb_lahir' => 'required|numeric|min:0',
                 'tb_lahir' => 'required|numeric|min:0'
             ],
@@ -278,7 +263,6 @@ class AnakController extends Controller
                 'jenis_kelamin.required' => 'Jenis kelamin tidak boleh kosong',
                 'tanggal_lahir.required' => 'Tanggal lahir tidak boleh kosong',
                 'tanggal_lahir.date' => 'Format tanggal lahir harus benar',
-                'orang_tua_id.required' => 'Orang tua tidak boleh kosong',
                 'bb_lahir.required' => 'Berat badan lahir tidak boleh kosong',
                 'bb_lahir.numeric' => 'Berat badan lahir harus angka',
                 'bb_lahir.min' => 'Berat badan lahir tidak boleh bernilai negatif',
@@ -292,13 +276,14 @@ class AnakController extends Controller
             return response()->json(['error' => $validator->errors()]);
         }
 
+        $anak = Anak::where('id', $request->anak)->first();
         $anak->nama = $request->nama;
         $anak->nik = $request->nik;
         $anak->jenis_kelamin = $request->jenis_kelamin;
         $anak->tanggal_lahir = Carbon::parse($request->tanggal_lahir)->format('Y-m-d');
         $anak->bb_lahir = $request->bb_lahir;
         $anak->tb_lahir = $request->tb_lahir;
-        $anak->orang_tua_id = $request->orang_tua_id;
+        $anak->orang_tua_id = $request->orangTua;
         $anak->save();
 
 
@@ -311,8 +296,9 @@ class AnakController extends Controller
      * @param  \App\Models\Anak  $anak
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Anak $anak)
+    public function destroy(Request $request)
     {
+        $anak = Anak::where('id', $request->anak)->first();
         $anak->delete();
 
         return response()->json(['status' => 'success']);

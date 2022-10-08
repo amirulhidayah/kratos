@@ -133,6 +133,7 @@
                                                             'Alamat',
                                                             'Aksi',
                                                         ],
+                                                        'class' => 'text-nowrap',
                                                     ])
                                                 @endcomponent
                                             </div>

@@ -1,11 +1,11 @@
 @extends('dashboard.layouts.main')
 
 @section('title')
-    Ubah Anak
+    Pengukuran Anak
 @endsection
 
 @section('titlePanelHeader')
-    Ubah Anak
+    Pengukuran Anak
 @endsection
 
 @section('subTitlePanelHeader')
@@ -26,16 +26,17 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
-                        <div class="card-title">Ubah Anak</div>
+                        <div class="card-title">Pengukuran Anak</div>
                     </div>
                 </div>
                 <div class="card-body">
-                    @component('dashboard.components.forms.anak')
+                    @component('dashboard.components.forms.pengukuranAnak')
                         @slot('form_id', 'form-tambah')
-                        @slot('action', url('/master-data/anak/' . $anak->id))
-                        @slot('data', $anak)
+                        @slot('action', url('pengukuran-anak/' . $anak->id . '/' . $pengukuranAnak->id))
+                        @slot('anak', $anak)
+                        @slot('data', $pengukuranAnak)
                         @slot('method', 'PUT')
-                        @slot('back_url', url('/master-data/anak'))
+                        @slot('back_url', url('pengukuran-anak/' . $anak->id))
                     @endcomponent
                 </div>
             </div>
@@ -46,12 +47,11 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $('#nama').val("{{ $anak->nama }}");
-            $('#nik').val("{{ $anak->nik }}");
-            $('#bb_lahir').val("{{ $anak->bb_lahir }}");
-            $('#tb_lahir').val("{{ $anak->tb_lahir }}");
-            $('#tanggal_lahir').val("{{ \Carbon\Carbon::parse($anak->tanggal_lahir)->format('d-m-Y') }}");
-            $('#jenis_kelamin').val("{{ $anak->jenis_kelamin }}").trigger('change');
+            $('#tanggal_pengukuran').val(
+                "{{ \Carbon\Carbon::parse($pengukuranAnak->tanggal_pengukuran)->format('d-m-Y') }}");
+            $('#lila').val("{{ $pengukuranAnak->lila }}");
+            $('#bb').val("{{ $pengukuranAnak->berat }}");
+            $('#tb').val("{{ $pengukuranAnak->tinggi }}").trigger('keyup');
         })
     </script>
 

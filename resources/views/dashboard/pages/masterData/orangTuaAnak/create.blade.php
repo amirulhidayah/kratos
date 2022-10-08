@@ -1,11 +1,11 @@
 @extends('dashboard.layouts.main')
 
 @section('title')
-    Ubah Anak
+    Anak
 @endsection
 
 @section('titlePanelHeader')
-    Ubah Anak
+    Anak
 @endsection
 
 @section('subTitlePanelHeader')
@@ -26,16 +26,16 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
-                        <div class="card-title">Ubah Anak</div>
+                        <div class="card-title">Tambah Anak</div>
                     </div>
                 </div>
                 <div class="card-body">
                     @component('dashboard.components.forms.anak')
                         @slot('form_id', 'form-tambah')
-                        @slot('action', url('/master-data/anak/' . $anak->id))
-                        @slot('data', $anak)
-                        @slot('method', 'PUT')
-                        @slot('back_url', url('/master-data/anak'))
+                        @slot('action', url('/master-data/orang-tua/anak/' . $orangTua->id))
+                        @slot('method', 'POST')
+                        @slot('orangTua', $orangTua)
+                        @slot('back_url', url('/master-data/orang-tua/anak/' . $orangTua->id))
                     @endcomponent
                 </div>
             </div>
@@ -45,17 +45,6 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function() {
-            $('#nama').val("{{ $anak->nama }}");
-            $('#nik').val("{{ $anak->nik }}");
-            $('#bb_lahir').val("{{ $anak->bb_lahir }}");
-            $('#tb_lahir').val("{{ $anak->tb_lahir }}");
-            $('#tanggal_lahir').val("{{ \Carbon\Carbon::parse($anak->tanggal_lahir)->format('d-m-Y') }}");
-            $('#jenis_kelamin').val("{{ $anak->jenis_kelamin }}").trigger('change');
-        })
-    </script>
-
-    <script>
-        $('#nav-master-anak').addClass('active');
+        $('#nav-master-orang-tua').addClass('active');
     </script>
 @endpush
