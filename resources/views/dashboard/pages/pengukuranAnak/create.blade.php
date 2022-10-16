@@ -1,11 +1,11 @@
 @extends('dashboard.layouts.main')
 
 @section('title')
-    Anak
+    Pengukuran Anak
 @endsection
 
 @section('titlePanelHeader')
-    Anak
+    Pengukuran Anak
 @endsection
 
 @section('subTitlePanelHeader')
@@ -26,15 +26,16 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
-                        <div class="card-title">Tambah Anak</div>
+                        <div class="card-title">Tambah Pengukuran Anak</div>
                     </div>
                 </div>
                 <div class="card-body">
-                    @component('dashboard.components.forms.anak')
+                    @component('dashboard.components.forms.pengukuranAnak')
                         @slot('form_id', 'form-tambah')
-                        @slot('action', url('/master-data/anak'))
+                        @slot('action', url('pengukuran-anak/' . $anak->id))
                         @slot('method', 'POST')
-                        @slot('back_url', url('/master-data/anak'))
+                        @slot('back_url', url('pengukuran-anak/' . $anak->id))
+                        @slot('anak', $anak)
                     @endcomponent
                 </div>
             </div>
@@ -44,6 +45,6 @@
 
 @push('scripts')
     <script>
-        $('#nav-master-anak').addClass('active');
+        $('#nav-pengukuran-anak').addClass('active');
     </script>
 @endpush

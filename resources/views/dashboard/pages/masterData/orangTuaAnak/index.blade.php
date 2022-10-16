@@ -13,10 +13,13 @@
 @endsection
 
 @section('buttonPanelHeader')
+    <a href="{{ url('master-data/orang-tua') }}" class="btn btn-secondary btn-round" id=""><i
+            class="far fa-arrow-alt-circle-left"></i>
+        Kembali</a>
     @if (Auth::user()->role == 'Admin')
         @component('dashboard.components.buttons.add',
             [
-                'url' => url('master-data/anak/create'),
+                'url' => url('master-data/orang-tua/anak/' . $orangTua->id . '/create'),
             ])
         @endcomponent
     @endif
@@ -448,7 +451,7 @@
             }).then((Delete) => {
                 if (Delete) {
                     $.ajax({
-                        url: "{{ url('master-data/anak') }}" + '/' + id,
+                        url: "{{ url('master-data/orang-tua/anak/' . $orangTua->id) }}" + '/' + id,
                         type: 'DELETE',
                         data: {
                             '_token': '{{ csrf_token() }}'
@@ -489,7 +492,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ url('master-data/anak') }}",
+                url: "{{ url('master-data/orang-tua/anak/' . $orangTua->id) }}",
                 data: function(d) {
                     d.desa_id = $('#desa_id').val();
                     d.kecamatan_id = $('#kecamatan_id').val();
@@ -602,7 +605,6 @@
                     kecamatan_id: $('#kecamatan_id').val(),
                 },
                 success: function(response) {
-                    console.log(response);
                     $('#wilayah').html(response.wilayah);
                     $('#nama-wilayah').html(response.nama_wilayah);
                     $('#total-penduduk').html(response.total_penduduk);
@@ -638,7 +640,7 @@
     </script>
 
     <script>
-        $('#nav-master-anak').addClass('active');
+        $('#nav-master-orang-tua').addClass('active');
 
         $(document).ready(function() {
             getJumlahPenduduk();

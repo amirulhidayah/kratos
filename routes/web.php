@@ -16,10 +16,16 @@ use App\Http\Controllers\masterData\wilayah\DesaController;
 use App\Http\Controllers\masterData\wilayah\KecamatanController;
 use App\Http\Controllers\masterData\AkunController;
 use App\Http\Controllers\masterData\AnakController;
+use App\Http\Controllers\masterData\OrangTuaAnakController;
 use App\Http\Controllers\masterData\OrangTuaController;
 use App\Http\Controllers\masterData\PosyanduController;
 use App\Http\Controllers\masterData\PuskesmasController;
 use App\Http\Controllers\masterData\SumberDanaController;
+use App\Http\Controllers\DaftarPengukuranAnakController;
+use App\Http\Controllers\HitungController;
+use App\Http\Controllers\PengukuranAnakController;
+use App\Imports\PuskesmasPosyanduImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +103,13 @@ Route::group(['middleware' => 'auth'], function () {
             'show'
         );
 
+        Route::resource('master-data/orang-tua/anak/{orangTua}', OrangTuaAnakController::class)->except(
+            'index',
+            'show'
+        )->parameters([
+            '{orangTua}' => 'anak'
+        ]);
+
         Route::resource('master-data/orang-tua', OrangTuaController::class)->except(
             'index',
             'show'
@@ -125,10 +138,25 @@ Route::group(['middleware' => 'auth'], function () {
             '{kecamatan}' => 'desa'
         ]);
         Route::resource('master-data/akun', AkunController::class)->parameters(['akun' => 'user']);
+
+        Route::resource('pengukuran-anak/{anak}', PengukuranAnakController::class)->except(
+            'index',
+            'show'
+        )->parameters(
+            ['{anak}' => 'pengukuranAnak']
+        );
+
+        Route::resource('daftar-pengukuran-anak', DaftarPengukuranAnakController::class)->except(
+            'index',
+            'show'
+        );
     });
 
 
-
+    Route::resource('daftar-pengukuran-anak', DaftarPengukuranAnakController::class)->only(
+        'index',
+        'show'
+    );
     // Pengaturan Akun
     Route::get('pengaturan-akun', [PengaturanAkunController::class, 'index']);
     Route::put('pengaturan-akun', [PengaturanAkunController::class, 'update']);
@@ -140,6 +168,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('master-data/sumber-dana', SumberDanaController::class)->parameters(['sumber-dana' => 'sumberDana']);
 
     // Orang Tua
+    Route::resource('master-data/orang-tua/anak/{orangTua}', OrangTuaAnakController::class)->only(
+        'index',
+        'show'
+    )->parameters([
+        '{orangTua}' => 'anak'
+    ]);
+
     Route::resource('master-data/anak', AnakController::class)->only(
         'index',
         'show'
@@ -147,6 +182,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('master-data/orang-tua', OrangTuaController::class)->only(
         'index',
         'show'
+    );
+
+    Route::resource('pengukuran-anak/{anak}', PengukuranAnakController::class)->only(
+        'index',
+        'show'
+    )->parameters(
+        ['{anak}' => 'pengukuranAnak']
     );
 
     // Penduduk
@@ -159,9 +201,23 @@ Route::group(['middleware' => 'auth'], function () {
     );
 
     // List
+    Route::get('list/puskesmas', [ListController::class, 'puskesmas']);
+    Route::get('list/posyandu', [ListController::class, 'posyandu']);
     Route::get('list/kecamatan', [ListController::class, 'kecamatan']);
     Route::get('list/desa', [ListController::class, 'desa']);
     Route::get('list/orang-tua-desa', [ListController::class, 'orangTuaByDesa']);
 
     Route::get('list/anak', [ListController::class, 'anak']);
+    Route::get('list/orang-tua', [ListController::class, 'orangTua']);
+
+    Route::get('importPuskesmas', function () {
+        Excel::import(new PuskesmasPosyanduImport, 'Posyandupuskesmas.xlsx');
+        echo "Berhasil";
+    });
+
+    Route::get('hitung/pengukuran-anak', [HitungController::class, 'pengukuranAnak']);
+
+    Route::get('coba', function () {
+        echo bbtb(1, 'Perempuan', 49, 3.5);
+    });
 });
