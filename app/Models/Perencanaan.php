@@ -20,14 +20,14 @@ class Perencanaan extends Model
         return $this->belongsTo(OPD::class, 'opd_id')->withTrashed();
     }
 
+    public function indikator()
+    {
+        return $this->belongsTo(Indikator::class)->withTrashed();
+    }
+
     public function opdTerkait()
     {
         return $this->hasMany(OPDTerkait::class, 'perencanaan_id');
-    }
-
-    public function lokasiPerencanaan()
-    {
-        return $this->hasMany(LokasiPerencanaan::class, 'perencanaan_id')->orderBy('updated_at', 'DESC');
     }
 
     public function dokumenPerencanaan()
@@ -37,6 +37,11 @@ class Perencanaan extends Model
 
     public function realisasi()
     {
-        return $this->hasMany(Realisasi::class, 'perencanaan_id');
+        return $this->hasOne(Realisasi::class, 'perencanaan_id');
+    }
+
+    public function sumberDana()
+    {
+        return $this->belongsTo(SumberDana::class)->withTrashed();
     }
 }

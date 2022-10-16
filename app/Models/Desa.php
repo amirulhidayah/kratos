@@ -21,18 +21,13 @@ class Desa extends Model
         return json_decode($this->polygon);
     }
 
-    public function lokasi()
+    public function kecamatan()
     {
-        return $this->hasMany(Lokasi::class, 'desa_id')->orderBy('nama');
+        return $this->belongsTo(Kecamatan::class)->orderBy('nama');
     }
 
     public function penduduk()
     {
         return $this->hasMany(Penduduk::class, 'desa_id')->orderBy('nama');
-    }
-
-    public function kecamatan()
-    {
-        return $this->belongsTo(Kecamatan::class);
     }
 }

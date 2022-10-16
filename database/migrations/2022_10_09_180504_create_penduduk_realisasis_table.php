@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('perencanaan', function (Blueprint $table) {
+        Schema::create('penduduk_realisasi', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('opd_id');
-            $table->string('indikator_id');
-            $table->bigInteger('nilai_pembiayaan');
-            $table->string('sumber_dana_id');
+            $table->uuid('realisasi_id');
+            $table->string('sasaran_intervensi');
+            $table->uuid('orang_tua_id');
+            $table->uuid('anak_id')->nullable();
             $table->integer('status')->default(0); // 0/1/2
-            $table->date('tanggal_konfirmasi')->nullable();
-            $table->text('alasan_ditolak')->nullable();
-            $table->text('alasan_tidak_terselesaikan')->nullable();
-            $table->integer('status_baca')->nullable();
+            $table->integer('nomor'); // 0/1/2
             $table->timestamps();
         });
     }
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perencanaan');
+        Schema::dropIfExists('penduduk_realisasi');
     }
 };

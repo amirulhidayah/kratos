@@ -19,13 +19,18 @@ class Realisasi extends Model
         return $this->belongsTo(Perencanaan::class, 'perencanaan_id');
     }
 
-    public function lokasiRealisasi()
+    public function desaRealisasi()
     {
-        return $this->hasMany(LokasiPerencanaan::class, 'realisasi_id')->orderBy('updated_at', 'DESC');
+        return $this->hasMany(DesaPerencanaan::class, 'realisasi_id')->orderBy('updated_at', 'DESC');
     }
 
     public function dokumenRealisasi()
     {
         return $this->hasMany(DokumenRealisasi::class, 'realisasi_id')->orderBy('no_urut');
+    }
+
+    public function pendudukRealisasi()
+    {
+        return $this->hasMany(PendudukRealisasi::class, 'realisasi_id');
     }
 }

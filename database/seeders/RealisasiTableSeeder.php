@@ -14,167 +14,83 @@ class RealisasiTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('realisasi')->delete();
-
-        \DB::table('realisasi')->insert(array(
-            0 =>
-            array(
-                'id' => '34ec0294-d921-4cd3-99fb-13dbe8ef5e69',
-                'perencanaan_id' => '5fa15403-b90f-4c7f-8c77-5076bc262028',
-                'penggunaan_anggaran' => 8000000,
-                'tw' => 1,
-                'progress' => 40.0,
-                'status' => 1,
-                'tanggal_konfirmasi' => '2021-03-09',
+        
+        \DB::table('realisasi')->insert(array (
+            0 => 
+            array (
                 'alasan_ditolak' => '-',
-                'created_at' => '2021-03-08 15:08:41',
-                'updated_at' => '2021-03-08 15:10:44',
-            ),
-            1 =>
-            array(
-                'id' => '3a729127-7f21-4cf8-88ba-10de0d67cdb6',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265984',
-                'penggunaan_anggaran' => 2000000,
-                'tw' => 2,
-                'progress' => 42.86,
-                'status' => 1,
-                'tanggal_konfirmasi' => '2022-04-23',
-                'alasan_ditolak' => '-',
-                'created_at' => '2022-04-23 20:44:20',
-                'updated_at' => '2022-04-23 20:44:40',
-            ),
-            2 =>
-            array(
-                'id' => '442fd3ce-eef0-442b-b173-008237449104',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265984',
-                'penggunaan_anggaran' => 1000000,
-                'tw' => 4,
-                'progress' => 85.71,
+                'created_at' => '2022-05-20 22:55:33',
+                'id' => '63eeb154-465f-48f8-95e9-b5667f0e139d',
+                'perencanaan_id' => 'cedd07ba-bc7d-4bc2-acf1-c98391722b76',
                 'status' => 0,
                 'tanggal_konfirmasi' => NULL,
+                'updated_at' => '2022-10-15 23:04:39',
+            ),
+            1 => 
+            array (
+                'alasan_ditolak' => '-',
+                'created_at' => '2022-05-15 22:40:47',
+                'id' => '81ea6d05-ef7c-48de-be86-74c5055e1d66',
+                'perencanaan_id' => '2fe3f018-8837-463e-be44-c4a8c3dcb069',
+                'status' => 1,
+                'tanggal_konfirmasi' => '2022-10-15',
+                'updated_at' => '2022-10-15 22:51:19',
+            ),
+            2 => 
+            array (
+                'alasan_ditolak' => 'Terlalu sedikit penduduk',
+                'created_at' => '2022-05-05 21:50:08',
+                'id' => '9a856b65-481e-496b-8da6-77dfe5a97adf',
+                'perencanaan_id' => 'f884c0d6-ec2c-4038-8440-2eab2a2a4431',
+                'status' => 2,
+                'tanggal_konfirmasi' => '2022-10-15',
+                'updated_at' => '2022-10-15 21:53:34',
+            ),
+            3 => 
+            array (
                 'alasan_ditolak' => NULL,
-                'created_at' => '2022-11-28 20:51:01',
-                'updated_at' => '2022-11-28 20:51:01',
+                'created_at' => '2022-04-20 20:39:24',
+                'id' => 'bd9891f8-2e65-4cdd-87d2-48d65d00a36d',
+                'perencanaan_id' => '8674fd2c-041d-49ac-8dd8-adbacb7476ed',
+                'status' => 3,
+                'tanggal_konfirmasi' => NULL,
+                'updated_at' => '2022-10-15 20:39:24',
             ),
-            3 =>
-            array(
-                'id' => '547c6f6f-827a-4c9f-a720-cb119da8e0e2',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265984',
-                'penggunaan_anggaran' => 1000000,
-                'tw' => 1,
-                'progress' => 28.57,
-                'status' => 1,
-                'tanggal_konfirmasi' => '2022-01-10',
+            4 => 
+            array (
                 'alasan_ditolak' => '-',
-                'created_at' => '2022-01-10 20:41:40',
-                'updated_at' => '2022-01-10 20:41:53',
+                'created_at' => '2021-04-15 19:35:41',
+                'id' => 'c43dafca-4f0d-4581-82b1-0fca2c0a5070',
+                'perencanaan_id' => 'aa3c387f-90a5-4148-9ccd-680c6d1f41a0',
+                'status' => 1,
+                'tanggal_konfirmasi' => '2021-04-20',
+                'updated_at' => '2022-10-15 20:31:10',
             ),
-            4 =>
-            array(
-                'id' => '66283c96-ead5-40fd-a506-1d746c08d6b9',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265984',
-                'penggunaan_anggaran' => 3000000,
-                'tw' => 2,
-                'progress' => 57.14,
-                'status' => 1,
-                'tanggal_konfirmasi' => '2022-06-03',
-                'alasan_ditolak' => '-',
-                'created_at' => '2022-06-03 20:46:16',
-                'updated_at' => '2022-06-03 20:46:45',
+            5 => 
+            array (
+                'alasan_ditolak' => NULL,
+                'created_at' => '2022-04-03 20:49:52',
+                'id' => 'da8702d4-9cc8-4a60-92cf-50e69b657347',
+                'perencanaan_id' => '6e1e11f9-b285-46d5-af90-847d5e5fa602',
+                'status' => 3,
+                'tanggal_konfirmasi' => NULL,
+                'updated_at' => '2022-10-15 20:49:52',
             ),
-            5 =>
-            array(
-                'id' => '68d5db04-70e8-4e19-ae4e-a8f3e1e452a0',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265984',
-                'penggunaan_anggaran' => 4000000,
-                'tw' => 3,
-                'progress' => 71.43,
-                'status' => 1,
-                'tanggal_konfirmasi' => '2022-08-17',
+            6 => 
+            array (
                 'alasan_ditolak' => '-',
-                'created_at' => '2022-08-17 20:49:04',
-                'updated_at' => '2022-08-17 20:49:19',
-            ),
-            6 =>
-            array(
-                'id' => '7852b2d9-080d-474f-b0a9-1560c07be671',
-                'perencanaan_id' => '5fa15403-b90f-4c7f-8c77-5076bc262028',
-                'penggunaan_anggaran' => 7000000,
-                'tw' => 4,
-                'progress' => 100.0,
+                'created_at' => '2022-04-30 21:03:27',
+                'id' => 'fdc17db5-c785-4335-91f3-985848766bb5',
+                'perencanaan_id' => '4daef7d5-86d9-4d28-8a5c-1823b8fae6d9',
                 'status' => 1,
-                'tanggal_konfirmasi' => '2021-10-10',
-                'alasan_ditolak' => '-',
-                'created_at' => '2021-10-10 15:12:29',
-                'updated_at' => '2022-10-10 15:12:45',
-            ),
-            7 =>
-            array(
-                'id' => '9392b3cc-537c-49b3-bc91-d320a17d703f',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265986',
-                'penggunaan_anggaran' => 1000000,
-                'tw' => 2,
-                'progress' => 40.0,
-                'status' => 1,
-                'tanggal_konfirmasi' => '2022-04-21',
-                'alasan_ditolak' => '-',
-                'created_at' => '2022-04-21 13:11:56',
-                'updated_at' => '2022-08-28 13:12:50',
-            ),
-            8 =>
-            array(
-                'id' => 'cc9b49d7-8cfc-4527-ac2c-2ade8adcefe4',
-                'perencanaan_id' => '66417cb6-4595-439d-8e67-87f292255a3c',
-                'penggunaan_anggaran' => 7000000,
-                'tw' => 3,
-                'progress' => 72.22,
-                'status' => 1,
-                'tanggal_konfirmasi' => '2021-07-06',
-                'alasan_ditolak' => '-',
-                'created_at' => '2021-07-05 14:50:49',
-                'updated_at' => '2021-09-05 14:51:09',
-            ),
-            9 =>
-            array(
-                'id' => 'cfaef6bf-d139-46d2-97f8-6eb83af04d0c',
-                'perencanaan_id' => '66417cb6-4595-439d-8e67-87f292255a3c',
-                'penggunaan_anggaran' => 6000000,
-                'tw' => 2,
-                'progress' => 33.33,
-                'status' => 1,
-                'tanggal_konfirmasi' => '2021-03-02',
-                'alasan_ditolak' => '-',
-                'created_at' => '2021-03-01 14:48:03',
-                'updated_at' => '2021-03-01 14:48:43',
-            ),
-            10 =>
-            array(
-                'id' => 'f6b09084-f1bf-453d-bc36-ece196f46782',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265986',
-                'penggunaan_anggaran' => 2000000,
-                'tw' => 3,
-                'progress' => 100.0,
-                'status' => 1,
-                'tanggal_konfirmasi' => '2022-08-28',
-                'alasan_ditolak' => '-',
-                'created_at' => '2022-08-28 13:13:51',
-                'updated_at' => '2022-08-28 13:14:04',
-            ),
-            11 =>
-            array(
-                'id' => 'fec555f8-3cbe-48b7-a597-ec84c0838b1a',
-                'perencanaan_id' => '5fa15403-b90f-4c7f-8c77-5076bc262028',
-                'penggunaan_anggaran' => 5000000,
-                'tw' => 3,
-                'progress' => 73.33,
-                'status' => 1,
-                'tanggal_konfirmasi' => '2021-07-07',
-                'alasan_ditolak' => '-',
-                'created_at' => '2021-07-07 15:11:37',
-                'updated_at' => '2021-07-07 15:11:46',
+                'tanggal_konfirmasi' => '2022-10-15',
+                'updated_at' => '2022-10-15 21:39:40',
             ),
         ));
+        
+        
     }
 }

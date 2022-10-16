@@ -14,191 +14,163 @@ class DokumenPerencanaanTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('dokumen_perencanaan')->delete();
-
-        \DB::table('dokumen_perencanaan')->insert(array(
-            0 =>
-            array(
-                'id' => '1a589225-9b3a-422a-a9f4-208225c27cab',
-                'perencanaan_id' => '5fa15403-b90f-4c7f-8c77-5076bc262028',
-                'nama' => 'Dokumen Perencanaan Keong r',
-                'file' => '2042198693-Dokumen Perencanaan Keong r-Mengambil sampel keong pada setiap kolam-1.pdf',
+        
+        \DB::table('dokumen_perencanaan')->insert(array (
+            0 => 
+            array (
+                'created_at' => '2022-10-15 22:13:39',
+                'file' => '2022652701-Dokumen Perencanaan-Dinas Kesehatan-1.pdf',
+                'id' => '03e941e3-0f36-49e8-83d3-68ef805754bd',
+                'nama' => 'Dokumen Perencanaan',
                 'no_urut' => 1,
-                'created_at' => '2022-09-06 11:21:05',
-                'updated_at' => '2022-09-06 11:21:05',
+                'perencanaan_id' => '2fe3f018-8837-463e-be44-c4a8c3dcb069',
+                'updated_at' => '2022-10-15 22:13:39',
             ),
-            1 =>
-            array(
-                'id' => '20b0b70a-64bd-4e68-ba4f-e8e727c7284d',
-                'perencanaan_id' => '66417cb6-4595-439d-8e67-87f292255a3c',
-                'nama' => 'Dokumen Perencanaan Keong g',
-                'file' => '83500604-Dokumen Perencanaan Keong g-Memberi tanda pada kolam  yang bebas maupun yang terdeteksi keong schistosomiasis-2.pdf',
+            1 => 
+            array (
+                'created_at' => '2022-09-22 00:47:22',
+                'file' => '1361776916-Dokumen Perencanaan b-Dinas Kesehatan-1.pdf',
+                'id' => '07bf4a4b-6b53-4469-834f-6a9b679cf965',
+                'nama' => 'Dokumen Perencanaan b',
+                'no_urut' => 1,
+                'perencanaan_id' => '05a722bc-3504-4ef4-a5a7-08629ea1952c',
+                'updated_at' => '2022-09-22 00:47:22',
+            ),
+            2 => 
+            array (
+                'created_at' => '2022-10-15 23:07:28',
+                'file' => '427228689-Dokumen Perencanaan-Dinas Kesehatan-1.pdf',
+                'id' => '0ab37fe4-7d3a-4972-bac5-3b461b1592e6',
+                'nama' => 'Dokumen Perencanaan',
+                'no_urut' => 1,
+                'perencanaan_id' => 'c9812995-a1fb-4883-ad53-daefa2e99f31',
+                'updated_at' => '2022-10-15 23:07:28',
+            ),
+            3 => 
+            array (
+                'created_at' => '2022-09-22 00:50:25',
+                'file' => '540497769-Dokumen Perencanaan b-Dinas Kesehatan-1.pdf',
+                'id' => '1882f9bc-a040-4cef-b3dc-0cf81d56b445',
+                'nama' => 'Dokumen Perencanaan b',
+                'no_urut' => 1,
+                'perencanaan_id' => '6e1e11f9-b285-46d5-af90-847d5e5fa602',
+                'updated_at' => '2022-09-22 00:50:25',
+            ),
+            4 => 
+            array (
+                'created_at' => '2022-10-15 22:28:33',
+                'file' => '940152161-Dokumen Perencanaan-Dinas Kesehatan-1.pdf',
+                'id' => '2dc4c4c3-b4f0-49b6-84ae-222426b46783',
+                'nama' => 'Dokumen Perencanaan',
+                'no_urut' => 1,
+                'perencanaan_id' => 'cedd07ba-bc7d-4bc2-acf1-c98391722b76',
+                'updated_at' => '2022-10-15 22:28:33',
+            ),
+            5 => 
+            array (
+                'created_at' => '2022-09-21 15:12:14',
+                'file' => '807116783-Dokumen Perencanaan r-Dinas Kebersihan-1.pdf',
+                'id' => '47062d2b-d0bc-4233-99f5-4fc6d58d1e07',
+                'nama' => 'Dokumen Perencanaan r',
+                'no_urut' => 1,
+                'perencanaan_id' => 'd41ed3a7-8ce0-4309-8068-aa7839a132e1',
+                'updated_at' => '2022-09-21 15:12:14',
+            ),
+            6 => 
+            array (
+                'created_at' => '2022-09-22 00:49:00',
+                'file' => '1258680443-Dokumen Perencanaan g-Dinas Kesehatan-1.pdf',
+                'id' => '5a36ac8f-ecec-4462-95a1-6a31ba8e9a51',
+                'nama' => 'Dokumen Perencanaan g',
+                'no_urut' => 1,
+                'perencanaan_id' => 'd782e166-f1ac-4e68-866a-84917e214c76',
+                'updated_at' => '2022-09-22 00:49:00',
+            ),
+            7 => 
+            array (
+                'created_at' => '2022-10-15 22:30:00',
+                'file' => '1141723862-Dokumen Perencanaan-Dinas Kesehatan-1.pdf',
+                'id' => '6345716b-608f-4001-9d1c-26cf69b3462a',
+                'nama' => 'Dokumen Perencanaan',
+                'no_urut' => 1,
+                'perencanaan_id' => '5bcbda3a-4ee9-4a4d-aa38-51ca4f511f88',
+                'updated_at' => '2022-10-15 22:36:59',
+            ),
+            8 => 
+            array (
+                'created_at' => '2022-09-22 00:35:41',
+                'file' => '995481321-Dokumen Perencanaan p-Dinas Kebersihan-1.pdf',
+                'id' => '6725e8a9-f9d3-4ea8-9ac7-a14e7ac4f2d3',
+                'nama' => 'Dokumen Perencanaan p',
+                'no_urut' => 1,
+                'perencanaan_id' => 'f884c0d6-ec2c-4038-8440-2eab2a2a4431',
+                'updated_at' => '2022-09-22 00:35:41',
+            ),
+            9 => 
+            array (
+                'created_at' => '2022-09-21 15:19:01',
+                'file' => '1818177951-Dokumen Perencanaan r-Dinas Kebersihan-1.pdf',
+                'id' => '67c236b5-cc39-45eb-9593-057ea7c98bd9',
+                'nama' => 'Dokumen Perencanaan r',
+                'no_urut' => 1,
+                'perencanaan_id' => 'b8b2d7a0-047e-431d-950b-04c13814c5bc',
+                'updated_at' => '2022-09-21 15:19:01',
+            ),
+            10 => 
+            array (
+                'created_at' => '2022-09-21 15:14:14',
+                'file' => '1426184739-Dokumen Perencanaan b-Dinas Kebersihan-1.pdf',
+                'id' => '85beef92-d4ba-4cf1-b27f-eb61ec511ca0',
+                'nama' => 'Dokumen Perencanaan b',
+                'no_urut' => 1,
+                'perencanaan_id' => '28f813fc-f9d9-4a7d-b161-508ad436001e',
+                'updated_at' => '2022-09-21 15:14:14',
+            ),
+            11 => 
+            array (
+                'created_at' => '2022-09-21 15:16:04',
+                'file' => '1962832105-Dokumen Perencanaan g-Dinas Kebersihan-1.pdf',
+                'id' => '8b1b9cc1-63a0-4a48-a855-6aa1a32b37c3',
+                'nama' => 'Dokumen Perencanaan g',
+                'no_urut' => 1,
+                'perencanaan_id' => '8674fd2c-041d-49ac-8dd8-adbacb7476ed',
+                'updated_at' => '2022-09-21 15:16:04',
+            ),
+            12 => 
+            array (
+                'created_at' => '2022-09-22 00:51:56',
+                'file' => '512679814-Dokumen Perencanaan p-Dinas Kesehatan-1.pdf',
+                'id' => '9b0a28d3-6022-4659-b562-5defca809b72',
+                'nama' => 'Dokumen Perencanaan p',
+                'no_urut' => 1,
+                'perencanaan_id' => '4daef7d5-86d9-4d28-8a5c-1823b8fae6d9',
+                'updated_at' => '2022-09-22 00:51:56',
+            ),
+            13 => 
+            array (
+                'created_at' => '2022-09-22 00:45:35',
+                'file' => '1698814217-Dokumen Perencanaan r-Dinas Kesehatan-1.pdf',
+                'id' => 'b29334e8-b850-461c-9529-7f66873b7e83',
+                'nama' => 'Dokumen Perencanaan r',
+                'no_urut' => 1,
+                'perencanaan_id' => 'aa3c387f-90a5-4148-9ccd-680c6d1f41a0',
+                'updated_at' => '2022-09-22 00:45:35',
+            ),
+            14 => 
+            array (
+                'created_at' => '2022-09-21 15:12:14',
+                'file' => '1751659701-Dokumen Perencanaan p-Dinas Kebersihan-2.pdf',
+                'id' => 'bd58b1bc-860f-44a6-b14b-bfd1ff248b7b',
+                'nama' => 'Dokumen Perencanaan p',
                 'no_urut' => 2,
-                'created_at' => '2022-09-06 11:32:51',
-                'updated_at' => '2022-09-06 11:32:51',
-            ),
-            2 =>
-            array(
-                'id' => '4f66aa3a-6ee9-4f6a-9f0a-3c7473319f65',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265982',
-                'nama' => 'Dokumen Perencanaan Keong 1',
-                'file' => 'dokumen_perencanaan_1_65_red.pdf',
-                'no_urut' => 1,
-                'created_at' => '2020-08-08 01:15:57',
-                'updated_at' => NULL,
-            ),
-            3 =>
-            array(
-                'id' => '4f66aa3a-6ee9-4f6a-9f0a-3c7473319f66',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265983',
-                'nama' => 'Dokumen Perencanaan Keong 1',
-                'file' => 'dokumen_perencanaan_1_66_blue.pdf',
-                'no_urut' => 1,
-                'created_at' => '2020-08-08 01:16:57',
-                'updated_at' => NULL,
-            ),
-            4 =>
-            array(
-                'id' => '4f66aa3a-6ee9-4f6a-9f0a-3c7473319f67',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265983',
-                'nama' => 'Dokumen Perencanaan Keong 2',
-                'file' => 'dokumen_perencanaan_2_67_green.pdf',
-                'no_urut' => 2,
-                'created_at' => '2020-08-08 01:17:57',
-                'updated_at' => NULL,
-            ),
-            5 =>
-            array(
-                'id' => '4f66aa3a-6ee9-4f6a-9f0a-3c7473319f68',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265984',
-                'nama' => 'Dokumen Perencanaan Keong 1',
-                'file' => 'dokumen_perencanaan_1_68_purple.pdf',
-                'no_urut' => 1,
-                'created_at' => '2020-08-08 01:18:57',
-                'updated_at' => NULL,
-            ),
-            6 =>
-            array(
-                'id' => '4f66aa3a-6ee9-4f6a-9f0a-3c7473319f69',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265984',
-                'nama' => 'Dokumen Perencanaan Keong 2',
-                'file' => 'dokumen_perencanaan_2_69_red.pdf',
-                'no_urut' => 2,
-                'created_at' => '2020-08-08 01:18:57',
-                'updated_at' => NULL,
-            ),
-            7 =>
-            array(
-                'id' => '4f66aa3a-6ee9-4f6a-9f0a-3c7473319f70',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265984',
-                'nama' => 'Dokumen Perencanaan Keong 3',
-                'file' => 'dokumen_perencanaan_3_70_blue.pdf',
-                'no_urut' => 3,
-                'created_at' => '2020-08-08 01:18:57',
-                'updated_at' => NULL,
-            ),
-            8 =>
-            array(
-                'id' => '4f66aa3a-6ee9-4f6a-9f0a-3c7473319f71',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265985',
-                'nama' => 'Dokumen Perencanaan Keong 1',
-                'file' => 'dokumen_perencanaan_1_71_green.pdf',
-                'no_urut' => 1,
-                'created_at' => '2020-08-08 01:18:57',
-                'updated_at' => NULL,
-            ),
-            9 =>
-            array(
-                'id' => '4f66aa3a-6ee9-4f6a-9f0a-3c7473319f72',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265985',
-                'nama' => 'Dokumen Perencanaan Keong 2',
-                'file' => 'dokumen_perencanaan_2_72_purple.pdf',
-                'no_urut' => 2,
-                'created_at' => '2020-08-08 01:18:57',
-                'updated_at' => NULL,
-            ),
-            10 =>
-            array(
-                'id' => '4f66aa3a-6ee9-4f6a-9f0a-3c7473319f73',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265985',
-                'nama' => 'Dokumen Perencanaan Keong 3',
-                'file' => 'dokumen_perencanaan_3_73_red.pdf',
-                'no_urut' => 3,
-                'created_at' => '2020-08-08 01:18:57',
-                'updated_at' => NULL,
-            ),
-            11 =>
-            array(
-                'id' => '4f66aa3a-6ee9-4f6a-9f0a-3c7473319f74',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265985',
-                'nama' => 'Dokumen Perencanaan Keong 4',
-                'file' => 'dokumen_perencanaan_4_74_blue.pdf',
-                'no_urut' => 4,
-                'created_at' => '2020-08-08 01:18:57',
-                'updated_at' => NULL,
-            ),
-            12 =>
-            array(
-                'id' => '4f66aa3a-6ee9-4f6a-9f0a-3c7473319f75',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265986',
-                'nama' => 'Dokumen Perencanaan Keong 1',
-                'file' => 'dokumen_perencanaan_1_75_green.pdf',
-                'no_urut' => 1,
-                'created_at' => '2020-08-08 01:18:57',
-                'updated_at' => NULL,
-            ),
-            13 =>
-            array(
-                'id' => '4f66aa3a-6ee9-4f6a-9f0a-3c7473319f76',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265986',
-                'nama' => 'Dokumen Perencanaan Keong 2',
-                'file' => 'dokumen_perencanaan_2_76_purple.pdf',
-                'no_urut' => 2,
-                'created_at' => '2020-08-08 01:18:57',
-                'updated_at' => NULL,
-            ),
-            14 =>
-            array(
-                'id' => '4f66aa3a-6ee9-4f6a-9f0a-3c7473319f77',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265987',
-                'nama' => 'Dokumen Perencanaan Keong 1',
-                'file' => 'dokumen_perencanaan_1_77_red.pdf',
-                'no_urut' => 1,
-                'created_at' => '2020-08-08 01:18:57',
-                'updated_at' => NULL,
-            ),
-            15 =>
-            array(
-                'id' => '4f66aa3a-6ee9-4f6a-9f0a-3c7473319f78',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265987',
-                'nama' => 'Dokumen Perencanaan Keong 2',
-                'file' => 'dokumen_perencanaan_2_78_blue.pdf',
-                'no_urut' => 2,
-                'created_at' => '2020-08-08 01:18:57',
-                'updated_at' => NULL,
-            ),
-            16 =>
-            array(
-                'id' => '4f66aa3a-6ee9-4f6a-9f0a-3c7473319f79',
-                'perencanaan_id' => '76628878-af22-4ae8-be21-eaa420265987',
-                'nama' => 'Dokumen Perencanaan Keong 3',
-                'file' => 'dokumen_perencanaan_3_79_green.pdf',
-                'no_urut' => 3,
-                'created_at' => '2020-08-08 01:18:57',
-                'updated_at' => NULL,
-            ),
-            17 =>
-            array(
-                'id' => '50566138-8802-4a48-9075-c93c11256446',
-                'perencanaan_id' => '66417cb6-4595-439d-8e67-87f292255a3c',
-                'nama' => 'Dokumen Perencanaan Keong r',
-                'file' => '1234390325-Dokumen Perencanaan Keong r-Memberi tanda pada kolam  yang bebas maupun yang terdeteksi keong schistosomiasis-1.pdf',
-                'no_urut' => 1,
-                'created_at' => '2022-09-06 11:32:51',
-                'updated_at' => '2022-09-06 11:32:51',
+                'perencanaan_id' => 'd41ed3a7-8ce0-4309-8068-aa7839a132e1',
+                'updated_at' => '2022-09-21 15:12:14',
             ),
         ));
+        
+        
     }
 }

@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator;
+use App\Helpers\helpers;
 
 class AnakSeeder extends Seeder
 {
@@ -27,7 +28,7 @@ class AnakSeeder extends Seeder
         $faker = app(Generator::class);
 
 
-        for ($i = 0; $i < 150; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             $randomNumber = rand(0, 1);
 
             if ($randomNumber == 1) {

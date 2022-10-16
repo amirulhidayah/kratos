@@ -62,14 +62,25 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::resource('realisasi-intervensi', RealisasiController::class);
-    Route::get('tabel-laporan-realisasi', RealisasiController::class . '@tabelLaporan');
-    Route::get('realisasi-intervensi/create-pelaporan/{realisasi_intervensi}', RealisasiController::class . '@createPelaporan');
-    Route::get('realisasi-intervensi/show-laporan/{realisasi_intervensi}', RealisasiController::class . '@showLaporan');
+    Route::get('realisasi-intervensi-penduduk', RealisasiController::class . '@tabelPenduduk');
+    Route::get('realisasi-intervensi/tambah-penduduk-realisasi/{realisasi_intervensi}', RealisasiController::class . '@edit');
+    Route::post('realisasi-intervensi/insert-penduduk', RealisasiController::class . '@insertPenduduk');
+    Route::post('realisasi-intervensi/delete-penduduk', RealisasiController::class . '@deletePenduduk');
+    Route::post('realisasi-intervensi/selesai-direalisasi', RealisasiController::class . '@selesaiDirealisasi');
     Route::post('realisasi-intervensi/konfirmasi/{realisasi_intervensi}', RealisasiController::class . '@konfirmasi');
-    Route::post('realisasi-intervensi/update-opd/{realisasi_intervensi}', RealisasiController::class . '@updateOPD');
-    Route::delete('realisasi-intervensi/delete-opd/{realisasi_intervensi}', RealisasiController::class . '@deleteOPD');
-    Route::delete('realisasi-intervensi/delete-laporan/{realisasi_intervensi}', RealisasiController::class . '@deleteLaporan');
-    Route::delete('realisasi-intervensi/delete-semua-laporan/{realisasi_intervensi}', RealisasiController::class . '@deleteSemuaLaporan');
+
+
+
+
+
+
+    // Route::get('tabel-laporan-realisasi', RealisasiController::class . '@tabelLaporan');
+    // Route::get('realisasi-intervensi/create-pelaporan/{realisasi_intervensi}', RealisasiController::class . '@createPelaporan');
+    // Route::get('realisasi-intervensi/show-laporan/{realisasi_intervensi}', RealisasiController::class . '@showLaporan');
+    // Route::post('realisasi-intervensi/update-opd/{realisasi_intervensi}', RealisasiController::class . '@updateOPD');
+    // Route::delete('realisasi-intervensi/delete-opd/{realisasi_intervensi}', RealisasiController::class . '@deleteOPD');
+    // Route::delete('realisasi-intervensi/delete-laporan/{realisasi_intervensi}', RealisasiController::class . '@deleteLaporan');
+    // Route::delete('realisasi-intervensi/delete-semua-laporan/{realisasi_intervensi}', RealisasiController::class . '@deleteSemuaLaporan');
     Route::get('hasil-realisasi', RealisasiController::class . '@hasilRealisasi');
     Route::post('export-realisasi', RealisasiController::class . '@export');
     Route::post('export-hasil-realisasi', RealisasiController::class . '@exportHasilRealisasi');
@@ -194,6 +205,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('list/posyandu', [ListController::class, 'posyandu']);
     Route::get('list/kecamatan', [ListController::class, 'kecamatan']);
     Route::get('list/desa', [ListController::class, 'desa']);
+    Route::get('list/orang-tua-desa', [ListController::class, 'orangTuaByDesa']);
+
+    Route::get('list/anak', [ListController::class, 'anak']);
     Route::get('list/orang-tua', [ListController::class, 'orangTua']);
 
     Route::get('importPuskesmas', function () {

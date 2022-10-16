@@ -33,27 +33,34 @@ class DatabaseSeeder extends Seeder
             storage_path('app/public/uploads')
         );
 
-        $this->call(PerencanaanTableSeeder::class);
-        $this->call(RealisasiTableSeeder::class);
-        $this->call(OPDSeeder::class);
-        $this->call(DesaTableSeeder::class);
-        $this->call(KecamatanTableSeeder::class);
-        $this->call(PendudukSeeder::class);
-        $this->call(LokasiTableSeeder::class);
-        $this->call(IndikatorTableSeeder::class);
-        $this->call(DokumenPerencanaanTableSeeder::class);
-        $this->call(DokumenRealisasiTableSeeder::class);
-        $this->call(LokasiPerencanaanTableSeeder::class);
-        $this->call(OpdTerkaitTableSeeder::class);
-        // $this->call(PemilikLokasiSeeder::class);
+
+
+
         // $this->call(PendudukTableSeeder::class); // new
-        $this->call(UserSeeder::class);
-        $this->call(SumberDanaSeeder::class);
+        // $this->call(PendudukSeeder::class);
         // $this->call(PuskesmasSeeder::class);
         // $this->call(PosyanduSeeder::class);
-        $this->call(OrangTuaSeeder::class);
+        $this->call(IndikatorTableSeeder::class);
+        $this->call(DesaTableSeeder::class);
+        $this->call(KecamatanTableSeeder::class);
+        $this->call(OPDSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(SumberDanaSeeder::class);
         $this->call(PuskesmasTableSeeder::class);
         $this->call(PosyanduTableSeeder::class);
-        $this->call(AnakSeeder::class);
+        $this->call(OrangTuaTableSeeder::class);
+        $this->call(AnakTableSeeder::class);
+        $this->call(PengukuranAnakTableSeeder::class);
+
+
+        $this->call(PerencanaanTableSeeder::class);
+        $this->call(OpdTerkaitTableSeeder::class);
+        $this->call(DokumenPerencanaanTableSeeder::class);
+        $this->call(RealisasiTableSeeder::class);
+        $this->call(PendudukRealisasiTableSeeder::class);
+        $this->call(DokumenRealisasiTableSeeder::class);
+        $this->call(OrangTuaTableSeeder::class);
+        $this->call(AnakTableSeeder::class);
+        $this->call(PengukuranAnakTableSeeder::class);
     }
 }

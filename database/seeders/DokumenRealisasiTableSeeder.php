@@ -14,161 +14,103 @@ class DokumenRealisasiTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('dokumen_realisasi')->delete();
-
-        \DB::table('dokumen_realisasi')->insert(array(
-            0 =>
-            array(
-                'id' => '17f1a9cd-c780-475b-80e4-b87f6364a544',
-                'realisasi_id' => 'cc9b49d7-8cfc-4527-ac2c-2ade8adcefe4',
-                'nama' => 'Dokumen Realisasi Keong p',
-                'file' => '1371018021-Dokumen Realisasi Keong p-Memberi tanda pada kolam yang bebas maupun yang terdeteksi keong schistosomiasis-1.pdf',
+        
+        \DB::table('dokumen_realisasi')->insert(array (
+            0 => 
+            array (
+                'created_at' => '2022-10-15 22:52:22',
+                'file' => '631495917-Dokumen Realisasi-Dinas Kesehatan-1.pdf',
+                'id' => '3264bd9a-dfe6-4491-93a4-25abac907149',
+                'nama' => 'Dokumen Realisasi',
                 'no_urut' => 1,
-                'created_at' => '2022-09-06 14:50:49',
-                'updated_at' => '2022-09-06 14:50:49',
+                'realisasi_id' => 'd0dfe5b7-acd7-43c5-9d9b-7e4dfc68265e',
+                'updated_at' => '2022-10-15 22:52:22',
             ),
-            1 =>
-            array(
-                'id' => '20925c30-49b9-47d6-a37e-7144a942d033',
-                'realisasi_id' => '68d5db04-70e8-4e19-ae4e-a8f3e1e452a0',
-                'nama' => 'Dokumen Realisasi Keong 1 p',
-                'file' => '524591169-Dokumen Realisasi Keong 1 p-Pembersihan Habitat Keong-1.pdf',
+            1 => 
+            array (
+                'created_at' => '2022-10-15 22:55:33',
+                'file' => '724465572-Dokumen Realisasi-Dinas Kesehatan-1.pdf',
+                'id' => '642b59fb-067f-4696-911c-e6c826911873',
+                'nama' => 'Dokumen Realisasi',
                 'no_urut' => 1,
-                'created_at' => '2022-08-17 20:49:04',
-                'updated_at' => '2022-08-17 20:49:04',
+                'realisasi_id' => '63eeb154-465f-48f8-95e9-b5667f0e139d',
+                'updated_at' => '2022-10-15 22:55:33',
             ),
-            2 =>
-            array(
-                'id' => '28d2f2b2-1860-4853-a942-1471b2341677',
-                'realisasi_id' => '442fd3ce-eef0-442b-b173-008237449104',
-                'nama' => 'Dokumen Realisasi Keong 2 r',
-                'file' => '1508051539-Dokumen Realisasi Keong 2 r-Pembersihan Habitat Keong-2.pdf',
+            2 => 
+            array (
+                'created_at' => '2022-10-15 21:03:27',
+                'file' => '385189562-Dokumen Realisasi-Dinas Kesehatan-1.pdf',
+                'id' => '7a29a554-28d9-4b1f-ab92-818c9801103a',
+                'nama' => 'Dokumen Realisasi',
+                'no_urut' => 1,
+                'realisasi_id' => 'fdc17db5-c785-4335-91f3-985848766bb5',
+                'updated_at' => '2022-10-15 21:03:27',
+            ),
+            3 => 
+            array (
+                'created_at' => '2022-10-15 20:49:52',
+                'file' => '295620197-Dokumen Realisasi-Dinas Kesehatan-1.pdf',
+                'id' => '8d73e56a-77f0-4e8d-b930-cbadcf99afd8',
+                'nama' => 'Dokumen Realisasi',
+                'no_urut' => 1,
+                'realisasi_id' => 'da8702d4-9cc8-4a60-92cf-50e69b657347',
+                'updated_at' => '2022-10-15 20:49:52',
+            ),
+            4 => 
+            array (
+                'created_at' => '2022-10-15 20:39:24',
+                'file' => '1843980082-Dokumen Realisasi-Dinas Kebersihan-1.pdf',
+                'id' => 'd0eee1a1-3ffd-4e28-945a-8d315955fff3',
+                'nama' => 'Dokumen Realisasi',
+                'no_urut' => 1,
+                'realisasi_id' => 'bd9891f8-2e65-4cdd-87d2-48d65d00a36d',
+                'updated_at' => '2022-10-15 20:39:24',
+            ),
+            5 => 
+            array (
+                'created_at' => '2022-10-15 21:50:08',
+                'file' => '1541129130-Dokumen Realisasi-Dinas Kebersihan-1.pdf',
+                'id' => 'dcc5cc2c-84fa-4885-8584-87be505e7f39',
+                'nama' => 'Dokumen Realisasi',
+                'no_urut' => 1,
+                'realisasi_id' => '9a856b65-481e-496b-8da6-77dfe5a97adf',
+                'updated_at' => '2022-10-15 21:50:08',
+            ),
+            6 => 
+            array (
+                'created_at' => '2022-10-15 19:35:41',
+                'file' => '879973402-Dokumen Realisasi 1-Dinas Kesehatan-1.pdf',
+                'id' => 'e7b324b4-f8f3-4a1a-ac23-a6b19ba22959',
+                'nama' => 'Dokumen Realisasi 1',
+                'no_urut' => 1,
+                'realisasi_id' => 'c43dafca-4f0d-4581-82b1-0fca2c0a5070',
+                'updated_at' => '2022-10-15 19:35:41',
+            ),
+            7 => 
+            array (
+                'created_at' => '2022-10-15 19:35:41',
+                'file' => '632825235-Dokumen Realisasi 2-Dinas Kesehatan-2.pdf',
+                'id' => 'fb25bf3f-9ecd-4e1a-87d9-84130c01d100',
+                'nama' => 'Dokumen Realisasi 2',
                 'no_urut' => 2,
-                'created_at' => '2022-11-28 20:51:01',
-                'updated_at' => '2022-11-28 20:51:01',
+                'realisasi_id' => 'c43dafca-4f0d-4581-82b1-0fca2c0a5070',
+                'updated_at' => '2022-10-15 19:35:41',
             ),
-            3 =>
-            array(
-                'id' => '2a8b6427-f6d0-4f22-a11c-33745e18e3f4',
-                'realisasi_id' => 'cfaef6bf-d139-46d2-97f8-6eb83af04d0c',
-                'nama' => 'Dokumen Realisasi Keong r',
-                'file' => '802723135-Dokumen Realisasi Keong r-Memberi tanda pada kolam yang bebas maupun yang terdeteksi keong schistosomiasis-1.pdf',
+            8 => 
+            array (
+                'created_at' => '2022-10-15 22:40:47',
+                'file' => '957153270-Dokumen Realisasi-Dinas Kesehatan-1.pdf',
+                'id' => 'fbe56a2d-d7c0-4615-a690-efea5bd55726',
+                'nama' => 'Dokumen Realisasi',
                 'no_urut' => 1,
-                'created_at' => '2022-09-06 14:48:03',
-                'updated_at' => '2022-09-06 14:48:03',
-            ),
-            4 =>
-            array(
-                'id' => '2b27380f-8e1a-4ff5-9e73-58115957f2b4',
-                'realisasi_id' => '7852b2d9-080d-474f-b0a9-1560c07be671',
-                'nama' => 'Dokumen Realisasi Keong r',
-                'file' => '2029553778-Dokumen Realisasi Keong r-Mengecek sampel keong pada setiap kolam-1.pdf',
-                'no_urut' => 1,
-                'created_at' => '2022-09-06 15:12:29',
-                'updated_at' => '2022-09-06 15:12:29',
-            ),
-            5 =>
-            array(
-                'id' => '2e14583b-566f-46db-94c3-cfb66c7ddaf3',
-                'realisasi_id' => 'fec555f8-3cbe-48b7-a597-ec84c0838b1a',
-                'nama' => 'Dokumen Realisasi Keong b',
-                'file' => '1681220332-Dokumen Realisasi Keong b-Mengecek sampel keong pada setiap kolam-1.pdf',
-                'no_urut' => 1,
-                'created_at' => '2022-09-06 15:11:37',
-                'updated_at' => '2022-09-06 15:11:37',
-            ),
-            6 =>
-            array(
-                'id' => '54e432fe-eafa-4c45-858f-020e82c985c6',
-                'realisasi_id' => '547c6f6f-827a-4c9f-a720-cb119da8e0e2',
-                'nama' => 'Dokumen Realisasi Keong 1 r',
-                'file' => '930295587-Dokumen Realisasi Keong 1 r-Pembersihan Habitat Keong-1.pdf',
-                'no_urut' => 1,
-                'created_at' => '2022-01-10 20:41:40',
-                'updated_at' => '2022-01-10 20:41:40',
-            ),
-            7 =>
-            array(
-                'id' => '5cb72df2-4d9a-494a-a517-0f0bd8abf388',
-                'realisasi_id' => '66283c96-ead5-40fd-a506-1d746c08d6b9',
-                'nama' => 'Dokumen Realisasi Keong 1 r',
-                'file' => '1792300995-Dokumen Realisasi Keong 1 r-Pembersihan Habitat Keong-1.pdf',
-                'no_urut' => 1,
-                'created_at' => '2022-06-03 20:46:17',
-                'updated_at' => '2022-06-03 20:46:17',
-            ),
-            8 =>
-            array(
-                'id' => '6d211fce-6cf3-47b6-bded-89c4231626f3',
-                'realisasi_id' => '9392b3cc-537c-49b3-bc91-d320a17d703f',
-                'nama' => 'Dokumen Realisasi Keong r',
-                'file' => '1303543068-Dokumen Realisasi Keong r-Mengindentifikasi Kolam terdeteksi schistosomiasis-1.pdf',
-                'no_urut' => 1,
-                'created_at' => '2022-08-28 13:11:56',
-                'updated_at' => '2022-08-28 13:11:56',
-            ),
-            9 =>
-            array(
-                'id' => '7b602c25-b073-4129-befa-214837dded05',
-                'realisasi_id' => '3a729127-7f21-4cf8-88ba-10de0d67cdb6',
-                'nama' => 'Dokumen Realisasi Keong 2 g',
-                'file' => '828425536-Dokumen Realisasi Keong 2 g-Pembersihan Habitat Keong-2.pdf',
-                'no_urut' => 2,
-                'created_at' => '2022-04-23 20:44:20',
-                'updated_at' => '2022-04-23 20:44:20',
-            ),
-            10 =>
-            array(
-                'id' => '80f0403e-b84b-48ff-b029-5911ce0039c4',
-                'realisasi_id' => '547c6f6f-827a-4c9f-a720-cb119da8e0e2',
-                'nama' => 'Dokumen Realisasi Keong 2 b',
-                'file' => '1751385293-Dokumen Realisasi Keong 2 b-Pembersihan Habitat Keong-2.pdf',
-                'no_urut' => 2,
-                'created_at' => '2022-01-10 20:41:40',
-                'updated_at' => '2022-01-10 20:41:40',
-            ),
-            11 =>
-            array(
-                'id' => 'bbbd3ab3-0cc7-4119-80db-1241930fe3b6',
-                'realisasi_id' => '3a729127-7f21-4cf8-88ba-10de0d67cdb6',
-                'nama' => 'Dokumen Realisasi Keong 1 p',
-                'file' => '146105404-Dokumen Realisasi Keong 1 p-Pembersihan Habitat Keong-1.pdf',
-                'no_urut' => 1,
-                'created_at' => '2022-04-23 20:44:20',
-                'updated_at' => '2022-04-23 20:44:20',
-            ),
-            12 =>
-            array(
-                'id' => 'd0a32d62-14d1-4eeb-b49b-108076761b1b',
-                'realisasi_id' => '442fd3ce-eef0-442b-b173-008237449104',
-                'nama' => 'Dokumen Realisasi Keong 1 g',
-                'file' => '270262400-Dokumen Realisasi Keong 1 g-Pembersihan Habitat Keong-1.pdf',
-                'no_urut' => 1,
-                'created_at' => '2022-11-28 20:51:01',
-                'updated_at' => '2022-11-28 20:51:01',
-            ),
-            13 =>
-            array(
-                'id' => 'e6233c94-e44f-4f67-8c86-f8b31b2590e8',
-                'realisasi_id' => '34ec0294-d921-4cd3-99fb-13dbe8ef5e69',
-                'nama' => 'Dokumen Realisasi Keong g',
-                'file' => '1807520047-Dokumen Realisasi Keong g-Mengecek sampel keong pada setiap kolam-1.pdf',
-                'no_urut' => 1,
-                'created_at' => '2022-09-06 15:08:41',
-                'updated_at' => '2022-09-06 15:08:41',
-            ),
-            14 =>
-            array(
-                'id' => 'feeca167-d819-4fc4-92ea-33cd5722c5e2',
-                'realisasi_id' => 'f6b09084-f1bf-453d-bc36-ece196f46782',
-                'nama' => 'Dokumen Realisasi Keong p',
-                'file' => '113472785-Dokumen Realisasi Keong p-Mengindentifikasi Kolam terdeteksi schistosomiasis-1.pdf',
-                'no_urut' => 1,
-                'created_at' => '2022-08-28 13:13:51',
-                'updated_at' => '2022-08-28 13:13:51',
+                'realisasi_id' => '81ea6d05-ef7c-48de-be86-74c5055e1d66',
+                'updated_at' => '2022-10-15 22:40:47',
             ),
         ));
+        
+        
     }
 }

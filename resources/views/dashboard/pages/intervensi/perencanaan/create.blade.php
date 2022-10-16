@@ -32,8 +32,9 @@
                             @component('dashboard.components.forms.perencanaan',
                                 [
                                     'action' => route('rencana-intervensi.store'),
-                                    'desa' => $desa,
+                                    'sub_indikator' => $sub_indikator,
                                     'opd' => $opd,
+                                    'sumberDana' => $sumberDana,
                                     'method' => 'POST',
                                     'submitLabel' => 'Kirim Data',
                                     'submitIcon' => '<i class="fas fa-paper-plane"></i> ',
