@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Anak;
 use App\Models\Desa;
 use App\Models\Hewan;
 use App\Models\Kecamatan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\OrangTua;
 
 class ListController extends Controller
 {
@@ -42,5 +45,17 @@ class ListController extends Controller
         }
 
         return response()->json(['status' => 'success', 'data' => $desa]);
+    }
+
+    public function orangTuaByDesa(Request $request)
+    {
+        $orangTua = OrangTua::where('desa_id', $request->desa)->get();
+        return response()->json(['status' => 'success', 'data' => $orangTua]);
+    }
+
+    public function anak(Request $request)
+    {
+        $anak = Anak::where('orang_tua_id', $request->orang_tua)->get();
+        return response()->json(['status' => 'success', 'data' => $anak]);
     }
 }

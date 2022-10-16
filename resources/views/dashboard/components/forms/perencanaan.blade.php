@@ -81,7 +81,6 @@
                     </select>
                 </div>
             </div>
-
         </div>
 
         <div class="col-lg-4">
@@ -288,6 +287,7 @@
                         processData: false,
                         contentType: false,
                         success: function(response) {
+                            console.log(response)
                             $('.rupiah').mask('000.000.000.000.000', {
                                 reverse: true
                             })

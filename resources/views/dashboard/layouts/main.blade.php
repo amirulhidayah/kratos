@@ -401,7 +401,6 @@
                         reverse: true
                     })
                 });
-
                 throw 'Ada inputan yang kosong!';
             }
         }

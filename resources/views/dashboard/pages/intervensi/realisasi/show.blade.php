@@ -1,16 +1,15 @@
 @extends('dashboard.layouts.main')
 
 @section('title')
-    Detail Laporan Realisasi Intervensi
+    Realisasi Intervensi
 @endsection
 
 @section('titlePanelHeader')
-    Detail Laporan Realisasi Intervensi | <span style="text-decoration: underline">Laporan Tanggal:
-        {{ Carbon\Carbon::parse($realisasi_intervensi->created_at)->translatedFormat('j F Y') }}</span>
+    Detail Realisasi Intervensi
 @endsection
 
 @section('subTitlePanelHeader')
-    {{ $rencana_intervensi->indikator->nama }}
+    {{ $realisasi_intervensi->perencanaan->indikator->nama }}
 @endsection
 
 @section('buttonPanelHeader')
@@ -20,16 +19,13 @@
 
 @push('styles')
     <style>
-        #peta {
-            height: 600px;
-            margin-top: 0px;
-        }
+
     </style>
 @endpush
 
 @section('contents')
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-lg-8">
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
@@ -38,26 +34,23 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-bordered">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Tanggal Laporan:
+                        <li class="list-group-item d-flex justify-content-between align-items-center">Tanggal Pembuatan
+                            Laporan:
                             <span
                                 class="font-weight-bold">{{ Carbon\Carbon::parse($realisasi_intervensi->created_at)->translatedFormat('j F Y') }}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">Sub Indikator:<span
-                                class="font-weight-bold">{{ $rencana_intervensi->indikator->nama }}</span>
+                                class="font-weight-bold">{{ $realisasi_intervensi->perencanaan->indikator->nama }}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">OPD:<span
-                                class="font-weight-bold">{{ $rencana_intervensi->opd->nama }}</span>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">OPD Pembuat:<span
+                                class="font-weight-bold">{{ $realisasi_intervensi->perencanaan->opd->nama }}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Jumlah Desa:<span
-                                class="font-weight-bold">
-                                {{ $realisasi_intervensi->desaRealisasi->count() }}
-                            </span>
-                        </li>
-                        @if ($rencana_intervensi->opdTerkait->count() > 0)
+                        @if ($realisasi_intervensi->perencanaan->opdTerkait->count() > 0)
                             <li class="list-group-item d-flex justify-content-between align-items-center">OPD Terkait
-                                ({{ $rencana_intervensi->opdTerkait->count() }}):<span class="font-weight-bold">
+                                ({{ $realisasi_intervensi->perencanaan->opdTerkait->count() }}):<span
+                                    class="font-weight-bold">
                                     <ul>
-                                        @foreach ($rencana_intervensi->opdTerkait as $item)
+                                        @foreach ($realisasi_intervensi->perencanaan->opdTerkait as $item)
                                             <li class="d-flex justify-content-end align-items-end">
                                                 {{ $item->opd->nama . ' ' }}
                                             </li>
@@ -66,12 +59,14 @@
                                 </span>
                             </li>
                         @endif
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Penggunaan
-                            Anggaran:<span class="font-weight-bold"><span>Rp. </span>
-                                <span class="rupiah">{{ $realisasi_intervensi->penggunaan_anggaran }}</span></span>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ $realisasi_intervensi->status == 1 ? 'Nilai Anggaran:' : 'Rencana Anggaran:' }}<span
+                                class="font-weight-bold"><span>Rp. </span>
+                                <span
+                                    class="rupiah">{{ $realisasi_intervensi->perencanaan->nilai_pembiayaan }}</span></span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">Sumber Dana:<span
-                                class="font-weight-bold">{{ $rencana_intervensi->sumber_dana }}</span>
+                                class="font-weight-bold">{{ $realisasi_intervensi->perencanaan->sumberDana->nama }}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">Status:
                             @if ($realisasi_intervensi->status == 1)
@@ -99,12 +94,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4">
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
-                        <div class="card-title">List Dokumen Laporan Realisasi</div>
-
+                        <div class="card-title">List Dokumen Realisasi</div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -115,6 +109,7 @@
                                 <a href="{{ Storage::url('uploads/dokumen/realisasi/' . $item->file) }}" target="_blank"
                                     class="badge badge-primary" data-toggle="tooltip" data-placement="top" title="Download">
                                     <i class="fas fa-download"></i>
+
                                 </a>
                             </li>
                         @empty
@@ -131,27 +126,29 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-head-row">
-                        <div class="card-title">Desa Yang Direalisasi</div>
+                        <div class="card-title">Data Penduduk Yang Direalisasi</div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover table-striped" id="tabelDesa" cellspacing="0" width="100%">
+                <div class="card-body px-1 pt-2">
+                    <div class="table-responsive mt-2">
+                        <table class="table table-hover table-striped table-bordered" id="{{ $id ?? 'dataTables' }}"
+                            cellspacing="0" width="100%">
                             <thead>
                                 <tr class="text-center fw-bold">
                                     <th>No</th>
-                                    <th>Desa</th>
+                                    <th>Nomor</th>
+                                    <th>Sasaran Intervensi</th>
+                                    <th>Nama Ayah</th>
+                                    <th>Nama Ibu</th>
+                                    <th>Nama Anak</th>
                                     <th>Kecamatan</th>
+                                    <th>Desa</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($dataDesaRealisasi as $item)
+                                @foreach ($realisasi_intervensi->pendudukRealisasi as $item)
                                     <tr>
-                                        <td class="text-center">
-                                            {{ $loop->iteration }}
-                                        </td>
-                                        <td>{{ $item->nama }}</td>
-                                        <td>{{ $item->kecamatan->nama }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -165,11 +162,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-head-row">
-                            <div class="card-title">Konfirmasi Laporan Realisasi</div>
-
+                            <div class="card-title">Konfirmasi Realisasi</div>
                         </div>
                     </div>
-                    <div class="card-body pt-0">
+                    <div class="card-body px-2 pt-2">
                         @component('dashboard.components.forms.confirm',
                             [
                                 'action' => url('realisasi-intervensi/konfirmasi/' . $realisasi_intervensi->id),
@@ -186,10 +182,86 @@
     <script>
         $('#nav-realisasi').addClass('active');
         $('#nav-realisasi .collapse').addClass('show');
-        $('#nav-realisasi .collapse #li-keong-2').addClass('active');
 
-        var tableLaporan = $('#tabelDesa').DataTable({
+        var table = $('#dataTables').DataTable({
             processing: true,
+            serverSide: true,
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            ajax: {
+                url: "{{ url('realisasi-intervensi-penduduk') }}",
+                data: function(d) {
+                    d.realisasi_id = '{{ $realisasi_intervensi->id }}';
+                    // d.tahun_filter = $('#tahun-filter').val();
+                    // d.opd_filter = $('#opd-filter').val();
+                    // d.status_filter = $('#status-filter').val();
+                    // d.search_filter = $('input[type="search"]').val();
+                },
+            },
+            "columns": [{
+                    "data": "id",
+                    render: function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    "data": "nomor",
+                    "className": "text-center",
+                    "visible": false
+                },
+                {
+                    "data": "sasaran_intervensi",
+                    "className": "text-center"
+                },
+                {
+                    "data": "nama_ayah",
+                    "render": function(data, type, row, meta) {
+                        if (row.nama_ayah) {
+                            return data;
+                        } else {
+                            return '-';
+                        }
+                    },
+                    "visible": false
+                },
+                {
+                    "data": "nama_ibu",
+                    "render": function(data, type, row, meta) {
+                        if (row.sasaran_intervensi != 'Anak') {
+                            if (row.nama_ibu) {
+                                return '<i class="fas fa-check-square text-success"></i> ' + data;
+                            } else {
+                                return '<i class="fas fa-check-square text-success"></i> -';
+                            }
+                        } else {
+                            return data
+                        }
+                    },
+                },
+                {
+                    "data": "nama_anak",
+                    "render": function(data, type, row, meta) {
+                        if (row.sasaran_intervensi != 'Orang Tua') {
+                            return '<i class="fas fa-check-square text-success"></i> ' + data;
+                        } else {
+                            return '-'
+                        }
+                    },
+                },
+                {
+                    "data": "kecamatan",
+                    "className": "text-center"
+                },
+                {
+                    "data": "desa",
+                    "className": "text-center"
+                },
+            ],
+            order: [
+                [1, 'desc'],
+            ],
         })
     </script>
 @endpush

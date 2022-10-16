@@ -19,4 +19,4 @@
     </select>
 </div>
 
-<span class="text-danger error-text {{ $name }}-error"></span>
+<span class="text-danger error-text {{ $errorClass ?? '' }} {{ $name }}-error"></span>

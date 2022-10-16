@@ -69,8 +69,15 @@ class PerencanaanController extends Controller
                                 $query->where('status', 0);
                             } else {
                                 if ($filter == 10) {
-                                    $query->where('status', 1);
-                                    $query->doesntHave('realisasi');
+                                    $query->where(function ($q) {
+                                        $q->where('status', 1);
+                                        $q->doesntHave('realisasi');
+                                    });
+                                    $query->orWhere(function ($q) {
+                                        $q->whereHas('realisasi', function ($q2) {
+                                            $q2->where('status', 3);
+                                        });
+                                    });
                                 } else if ($filter == 11) {
                                     $query->where('status', 1);
                                     $query->whereHas('realisasi', function ($q) {
@@ -114,11 +121,15 @@ class PerencanaanController extends Controller
                     } else if ($row->status == 1) {
                         $status = '<div class="my-2">';
                         $status .= '<span class="badge fw-bold badge-success mb-1">Disetujui</span>';
-                        if (($row->realisasi) && ($row->realisasi->status == 1)) {
-                            $status .=  '<br><a class="shadow" href="' . route('realisasi-intervensi.show', $row->realisasi->id) . '"><span class="badge fw-bold badge-primary">Sudah Terealisasi</span></a>';
-                        } else {
-                            $status .=  '<br><span class="badge fw-bold badge-dark">Belum Terealisasi</span>';
-                        }
+                        // if (($row->realisasi) && ($row->realisasi->status == 1)) {
+                        //     $status .=  '<br><a class="shadow" href="' . route('realisasi-intervensi.show', $row->realisasi->id) . '"><span class="badge fw-bold badge-primary">Sudah Terealisasi</span></a>';
+                        // } else {
+                        //     if (($row->realisasi) && ($row->realisasi->status) == 3) {
+                        //         $status .=  '<br><span class="badge fw-bold badge-info">Dalam Proses Realiasasi</span>';
+                        //     } else {
+                        //         $status .=  '<br><span class="badge fw-bold badge-dark">Belum Terealisasi</span>';
+                        //     }
+                        // }
                         if (($row->created_at->year != Carbon::now()->year) && ((!$row->realisasi) || (($row->realisasi) && ($row->realisasi->status != 1)))) {
                             $status .=  '<br><span class="badge fw-bold badge-secondary mt-1">Tidak Terselesaikan Ditahun ' . $row->created_at->year . '</span>';
                             if ($row->alasan_tidak_terselesaikan == null && $row->status_baca == null) {

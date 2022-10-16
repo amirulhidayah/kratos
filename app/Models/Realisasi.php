@@ -28,4 +28,9 @@ class Realisasi extends Model
     {
         return $this->hasMany(DokumenRealisasi::class, 'realisasi_id')->orderBy('no_urut');
     }
+
+    public function pendudukRealisasi()
+    {
+        return $this->hasMany(PendudukRealisasi::class, 'realisasi_id');
+    }
 }

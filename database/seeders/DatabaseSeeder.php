@@ -33,23 +33,28 @@ class DatabaseSeeder extends Seeder
             storage_path('app/public/uploads')
         );
 
-        $this->call(PerencanaanTableSeeder::class);
-        // $this->call(RealisasiTableSeeder::class);
-        $this->call(OpdTerkaitTableSeeder::class);
-        $this->call(DokumenPerencanaanTableSeeder::class);
-        $this->call(OPDSeeder::class);
+
+
+
+        // $this->call(PendudukTableSeeder::class); // new
+        // $this->call(PendudukSeeder::class);
+        $this->call(IndikatorTableSeeder::class);
         $this->call(DesaTableSeeder::class);
         $this->call(KecamatanTableSeeder::class);
-        $this->call(PendudukSeeder::class);
-        $this->call(IndikatorTableSeeder::class);
-        $this->call(DokumenRealisasiTableSeeder::class);
-        // $this->call(PemilikLokasiSeeder::class);
-        // $this->call(PendudukTableSeeder::class); // new
+        $this->call(OPDSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(SumberDanaSeeder::class);
         $this->call(PuskesmasSeeder::class);
         $this->call(PosyanduSeeder::class);
         $this->call(OrangTuaSeeder::class);
         $this->call(AnakSeeder::class);
+
+
+        $this->call(PerencanaanTableSeeder::class);
+        $this->call(OpdTerkaitTableSeeder::class);
+        $this->call(DokumenPerencanaanTableSeeder::class);
+        $this->call(RealisasiTableSeeder::class);
+        $this->call(PendudukRealisasiTableSeeder::class);
+        $this->call(DokumenRealisasiTableSeeder::class);
     }
 }

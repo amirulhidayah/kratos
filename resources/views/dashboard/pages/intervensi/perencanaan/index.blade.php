@@ -90,8 +90,8 @@
                                     <option value="semua">Semua</option>
                                     <option value="-">Menunggu Konfirmasi</option>
                                     <option value="1">Disetujui</option>
-                                    <option value="10">Disetujui Tapi Belum Terealisasi</option>
-                                    <option value="11">Disetujui dan Telah Terealisasi</option>
+                                    {{-- <option value="10">Disetujui Tapi Belum Selesai Terealisasi</option>
+                                    <option value="11">Disetujui dan Telah Terealisasi</option> --}}
                                     <option value="2">Ditolak</option>
                                     <option value="3">Tidak Terselesaikan Ditahun Sebelumnya</option>
                                 @endslot

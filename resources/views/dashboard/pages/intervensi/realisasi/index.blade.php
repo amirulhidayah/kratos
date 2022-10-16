@@ -80,18 +80,17 @@
                         <div class="col-md-4">
                             @component('dashboard.components.formElements.select',
                                 [
-                                    'label' => 'Status',
+                                    'label' => 'Status Laporan',
                                     'id' => 'status-filter',
                                     'name' => 'status_filter',
                                     'class' => 'select2 filter',
                                 ])
                                 @slot('options')
                                     <option value="semua">Semua</option>
-                                    <option value="selesai">Selesai Terealisasi</option>
-                                    <option value="belum_selesai">Belum Selesai Terealisasi</option>
-                                    <option value="belum_ada_laporan">Belum Ada Laporan Sama Sekali</option>
                                     <option value="-">Menunggu Konfirmasi</option>
+                                    <option value="1">Disetujui</option>
                                     <option value="2">Ditolak</option>
+                                    <option value="3">Dalam Proses</option>
                                 @endslot
                             @endcomponent
                         </div>
@@ -104,10 +103,11 @@
                                     <thead>
                                         <tr class="text-center fw-bold">
                                             <th>No</th>
-                                            <th>Tanggal Pembuatan Perencanaan</th>
+                                            <th>Tanggal Pembuatan Laporan</th>
                                             <th>Sub Indikator</th>
                                             <th>OPD</th>
                                             <th>Nilai Anggaran</th>
+                                            <th>Jumlah Penduduk</th>
                                             <th>Status Laporan</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -182,8 +182,13 @@
                     render: $.fn.dataTable.render.number('.', ',', 0, 'Rp.'),
                 },
                 {
-                    data: 'status',
-                    name: 'status',
+                    data: 'jumlah_penduduk',
+                    name: 'jumlah_penduduk',
+                    className: 'text-center',
+                },
+                {
+                    data: 'status_laporan',
+                    name: 'status_laporan',
                     className: 'text-center',
                 },
                 {

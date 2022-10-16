@@ -44,7 +44,7 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center">Sub Indikator:<span
                                 class="font-weight-bold">{{ $rencana_intervensi->indikator->nama }}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">OPD:<span
+                        <li class="list-group-item d-flex justify-content-between align-items-center">OPD Pembuat:<span
                                 class="font-weight-bold">{{ $rencana_intervensi->opd->nama }}</span>
                         </li>
                         @if ($rencana_intervensi->opdTerkait->count() > 0)
@@ -98,7 +98,6 @@
                 <div class="card-header">
                     <div class="card-head-row">
                         <div class="card-title">List Dokumen Perencanaan</div>
-
                     </div>
                 </div>
                 <div class="card-body">
@@ -124,10 +123,9 @@
                     <div class="card-header">
                         <div class="card-head-row">
                             <div class="card-title">Konfirmasi Perencanaan</div>
-
                         </div>
                     </div>
-                    <div class="card-body pt-0">
+                    <div class="card-body px-2 pt-2">
                         @component('dashboard.components.forms.confirm',
                             [
                                 'action' => url('rencana-intervensi/konfirmasi/' . $rencana_intervensi->id),
