@@ -218,18 +218,18 @@
                 if (result) {
                     $.ajax({
                         type: 'DELETE',
-                        url: "{{ url('rencana-intervensi-keong') }}" + '/' + id,
+                        url: "{{ url('realisasi-intervensi') }}" + '/' + id,
                         data: {
                             _token: _token
                         },
                         success: function(data) {
+                            // console.log(data)
                             swal({
                                 title: "Berhasil!",
                                 text: "Data yang dipilih berhasil dihapus.",
                                 icon: "success",
                             }).then(function() {
                                 table.ajax.reload();
-                                $('#checkAllData').prop('checked', false);
                             });
                         }
                     })

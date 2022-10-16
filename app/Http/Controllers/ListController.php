@@ -11,7 +11,6 @@ use App\Models\Posyandu;
 use App\Models\Puskesmas;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\OrangTua;
 
 class ListController extends Controller
 {

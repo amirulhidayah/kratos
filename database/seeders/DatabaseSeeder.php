@@ -38,18 +38,19 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(PendudukTableSeeder::class); // new
         // $this->call(PendudukSeeder::class);
+        // $this->call(PuskesmasSeeder::class);
+        // $this->call(PosyanduSeeder::class);
         $this->call(IndikatorTableSeeder::class);
         $this->call(DesaTableSeeder::class);
         $this->call(KecamatanTableSeeder::class);
         $this->call(OPDSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(SumberDanaSeeder::class);
-        // $this->call(PuskesmasSeeder::class);
-        // $this->call(PosyanduSeeder::class);
-        $this->call(OrangTuaSeeder::class);
         $this->call(PuskesmasTableSeeder::class);
         $this->call(PosyanduTableSeeder::class);
-        $this->call(AnakSeeder::class);
+        $this->call(OrangTuaTableSeeder::class);
+        $this->call(AnakTableSeeder::class);
+        $this->call(PengukuranAnakTableSeeder::class);
 
 
         $this->call(PerencanaanTableSeeder::class);
@@ -58,5 +59,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RealisasiTableSeeder::class);
         $this->call(PendudukRealisasiTableSeeder::class);
         $this->call(DokumenRealisasiTableSeeder::class);
+        $this->call(OrangTuaTableSeeder::class);
+        $this->call(AnakTableSeeder::class);
+        $this->call(PengukuranAnakTableSeeder::class);
     }
 }

@@ -291,7 +291,7 @@ class RealisasiController extends Controller
             'listPerencanaan' => $listPerencanaan,
             // 'realisasiIntervensi' => $realisasi_intervensi,
             // 'pendudukRealisasi' => $realisasi_intervensi->pendudukRealisasi,
-            'kecamatan' => Kecamatan::with('desa')->get(),
+            'kecamatan' => Kecamatan::with('desa')->orderBy('nama')->get(),
             'orangTua' => OrangTua::latest()->get(),
         ];
 
@@ -516,7 +516,7 @@ class RealisasiController extends Controller
             'orangTua' => OrangTua::latest()->get(),
             'opd' => OPD::orderBy('nama')->whereNot('id', Auth::user()->opd_id)->get(),
             'orangTua' => OrangTua::latest()->get(),
-            'kecamatan' => Kecamatan::with('desa')->get(),
+            'kecamatan' => Kecamatan::with('desa')->orderBy('nama')->get(),
         ];
 
         if ($urlKedua == 'tambah-penduduk-realisasi') {
@@ -712,39 +712,8 @@ class RealisasiController extends Controller
         return response()->json(['success' => 'Berhasil mengkonfirmasi']);
     }
 
-    public function updateOPD(Perencanaan $realisasi_intervensi, Request $request)
+    public function destroy(Realisasi $realisasi_intervensi)
     {
-        $rencana_intervensi = $realisasi_intervensi;
-        $rencana_intervensi->opdTerkait()->delete();
-
-        foreach ($request->opd_terkait as $item) {
-            $data = [
-                'perencanaan_id' => $rencana_intervensi->id,
-                'opd_id' => $item,
-            ];
-            OPDTerkait::create($data);
-        }
-        return $realisasi_intervensi;
-    }
-
-    public function deleteOPD(OPDTerkait $realisasi_intervensi)
-    {
-        $realisasi_intervensi->delete();
-        return response()->json(['success' => 'Berhasil menghapus OPD terkait']);
-    }
-
-    public function deleteLaporan(Realisasi $realisasi_intervensi)
-    {
-        if ($realisasi_intervensi->desaRealisasi) {
-            foreach ($realisasi_intervensi->desaRealisasi as $item) {
-                $data = [
-                    'status' => 0,
-                    'realisasi_id' => NULL,
-                ];
-                $item->update($data);
-            }
-        }
-
         if ($realisasi_intervensi->dokumenRealisasi) {
             foreach ($realisasi_intervensi->dokumenRealisasi as $item) {
                 $namaFile = $item->file;
@@ -754,35 +723,9 @@ class RealisasiController extends Controller
             }
             $realisasi_intervensi->dokumenRealisasi()->delete();
         }
-
+        $realisasi_intervensi->pendudukRealisasi()->delete();
         $realisasi_intervensi->delete();
-        return response()->json(['success' => 'Berhasil menghapus laporan']);
-    }
 
-    public function deleteSemuaLaporan(Perencanaan $realisasi_intervensi)
-    {
-        $rencana_intervensi = $realisasi_intervensi;
-
-        if ($rencana_intervensi->realisasi) {
-            foreach ($rencana_intervensi->realisasi as $item) {
-                foreach ($item->desaRealisasi as $item2) {
-                    $data = [
-                        'status' => 0,
-                        'realisasi_id' => NULL,
-                    ];
-                    $item2->update($data);
-                }
-                foreach ($item->dokumenRealisasi as $item3) {
-                    $namaFile = $item3->file;
-                    if (Storage::exists('uploads/dokumen/realisasi/' . $namaFile)) {
-                        Storage::delete('uploads/dokumen/realisasi/' . $namaFile);
-                    }
-                }
-                $item->dokumenRealisasi()->delete();
-            }
-
-            $rencana_intervensi->realisasi()->delete();
-        }
         return response()->json(['success' => 'Berhasil menghapus laporan']);
     }
 

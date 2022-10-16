@@ -69,21 +69,13 @@ class OpdTerkaitTableSeeder extends Seeder
             ),
             6 => 
             array (
-                'created_at' => '2022-10-15 20:39:24',
-                'id' => '635601fc-1b06-4c98-85c6-6f554a26bcdd',
-                'opd_id' => '0065b51c-49c0-4e81-a3b3-a6b4e21b3c95',
-                'perencanaan_id' => '8674fd2c-041d-49ac-8dd8-adbacb7476ed',
-                'updated_at' => '2022-10-15 20:39:24',
-            ),
-            7 => 
-            array (
                 'created_at' => '2022-10-15 22:55:33',
                 'id' => '6de40567-f5b8-4535-a463-36c80c14bb4c',
                 'opd_id' => '0065b51c-49c0-4e81-a3b3-a6b4e21b3c97',
                 'perencanaan_id' => 'cedd07ba-bc7d-4bc2-acf1-c98391722b76',
                 'updated_at' => '2022-10-15 22:55:33',
             ),
-            8 => 
+            7 => 
             array (
                 'created_at' => '2022-10-15 21:03:27',
                 'id' => '7493944e-17ac-4c87-a260-96d29f9b3450',
@@ -91,7 +83,7 @@ class OpdTerkaitTableSeeder extends Seeder
                 'perencanaan_id' => '4daef7d5-86d9-4d28-8a5c-1823b8fae6d9',
                 'updated_at' => '2022-10-15 21:03:27',
             ),
-            9 => 
+            8 => 
             array (
                 'created_at' => '2022-10-15 21:03:27',
                 'id' => '7de76593-2432-4f95-a082-a5e3d20230c4',
@@ -99,7 +91,7 @@ class OpdTerkaitTableSeeder extends Seeder
                 'perencanaan_id' => '4daef7d5-86d9-4d28-8a5c-1823b8fae6d9',
                 'updated_at' => '2022-10-15 21:03:27',
             ),
-            10 => 
+            9 => 
             array (
                 'created_at' => '2022-10-15 22:40:47',
                 'id' => '96737323-d107-4d3f-b15e-2f976b09000a',
@@ -107,7 +99,7 @@ class OpdTerkaitTableSeeder extends Seeder
                 'perencanaan_id' => '2fe3f018-8837-463e-be44-c4a8c3dcb069',
                 'updated_at' => '2022-10-15 22:40:47',
             ),
-            11 => 
+            10 => 
             array (
                 'created_at' => '2022-10-15 22:55:33',
                 'id' => '987913f8-3c82-4b75-9523-3903bc2a0c0e',
@@ -115,7 +107,7 @@ class OpdTerkaitTableSeeder extends Seeder
                 'perencanaan_id' => 'cedd07ba-bc7d-4bc2-acf1-c98391722b76',
                 'updated_at' => '2022-10-15 22:55:33',
             ),
-            12 => 
+            11 => 
             array (
                 'created_at' => '2022-10-15 20:31:10',
                 'id' => 'a285cd7f-9184-44d0-8456-537d5427a24d',
@@ -123,7 +115,7 @@ class OpdTerkaitTableSeeder extends Seeder
                 'perencanaan_id' => 'aa3c387f-90a5-4148-9ccd-680c6d1f41a0',
                 'updated_at' => '2022-10-15 20:31:10',
             ),
-            13 => 
+            12 => 
             array (
                 'created_at' => '2022-10-15 20:49:52',
                 'id' => 'a6922a91-801e-4024-a472-6b20087c550c',
@@ -131,15 +123,7 @@ class OpdTerkaitTableSeeder extends Seeder
                 'perencanaan_id' => '6e1e11f9-b285-46d5-af90-847d5e5fa602',
                 'updated_at' => '2022-10-15 20:49:52',
             ),
-            14 => 
-            array (
-                'created_at' => '2022-10-15 20:39:24',
-                'id' => 'b47b2d3b-0ff7-4b0f-bb52-3e569fc5b438',
-                'opd_id' => '0065b51c-49c0-4e81-a3b3-a6b4e21b3c10',
-                'perencanaan_id' => '8674fd2c-041d-49ac-8dd8-adbacb7476ed',
-                'updated_at' => '2022-10-15 20:39:24',
-            ),
-            15 => 
+            13 => 
             array (
                 'created_at' => '2022-10-15 21:50:08',
                 'id' => 'b4e61c4a-34f6-4a7b-916f-176da46b6250',
@@ -147,7 +131,7 @@ class OpdTerkaitTableSeeder extends Seeder
                 'perencanaan_id' => 'f884c0d6-ec2c-4038-8440-2eab2a2a4431',
                 'updated_at' => '2022-10-15 21:50:08',
             ),
-            16 => 
+            14 => 
             array (
                 'created_at' => '2022-09-21 15:14:14',
                 'id' => 'c0393259-fd20-4065-b3c2-17eeab2ae4c8',
@@ -155,7 +139,15 @@ class OpdTerkaitTableSeeder extends Seeder
                 'perencanaan_id' => '28f813fc-f9d9-4a7d-b161-508ad436001e',
                 'updated_at' => '2022-09-21 15:14:14',
             ),
-            17 => 
+            15 => 
+            array (
+                'created_at' => '2022-10-16 15:08:12',
+                'id' => 'c13dbb32-8c33-496e-a669-a7f06caef2ca',
+                'opd_id' => '0065b51c-49c0-4e81-a3b3-a6b4e21b3c10',
+                'perencanaan_id' => '8674fd2c-041d-49ac-8dd8-adbacb7476ed',
+                'updated_at' => '2022-10-16 15:08:12',
+            ),
+            16 => 
             array (
                 'created_at' => '2022-10-15 22:36:59',
                 'id' => 'c19f5106-69d2-474e-89a4-fa013880d981',
@@ -163,7 +155,7 @@ class OpdTerkaitTableSeeder extends Seeder
                 'perencanaan_id' => '5bcbda3a-4ee9-4a4d-aa38-51ca4f511f88',
                 'updated_at' => '2022-10-15 22:36:59',
             ),
-            18 => 
+            17 => 
             array (
                 'created_at' => '2022-09-22 00:47:22',
                 'id' => 'c8476221-a1d6-4ca0-811e-7505ca1f78da',
@@ -171,7 +163,7 @@ class OpdTerkaitTableSeeder extends Seeder
                 'perencanaan_id' => '05a722bc-3504-4ef4-a5a7-08629ea1952c',
                 'updated_at' => '2022-09-22 00:47:22',
             ),
-            19 => 
+            18 => 
             array (
                 'created_at' => '2022-09-22 00:49:00',
                 'id' => 'd3827f5f-b26f-4769-a77d-6711f19dc0b2',
@@ -179,7 +171,7 @@ class OpdTerkaitTableSeeder extends Seeder
                 'perencanaan_id' => 'd782e166-f1ac-4e68-866a-84917e214c76',
                 'updated_at' => '2022-09-22 00:49:00',
             ),
-            20 => 
+            19 => 
             array (
                 'created_at' => '2022-10-15 23:07:28',
                 'id' => 'd86001ea-0949-4658-a61b-e3d478d851f8',

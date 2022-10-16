@@ -15,11 +15,11 @@ class PendudukRealisasi extends Model
 
     public function orangTua()
     {
-        return $this->belongsTo(OrangTua::class);
+        return $this->belongsTo(OrangTua::class)->withTrashed();
     }
 
     public function anak()
     {
-        return $this->belongsTo(Anak::class);
+        return $this->belongsTo(Anak::class)->withTrashed();
     }
 }

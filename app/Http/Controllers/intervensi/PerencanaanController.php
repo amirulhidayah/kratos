@@ -18,6 +18,7 @@ use App\Exports\PerencanaanExport;
 use App\Models\DokumenPerencanaan;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\PendudukRealisasi;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
@@ -572,7 +573,13 @@ class PerencanaanController extends Controller
                 DokumenRealisasi::where('id', $doc->id)->delete();
             }
             // $rencana_intervensi_manusia->realisasiManusia->pendudukRealisasiManusia()->delete();
+
+            // foreach ($rencana_intervensi->realisasi->pendudukRealisasi as $row){
+            //     PendudukRealisasi::where('id', $row->id);
+            // }
         }
+
+        $rencana_intervensi->realisasi->pendudukRealisasi()->delete();
 
         $rencana_intervensi->opdTerkait()->delete();
         $rencana_intervensi->realisasi()->delete();
