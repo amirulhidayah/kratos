@@ -4,77 +4,68 @@
                 <th scope="col" align="center"
                     style="vertical-align: center;border: 1px solid black;font-weight : bold">No.</th>
                 <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Nama</th>
+                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Nama Ibu</th>
                 <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">NIK</th>
+                    style="vertical-align: center;border: 1px solid black;font-weight : bold">NIK Ibu</th>
                 <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Jenis Kelamin</th>
+                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Nama Ayah</th>
                 <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Tempat Lahir</th>
+                    style="vertical-align: center;border: 1px solid black;font-weight : bold">NIK Ayah</th>
                 <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Tanggal Lahir</th>
+                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Kecamatan</th>
                 <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Agama</th>
+                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Desa</th>
                 <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Status Pendidikan Terakhir
+                    style="vertical-align: center;border: 1px solid black;font-weight : bold">RT
                 </th>
                 <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Pekerjaan</th>
-                <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Golongan Darah</th>
-                <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Status Perkawinan</th>
-                <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Tanggal Perkawinan</th>
-                <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Kewarganegaraan</th>
-                <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Nomor Paspor</th>
-                <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Nomor Kitap</th>
+                    style="vertical-align: center;border: 1px solid black;font-weight : bold">RW</th>
                 <th scope="col" align="center"
                     style="vertical-align: center;border: 1px solid black;font-weight : bold">Alamat</th>
                 <th scope="col" align="center"
-                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Desa</th>
+                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Jumlah Anak</th>
+                <th scope="col" align="center"
+                    style="vertical-align: center;border: 1px solid black;font-weight : bold">Anak</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($daftarPenduduk as $penduduk)
+            @foreach ($daftarOrangTua as $orangTua)
                 <tr style="vertical-align: center;border: 1px solid black;">
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
                         {{ $loop->iteration }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $penduduk->nama }}</td>
+                        {{ $orangTua->nama_ibu ?? '-' }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $penduduk->nik }}</td>
+                        {{ $orangTua->nik_ibu ?? '-' }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $penduduk->jenis_kelamin }}</td>
+                        {{ $orangTua->nama_ayah ?? '-' }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $penduduk->tempat_lahir }}</td>
+                        {{ $orangTua->nik_ayah ?? '-' }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ \Carbon\Carbon::parse($penduduk->tanggal_lahir)->format('d-m-Y') }}</td>
+                        {{ $orangTua->desa->kecamatan->nama }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $penduduk->agama }}</td>
+                        {{ $orangTua->desa->nama }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $penduduk->status_pendidikan }}</td>
+                        {{ $orangTua->rt ?? '-' }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $penduduk->pekerjaan }}</td>
+                        {{ $orangTua->rw ?? '-' }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $penduduk->golongan_darah }}</td>
+                        {{ $orangTua->alamat ?? '-' }}</td>
                     <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $penduduk->status_perkawinan }}</td>
-                    <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ \Carbon\Carbon::parse($penduduk->tanggal_perkawinan)->format('d-m-Y') }}</td>
-                    <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $penduduk->kewarganegaraan }}</td>
-                    <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $penduduk->no_paspor }}</td>
-                    <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $penduduk->no_kitap }}</td>
-                    <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $penduduk->alamat }}</td>
-                    <td style="vertical-align: center;border: 1px solid black;" align="center">
-                        {{ $penduduk->desa->nama }}</td>
+                        {{ count($orangTua->anak) }}</td>
+                    @if (count($orangTua->anak) > 0)
+                        <td style="vertical-align: center;border: 1px solid black;" align="center">
+                            @foreach ($orangTua->anak as $anak)
+                                {{ $loop->iteration . '. ' . $anak->nama . ' (' . $anak->nik . ')' }}
+                                @if (!$loop->last)
+                                    <br>
+                                @endif
+                            @endforeach
+                        </td>
+                    @else
+                        <td style="vertical-align: center;border: 1px solid black;" align="center">
+                            -</td>
+                    @endif
                 </tr>
             @endforeach
         </tbody>

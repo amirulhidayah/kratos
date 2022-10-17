@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\masterData;
 
+use App\Exports\OrangTuaExport;
 use App\Http\Controllers\Controller;
 use App\Models\Kecamatan;
 use App\Models\OrangTua;
@@ -35,6 +36,13 @@ class OrangTuaController extends Controller
                 if ($request->desa_id && $request->desa_id != "semua") {
                     $query->where('desa_id', $request->desa_id);
                 }
+
+                if ($request->nama_nik) {
+                    $query->where('nama_ibu', 'LIKE', '%' . $request->nama_nik . '%');
+                    $query->orWhere('nik_ibu', 'LIKE', '%' . $request->nama_nik . '%');
+                    $query->orWhere('nama_ayah', 'LIKE', '%' . $request->nama_nik . '%');
+                    $query->orWhere('nik_ayah', 'LIKE', '%' . $request->nama_nik . '%');
+                }
             })->get();
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -62,6 +70,22 @@ class OrangTuaController extends Controller
                 ->addColumn('rw', function ($row) {
                     return $row->rw ?? '-';
                 })
+                ->addColumn('jumlah_anak', function ($row) {
+                    return $row->anak->count();
+                })
+                ->addColumn('anak', function ($row) {
+                    $daftarAnak = '';
+                    if (count($row->anak) > 0) {
+                        $i = 1;
+                        foreach ($row->anak as $anak) {
+                            $daftarAnak .= '<p class="my-0">' . $i . '. ' . $anak->nama . ' (' . $anak->nik . ') </p>';
+                            $i++;
+                        }
+                    } else {
+                        $daftarAnak .= '-';
+                    }
+                    return $daftarAnak;
+                })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '';
 
@@ -72,7 +96,7 @@ class OrangTuaController extends Controller
                     }
                     return $actionBtn;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action', 'anak'])
                 ->make(true);
         }
 
@@ -105,7 +129,7 @@ class OrangTuaController extends Controller
         $namaAyah = $request->nama_ayah;
         $nikAyah = $request->nik_ayah;
 
-        if ((!$namaIbu && !$nikIbu) && (!$namaAyah && !$nikAyah)) {
+        if (((!$namaIbu && !$nikIbu) && (!$namaAyah && !$nikAyah)) || (($namaIbu && $nikIbu) && ($namaAyah && !$nikAyah) || ($namaIbu && $nikIbu) && (!$namaAyah && $nikAyah) || (!$namaIbu && $nikIbu) && ($namaAyah && $nikAyah) || ($namaIbu && !$nikIbu) && ($namaAyah && $nikAyah) || (!$namaIbu && $nikIbu) && (!$namaAyah && $nikAyah) || ($namaIbu && !$nikIbu) && ($namaAyah && !$nikAyah) || (!$namaIbu && $nikIbu) && ($namaAyah && !$nikAyah) || ($namaIbu && !$nikIbu) && (!$namaAyah && $nikAyah)) || (($namaIbu && $nikIbu) && ($namaAyah && $nikAyah))) {
             $validatorNamaIbu = 'required';
             $validatorNikIbu = ['required', Rule::unique('orang_tua')->withoutTrashed(), 'digits:16'];
             $validatorNamaAyah = 'required';
@@ -275,5 +299,26 @@ class OrangTuaController extends Controller
         $orangTua->delete();
 
         return response()->json(['status' => 'success']);
+    }
+
+    public function export(Request $request)
+    {
+        $daftarOrangTua = OrangTua::with(['desa'])->orderBy('created_at', 'desc')->where(function ($query) use ($request) {
+            if ($request->kecamatan_id && $request->kecamatan_id != "semua") {
+                $query->whereHas('desa', function ($query) use ($request) {
+                    $query->whereHas('kecamatan', function ($query) use ($request) {
+                        $query->where('id', $request->kecamatan_id);
+                    });
+                });
+            }
+
+            if ($request->desa_id && $request->desa_id != "semua") {
+                $query->where('desa_id', $request->desa_id);
+            }
+        })->get();
+
+        $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
+
+        return Excel::download(new OrangTuaExport($daftarOrangTua), "Export Data Orang Tua" . "-" . $tanggal . "-" . rand(1, 9999) . '.xlsx');
     }
 }

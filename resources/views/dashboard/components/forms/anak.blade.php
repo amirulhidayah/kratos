@@ -80,7 +80,7 @@
                     'id' => 'bb_lahir',
                     'name' => 'bb_lahir',
                     'class' => 'numerik',
-                    'wajib' => '<sup class="text-danger">*</sup>',
+                    // 'wajib' => '<sup class="text-danger">*</sup>',
                     'placeholder' => 'Masukkan Berat Badan Lahir',
                 ])
             @endcomponent
@@ -93,7 +93,7 @@
                     'id' => 'tb_lahir',
                     'name' => 'tb_lahir',
                     'class' => 'numerik',
-                    'wajib' => '<sup class="text-danger">*</sup>',
+                    // 'wajib' => '<sup class="text-danger">*</sup>',
                     'placeholder' => 'Masukkan Tinggi Badan Lahir',
                 ])
             @endcomponent

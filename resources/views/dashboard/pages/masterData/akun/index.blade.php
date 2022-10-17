@@ -175,6 +175,10 @@
         var table = $('#table-data').DataTable({
             processing: true,
             serverSide: true,
+            pageLength: 25,
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/id.json'
+            },
             ajax: {
                 url: "{{ url('master-data/akun') }}",
                 data: function(d) {

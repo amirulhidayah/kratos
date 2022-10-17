@@ -17,4 +17,9 @@ class OrangTua extends Model
     {
         return $this->belongsTo(Desa::class);
     }
+
+    public function anak()
+    {
+        return $this->hasMany(Anak::class);
+    }
 }

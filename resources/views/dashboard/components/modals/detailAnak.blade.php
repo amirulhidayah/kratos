@@ -156,8 +156,10 @@
                         $('#nik').html(response.anak.nik);
                         $('#jenis-kelamin').html(response.anak.jenis_kelamin);
                         $('#tanggal-lahir').html(response.tanggalLahir);
-                        $('#bb_lahir').html(response.anak.bb_lahir + " Kg");
-                        $('#tb_lahir').html(response.anak.tb_lahir + " Cm");
+                        $('#bb_lahir').html(response.anak.bb_lahir ? response.anak.bb_lahir + " Kg" :
+                            '-');
+                        $('#tb_lahir').html(response.anak.tb_lahir ? response.anak.tb_lahir + " Cm" :
+                            '-');
                         $('#nama_ibu').html(response.orangTua.nama_ibu) ?? '-';
                         $('#nik_ibu').html(response.orangTua.nik_ibu ?? '-');
                         $('#nama_ayah').html(response.orangTua.nama_ayah ?? '-');
@@ -174,6 +176,14 @@
                             $('#bbu').html(response.pengukuranAnakTerakhir.bb_u);
                             $('#tbu').html(response.pengukuranAnakTerakhir.tb_u);
                             $('#bbtb').html(response.pengukuranAnakTerakhir.bb_tb);
+                        } else {
+                            $('#usia-saat-ukur').html('-');
+                            $('#berat_ukur').html('-');
+                            $('#tinggi_ukur').html('-');
+                            $('#lila').html('-');
+                            $('#bbu').html('-');
+                            $('#tbu').html('-');
+                            $('#bbtb').html('-');
                         }
 
                         $('#modal-lihat').modal('show');

@@ -261,6 +261,9 @@
         var table = $('#table-data').DataTable({
             processing: true,
             serverSide: true,
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/id.json'
+            },
             lengthMenu: [
                 [10, 25, 50, -1],
                 [10, 25, 50, "All"]
