@@ -177,6 +177,16 @@
             z-index: 999;
             font-weight: bold;
         }
+
+        .blink-soft {
+            animation: blinker 2s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
     </style>
     @stack('styles')
 </head>

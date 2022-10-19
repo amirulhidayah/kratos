@@ -36,13 +36,21 @@ class PengukuranAnakController extends Controller
                     return $row->posyandu->nama ?? '-';
                 })
                 ->addColumn('tanggal_pengukuran', function ($row) {
-                    return Carbon::parse($row->tanggal_pengukuran)->translatedFormat('d F Y');
+                    $tanggalLahir = Carbon::parse($row->anak->tanggal_lahir);
+                    $tanggalPengukuran = Carbon::parse($row->tanggal_pengukuran);
+
+                    $tanggal = '<p class="mt-2 mb-0">' .  $tanggalPengukuran->translatedFormat('d F Y') . '</p>';
+
+                    if ($tanggalLahir->gt($tanggalPengukuran)) {
+                        $tanggal .= '<p class="blink-soft"><span class="badge badge-danger">Tanggal Pengukuran Kurang Dari Tanggal Lahir</span></p>';
+                    }
+
+                    return $tanggal;
                 })
-                ->addColumn('usia_saat_ukur', function ($row) {
-
-                    return $row->usia_saat_ukur;
-                    // return Carbon::parse($row->tanggal_pengukuran)->translatedFormat('d F Y');
-
+                ->addColumn('usia_sebut', function ($row) {
+                    $tanggalLahir = Carbon::parse($row->anak->tanggal_lahir)->format('Y-m-d');
+                    $tanggalUkur = Carbon::parse($row->tanggal_pengukuran)->format('Y-m-d');
+                    return usiaSebut($tanggalLahir, $tanggalUkur);
                 })
                 ->addColumn('berat', function ($row) {
 
@@ -77,7 +85,7 @@ class PengukuranAnakController extends Controller
                     }
                     return $actionBtn;
                 })
-                ->rawColumns(['action', 'orang_tua', 'tanggal_pengukuran', 'usia_saat_ukur', 'berat', 'tinggi', 'lila', 'bb_u', 'tb_u', 'bb_tb'])
+                ->rawColumns(['action', 'orang_tua', 'tanggal_pengukuran', 'usia_sebut', 'berat', 'tinggi', 'lila', 'bb_u', 'tb_u', 'bb_tb'])
                 ->make(true);
         }
 
@@ -167,7 +175,6 @@ class PengukuranAnakController extends Controller
         $pengukuranAnak->tanggal_pengukuran = Carbon::parse($request->tanggal_pengukuran)->format('Y-m-d');
         $pengukuranAnak->puskesmas_id = $request->puskesmas_id;
         $pengukuranAnak->posyandu_id = $request->posyandu_id;
-        $pengukuranAnak->usia_saat_ukur = $usiaSebut;
         $pengukuranAnak->bb_u = $bbu;
         $pengukuranAnak->tb_u = $tbu;
         $pengukuranAnak->bb_tb = $bbtb;
@@ -272,7 +279,6 @@ class PengukuranAnakController extends Controller
         $pengukuranAnak->puskesmas_id = $request->puskesmas_id;
         $pengukuranAnak->posyandu_id = $request->posyandu_id;
         $pengukuranAnak->bb_u = $bbu;
-        $pengukuranAnak->usia_saat_ukur = $usiaSebut;
         $pengukuranAnak->tb_u = $tbu;
         $pengukuranAnak->bb_tb = $bbtb;
         $pengukuranAnak->save();

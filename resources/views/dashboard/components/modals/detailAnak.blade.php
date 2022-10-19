@@ -160,7 +160,7 @@
                             '-');
                         $('#tb_lahir').html(response.anak.tb_lahir ? response.anak.tb_lahir + " Cm" :
                             '-');
-                        $('#nama_ibu').html(response.orangTua.nama_ibu) ?? '-';
+                        $('#nama_ibu').html(response.orangTua.nama_ibu ?? '-');
                         $('#nik_ibu').html(response.orangTua.nik_ibu ?? '-');
                         $('#nama_ayah').html(response.orangTua.nama_ayah ?? '-');
                         $('#nik_ayah').html(response.orangTua.nik_ayah ?? '-');

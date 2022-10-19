@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\TraitUuid;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,6 +27,12 @@ class Anak extends Model
     public function pengukuranAnak()
     {
         return $this->hasMany(PengukuranAnak::class);
+    }
+
+    public function pengukuranAnakLewatTanggalLahir()
+    {
+        $tanggalLahir = Carbon::parse($this->tanggal_lahir)->format('Y-m-d');
+        return $this->hasMany(PengukuranAnak::class)->whereDate('tanggal_pengukuran', '<', $tanggalLahir);
     }
 
     public function scopeJenisKelamin($query, $value)

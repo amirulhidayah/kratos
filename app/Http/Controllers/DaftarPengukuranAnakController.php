@@ -85,9 +85,19 @@ class DaftarPengukuranAnakController extends Controller
                         $query->where('bb_tb', $request->bb_tb);
                     });
                 }
-            })->orderBy('created_at', 'desc')->get();
+            })->orderBy('created_at', 'desc')->get()->sortByDesc(function ($data) {
+                return $data->pengukuranAnakLewatTanggalLahir->count();
+            });
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('nama', function ($row) {
+                    $nama = '<p class="mt-2 mb-0">' .  $row->nama . '</p>';
+
+                    if (count($row->pengukuranAnakLewatTanggalLahir) > 0) {
+                        $nama .= '<p class="blink-soft"><span class="badge badge-danger"> Terdapat Pengukuran yang Tanggal Pengukurannya Kurang Dari Tanggal Lahir</span></p>';
+                    }
+                    return $nama;
+                })
                 ->addColumn('tanggal_lahir', function ($row) {
                     return Carbon::parse($row->tanggal_lahir)->translatedFormat('d F Y');
                 })
@@ -100,7 +110,9 @@ class DaftarPengukuranAnakController extends Controller
                 })
                 ->addColumn('usia_saat_ukur', function ($row) {
                     if ($row->pengukuranAnakTerakhir) {
-                        return $row->pengukuranAnakTerakhir->usia_saat_ukur;
+                        $tanggalLahir = Carbon::parse($row->tanggal_lahir)->format('Y-m-d');
+                        $tanggalUkur = Carbon::parse($row->pengukuranAnakTerakhir->tanggal_pengukuran)->format('Y-m-d');
+                        return usiaSebut($tanggalLahir, $tanggalUkur);
                         // return Carbon::parse($row->pengukuranAnakTerakhir->tanggal_pengukuran)->translatedFormat('d F Y');
                     } else {
                         return "<span class='badge badge-primary'>Belum Ada</span>";
@@ -174,7 +186,7 @@ class DaftarPengukuranAnakController extends Controller
                     }
                     return $actionBtn;
                 })
-                ->rawColumns(['action', 'orang_tua', 'tanggal_pengukuran', 'usia_saat_ukur', 'berat', 'tinggi', 'lila', 'bb_u', 'tb_u', 'bb_tb'])
+                ->rawColumns(['action', 'nama', 'orang_tua', 'tanggal_pengukuran', 'usia_saat_ukur', 'berat', 'tinggi', 'lila', 'bb_u', 'tb_u', 'bb_tb'])
                 ->make(true);
         }
 

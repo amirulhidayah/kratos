@@ -197,6 +197,18 @@
                                     window.location.href =
                                         "{{ $back_url }}";
                                 })
+                            } else if (response.status ==
+                                'success_pengukuran_lewat_tanggal_lahir') {
+                                swal("Berhasil",
+                                    "Terdapat Data Pengukuran yang Tanggal Pengukurannya Kurang Dari Tanggal Lahir", {
+                                        icon: "warning",
+                                        buttons: false,
+                                        timer: 3000,
+                                    }).then(function() {
+                                    window.location.href =
+                                        "{{ url('pengukuran-anak') }}" + '/' + response
+                                        .id;
+                                })
                             } else {
                                 swal("Periksa Kembali Data Anda", {
                                     buttons: false,

@@ -53,6 +53,14 @@ class AnakController extends Controller
             })->orderBy('created_at', 'desc')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('nama', function ($row) {
+                    $nama = '<p class="mt-2 mb-0">' .  $row->nama . '</p>';
+
+                    if (count($row->pengukuranAnakLewatTanggalLahir) > 0) {
+                        $nama .= '<p class="blink-soft"><span class="badge badge-danger"> Terdapat Pengukuran yang Tanggal Pengukurannya Kurang Dari Tanggal Lahir</span></p>';
+                    }
+                    return $nama;
+                })
                 ->addColumn('tanggal_lahir', function ($row) {
                     return Carbon::parse($row->tanggal_lahir)->translatedFormat('d F Y');
                 })
@@ -77,10 +85,10 @@ class AnakController extends Controller
                     return $row->orangTua->alamat;
                 })
                 ->addColumn('bb_lahir', function ($row) {
-                    return $row->bb_lahir . ' Kg';
+                    return $row->bb_lahir ? $row->bb_lahir . ' Kg' : '-';
                 })
                 ->addColumn('tb_lahir', function ($row) {
-                    return $row->tb_lahir . ' Cm';
+                    return $row->tb_lahir ? $row->tb_lahir . ' Cm' : '-';
                 })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '';
@@ -97,7 +105,7 @@ class AnakController extends Controller
                     }
                     return $actionBtn;
                 })
-                ->rawColumns(['action', 'orang_tua'])
+                ->rawColumns(['action', 'orang_tua', 'nama'])
                 ->make(true);
         }
 
@@ -247,7 +255,6 @@ class AnakController extends Controller
             'pengukuranAnakTerakhir' => $anak->pengukuranAnakTerakhir,
             'tanggalPengukuran' => $anak->pengukuranAnakTerakhir->tanggal_pengukuran ?? '' ? Carbon::parse($anak->pengukuranAnakTerakhir->tanggal_pengukuran)->translatedFormat('d F Y') : '-',
             'tanggalLahir' => $anak->tanggal_lahir ?? '' ? Carbon::parse($anak->tanggal_lahir)->translatedFormat('d F Y') : '-',
-
         ]);
     }
 
@@ -313,6 +320,14 @@ class AnakController extends Controller
         $anak->orang_tua_id = $request->orang_tua_id;
         $anak->save();
 
+        $pengukuranAnak = PengukuranAnak::where('anak_id', $anak->id)->whereDate('tanggal_pengukuran', '<', $anak->tanggal_lahir)->count();
+        if ($pengukuranAnak > 0) {
+            return response()->json([
+                'status' => 'success_pengukuran_lewat_tanggal_lahir',
+                'id' => $anak->id
+            ]);
+        }
+
 
         return response()->json(['status' => 'success']);
     }
@@ -326,6 +341,8 @@ class AnakController extends Controller
     public function destroy(Anak $anak)
     {
         $anak->delete();
+
+        $anak->pengukuranAnak()->delete();
 
         return response()->json(['status' => 'success']);
     }

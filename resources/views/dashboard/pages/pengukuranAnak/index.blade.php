@@ -257,8 +257,8 @@
                     class: 'text-center'
                 },
                 {
-                    data: 'usia_saat_ukur',
-                    name: 'usia_saat_ukur',
+                    data: 'usia_sebut',
+                    name: 'usia_sebut',
                     class: 'text-center'
                 },
                 {

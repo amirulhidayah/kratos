@@ -6,6 +6,7 @@ use App\Exports\OrangTuaExport;
 use App\Http\Controllers\Controller;
 use App\Models\Kecamatan;
 use App\Models\OrangTua;
+use App\Models\PengukuranAnak;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +48,16 @@ class OrangTuaController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('nama_ibu', function ($row) {
-                    return $row->nama_ibu ?? '-';
+                    $pengukuran = '';
+                    $ibu = $row->nama_ibu ? '<p class="my-0">'  . $row->nama_ibu . '</p>' : '<p class="my-0">-</p>';
+                    foreach ($row->anak as $anak) {
+                        if (count($anak->pengukuranAnakLewatTanggalLahir) > 0) {
+                            $pengukuran = '<p class="blink-soft"><span class="badge badge-danger"> Terdapat Pengukuran Anak yang Tanggal Pengukurannya Kurang Dari Tanggal Lahir</span></p>';
+                        }
+                    }
+
+                    $ibu .= $pengukuran;
+                    return $ibu;
                 })
                 ->addColumn('nik_ibu', function ($row) {
                     return $row->nik_ibu ?? '-';
@@ -96,7 +106,7 @@ class OrangTuaController extends Controller
                     }
                     return $actionBtn;
                 })
-                ->rawColumns(['action', 'anak'])
+                ->rawColumns(['action', 'anak', 'nama_ibu'])
                 ->make(true);
         }
 
@@ -297,6 +307,13 @@ class OrangTuaController extends Controller
     public function destroy(OrangTua $orangTua)
     {
         $orangTua->delete();
+
+        foreach ($orangTua->anak as $anak) {
+            $pengukuranAnak = PengukuranAnak::where('anak_id', $anak->id)->delete();
+        }
+
+        $orangTua->anak()->delete();
+
 
         return response()->json(['status' => 'success']);
     }

@@ -43,6 +43,14 @@ class OrangTuaAnakController extends Controller
             })->where('orang_tua_id', $orangTua->id)->orderBy('created_at', 'desc')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('nama', function ($row) {
+                    $nama = '<p class="mt-2 mb-0">' .  $row->nama . '</p>';
+
+                    if (count($row->pengukuranAnakLewatTanggalLahir) > 0) {
+                        $nama .= '<p class="blink-soft"><span class="badge badge-danger"> Terdapat Pengukuran yang Tanggal Pengukurannya Kurang Dari Tanggal Lahir</span></p>';
+                    }
+                    return $nama;
+                })
                 ->addColumn('tanggal_lahir', function ($row) {
                     return Carbon::parse($row->tanggal_lahir)->translatedFormat('d F Y');
                 })
@@ -81,7 +89,7 @@ class OrangTuaAnakController extends Controller
                     }
                     return $actionBtn;
                 })
-                ->rawColumns(['action', 'orang_tua'])
+                ->rawColumns(['action', 'orang_tua', 'nama'])
                 ->make(true);
         }
 
@@ -245,11 +253,12 @@ class OrangTuaAnakController extends Controller
      */
     public function update(Request $request)
     {
+        $anak = Anak::where('id', $request->anak)->first();
         $validator = Validator::make(
             $request->all(),
             [
                 'nama' => 'required',
-                'nik' => ['required', Rule::unique('anak')->withoutTrashed(), 'digits:16'],
+                'nik' => ['required', Rule::unique('anak')->ignore($anak->id)->withoutTrashed(), 'digits:16'],
                 'jenis_kelamin' => 'required',
                 'tanggal_lahir' => 'required|date',
                 'bb_lahir' => 'required|numeric|min:0',
@@ -276,7 +285,7 @@ class OrangTuaAnakController extends Controller
             return response()->json(['error' => $validator->errors()]);
         }
 
-        $anak = Anak::where('id', $request->anak)->first();
+
         $anak->nama = $request->nama;
         $anak->nik = $request->nik;
         $anak->jenis_kelamin = $request->jenis_kelamin;
@@ -285,6 +294,14 @@ class OrangTuaAnakController extends Controller
         $anak->tb_lahir = $request->tb_lahir;
         $anak->orang_tua_id = $request->orangTua;
         $anak->save();
+
+        $pengukuranAnak = PengukuranAnak::where('anak_id', $anak->id)->whereDate('tanggal_pengukuran', '<', $anak->tanggal_lahir)->count();
+        if ($pengukuranAnak > 0) {
+            return response()->json([
+                'status' => 'success_pengukuran_lewat_tanggal_lahir',
+                'id' => $anak->id
+            ]);
+        }
 
 
         return response()->json(['status' => 'success']);
@@ -299,7 +316,10 @@ class OrangTuaAnakController extends Controller
     public function destroy(Request $request)
     {
         $anak = Anak::where('id', $request->anak)->first();
+
         $anak->delete();
+
+        $anak->pengukuranAnak()->delete();
 
         return response()->json(['status' => 'success']);
     }
