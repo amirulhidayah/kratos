@@ -33,7 +33,7 @@
                 'id' => 'lila',
                 'name' => 'lila',
                 'class' => 'numerik pengukuran',
-                'wajib' => '<sup class="text-danger">*</sup>',
+                // 'wajib' => '<sup class="text-danger">*</sup>',
                 'placeholder' => 'Masukkan Lingkar Lengan Atas (LiLA)',
             ])
         @endcomponent
@@ -84,7 +84,7 @@
                 'id' => 'posyandu_id',
                 'name' => 'posyandu_id',
                 'class' => 'select2',
-                'wajib' => '<sup class="text-danger">*</sup>',
+                // 'wajib' => '<sup class="text-danger">*</sup>',
             ])
             @slot('options')
             @endslot

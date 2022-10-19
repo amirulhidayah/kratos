@@ -97,6 +97,12 @@ Route::group(['middleware' => 'auth'], function () {
         );
     });
 
+    Route::post('master-data/anak/export', [AnakController::class, 'export']);
+    Route::post('master-data/orang-tua/export', [OrangTuaController::class, 'export']);
+    Route::post('daftar-pengukuran-anak/jumlah-data', [DaftarPengukuranAnakController::class, 'getJumlah']);
+    Route::post('daftar-pengukuran-anak/export-pengukuran-anak', [DaftarPengukuranAnakController::class, 'exportPengukuranAnak']);
+    Route::post('daftar-pengukuran-anak/export-jumlah', [DaftarPengukuranAnakController::class, 'exportJumlah']);
+
     Route::group(['middleware' => ['role:Admin']], function () {
         Route::resource('master-data/opd', OPDController::class)->except(
             'index',

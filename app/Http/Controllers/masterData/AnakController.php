@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\masterData;
 
+use App\Exports\AnakExport;
 use App\Http\Controllers\Controller;
 use App\Models\Anak;
 use App\Models\Kecamatan;
@@ -24,23 +25,42 @@ class AnakController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Anak::with(['orangTua'], function ($query) use ($request) {
-                $query->with(['desa'])->where(function ($query) use ($request) {
-                    if ($request->kecamatan_id && $request->kecamatan_id != "semua") {
+            $data = Anak::with(['orangTua'])->where(function ($query) use ($request) {
+                if ($request->kecamatan_id && $request->kecamatan_id != "semua") {
+                    $query->whereHas('orangTua', function ($query) use ($request) {
                         $query->whereHas('desa', function ($query) use ($request) {
-                            $query->whereHas('kecamatan', function ($query) use ($request) {
-                                $query->where('id', $request->kecamatan_id);
-                            });
+                            $query->where('kecamatan_id', $request->kecamatan_id);
                         });
-                    }
-
+                    });
+                }
+                $query->whereHas('orangTua', function ($query) use ($request) {
                     if ($request->desa_id && $request->desa_id != "semua") {
                         $query->where('desa_id', $request->desa_id);
                     }
                 });
+            })->where(function ($query) use ($request) {
+                if ($request->nama_nik) {
+                    $query->where('nama', 'LIKE', '%' . $request->nama_nik . '%');
+                    $query->orWhere('nik', 'LIKE', '%' . $request->nama_nik . '%');
+
+                    $query->orWhereHas('orangTua', function ($query) use ($request) {
+                        $query->where('nama_ibu', 'LIKE', '%' . $request->nama_nik . '%');
+                        $query->orWhere('nik_ibu', 'LIKE', '%' . $request->nama_nik . '%');
+                        $query->orWhere('nama_ayah', 'LIKE', '%' . $request->nama_nik . '%');
+                        $query->orWhere('nik_ayah', 'LIKE', '%' . $request->nama_nik . '%');
+                    });
+                }
             })->orderBy('created_at', 'desc')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('nama', function ($row) {
+                    $nama = '<p class="mt-2 mb-0">' .  $row->nama . '</p>';
+
+                    if (count($row->pengukuranAnakLewatTanggalLahir) > 0) {
+                        $nama .= '<p class="blink-soft"><span class="badge badge-danger"> Terdapat Pengukuran yang Tanggal Pengukurannya Kurang Dari Tanggal Lahir</span></p>';
+                    }
+                    return $nama;
+                })
                 ->addColumn('tanggal_lahir', function ($row) {
                     return Carbon::parse($row->tanggal_lahir)->translatedFormat('d F Y');
                 })
@@ -65,10 +85,10 @@ class AnakController extends Controller
                     return $row->orangTua->alamat;
                 })
                 ->addColumn('bb_lahir', function ($row) {
-                    return $row->bb_lahir . ' Kg';
+                    return $row->bb_lahir ? $row->bb_lahir . ' Kg' : '-';
                 })
                 ->addColumn('tb_lahir', function ($row) {
-                    return $row->tb_lahir . ' Cm';
+                    return $row->tb_lahir ? $row->tb_lahir . ' Cm' : '-';
                 })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '';
@@ -85,7 +105,7 @@ class AnakController extends Controller
                     }
                     return $actionBtn;
                 })
-                ->rawColumns(['action', 'orang_tua'])
+                ->rawColumns(['action', 'orang_tua', 'nama'])
                 ->make(true);
         }
 
@@ -121,8 +141,8 @@ class AnakController extends Controller
                 'jenis_kelamin' => 'required',
                 'tanggal_lahir' => 'required|date',
                 'orang_tua_id' => 'required',
-                'bb_lahir' => 'required|numeric|min:0',
-                'tb_lahir' => 'required|numeric|min:0',
+                'bb_lahir' => $request->bb_lahir ? 'required|numeric|min:0' : 'nullable',
+                'tb_lahir' => $request->tb_lahir ? 'required|numeric|min:0' : 'nullable',
                 'data_pengukuran' => 'required',
                 'tanggal_pengukuran' => $request->data_pengukuran == 'Ya' ? 'required|date' : 'nullable',
                 'lila' => $request->data_pengukuran == 'Ya' ? 'required|numeric|min:0' : 'nullable',
@@ -235,7 +255,6 @@ class AnakController extends Controller
             'pengukuranAnakTerakhir' => $anak->pengukuranAnakTerakhir,
             'tanggalPengukuran' => $anak->pengukuranAnakTerakhir->tanggal_pengukuran ?? '' ? Carbon::parse($anak->pengukuranAnakTerakhir->tanggal_pengukuran)->translatedFormat('d F Y') : '-',
             'tanggalLahir' => $anak->tanggal_lahir ?? '' ? Carbon::parse($anak->tanggal_lahir)->translatedFormat('d F Y') : '-',
-
         ]);
     }
 
@@ -267,8 +286,8 @@ class AnakController extends Controller
                 'jenis_kelamin' => 'required',
                 'tanggal_lahir' => 'required|date',
                 'orang_tua_id' => 'required',
-                'bb_lahir' => 'required|numeric|min:0',
-                'tb_lahir' => 'required|numeric|min:0'
+                'bb_lahir' => $request->bb_lahir ? 'required|numeric|min:0' : 'nullable',
+                'tb_lahir' => $request->tb_lahir ? 'required|numeric|min:0' : 'nullable',
             ],
             [
                 'nama.required' => 'Nama tidak boleh kosong',
@@ -301,6 +320,14 @@ class AnakController extends Controller
         $anak->orang_tua_id = $request->orang_tua_id;
         $anak->save();
 
+        $pengukuranAnak = PengukuranAnak::where('anak_id', $anak->id)->whereDate('tanggal_pengukuran', '<', $anak->tanggal_lahir)->count();
+        if ($pengukuranAnak > 0) {
+            return response()->json([
+                'status' => 'success_pengukuran_lewat_tanggal_lahir',
+                'id' => $anak->id
+            ]);
+        }
+
 
         return response()->json(['status' => 'success']);
     }
@@ -315,6 +342,30 @@ class AnakController extends Controller
     {
         $anak->delete();
 
+        $anak->pengukuranAnak()->delete();
+
         return response()->json(['status' => 'success']);
+    }
+
+    public function export(Request $request)
+    {
+        $daftarAnak = Anak::with(['orangTua'])->where(function ($query) use ($request) {
+            if ($request->kecamatan_id && $request->kecamatan_id != "semua") {
+                $query->whereHas('orangTua', function ($query) use ($request) {
+                    $query->whereHas('desa', function ($query) use ($request) {
+                        $query->where('kecamatan_id', $request->kecamatan_id);
+                    });
+                });
+            }
+            $query->whereHas('orangTua', function ($query) use ($request) {
+                if ($request->desa_id && $request->desa_id != "semua") {
+                    $query->where('desa_id', $request->desa_id);
+                }
+            });
+        })->orderBy('created_at', 'desc')->get();
+
+        $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
+
+        return Excel::download(new AnakExport($daftarAnak), "Export Data Anak" . "-" . $tanggal . "-" . rand(1, 9999) . '.xlsx');
     }
 }

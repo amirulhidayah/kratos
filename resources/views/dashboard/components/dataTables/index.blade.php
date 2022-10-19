@@ -1,5 +1,5 @@
 <div class="table-responsive {{ $class ?? '' }}">
-    <table class="table table-hover table-striped" id="{{ $id }}" width="100%">
+    <table class="table table-bordered" id="{{ $id }}" width="100%" cellspacing="0">
         <thead>
             <tr class="text-center fw-bold">
                 @foreach ($th as $item)
@@ -7,8 +7,16 @@
                 @endforeach
             </tr>
         </thead>
-        <tbody>
+        <tbody class="border">
 
         </tbody>
     </table>
 </div>
+
+@push('styles')
+    <style>
+        tbody td {
+            border: 1px solid #dee2e6 !important;
+        }
+    </style>
+@endpush

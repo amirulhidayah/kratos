@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
     <link rel="stylesheet"
         href="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.1.0/css/fixedColumns.dataTables.min.css">
 
     <style>
         #overlay {
@@ -176,6 +177,16 @@
             z-index: 999;
             font-weight: bold;
         }
+
+        .blink-soft {
+            animation: blinker 2s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
     </style>
     @stack('styles')
 </head>
@@ -303,6 +314,9 @@
 
     <!-- Atlantis JS -->
     <script src="{{ asset('assets/dashboard') }}/js/atlantis.min.js"></script>
+
+    {{-- Fixed Column Datatables --}}
+    <script src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script>
 
     {{-- Leaflet --}}
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
