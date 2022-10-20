@@ -22,4 +22,9 @@ class PendudukRealisasi extends Model
     {
         return $this->belongsTo(Anak::class)->withTrashed();
     }
+
+    public function realisasi()
+    {
+        return $this->belongsTo(Realisasi::class);
+    }
 }

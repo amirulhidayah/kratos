@@ -19,6 +19,6 @@ class RealisasiExport implements FromView
 
     public function view(): View
     {
-        return view('dashboard.pages.intervensi.realisasi.subIndikator.export', ['dataRealisasi' => $this->dataRealisasi]);
+        return view('dashboard.pages.intervensi.realisasi.export', ['dataRealisasi' => $this->dataRealisasi]);
     }
 }

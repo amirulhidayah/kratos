@@ -14,4 +14,9 @@ class Indikator extends Model
     use TraitUuid;
 
     protected $table = 'indikator';
+
+    public function perencanaan()
+    {
+        return $this->hasOne(Perencanaan::class);
+    }
 }

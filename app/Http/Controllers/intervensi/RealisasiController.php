@@ -17,13 +17,15 @@ use Illuminate\Http\Request;
 use App\Models\DesaPerencanaan;
 use App\Exports\RealisasiExport;
 use App\Models\DokumenRealisasi;
+use App\Models\PendudukRealisasi;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\HasilRealisasiExport;
-use App\Models\PendudukRealisasi;
 use Illuminate\Support\Facades\Storage;
+use App\Exports\PendudukRealisasiExport;
+use App\Models\Indikator;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -207,7 +209,7 @@ class RealisasiController extends Controller
             if ($iter == 1) {
                 array_push($opdFilter, $data);
             } else {
-                $found_key = array_search($item->perencanaan->opd_id, array_column($opdFilter, 'id'));
+                $found_key = in_array($item->perencanaan->opd_id, array_column($opdFilter, 'id'));
                 if (!$found_key) {
                     array_push($opdFilter, $data);
                 }
@@ -747,117 +749,232 @@ class RealisasiController extends Controller
 
     public function hasilRealisasi(Request $request)
     {
-        $habitatKeong = DesaPerencanaan::where('status', 1)
-            ->groupBy('desa_id')
-            ->pluck('desa_id')
-            ->toArray();
+        // dd($this->tabelHasilRealisasi($request));
+        $tahun = $request->tahun;
+        $tahun_ = Realisasi::selectRaw('year(created_at) year')->groupBy('year')->get()->pluck('year')->toArray();
+        $opd = OPD::pluck('nama', 'id')->toArray();
+        $kecamatan = Kecamatan::orderBy('nama', 'ASC')->pluck('nama', 'id')->toArray();
+        $sub_indikator = Indikator::with('perencanaan')->whereHas('perencanaan', function ($q) {
+            $q->whereHas('realisasi');
+        })->pluck('nama', 'id')->toArray();
 
-        $dataHabitatKeong = Lokasi::with('listIndikator', 'desa')->whereIn('id', $habitatKeong);
+        $daftarTahun = array_unique(array_merge($tahun_));
+        return view('dashboard.pages.hasilRealisasi.index', compact(['daftarTahun', 'tahun', 'opd', 'kecamatan', 'sub_indikator']));
+    }
+
+    public function tabelHasilRealisasi(Request $request)
+    {
+        $tahun_filter = $request->tahun_filter;
+        $search_filter = $request->search_filter;
+        $sub_indikator_filter = $request->sub_indikator_filter;
+        $status_filter = $request->status_filter;
+        $opd_filter = $request->opd_filter;
+        $kecamatan_filter = $request->kecamatan_filter;
+        $desa_filter = $request->desa_filter;
+
+
+        $data = [];
+        $pendudukRealisasi = PendudukRealisasi::select('*', 'penduduk_realisasi.created_at as created_at_', 'anak.nama as nama_anak', 'desa.id as id_desa', 'desa.nama as nama_desa', 'kecamatan.id as id_kecamatan', 'kecamatan.nama as nama_kecamatan')
+            ->join('realisasi', 'realisasi.id', '=', 'penduduk_realisasi.realisasi_id')
+            ->join('orang_tua', 'orang_tua.id', '=', 'penduduk_realisasi.orang_tua_id')
+            ->join('desa', 'desa.id', '=', 'orang_tua.desa_id')
+            ->join('kecamatan', 'kecamatan.id', '=', 'desa.kecamatan_id')
+            ->leftJoin('anak', 'anak.id', '=', 'penduduk_realisasi.anak_id')
+            ->where('penduduk_realisasi.status', 1)
+            ->where(function ($q) use ($tahun_filter) {
+                if (($tahun_filter != '') && $tahun_filter != 'Semua') {
+                    $q->where('penduduk_realisasi.created_at', 'LIKE', '%' . $tahun_filter . '%');
+                }
+            })
+            ->get();
+
+
+        foreach ($pendudukRealisasi as $row) {
+            if (in_array($row->sasaran_intervensi, ['Orang Tua', 'Orang Tua dan Anak'])) { // Orang Tua
+                $penduduk = $row->nama_ibu != null ? $row->nama_ibu : $row->nama_ayah;
+                if ($penduduk) {
+                    $found_key = array_search($penduduk, array_column($data, 'penduduk'));
+                    $opd = [$row->realisasi->perencanaan->opd->nama];
+                    $opd_id = [$row->realisasi->perencanaan->opd->id];
+                    foreach ($row->realisasi->perencanaan->opdTerkait as $row2) {
+                        array_push($opd, $row2->opd->nama);
+                        array_push($opd_id, $row2->opd->id);
+                    }
+
+                    $subIndikator =  [
+                        'sub_indikator_id' => $row->realisasi->perencanaan->indikator_id,
+                        'nama' => $row->realisasi->perencanaan->indikator->nama,
+                        'opd_id' => $opd_id,
+                        'opd' => $opd,
+                        'tanggal_intervensi' => $row->created_at_,
+                    ];
+
+                    if (!$found_key) {
+                        $push = [
+                            'penduduk' => $penduduk,
+                            'sub_indikator' => [$subIndikator],
+                            'status' => 'Orang Tua',
+                            'desa_id' => $row->id_desa,
+                            'nama_desa' => $row->nama_desa,
+                            'kecamatan_id' => $row->id_kecamatan,
+                            'nama_kecamatan' => $row->nama_kecamatan
+                        ];
+
+                        array_push($data, $push);
+                    } else {
+                        if (!in_array($row->realisasi->perencanaan->indikator_id, array_column($data[$found_key]['sub_indikator'], 'sub_indikator_id'))) { //// menghilangkan yang orang tua double indikatornya
+                            array_push($data[$found_key]['sub_indikator'], $subIndikator);
+                        }
+                    }
+                }
+            }
+
+            if (in_array($row->sasaran_intervensi, ['Anak', 'Orang Tua dan Anak'])) { // Anak
+                $penduduk = $row->nama_anak;
+                if ($penduduk) {
+                    $found_key = array_search($penduduk, array_column($data, 'penduduk'));
+                    $opd = [$row->realisasi->perencanaan->opd->nama];
+                    $opd_id = [$row->realisasi->perencanaan->opd->id];
+                    foreach ($row->realisasi->perencanaan->opdTerkait as $row2) {
+                        array_push($opd, $row2->opd->nama);
+                        array_push($opd_id, $row2->opd->id);
+                    }
+
+                    $subIndikator =  [
+                        'sub_indikator_id' => $row->realisasi->perencanaan->indikator_id,
+                        'nama' => $row->realisasi->perencanaan->indikator->nama,
+                        'opd_id' => $opd_id,
+                        'opd' => $opd,
+                        'tanggal_intervensi' => $row->created_at_,
+                    ];
+
+                    if (!$found_key) {
+                        $push = [
+                            'penduduk' => $penduduk,
+                            'sub_indikator' => [$subIndikator],
+                            'status' => 'Anak',
+                            'desa_id' => $row->id_desa,
+                            'nama_desa' => $row->nama_desa,
+                            'kecamatan_id' => $row->id_kecamatan,
+                            'nama_kecamatan' => $row->nama_kecamatan
+                        ];
+
+                        array_push($data, $push);
+                    } else {
+                        if (!in_array($row->realisasi->perencanaan->indikator_id, array_column($data[$found_key]['sub_indikator'], 'sub_indikator_id'))) {
+                            array_push($data[$found_key]['sub_indikator'], $subIndikator);
+                        }
+                    }
+                }
+            }
+        }
+
 
         if ($request->ajax()) {
-            $data = $dataHabitatKeong
-                // filtering
-                ->where(function ($query) use ($request) {
-                    if ($request->opd_filter && $request->opd_filter != 'semua') {
-                        $query->whereHas('listIndikator', function ($query2) use ($request) {
-                            $query2->whereHas('perencanaan', function ($query3) use ($request) {
-                                $query3->where(function ($query4) use ($request) {
-                                    $query4->where('opd_id', $request->opd_filter);
-                                    $query4->orWhereHas('opdTerkait', function ($query5) use ($request) {
-                                        $query5->where('opd_id', $request->opd_filter);
-                                    });
-                                });
-                                if ($request->tahun_filter && $request->tahun_filter != 'semua') {
-                                    $query3->whereYear('created_at', $request->tahun_filter);
-                                }
-                            });
-                        });
+            $dataRealisasi = $data;
+            if ($search_filter) {
+                $dataRealisasi = array_filter(
+                    $dataRealisasi,
+                    function ($obj) use ($search_filter) {
+                        return stristr($obj['penduduk'], $search_filter);
                     }
+                );
+            }
+            if ($sub_indikator_filter && $sub_indikator_filter !== 'semua') {
+                $dataRealisasi = array_filter(
+                    $dataRealisasi,
+                    function ($obj) use ($sub_indikator_filter) {
+                        $sub_indikator = array_merge(array_column($obj['sub_indikator'], 'sub_indikator_id'));
+                        return (in_array($sub_indikator_filter, $sub_indikator, TRUE));
+                    }
+                );
+            }
+            if ($status_filter && $status_filter !== 'semua') {
+                $dataRealisasi = array_filter(
+                    $dataRealisasi,
+                    function ($obj) use ($status_filter) {
+                        return $obj['status'] == $status_filter;
+                    }
+                );
+            }
+            if ($opd_filter && $opd_filter !== 'semua') {
+                $dataRealisasi = array_filter(
+                    $dataRealisasi,
+                    function ($obj) use ($opd_filter) {
+                        $opd = array_merge(array_column($obj['sub_indikator'], 'opd_id'));
+                        foreach ($opd as $o) {
+                            return (in_array($opd_filter, $o, TRUE));
+                        }
+                    }
+                );
+            }
+            if ($kecamatan_filter && $kecamatan_filter !== 'semua') {
+                $dataRealisasi = array_filter(
+                    $dataRealisasi,
+                    function ($obj) use ($kecamatan_filter) {
+                        return $obj['kecamatan_id'] == $kecamatan_filter;
+                    }
+                );
+            }
+            if ($desa_filter && $desa_filter !== 'semua') {
+                $dataRealisasi = array_filter(
+                    $dataRealisasi,
+                    function ($obj) use ($desa_filter) {
+                        return $obj['desa_id'] == $desa_filter;
+                    }
+                );
+            }
 
-                    if ($request->indikator_filter && $request->indikator_filter != 'semua') {
-                        $query->whereHas('listIndikator', function ($query2) use ($request) {
-                            $query2->whereHas('perencanaan', function ($query3) use ($request) {
-                                $query3->where('id', $request->indikator_filter);
-                                if ($request->tahun_filter && $request->tahun_filter != 'semua') {
-                                    $query3->whereYear('created_at', $request->tahun_filter);
-                                }
-                            });
-                        });
-                    }
-
-                    if ($request->tahun_filter && $request->tahun_filter != 'semua') {
-                        $query->whereHas('listIndikator', function ($query2) use ($request) {
-                            $query2->whereHas('perencanaan', function ($query3) use ($request) {
-                                $query3->whereYear('created_at', $request->tahun_filter);
-                            });
-                        });
-                    }
-
-                    if ($request->search_filter) {
-                        $query->where(function ($query2) use ($request) {
-                            $query2->where('nama', 'like', '%' . $request->search_filter . '%');
-                        });
-                    }
-                });
-            return DataTables::of($data)
+            return DataTables::of($dataRealisasi)
                 ->addIndexColumn()
 
-                ->addColumn('list_indikator', function ($row) use ($request) {
-                    $list = '<ol class="mb-0">';
-                    foreach ($row->listIndikator as $row2) {
-                        if ($request->tahun_filter && $request->tahun_filter != 'semua') {
-                            if (Carbon::parse($row2->perencanaan->created_at)->format('Y') == $request->tahun_filter) {
-                                $list .= '<li>' . $row2->perencanaan->sub_indikator . '</li>';
-                            }
-                        } else {
-                            $list .= '<li>' . $row2->perencanaan->sub_indikator . '</li>';
-                        }
-                    }
-                    $list .= '</ol>';
-                    return $list;
+                ->addColumn('nama', function ($row) {
+                    return $row['penduduk'];
                 })
 
-                ->addColumn('list_opd', function ($row) use ($request) {
-                    $list = '<ol class="mb-0">';
-                    foreach ($row->listIndikator as $row2) {
-                        if ($request->tahun_filter && $request->tahun_filter != 'semua') {
-                            if (Carbon::parse($row2->perencanaan->created_at)->format('Y') == $request->tahun_filter) {
-                                $list .= '<li class="font-weight-bold">' . $row2->perencanaan->opd->nama . '</li>';
-                                if ($row2->perencanaan->opdTerkait) {
-                                    foreach ($row2->perencanaan->opdTerkait as $row3) {
-                                        $list .= '<p class="p-0 m-0"> -' . $row3->opd->nama . '</p>';
-                                    }
-                                }
-                            }
-                        } else {
-                            $list .= '<li class="font-weight-bold">' . $row2->perencanaan->opd->nama . '</li>';
-                            if ($row2->perencanaan->opdTerkait) {
-                                foreach ($row2->perencanaan->opdTerkait as $row3) {
-                                    $list .= '<p class="p-0 m-0"> -' . $row3->opd->nama . '</p>';
-                                }
-                            }
-                        }
-                    }
-                    $list .= '</ol>';
-                    return $list;
+                ->addColumn('status', function ($row) {
+                    return $row['status'];
                 })
 
-                ->addColumn('tanggal_intervensi', function ($row) use ($request) {
-                    $list = '<ol class="mb-0">';
-                    foreach ($row->listIndikator as $row2) {
-                        if ($request->tahun_filter && $request->tahun_filter != 'semua') {
-                            if (Carbon::parse($row2->realisasi->created_at)->format('Y') == $request->tahun_filter) {
-                                $list .= '<li>' . Carbon::parse($row2->realisasi->created_at)->translatedFormat('d F Y') . '</li>';
-                            }
-                        } else {
-                            $list .= '<li>' . Carbon::parse($row2->realisasi->created_at)->translatedFormat('d F Y') . '</li>';
-                        }
+                ->addColumn('list_indikator', function ($row) {
+                    $indikator = '<ol class="mb-0 my-1">';
+                    foreach ($row['sub_indikator'] as $r) {
+                        $indikator .= '<li>' . $r['nama'] . '</li>';
                     }
-                    $list .= '</ol>';
-                    return $list;
+                    $indikator .= '</ol>';
+                    return $indikator;
+                })
+
+                ->addColumn('list_opd', function ($row) {
+                    $opd = '<ol class="mb-0 my-1">';
+                    foreach ($row['sub_indikator'] as $r) {
+                        $loop = 1;
+                        // $opd .= '<ol class="mb-0 my-1">';
+                        foreach ($r['opd'] as $q) {
+                            if ($loop == 1) {
+                                $opd .= '<li class="font-weight-bold">' . $q . '</li>';
+                            } else {
+                                $opd .= '<p class="p-0 m-0"> -' . $q . '</p>';
+                            }
+                            $loop++;
+                        }
+                        // $opd .= '</ol>';
+                    }
+                    $opd .= '</ol>';
+                    return $opd;
+                })
+
+                ->addColumn('tanggal_intervensi', function ($row) {
+                    $indikator = '<ol class="mb-0 my-1">';
+                    foreach ($row['sub_indikator'] as $r) {
+                        $indikator .= '<li>' . Carbon::parse($r['tanggal_intervensi'])->translatedFormat('j F Y') . '</li>';
+                    }
+                    $indikator .= '</ol>';
+                    return $indikator;
                 })
 
                 ->rawColumns([
+                    'status',
                     'list_indikator',
                     'list_opd',
                     'tanggal_intervensi'
@@ -865,77 +982,54 @@ class RealisasiController extends Controller
                 ->make(true);
         }
 
-        $filterSubIndikator = [];
-        $filterOpd = [];
-
-        foreach ($dataHabitatKeong->get() as $item) {
-            foreach ($item->listIndikator as $row) {
-                $dataSubIndikator = [
-                    'id' => $row->perencanaan->id,
-                    'sub_indikator' => $row->perencanaan->sub_indikator,
-                    'tahun' => $row->perencanaan->created_at->format('Y'),
-                    'created_at' => $row->perencanaan->created_at
-                ];
-                $dataOpd = [
-                    'id' => $row->perencanaan->opd->id,
-                    'opd' => $row->perencanaan->opd->nama
-                ];
-                array_push($filterSubIndikator, $dataSubIndikator);
-                array_push($filterOpd, $dataOpd);
-                if ($row->perencanaan->opdTerkait) {
-                    foreach ($row->perencanaan->opdTerkait as $row2) {
-                        $dataOpdTerkait = [
-                            'id' => $row2->opd->id,
-                            'opd' => $row2->opd->nama
-                        ];
-                        array_push($filterOpd, $dataOpdTerkait);
-                    }
-                }
-            }
-        }
-
-        array_multisort(array_column($filterSubIndikator, 'created_at'), SORT_DESC, $filterSubIndikator);
-
-        $filterSubIndikator = $this->unique_multidim_array($filterSubIndikator, 'id');
-        $filterOpd = $this->unique_multidim_array($filterOpd, 'id');
-        $filterTahun = $this->unique_multidim_array($filterSubIndikator, 'tahun');
-
-        return view('dashboard.pages.hasilRealisasi.index', ['filterSubIndikator' => $filterSubIndikator, 'filterOpd' => $filterOpd, 'filterTahun' => $filterTahun]);
+        // dd($data);
+        // return $data;
     }
 
     public function export()
     {
-        $dataRealisasi = Perencanaan::with('opd', 'desaPerencanaan', 'realisasi')
-            ->where('status', 1)
-            ->where(function ($query) {
+        $dataRealisasi = Realisasi::with('perencanaan')
+            ->whereHas('perencanaan', function ($query) {
                 if (Auth::user()->role == 'OPD') {
                     $query->where('opd_id', Auth::user()->opd_id);
                     $query->orWhereHas('opdTerkait', function ($q) {
-                        $q->where('status', 1);
                         $q->where('opd_id', Auth::user()->opd_id);
                     });
                 }
             })
             ->latest()->get();
-        // return view('dashboard.pages.intervensi.realisasi.keong.subIndikator.export', ['dataRealisasi' => $dataRealisasi]);
+
+        // return view('dashboard.pages.intervensi.realisasi.export', ['dataRealisasi' => $dataRealisasi]);
 
         $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
 
-        return Excel::download(new RealisasiExport($dataRealisasi), "Export Data Realisasi Habitat Keong" . "-" . $tanggal . "-" . rand(1, 9999) . '.xlsx');
+        return Excel::download(new RealisasiExport($dataRealisasi), "Export Data Realisasi" . " - " . $tanggal . " - " . rand(1, 9999) . '.xlsx');
+    }
+
+    public function exportPendudukRealisasi(Realisasi $realisasi_intervensi)
+    {
+        $dataPenduduk = PendudukRealisasi::with('orangTua', 'anak')->where('realisasi_id', $realisasi_intervensi->id)
+            ->latest()->get();
+
+        // return view('dashboard.pages.intervensi.realisasi.exportPenduduk', ['dataPenduduk' => $dataPenduduk]);
+
+        $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
+
+        return Excel::download(new PendudukRealisasiExport($dataPenduduk), "Export Penduduk Realisasi" . " - " . $realisasi_intervensi->perencanaan->opd->nama . " - " . $realisasi_intervensi->perencanaan->indikator->nama . " - " . $tanggal . " - " . rand(1, 9999) . '.xlsx');
     }
 
     public function exportHasilRealisasi()
     {
-        $habitatKeong = DesaPerencanaan::where('status', 1)
-            ->groupBy('desa_id')
-            ->pluck('desa_id')
-            ->toArray();
+        // $habitatKeong = DesaPerencanaan::where('status', 1)
+        //     ->groupBy('desa_id')
+        //     ->pluck('desa_id')
+        //     ->toArray();
 
-        $dataRealisasi = Lokasi::with('listIndikator', 'desa')->whereIn('id', $habitatKeong)->get();
-        // return view('dashboard.pages.hasilRealisasi.keong.export', ['dataRealisasi' => $dataRealisasi]);
+        // $dataRealisasi = Lokasi::with('listIndikator', 'desa')->whereIn('id', $habitatKeong)->get();
+        // // return view('dashboard.pages.hasilRealisasi.keong.export', ['dataRealisasi' => $dataRealisasi]);
 
-        $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
+        // $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
 
-        return Excel::download(new HasilRealisasiExport($dataRealisasi), "Export Data Hasil Realisasi Habitat Keong" . "-" . $tanggal . "-" . rand(1, 9999) . '.xlsx');
+        // return Excel::download(new HasilRealisasiExport($dataRealisasi), "Export Data Hasil Realisasi Habitat Keong" . "-" . $tanggal . "-" . rand(1, 9999) . '.xlsx');
     }
 }
