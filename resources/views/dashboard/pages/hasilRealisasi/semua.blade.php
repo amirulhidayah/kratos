@@ -3,7 +3,20 @@
         <div class="card mb-0 border shadow-md">
             <div class="card-header">
                 <div class="card-title">Data Penduduk Yang Telah
-                    Diintervensi......</div>
+                    Diintervensi <div class="title-card-tahun d-inline fw-bold"></div>
+                    <div class="card-tools float-right d-inline">
+                        <form action="{{ url('realisasi-intervensi/export-hasil-realisasi-semua') }}" method="POST"
+                            id="formExportHasilRealisasiSemua" autocomplete="off">
+                            @csrf
+                            <input type="hidden" name="tahun_filter" value="" class="tahun-filter-export">
+                            <button type="submit" class="btn btn-secondary btn-border btn-round btn-sm mr-2"
+                                value="" name="" id="btnExportSemua">
+                                <i class="fas fa-lg fa-download"></i>
+                                Export Data Hasil Realisasi
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="card-body pt-2">
                 <div class="row">
@@ -13,7 +26,7 @@
                                 'label' => 'Sub Indikator',
                                 'id' => 'sub-indikator-semua-filter',
                                 'name' => 'sub_indikator_filter',
-                                'class' => 'select2 filter',
+                                'class' => 'select2 filter filter-semua',
                             ])
                             @slot('options')
                                 <option value="semua">Semua</option>
@@ -29,7 +42,7 @@
                                 'label' => 'Status',
                                 'id' => 'sasaran-intervensi-semua-filter',
                                 'name' => 'sasaran_intervensi_filter',
-                                'class' => 'select2 filter',
+                                'class' => 'select2 filter filter-semua',
                             ])
                             @slot('options')
                                 <option value="semua">Semua</option>
@@ -44,7 +57,7 @@
                                 'label' => 'OPD',
                                 'id' => 'opd-semua-filter',
                                 'name' => 'opd_filter',
-                                'class' => 'select2 filter',
+                                'class' => 'select2 filter filter-semua',
                             ])
                             @slot('options')
                                 <option value="semua">Semua</option>
@@ -60,7 +73,7 @@
                                 'label' => 'Kecamatan',
                                 'id' => 'kecamatan-semua-filter',
                                 'name' => 'kecamatan_filter',
-                                'class' => 'select2 filter',
+                                'class' => 'select2 filter filter-semua',
                             ])
                             @slot('options')
                                 <option value="semua">Semua</option>
@@ -76,7 +89,7 @@
                                 'label' => 'Desa',
                                 'id' => 'desa-semua-filter',
                                 'name' => 'desa_filter',
-                                'class' => 'select2 filter',
+                                'class' => 'select2 filter filter-semua',
                                 'attribute' => 'disabled',
                             ])
                             @slot('options')
@@ -100,11 +113,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($realisasi_intervensi->pendudukRealisasi as $item)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                        </tr>
-                                    @endforeach --}}
                                 </tbody>
                             </table>
                         </div>
@@ -117,6 +125,11 @@
 
 @push('scripts')
     <script>
+        $('#form').submit(function(e) {
+            e.preventDefault();
+
+        })
+
         $('#kecamatan-semua-filter').change(function() {
             $('#desa-semua-filter').removeAttr('disabled')
             $.get("{{ url('list/desa') }}", {
@@ -124,7 +137,7 @@
             }).done(function(response) {
                 $('#desa-semua-filter').empty()
                 $('#desa-semua-filter').append(
-                    '<option value="" selected hidden>- Pilih Salah Satu -</option>')
+                    '<option value="semua" selected hidden>Semua</option>')
                 for (let i = 0; i < response.data.length; i++) {
                     const id = response.data[i].id
                     const nama = response.data[i].nama
@@ -134,7 +147,7 @@
             });
         })
 
-        var table = $('#dataTables').DataTable({
+        var tableSemua = $('#dataTables').DataTable({
             processing: true,
             serverSide: true,
             lengthMenu: [
@@ -190,5 +203,13 @@
                 },
             ],
         });
+
+        $('.filter-semua').change(function() {
+            tableSemua.draw();
+        })
+
+        // $('.export-hasil-realisasi').click(function() {
+        //     alert('test')
+        // })
     </script>
 @endpush

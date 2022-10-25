@@ -9,6 +9,7 @@ use App\Models\Anak;
 use App\Models\Desa;
 use App\Models\Lokasi;
 use App\Models\OrangTua;
+use App\Models\Indikator;
 use App\Models\Kecamatan;
 use App\Models\Realisasi;
 use App\Models\OPDTerkait;
@@ -25,9 +26,11 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\HasilRealisasiExport;
 use Illuminate\Support\Facades\Storage;
 use App\Exports\PendudukRealisasiExport;
-use App\Models\Indikator;
 use Yajra\DataTables\Facades\DataTables;
+use App\Exports\HasilRealisasiDesaExport;
 use Illuminate\Support\Facades\Validator;
+use App\Exports\HasilRealisasiSemuaExport;
+use App\Exports\HasilRealisasiKecamatanExport;
 
 class RealisasiController extends Controller
 {
@@ -300,48 +303,6 @@ class RealisasiController extends Controller
         return view('dashboard.pages.intervensi.realisasi.create', $data);
     }
 
-    // public function createPenduduk(Realisasi $realisasi_intervensi)
-    // {
-    //     if (Auth::user()->role == 'Admin') {
-    //         if (in_array($realisasi_intervensi->status, [0, 2, 3])) {
-    //             abort('403', 'Oops! anda tidak memiliki akses ke sini.');
-    //         }
-    //     } else if (Auth::user()->role == 'OPD') {
-    //         if (Auth::user()->opd_id != $realisasi_intervensi->perencanaan->opd_id) {
-    //             abort('403', 'Oops! anda tidak memiliki akses ke sini.');
-    //         }
-    //         if (in_array($realisasi_intervensi->status, [1])) {
-    //             abort('403', 'Oops! anda tidak memiliki akses ke sini.');
-    //         }
-    //     } else {
-    //         abort('403', 'Oops! anda tidak memiliki akses ke sini.');
-    //     }
-
-
-    //     // $pendudukRealisasi = PendudukRealisasi::select('penduduk_realisasi.*', 'orang_tua.nama_ayah', 'orang_tua.nama_ibu', 'anak.nama as nama_anak')
-    //     //     ->leftJoin('orang_tua', 'orang_tua.id', '=', 'penduduk_realisasi.orang_tua_id')
-    //     //     ->leftJoin('anak', 'anak.id', '=', 'penduduk_realisasi.anak_id')->where('realisasi_id', $realisasi_intervensi->id)
-    //     //     ->orderBy('penduduk_realisasi.nomor', 'ASC')
-    //     //     ->get();
-
-    //     // dd($pendudukRealisasi);
-
-    //     $data = [
-    //         'realisasiIntervensi' => $realisasi_intervensi,
-    //         'pendudukRealisasi' => $realisasi_intervensi->pendudukRealisasi,
-    //         'kecamatan' => Kecamatan::with('desa')->get(),
-    //         'orangTua' => OrangTua::latest()->get(),
-    //     ];
-
-
-    //     // dd()
-    //     // dd($data);
-
-    //     return view('dashboard.pages.intervensi.realisasi.penentuanPenduduk.create', $data);
-
-    //     // dd($realisasi_intervensi);
-    // }
-
     public function insertPenduduk(Request $request)
     {
         if (in_array($request->sasaran_intervensi, ['Anak', 'Orang Tua dan Anak'])) {
@@ -525,7 +486,6 @@ class RealisasiController extends Controller
             $data['urlKedua'] = $urlKedua;
         }
 
-
         return view('dashboard.pages.intervensi.realisasi.edit', $data);
     }
 
@@ -648,10 +608,7 @@ class RealisasiController extends Controller
         $dataRealisasi = [];
 
         $dataRealisasi['perencanaan_id'] = $perencanaan_id;
-        // if ((Auth::user()->role == 'OPD') && ($realisasi_intervensi->status != 3)) {
-        //     $dataRealisasi['status'] = 0;
-        //     $dataRealisasi['alasan_ditolak'] = '-';
-        // }
+
         $realisasi_intervensi->update($dataRealisasi);
 
         return response()->json(['res' => 'perbarui', 'infoSubIndikator' => $perencanaan->indikator->nama]);
@@ -749,29 +706,25 @@ class RealisasiController extends Controller
 
     public function hasilRealisasi(Request $request)
     {
-        // dd($this->tabelHasilRealisasi($request));
         $tahun = $request->tahun;
         $tahun_ = Realisasi::selectRaw('year(created_at) year')->groupBy('year')->get()->pluck('year')->toArray();
         $opd = OPD::pluck('nama', 'id')->toArray();
         $kecamatan = Kecamatan::orderBy('nama', 'ASC')->pluck('nama', 'id')->toArray();
         $sub_indikator = Indikator::with('perencanaan')->whereHas('perencanaan', function ($q) {
-            $q->whereHas('realisasi');
+            $q->whereHas('realisasi', function ($q) {
+                $q->where('status', 1);
+            });
         })->pluck('nama', 'id')->toArray();
 
         $daftarTahun = array_unique(array_merge($tahun_));
         return view('dashboard.pages.hasilRealisasi.index', compact(['daftarTahun', 'tahun', 'opd', 'kecamatan', 'sub_indikator']));
     }
 
-    public function tabelHasilRealisasi(Request $request)
+    public function queryHasilRealisasi(Request $request)
     {
         $tahun_filter = $request->tahun_filter;
-        $search_filter = $request->search_filter;
-        $sub_indikator_filter = $request->sub_indikator_filter;
-        $status_filter = $request->status_filter;
-        $opd_filter = $request->opd_filter;
         $kecamatan_filter = $request->kecamatan_filter;
         $desa_filter = $request->desa_filter;
-
 
         $data = [];
         $pendudukRealisasi = PendudukRealisasi::select('*', 'penduduk_realisasi.created_at as created_at_', 'anak.nama as nama_anak', 'desa.id as id_desa', 'desa.nama as nama_desa', 'kecamatan.id as id_kecamatan', 'kecamatan.nama as nama_kecamatan')
@@ -784,6 +737,16 @@ class RealisasiController extends Controller
             ->where(function ($q) use ($tahun_filter) {
                 if (($tahun_filter != '') && $tahun_filter != 'Semua') {
                     $q->where('penduduk_realisasi.created_at', 'LIKE', '%' . $tahun_filter . '%');
+                }
+            })
+            ->where(function ($q) use ($kecamatan_filter) {
+                if (($kecamatan_filter != '') && $kecamatan_filter != 'semua') {
+                    $q->where('kecamatan.id', $kecamatan_filter);
+                }
+            })
+            ->where(function ($q) use ($desa_filter) {
+                if (($desa_filter != '') && $desa_filter != 'semua') {
+                    $q->where('desa.id', $desa_filter);
                 }
             })
             ->get();
@@ -819,7 +782,6 @@ class RealisasiController extends Controller
                             'kecamatan_id' => $row->id_kecamatan,
                             'nama_kecamatan' => $row->nama_kecamatan
                         ];
-
                         array_push($data, $push);
                     } else {
                         if (!in_array($row->realisasi->perencanaan->indikator_id, array_column($data[$found_key]['sub_indikator'], 'sub_indikator_id'))) { //// menghilangkan yang orang tua double indikatornya
@@ -869,6 +831,19 @@ class RealisasiController extends Controller
             }
         }
 
+        return $data;
+    }
+
+    public function tabelHasilRealisasi(Request $request)
+    {
+        $req = $request;
+        $data = $this->queryHasilRealisasi($req);
+        $search_filter = $request->search_filter;
+        $sub_indikator_filter = $request->sub_indikator_filter;
+        $status_filter = $request->status_filter;
+        $opd_filter = $request->opd_filter;
+        $kecamatan_filter = $request->kecamatan_filter;
+        $desa_filter = $request->desa_filter;
 
         if ($request->ajax()) {
             $dataRealisasi = $data;
@@ -949,7 +924,6 @@ class RealisasiController extends Controller
                     $opd = '<ol class="mb-0 my-1">';
                     foreach ($row['sub_indikator'] as $r) {
                         $loop = 1;
-                        // $opd .= '<ol class="mb-0 my-1">';
                         foreach ($r['opd'] as $q) {
                             if ($loop == 1) {
                                 $opd .= '<li class="font-weight-bold">' . $q . '</li>';
@@ -958,7 +932,6 @@ class RealisasiController extends Controller
                             }
                             $loop++;
                         }
-                        // $opd .= '</ol>';
                     }
                     $opd .= '</ol>';
                     return $opd;
@@ -981,9 +954,46 @@ class RealisasiController extends Controller
                 ])
                 ->make(true);
         }
+    }
 
-        // dd($data);
-        // return $data;
+    public function infoRealisasiKecamatan(Request $request)
+    {
+        $req = $request;
+        $data = $this->queryHasilRealisasi($req);
+
+        $kecamatan_filter = $request->kecamatan_filter;
+
+        $kecamatan = Kecamatan::find($kecamatan_filter);
+
+        $return = [
+            'nama_kecamatan' => $kecamatan ? $kecamatan->nama : '',
+            'count_total_intervensi' => $data ? count($data) : 0,
+            'count_orang_tua' => $data  ? array_count_values(array_column($data, 'status'))['Orang Tua'] : 0,
+            'count_anak' => $data && in_array('Anak', array_column($data, 'status')) ? array_count_values(array_column($data, 'status'))['Anak'] : 0,
+        ];
+
+        return $return;
+    }
+
+    public function infoRealisasiDesa(Request $request)
+    {
+        $req = $request;
+        $data = $this->queryHasilRealisasi($req);
+
+        $kecamatan_filter = $request->kecamatan_filter;
+        $desa_filter = $request->desa_filter;
+
+        $kecamatan = Kecamatan::find($kecamatan_filter);
+        $desa = Desa::find($desa_filter);
+        $return = [
+            'nama_desa' => $desa ? $desa->nama : '',
+            'nama_kecamatan' => $kecamatan ? $kecamatan->nama : '',
+            'count_total_intervensi' => $data ? count($data) : 0,
+            'count_orang_tua' => $data  ? array_count_values(array_column($data, 'status'))['Orang Tua'] : 0,
+            'count_anak' => $data && in_array('Anak', array_column($data, 'status')) ? array_count_values(array_column($data, 'status'))['Anak'] : 0,
+        ];
+
+        return $return;
     }
 
     public function export()
@@ -999,8 +1009,6 @@ class RealisasiController extends Controller
             })
             ->latest()->get();
 
-        // return view('dashboard.pages.intervensi.realisasi.export', ['dataRealisasi' => $dataRealisasi]);
-
         $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
 
         return Excel::download(new RealisasiExport($dataRealisasi), "Export Data Realisasi" . " - " . $tanggal . " - " . rand(1, 9999) . '.xlsx');
@@ -1011,25 +1019,51 @@ class RealisasiController extends Controller
         $dataPenduduk = PendudukRealisasi::with('orangTua', 'anak')->where('realisasi_id', $realisasi_intervensi->id)
             ->latest()->get();
 
-        // return view('dashboard.pages.intervensi.realisasi.exportPenduduk', ['dataPenduduk' => $dataPenduduk]);
-
         $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
 
         return Excel::download(new PendudukRealisasiExport($dataPenduduk), "Export Penduduk Realisasi" . " - " . $realisasi_intervensi->perencanaan->opd->nama . " - " . $realisasi_intervensi->perencanaan->indikator->nama . " - " . $tanggal . " - " . rand(1, 9999) . '.xlsx');
     }
 
-    public function exportHasilRealisasi()
+    public function exportHasilRealisasiSemua(Request $request)
     {
-        // $habitatKeong = DesaPerencanaan::where('status', 1)
-        //     ->groupBy('desa_id')
-        //     ->pluck('desa_id')
-        //     ->toArray();
+        $req = $request;
+        $tahun = $request->tahun_filter;
 
-        // $dataRealisasi = Lokasi::with('listIndikator', 'desa')->whereIn('id', $habitatKeong)->get();
-        // // return view('dashboard.pages.hasilRealisasi.keong.export', ['dataRealisasi' => $dataRealisasi]);
+        // dd($tahun);
+        $dataRealisasi = $this->queryHasilRealisasi($req);
 
-        // $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
+        // return view('dashboard.pages.hasilRealisasi.exportSemua', ['dataRealisasi' => $dataRealisasi]);
 
-        // return Excel::download(new HasilRealisasiExport($dataRealisasi), "Export Data Hasil Realisasi Habitat Keong" . "-" . $tanggal . "-" . rand(1, 9999) . '.xlsx');
+        $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
+
+        return Excel::download(new HasilRealisasiSemuaExport($dataRealisasi), "Export Data Hasil Realisasi (Tahun: " . $tahun . ")" . " - " . $tanggal . " - " . rand(1, 9999) . '.xlsx');
+    }
+
+    public function exportHasilRealisasiKecamatan(Request $request)
+    {
+        $req = $request;
+        $tahun = $request->tahun_filter;
+        $kecamatan = Kecamatan::find($request->kecamatan_filter)->nama;
+        $dataRealisasi = $this->queryHasilRealisasi($req);
+
+        // return view('dashboard.pages.hasilRealisasi.exportSemua', ['dataRealisasi' => $dataRealisasi]);
+
+        $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
+
+        return Excel::download(new HasilRealisasiKecamatanExport($dataRealisasi), "Export Data Hasil Realisasi Kecamatan " . $kecamatan . " (Tahun: " . $tahun . ")" . " - " . $tanggal . " - " . rand(1, 9999) . '.xlsx');
+    }
+
+    public function exportHasilRealisasiDesa(Request $request)
+    {
+        $req = $request;
+        $tahun = $request->tahun_filter;
+        $desa = Desa::find($request->desa_filter)->nama;
+        $dataRealisasi = $this->queryHasilRealisasi($req);
+
+        // return view('dashboard.pages.hasilRealisasi.exportSemua', ['dataRealisasi' => $dataRealisasi]);
+
+        $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
+
+        return Excel::download(new HasilRealisasiDesaExport($dataRealisasi), "Export Data Hasil Realisasi Desa " . $desa . " (Tahun: " . $tahun . ")" . " - " . $tanggal . " - " . rand(1, 9999) . '.xlsx');
     }
 }
