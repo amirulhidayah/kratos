@@ -141,6 +141,9 @@ Route::group(['middleware' => 'auth'], function () {
         // Indikator
         Route::resource('master-data/indikator', IndikatorController::class);
 
+        // // Wilayah
+        // Route::get('map/kecamatan', [KecamatanController::class, 'getMapData']);
+        
         Route::resource('master-data/wilayah/kecamatan', KecamatanController::class)->except(
             'index',
             'show'
@@ -183,7 +186,6 @@ Route::group(['middleware' => 'auth'], function () {
         'index',
         'show'
     );
-
 
     Route::resource('daftar-pengukuran-anak', DaftarPengukuranAnakController::class)->only(
         'index',

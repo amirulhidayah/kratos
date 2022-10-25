@@ -750,7 +750,7 @@ class RealisasiController extends Controller
                 }
             })
             ->get();
-
+            
 
         foreach ($pendudukRealisasi as $row) {
             if (in_array($row->sasaran_intervensi, ['Orang Tua', 'Orang Tua dan Anak'])) { // Orang Tua
