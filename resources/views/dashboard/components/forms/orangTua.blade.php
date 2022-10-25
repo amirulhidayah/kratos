@@ -62,7 +62,6 @@
                     'id' => 'rt',
                     'name' => 'rt',
                     'class' => 'angka',
-                    'wajib' => '<sup class="text-danger">*</sup>',
                     'placeholder' => 'Masukkan RT',
                 ])
             @endcomponent
@@ -75,7 +74,6 @@
                     'id' => 'rw',
                     'name' => 'rw',
                     'class' => 'angka',
-                    'wajib' => '<sup class="text-danger">*</sup>',
                     'placeholder' => 'Masukkan RW',
                 ])
             @endcomponent

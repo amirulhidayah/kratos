@@ -18,9 +18,8 @@ return new class extends Migration
             $table->uuid('anak_id');
             $table->string('berat');
             $table->string('tinggi');
-            $table->string('lila');
+            $table->string('lila')->nullable();
             $table->date('tanggal_pengukuran');
-            $table->string('usia_saat_ukur');
             $table->uuid('puskesmas_id');
             $table->uuid('posyandu_id')->nullable();
             $table->string('bb_u');

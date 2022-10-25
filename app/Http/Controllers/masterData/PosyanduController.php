@@ -12,6 +12,13 @@ use Yajra\DataTables\Facades\DataTables;
 
 class PosyanduController extends Controller
 {
+    public function __construct(Request $request)
+    {
+        $puskesmas = Puskesmas::where('id', $request->puskesmas)->first();
+        if ($puskesmas == null) {
+            return redirect(url('master-data/puskesmas'))->send();
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -105,6 +112,11 @@ class PosyanduController extends Controller
     {
         $puskesmas = Puskesmas::where('id', $request->puskesmas)->first();
         $posyandu = Posyandu::where('id', $request->posyandu)->first();
+
+        if ($puskesmas == null || $posyandu == null) {
+            return redirect()->back();
+        }
+
         return view('dashboard.pages.masterData.posyandu.edit', compact(['puskesmas', 'posyandu']));
     }
 

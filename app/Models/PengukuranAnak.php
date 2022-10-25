@@ -21,4 +21,9 @@ class PengukuranAnak extends Model
     {
         return $this->belongsTo(Posyandu::class);
     }
+
+    public function anak()
+    {
+        return $this->belongsTo(Anak::class);
+    }
 }

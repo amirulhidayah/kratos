@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Kecamatan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -26,11 +27,18 @@ class KecamatanController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="' . url('master-data/wilayah/desa' . '/' . $row->id) . '" class="btn btn-success btn-round btn-sm mr-1" value="' . $row->id . '"><i class="fa fa-eye"></i></a><a href="' . url('master-data/wilayah/kecamatan' . '/' . $row->id . '/edit') . '" class="btn btn-warning btn-round btn-sm mr-1" value="' . $row->id . '"><i class="fa fa-edit"></i></a><button id="btn-delete" class="btn btn-danger btn-round btn-sm mr-1" value="' . $row->id . '" ><i class="fa fa-trash"></i></button>';
+                    $actionBtn = '<a href="' . url('master-data/wilayah/desa' . '/' . $row->id) . '" class="btn btn-success btn-round btn-sm mr-1" value="' . $row->id . '"><i class="fa fa-eye"></i></a>';
+
+                    if (Auth::user()->role == "Admin") {
+                        $actionBtn .= '<a href="' . url('master-data/wilayah/kecamatan' . '/' . $row->id . '/edit') . '" class="btn btn-warning btn-round btn-sm mr-1" value="' . $row->id . '"><i class="fa fa-edit"></i></a><button id="btn-delete" class="btn btn-danger btn-round btn-sm mr-1" value="' . $row->id . '" ><i class="fa fa-trash"></i></button>';
+                    }
                     return $actionBtn;
                 })
+                ->addColumn('kode', function ($row) {
+                    return $row->kode ?? '-';
+                })
                 ->addColumn('luas', function ($row) {
-                    return $row->luas . " Km<sup>2</sup>";
+                    return $row->luas ? $row->luas . " Km<sup>2</sup>" : '-';
                 })
                 ->addColumn('statusPolygon', function ($row) {
                     if ($row->polygon) {

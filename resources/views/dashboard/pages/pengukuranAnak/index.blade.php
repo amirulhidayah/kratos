@@ -225,7 +225,8 @@
         var table = $('#table-data').DataTable({
             processing: true,
             serverSide: true,
-            "searching": false,
+            searching: false,
+            pageLength: 25,
             ajax: {
                 url: "{{ url('pengukuran-anak/' . $anak->id) }}",
                 data: function(d) {
@@ -256,8 +257,8 @@
                     class: 'text-center'
                 },
                 {
-                    data: 'usia_saat_ukur',
-                    name: 'usia_saat_ukur',
+                    data: 'usia_sebut',
+                    name: 'usia_sebut',
                     class: 'text-center'
                 },
                 {
