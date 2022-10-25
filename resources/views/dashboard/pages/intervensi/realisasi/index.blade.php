@@ -32,10 +32,10 @@
                     <div class="card-head-row">
                         <div class="card-title">Data Realisasi Intervensi</div>
                         <div class="card-tools">
-                            <form action="{{ url('export-realisasi-keong') }}" method="POST">
+                            <form action="{{ url('realisasi-intervensi/export-realisasi') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-secondary btn-border btn-round btn-sm mr-2"
-                                    id="export-penduduk" value="" name="desa_id">
+                                    id="export-realisasi" value="" name="">
                                     <i class="fas fa-lg fa-download"></i>
                                     Export Data Realisasi
                                 </button>

@@ -633,7 +633,7 @@ class PerencanaanController extends Controller
 
         $tanggal = Carbon::parse(Carbon::now())->translatedFormat('d F Y');
 
-        return Excel::download(new PerencanaanExport($dataPerencanaan), "Export Data Perencanaan" . " - " . $tanggal . "-" . rand(1, 9999) . '.xlsx');
+        return Excel::download(new PerencanaanExport($dataPerencanaan), "Export Data Perencanaan" . " - " . $tanggal . " - " . rand(1, 9999) . '.xlsx');
     }
 
     public function buatAlasanTidakTerselesaikan(Perencanaan $rencana_intervensi, Request $request)

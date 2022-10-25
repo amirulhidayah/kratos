@@ -143,7 +143,7 @@
                             <div class="card mt-4 border shadow-none">
                                 <div class="card-header">
                                     <div class="card-head-row">
-                                        <div class="card-title">Data Penduduk Yang Direalisasi</div>
+                                        <div class="card-title">Data Penduduk Yang Diintervensi</div>
                                     </div>
                                 </div>
                                 <div class="card-body pt-3">

@@ -35,7 +35,7 @@
                 data-toggle="pill" href="#v-pills-penduduk-icons" role="tab" aria-controls="v-pills-penduduk-icons"
                 aria-selected="false">
                 <i class="icon-people"></i>
-                Menentukan Penduduk Yang Direalisasi
+                Menentukan Penduduk Yang Diintervensi
             </a>
         </div>
     </div>

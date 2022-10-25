@@ -52,7 +52,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/dashboard/export/intervensi', [DashboardController::class, 'exportIntervensi']);
     Route::post('/dashboard/export/anggaran', [DashboardController::class, 'exportAnggaran']);
 
-    // Keong
     Route::resource('rencana-intervensi', PerencanaanController::class);
     Route::post('rencana-intervensi/konfirmasi/{rencana_intervensi}', PerencanaanController::class . '@konfirmasi');
     Route::get('rencana-intervensi/map/{rencana_intervensi}', PerencanaanController::class . '@map');
@@ -68,6 +67,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('realisasi-intervensi/delete-penduduk', RealisasiController::class . '@deletePenduduk');
     Route::post('realisasi-intervensi/selesai-direalisasi', RealisasiController::class . '@selesaiDirealisasi');
     Route::post('realisasi-intervensi/konfirmasi/{realisasi_intervensi}', RealisasiController::class . '@konfirmasi');
+    Route::post('realisasi-intervensi/export-penduduk-realisasi/{realisasi_intervensi}', RealisasiController::class . '@exportPendudukRealisasi');
+    Route::post('realisasi-intervensi/export-realisasi', RealisasiController::class . '@export');
+    Route::get('tabel-hasil-realisasi', RealisasiController::class . '@tabelHasilRealisasi');
+
+
 
 
 
@@ -82,7 +86,6 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::delete('realisasi-intervensi/delete-laporan/{realisasi_intervensi}', RealisasiController::class . '@deleteLaporan');
     // Route::delete('realisasi-intervensi/delete-semua-laporan/{realisasi_intervensi}', RealisasiController::class . '@deleteSemuaLaporan');
     Route::get('hasil-realisasi', RealisasiController::class . '@hasilRealisasi');
-    Route::post('export-realisasi', RealisasiController::class . '@export');
     Route::post('export-hasil-realisasi', RealisasiController::class . '@exportHasilRealisasi');
 
 
@@ -132,6 +135,9 @@ Route::group(['middleware' => 'auth'], function () {
         // Indikator
         Route::resource('master-data/indikator', IndikatorController::class);
 
+        // // Wilayah
+        // Route::get('map/kecamatan', [KecamatanController::class, 'getMapData']);
+        
         Route::resource('master-data/wilayah/kecamatan', KecamatanController::class)->except(
             'index',
             'show'
@@ -175,7 +181,6 @@ Route::group(['middleware' => 'auth'], function () {
         'index',
         'show'
     );
-
 
     Route::resource('daftar-pengukuran-anak', DaftarPengukuranAnakController::class)->only(
         'index',
