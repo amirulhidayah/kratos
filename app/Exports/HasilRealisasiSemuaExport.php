@@ -6,7 +6,7 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
 
-class HasilRealisasiExport implements FromView
+class HasilRealisasiSemuaExport implements FromView
 {
     protected $dataRealisasi;
     /**
@@ -19,6 +19,6 @@ class HasilRealisasiExport implements FromView
 
     public function view(): View
     {
-        return view('dashboard.pages.hasilRealisasi.export', ['dataRealisasi' => $this->dataRealisasi]);
+        return view('dashboard.pages.hasilRealisasi.exportSemua', ['dataRealisasi' => $this->dataRealisasi]);
     }
 }

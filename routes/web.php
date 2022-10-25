@@ -70,6 +70,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('realisasi-intervensi/export-penduduk-realisasi/{realisasi_intervensi}', RealisasiController::class . '@exportPendudukRealisasi');
     Route::post('realisasi-intervensi/export-realisasi', RealisasiController::class . '@export');
     Route::get('tabel-hasil-realisasi', RealisasiController::class . '@tabelHasilRealisasi');
+    Route::get('info-realisasi-kecamatan', RealisasiController::class . '@infoRealisasiKecamatan');
+    Route::get('info-realisasi-desa', RealisasiController::class . '@infoRealisasiDesa');
+    Route::post('realisasi-intervensi/export-hasil-realisasi-semua', RealisasiController::class . '@exportHasilRealisasiSemua');
+    Route::post('realisasi-intervensi/export-hasil-realisasi-kecamatan', RealisasiController::class . '@exportHasilRealisasiKecamatan');
+    Route::post('realisasi-intervensi/export-hasil-realisasi-desa', RealisasiController::class . '@exportHasilRealisasiDesa');
+
 
 
 
@@ -142,7 +148,6 @@ Route::group(['middleware' => 'auth'], function () {
             'index',
             'show'
         );
-
 
         Route::resource('master-data/wilayah/desa/{kecamatan}', DesaController::class)->except(
             'index',
