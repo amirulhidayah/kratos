@@ -169,10 +169,11 @@
                         $('#alamat').html(response.orangTua.alamat);
                         $('#tanggal-pengukuran').html(response.tanggalPengukuran);
                         if (response.pengukuranAnakTerakhir) {
-                            $('#usia-saat-ukur').html(response.pengukuranAnakTerakhir.usia_saat_ukur);
+                            $('#usia-saat-ukur').html(response.usiaSaatUkur);
                             $('#berat_ukur').html(response.pengukuranAnakTerakhir.berat + ' Kg');
                             $('#tinggi_ukur').html(response.pengukuranAnakTerakhir.tinggi + ' Cm');
-                            $('#lila').html(response.pengukuranAnakTerakhir.lila);
+                            $('#lila').html(response.pengukuranAnakTerakhir.lila ? response
+                                .pengukuranAnakTerakhir.lila + ' Cm' : '-');
                             $('#bbu').html(response.pengukuranAnakTerakhir.bb_u);
                             $('#tbu').html(response.pengukuranAnakTerakhir.tb_u);
                             $('#bbtb').html(response.pengukuranAnakTerakhir.bb_tb);

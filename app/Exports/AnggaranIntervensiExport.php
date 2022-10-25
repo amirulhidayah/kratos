@@ -8,21 +8,15 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 class AnggaranIntervensiExport implements FromView
 {
-    protected $tipe;
-    protected $tabelAnggaranKeong;
-    protected $tabelAnggaranManusia;
-    protected $tabelAnggaranHewan;
-    protected $tabelAnggaranSemua;
+    protected $tabelAnggaran;
     protected $tahun;
+    protected $daftarSumberDana;
 
-    function __construct($tipe, $tabelAnggaranKeong, $tabelAnggaranManusia, $tabelAnggaranHewan, $tabelAnggaranSemua, $tahun)
+    function __construct($tabelAnggaran, $tahun, $daftarSumberDana)
     {
-        $this->tipe = $tipe;
-        $this->tabelAnggaranKeong = $tabelAnggaranKeong;
-        $this->tabelAnggaranManusia = $tabelAnggaranManusia;
-        $this->tabelAnggaranHewan = $tabelAnggaranHewan;
-        $this->tabelAnggaranSemua = $tabelAnggaranSemua;
+        $this->tabelAnggaran = $tabelAnggaran;
         $this->tahun = $tahun;
+        $this->daftarSumberDana = $daftarSumberDana;
     }
 
     /**
@@ -30,30 +24,14 @@ class AnggaranIntervensiExport implements FromView
      */
     public function view(): View
     {
-        $tipe = $this->tipe;
-        $tabelAnggaranKeong = $this->tabelAnggaranKeong;
-        $tabelAnggaranManusia = $this->tabelAnggaranManusia;
-        $tabelAnggaranHewan = $this->tabelAnggaranHewan;
-        $tabelAnggaranSemua = $this->tabelAnggaranSemua;
+        $tabelAnggaran = $this->tabelAnggaran;
         $tahun = $this->tahun;
-        $view = '';
+        $daftarSumberDana = $this->daftarSumberDana;
 
-        if ($tipe == 'semua') {
-            $view = 'dashboard.pages.exportDashboard.anggaran.semua';
-        } else if ($tipe == 'keong') {
-            $view = 'dashboard.pages.exportDashboard.anggaran.keong';
-        } else if ($tipe == 'manusia') {
-            $view = 'dashboard.pages.exportDashboard.anggaran.manusia';
-        } else {
-            $view = 'dashboard.pages.exportDashboard.anggaran.hewan';
-        }
-
-        return view($view, compact([
-            'tabelAnggaranKeong',
-            'tabelAnggaranManusia',
-            'tabelAnggaranHewan',
-            'tabelAnggaranSemua',
-            'tahun'
+        return view('dashboard.pages.exportDashboard.anggaran.index', compact([
+            'tabelAnggaran',
+            'tahun',
+            'daftarSumberDana'
         ]));
     }
 }

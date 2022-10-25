@@ -42,8 +42,7 @@
                     <div class="card-head-row">
                         <div class="card-title">Data Desa</div>
                         <div class="card-tools">
-                            <form action="{{ url('master-data/wilayah/desa/' . $kecamatanId . '/export') }}"
-                                method="POST">
+                            <form action="{{ url('master-data/wilayah/desa/' . $kecamatanId . '/export') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-info btn-border btn-round btn-sm mr-2"
                                     id="export-lokasi-hewan">
@@ -155,20 +154,21 @@
                                     direction: "center",
                                     className: 'labelPolygon'
                                 })
-                            // .bindTooltip(
-                            //     response.data[i].nama + " (" + response.data[i].luas +
-                            //     " Km<sup>2</sup>) ", {
-                            //         permanent: true,
-                            //         direction: "center"
-                            //     }
-                            // )
-                            // .bindPopup(
-                            //     "<p class='fw-bold my-0 text-center'>" + response.data[i].nama +
-                            //     "</p><hr>" +
-                            //     "<p class='my-0'>Kode : " + response.data[i].kode + "</p>" +
-                            //     "<p class='my-0'>Luas : " + response.data[i].luas + " Km<sup>2</sup></p>"
-                            // )
-                            ;
+                                // .bindTooltip(
+                                //     response.data[i].nama + " (" + response.data[i].luas +
+                                //     " Km<sup>2</sup>) ", {
+                                //         permanent: true,
+                                //         direction: "center"
+                                //     }
+                                // )
+                                .bindPopup(
+                                    "<p class='fw-bold my-0 text-center'>" + response.data[i].nama +
+                                    "</p><hr>" +
+                                    "<p class='my-0'>Kode : " + (response.data[i].kode ?? '-') + "</p>" +
+                                    "<p class='my-0'>Luas : " + (response.data[i].luas ? response.data[i].luas +
+                                        " Km<sup>2</sup></p>" : '-')
+
+                                );
                         }
                     }
                 },

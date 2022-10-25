@@ -159,10 +159,9 @@
             }
 
             var tanggalPengukuran = $('#tanggal_pengukuran').val();
-            var lila = $('#lila').val();
             var bb = $('#bb').val();
             var tb = $('#tb').val();
-            if (jenisKelamin && tanggalLahir && tanggalPengukuran && lila && bb && tb) {
+            if (jenisKelamin && tanggalLahir && tanggalPengukuran && bb && tb) {
                 console.log('ada');
                 $.ajax({
                     url: "{{ url('hitung/pengukuran-anak') }}",

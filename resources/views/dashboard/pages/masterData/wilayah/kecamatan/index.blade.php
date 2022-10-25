@@ -148,18 +148,18 @@
                                     direction: "center",
                                     className: 'labelPolygon'
                                 })
-                            // .bindTooltip(response.data[i].nama + " (" + response.data[i].luas +
-                            //     " Km<sup>2</sup>) ", {
-                            //         permanent: true,
-                            //         direction: "center"
-                            //     })
-                            // .bindPopup(
-                            //     "<p class='fw-bold my-0 text-center'>" + response.data[i].nama +
-                            //     "</p><hr>" +
-                            //     "<p class='my-0'>Kode : " + response.data[i].kode + "</p>" +
-                            //     "<p class='my-0'>Luas : " + response.data[i].luas + " Km<sup>2</sup></p>"
-                            // )
-                            ;
+                                // .bindTooltip(response.data[i].nama + " (" + response.data[i].luas +
+                                //     " Km<sup>2</sup>) ", {
+                                //         permanent: true,
+                                //         direction: "center"
+                                //     })
+                                .bindPopup(
+                                    "<p class='fw-bold my-0 text-center'>" + response.data[i].nama +
+                                    "</p><hr>" +
+                                    "<p class='my-0'>Kode : " + (response.data[i].kode ?? '-') + "</p>" +
+                                    "<p class='my-0'>Luas : " + (response.data[i].luas ? response.data[i].luas +
+                                        " Km<sup>2</sup></p>" : '-')
+                                );
                         }
                     }
                 },
@@ -271,9 +271,9 @@
         $(document).ready(function() {
             initializeMap();
 
-            if (role != "Admin") {
-                table.column(6).visible(false);
-            }
+            // if (role != "Admin") {
+            //     table.column(6).visible(false);
+            // }
         })
     </script>
 

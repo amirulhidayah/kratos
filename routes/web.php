@@ -49,8 +49,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::resource('/dashboard', DashboardController::class);
-    Route::post('/dashboard/export/intervensi/{tipe}', [DashboardController::class, 'exportIntervensi']);
-    Route::post('/dashboard/export/anggaran/{tipe}', [DashboardController::class, 'exportAnggaran']);
+    Route::post('/dashboard/export/intervensi', [DashboardController::class, 'exportIntervensi']);
+    Route::post('/dashboard/export/anggaran', [DashboardController::class, 'exportAnggaran']);
 
     // Keong
     Route::resource('rencana-intervensi', PerencanaanController::class);
@@ -132,15 +132,16 @@ Route::group(['middleware' => 'auth'], function () {
         // Indikator
         Route::resource('master-data/indikator', IndikatorController::class);
 
-        // Wilayah
-        Route::get('map/kecamatan', [KecamatanController::class, 'getMapData']);
+        Route::resource('master-data/wilayah/kecamatan', KecamatanController::class)->except(
+            'index',
+            'show'
+        );
 
-        Route::post('master-data/wilayah/kecamatan/export', [KecamatanController::class, 'export']);
-        Route::resource('master-data/wilayah/kecamatan', KecamatanController::class);
 
-        Route::post('master-data/wilayah/desa/{kecamatan}/export', [DesaController::class, 'export']);
-        Route::get('map/desa', [DesaController::class, 'getMapData']);
-        Route::resource('master-data/wilayah/desa/{kecamatan}', DesaController::class)->parameters([
+        Route::resource('master-data/wilayah/desa/{kecamatan}', DesaController::class)->except(
+            'index',
+            'show'
+        )->parameters([
             '{kecamatan}' => 'desa'
         ]);
         Route::resource('master-data/akun', AkunController::class)->parameters(['akun' => 'user']);
@@ -157,6 +158,23 @@ Route::group(['middleware' => 'auth'], function () {
             'show'
         );
     });
+
+    Route::post('master-data/wilayah/desa/{kecamatan}/export', [DesaController::class, 'export']);
+    Route::post('master-data/wilayah/kecamatan/export', [KecamatanController::class, 'export']);
+    Route::get('map/desa', [DesaController::class, 'getMapData']);
+    Route::resource('master-data/wilayah/desa/{kecamatan}', DesaController::class)->only(
+        'index',
+        'show'
+    )->parameters([
+        '{kecamatan}' => 'desa'
+    ]);
+
+    // Wilayah
+    Route::get('map/kecamatan', [KecamatanController::class, 'getMapData']);
+    Route::resource('master-data/wilayah/kecamatan', KecamatanController::class)->only(
+        'index',
+        'show'
+    );
 
 
     Route::resource('daftar-pengukuran-anak', DaftarPengukuranAnakController::class)->only(

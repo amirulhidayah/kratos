@@ -5,7 +5,7 @@
 @endsection
 
 @section('titlePanelHeader')
-    Ubah POSYANDU | {{ $puskesmas->nama }}
+    Ubah POSYANDU
 @endsection
 
 @section('subTitlePanelHeader')

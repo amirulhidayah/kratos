@@ -14,13 +14,13 @@ class PengukuranAnakTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('pengukuran_anak')->delete();
-        
-        \DB::table('pengukuran_anak')->insert(array (
-            0 => 
-            array (
+
+        \DB::table('pengukuran_anak')->insert(array(
+            0 =>
+            array(
                 'anak_id' => '723200ca-3880-4eed-87ba-05687aa88a89',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -34,10 +34,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '103.7',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '3 Tahun - 8 Bulan - 30 Hari',
+
             ),
-            1 => 
-            array (
+            1 =>
+            array(
                 'anak_id' => '7332ce20-8579-4c7d-9daf-4e4ea4eb5710',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Kurang',
@@ -51,10 +51,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '87.1',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '3 Tahun - 10 Bulan - 19 Hari',
+
             ),
-            2 => 
-            array (
+            2 =>
+            array(
                 'anak_id' => 'fa914b2f-efa8-40e4-a86b-144efc70f40d',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Berat Badan Normal',
@@ -68,10 +68,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '95.7',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '1 Tahun - 6 Bulan - 26 Hari',
+
             ),
-            3 => 
-            array (
+            3 =>
+            array(
                 'anak_id' => 'f304ef82-0577-4d5e-a989-9bb6e3752154',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -85,10 +85,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '109.6',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '3 Tahun - 5 Bulan - 26 Hari',
+
             ),
-            4 => 
-            array (
+            4 =>
+            array(
                 'anak_id' => '6ed5bade-c0a2-4a24-9e78-796fe5db5fe8',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Sangat Kurang',
@@ -102,10 +102,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '67.1',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '4 Tahun - 8 Bulan - 25 Hari',
+
             ),
-            5 => 
-            array (
+            5 =>
+            array(
                 'anak_id' => 'e0b55b34-e420-4c97-b653-10f38c4f9653',
                 'bb_tb' => 'Gizi Kurang',
                 'bb_u' => 'Sangat Kurang',
@@ -119,10 +119,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '87.1',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '4 Tahun - 1 Bulan - 11 Hari',
+
             ),
-            6 => 
-            array (
+            6 =>
+            array(
                 'anak_id' => '0c27fe2a-c4e8-4980-b38a-cc7646fc939f',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -136,10 +136,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '75.3',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '2 Tahun - 9 Bulan - 26 Hari',
+
             ),
-            7 => 
-            array (
+            7 =>
+            array(
                 'anak_id' => '6589fd06-81e7-42d4-b7d9-8ff1f7517412',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -153,10 +153,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '87.7',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '2 Tahun - 10 Bulan - 13 Hari',
+
             ),
-            8 => 
-            array (
+            8 =>
+            array(
                 'anak_id' => 'c5a05e27-3de4-4aaf-90e4-acb97fc6e844',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Berat Badan Normal',
@@ -170,10 +170,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '109.7',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '3 Tahun - 5 Bulan - 14 Hari',
+
             ),
-            9 => 
-            array (
+            9 =>
+            array(
                 'anak_id' => 'c8f3ff8f-2185-4f6a-9d53-a84bda6622f1',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -187,10 +187,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '89.4',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '1 Tahun - 2 Bulan - 19 Hari',
+
             ),
-            10 => 
-            array (
+            10 =>
+            array(
                 'anak_id' => 'b756fcf8-24c1-4d2d-beea-fd5c36c932f4',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -204,10 +204,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '96.2',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '3 Tahun - 1 Bulan - 3 Hari',
+
             ),
-            11 => 
-            array (
+            11 =>
+            array(
                 'anak_id' => 'ebdaeb7d-8930-4e8f-bb15-9ffbe4c6f7dd',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -221,10 +221,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '78.7',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '5 Tahun - 6 Bulan - 17 Hari',
+
             ),
-            12 => 
-            array (
+            12 =>
+            array(
                 'anak_id' => '39ddee16-8e59-47d6-aded-9a4a7b915824',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -238,10 +238,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '102.7',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '4 Tahun - 8 Bulan - 5 Hari',
+
             ),
-            13 => 
-            array (
+            13 =>
+            array(
                 'anak_id' => '98633ec6-d2a1-436a-829b-8b144e5583ae',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Lebih',
@@ -255,10 +255,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '109.1',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '1 Tahun - 11 Bulan - 15 Hari',
+
             ),
-            14 => 
-            array (
+            14 =>
+            array(
                 'anak_id' => 'eebd08c2-5665-42a7-a2ff-1fdffd65d817',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -272,10 +272,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '107.4',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '5 Tahun - 0 Bulan - 17 Hari',
+
             ),
-            15 => 
-            array (
+            15 =>
+            array(
                 'anak_id' => 'e0e88843-5870-450f-85eb-da8df2ecda22',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -289,10 +289,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '67.7',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '3 Tahun - 11 Bulan - 9 Hari',
+
             ),
-            16 => 
-            array (
+            16 =>
+            array(
                 'anak_id' => '2e4bf691-9da4-49de-ad2a-e7a46a0e9878',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -306,10 +306,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '105.4',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '5 Tahun - 4 Bulan - 5 Hari',
+
             ),
-            17 => 
-            array (
+            17 =>
+            array(
                 'anak_id' => 'bf8c9561-fdd8-4085-8b1e-c726c16648d4',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -323,10 +323,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '106.4',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '2 Tahun - 6 Bulan - 7 Hari',
+
             ),
-            18 => 
-            array (
+            18 =>
+            array(
                 'anak_id' => 'a6c3d65d-5de0-4520-8d1c-0f1c7d857381',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Kurang',
@@ -340,10 +340,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '90.2',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '2 Tahun - 8 Bulan - 4 Hari',
+
             ),
-            19 => 
-            array (
+            19 =>
+            array(
                 'anak_id' => 'a7e78e5f-2d24-48b4-be4d-cdafaa9931bd',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -357,10 +357,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '94.9',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '1 Tahun - 9 Bulan - 8 Hari',
+
             ),
-            20 => 
-            array (
+            20 =>
+            array(
                 'anak_id' => '99c26d23-2870-4a66-85b1-e36f7d2e9a61',
                 'bb_tb' => 'Gizi Kurang',
                 'bb_u' => 'Berat Badan Normal',
@@ -374,10 +374,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '109.4',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 10 Bulan - 23 Hari',
+
             ),
-            21 => 
-            array (
+            21 =>
+            array(
                 'anak_id' => '523aa191-2ffb-467c-97d4-176c638efeb8',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -391,10 +391,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '103.2',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '3 Tahun - 0 Bulan - 2 Hari',
+
             ),
-            22 => 
-            array (
+            22 =>
+            array(
                 'anak_id' => '1cbcacec-a105-44f6-aef4-78277171645e',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Lebih',
@@ -408,10 +408,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '109.4',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '1 Tahun - 2 Bulan - 29 Hari',
+
             ),
-            23 => 
-            array (
+            23 =>
+            array(
                 'anak_id' => '64702317-fb32-4f8b-b09c-09b32b2cc255',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -425,10 +425,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '100.9',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '1 Tahun - 2 Bulan - 15 Hari',
+
             ),
-            24 => 
-            array (
+            24 =>
+            array(
                 'anak_id' => '07a9b640-2c2c-44c3-b139-1ac991c8e4aa',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -442,10 +442,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '88.5',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '4 Tahun - 7 Bulan - 17 Hari',
+
             ),
-            25 => 
-            array (
+            25 =>
+            array(
                 'anak_id' => 'f2fec889-3619-4b15-8bae-fb7d83303c8e',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -459,10 +459,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '98.1',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '5 Tahun - 0 Bulan - 10 Hari',
+
             ),
-            26 => 
-            array (
+            26 =>
+            array(
                 'anak_id' => 'b68d25d1-f60a-44c7-8008-19377c3fb850',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Kurang',
@@ -476,10 +476,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '104',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '3 Tahun - 5 Bulan - 15 Hari',
+
             ),
-            27 => 
-            array (
+            27 =>
+            array(
                 'anak_id' => '9827439e-eab5-41b6-9077-9f7e1b657dfc',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -493,10 +493,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '92.6',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '5 Tahun - 6 Bulan - 23 Hari',
+
             ),
-            28 => 
-            array (
+            28 =>
+            array(
                 'anak_id' => '37e58e4f-3299-42c8-8bf8-e311c9de0671',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -510,10 +510,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '95.1',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '4 Tahun - 7 Bulan - 17 Hari',
+
             ),
-            29 => 
-            array (
+            29 =>
+            array(
                 'anak_id' => '7f043912-5f60-40d3-bc61-e43c07fa0064',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -527,10 +527,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '94.4',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '3 Tahun - 7 Bulan - 28 Hari',
+
             ),
-            30 => 
-            array (
+            30 =>
+            array(
                 'anak_id' => '70560dfd-4e05-4fe1-89c5-0652472ffedc',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -544,10 +544,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '85.8',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '4 Tahun - 10 Bulan - 29 Hari',
+
             ),
-            31 => 
-            array (
+            31 =>
+            array(
                 'anak_id' => '01b05ee7-b5bd-4356-b04b-2427e49253f4',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -561,10 +561,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '66.2',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '2 Tahun - 4 Bulan - 22 Hari',
+
             ),
-            32 => 
-            array (
+            32 =>
+            array(
                 'anak_id' => '5e597e17-7f89-4788-b6d0-da0927150a66',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -578,10 +578,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '95.8',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '1 Tahun - 4 Bulan - 25 Hari',
+
             ),
-            33 => 
-            array (
+            33 =>
+            array(
                 'anak_id' => '8f64954a-c174-43b1-9d1a-194227f74f82',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -595,10 +595,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '74',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '5 Tahun - 7 Bulan - 7 Hari',
+
             ),
-            34 => 
-            array (
+            34 =>
+            array(
                 'anak_id' => '1f7d9524-7285-40ad-a404-dd6a644643b0',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -612,10 +612,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '84.2',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '1 Tahun - 2 Bulan - 3 Hari',
+
             ),
-            35 => 
-            array (
+            35 =>
+            array(
                 'anak_id' => '700e3bb8-f897-4895-ac6f-3f6cd70c34fb',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -629,10 +629,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '60.7',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '1 Tahun - 1 Bulan - 2 Hari',
+
             ),
-            36 => 
-            array (
+            36 =>
+            array(
                 'anak_id' => 'c5c15513-935a-4bb1-99f1-72f21e103cc3',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -646,10 +646,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '102.8',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '3 Tahun - 2 Bulan - 26 Hari',
+
             ),
-            37 => 
-            array (
+            37 =>
+            array(
                 'anak_id' => 'b5ce4eaa-3c89-4e3d-897d-4f379070737d',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -663,10 +663,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '71.3',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '5 Tahun - 11 Bulan - 27 Hari',
+
             ),
-            38 => 
-            array (
+            38 =>
+            array(
                 'anak_id' => '1e78f375-3bed-48f9-aca0-aee0d8e8f2a7',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Kurang',
@@ -680,10 +680,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '87',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '1 Tahun - 7 Bulan - 1 Hari',
+
             ),
-            39 => 
-            array (
+            39 =>
+            array(
                 'anak_id' => 'c63940a9-dcae-4f0d-acb4-57ea9faf6de3',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -697,10 +697,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '97.6',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '3 Tahun - 5 Bulan - 28 Hari',
+
             ),
-            40 => 
-            array (
+            40 =>
+            array(
                 'anak_id' => '37f8deca-dff9-481f-9299-c42415a25bcd',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -714,10 +714,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '85.1',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '5 Tahun - 9 Bulan - 0 Hari',
+
             ),
-            41 => 
-            array (
+            41 =>
+            array(
                 'anak_id' => '95898d0a-f368-47e8-b68a-0181f3d5d846',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -731,10 +731,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '89.4',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 0 Bulan - 27 Hari',
+
             ),
-            42 => 
-            array (
+            42 =>
+            array(
                 'anak_id' => '6d97aba4-dfa6-4af0-98aa-0f8630f34199',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -748,10 +748,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '103.4',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '3 Tahun - 9 Bulan - 2 Hari',
+
             ),
-            43 => 
-            array (
+            43 =>
+            array(
                 'anak_id' => '7b5891c0-7468-41ad-a64c-d98d776be99c',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -765,10 +765,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '105.8',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '5 Tahun - 11 Bulan - 14 Hari',
+
             ),
-            44 => 
-            array (
+            44 =>
+            array(
                 'anak_id' => 'e299411a-9cfc-41f7-9bf8-56edb2028f46',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -782,10 +782,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '98.7',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '2 Tahun - 9 Bulan - 5 Hari',
+
             ),
-            45 => 
-            array (
+            45 =>
+            array(
                 'anak_id' => '10b0ac25-0e4c-47c2-87a8-1926f33cfe5d',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -799,10 +799,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '105.4',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '5 Tahun - 10 Bulan - 19 Hari',
+
             ),
-            46 => 
-            array (
+            46 =>
+            array(
                 'anak_id' => 'e51de099-87dd-44c0-8668-a238bd424373',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Kurang',
@@ -816,10 +816,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '56',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '2 Tahun - 1 Bulan - 20 Hari',
+
             ),
-            47 => 
-            array (
+            47 =>
+            array(
                 'anak_id' => '0796d823-673f-492f-b41c-dae255ff4e30',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -833,10 +833,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '96.7',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '4 Tahun - 2 Bulan - 29 Hari',
+
             ),
-            48 => 
-            array (
+            48 =>
+            array(
                 'anak_id' => '7474d1b8-383c-47ea-a97f-b13142ffb4b7',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Kurang',
@@ -850,10 +850,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '99.4',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '5 Tahun - 6 Bulan - 25 Hari',
+
             ),
-            49 => 
-            array (
+            49 =>
+            array(
                 'anak_id' => '0578e5fa-1de7-490e-814b-0ca414c33fdf',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -867,10 +867,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '107.9',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '3 Tahun - 10 Bulan - 3 Hari',
+
             ),
-            50 => 
-            array (
+            50 =>
+            array(
                 'anak_id' => 'e707f655-b65c-4cb2-8ce8-ca3f008745d4',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -884,10 +884,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '51.3',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '5 Tahun - 3 Bulan - 23 Hari',
+
             ),
-            51 => 
-            array (
+            51 =>
+            array(
                 'anak_id' => 'd9d68f43-7686-496d-947f-522432830215',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -901,10 +901,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '98.6',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '4 Tahun - 5 Bulan - 5 Hari',
+
             ),
-            52 => 
-            array (
+            52 =>
+            array(
                 'anak_id' => '76a4bec0-aa31-4430-915b-505d74b5e69b',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -918,10 +918,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '102.1',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '2 Tahun - 0 Bulan - 25 Hari',
+
             ),
-            53 => 
-            array (
+            53 =>
+            array(
                 'anak_id' => '4c4eab2b-abae-4671-b71c-0d1be9a10c0d',
                 'bb_tb' => 'Gizi Kurang',
                 'bb_u' => 'Sangat Kurang',
@@ -935,10 +935,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '89.8',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '5 Tahun - 1 Bulan - 22 Hari',
+
             ),
-            54 => 
-            array (
+            54 =>
+            array(
                 'anak_id' => '6da3959a-81b0-4085-88ed-0903c8019b3c',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -952,10 +952,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '58.1',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '3 Tahun - 3 Bulan - 18 Hari',
+
             ),
-            55 => 
-            array (
+            55 =>
+            array(
                 'anak_id' => '3264ee16-bf29-4f73-9dbd-5fe4e5649e7c',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -969,10 +969,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '74.8',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 10 Bulan - 2 Hari',
+
             ),
-            56 => 
-            array (
+            56 =>
+            array(
                 'anak_id' => 'edb6966b-b541-4186-9500-64204b960cfd',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -986,10 +986,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '106.3',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '2 Tahun - 10 Bulan - 18 Hari',
+
             ),
-            57 => 
-            array (
+            57 =>
+            array(
                 'anak_id' => '0772e861-e38d-4065-9104-283b5590f609',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -1003,10 +1003,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '81.1',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '2 Tahun - 10 Bulan - 9 Hari',
+
             ),
-            58 => 
-            array (
+            58 =>
+            array(
                 'anak_id' => '25e36867-afce-49ba-a5df-a201156628e5',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -1020,10 +1020,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '74.3',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '4 Tahun - 6 Bulan - 23 Hari',
+
             ),
-            59 => 
-            array (
+            59 =>
+            array(
                 'anak_id' => '3bf1b2af-97bb-4a3d-9e59-5e4b9366d77d',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -1037,10 +1037,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '82.5',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '3 Tahun - 2 Bulan - 0 Hari',
+
             ),
-            60 => 
-            array (
+            60 =>
+            array(
                 'anak_id' => 'a912ab95-9bed-44ec-bec5-dc3c0dbc0abf',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -1054,10 +1054,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '69.4',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '3 Tahun - 8 Bulan - 11 Hari',
+
             ),
-            61 => 
-            array (
+            61 =>
+            array(
                 'anak_id' => 'edf08b96-8558-4eab-9307-ad464f6d415c',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -1071,10 +1071,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '95.1',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '2 Tahun - 1 Bulan - 29 Hari',
+
             ),
-            62 => 
-            array (
+            62 =>
+            array(
                 'anak_id' => '0a2123cd-59da-4790-9bba-ba6ff19eae4a',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Kurang',
@@ -1088,10 +1088,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '78.6',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '4 Tahun - 10 Bulan - 14 Hari',
+
             ),
-            63 => 
-            array (
+            63 =>
+            array(
                 'anak_id' => '9d0a8eb8-6894-4b2d-9a15-7244b095cb4f',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -1105,10 +1105,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '103.3',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '4 Tahun - 3 Bulan - 2 Hari',
+
             ),
-            64 => 
-            array (
+            64 =>
+            array(
                 'anak_id' => '10d1b7df-9a8e-4eb5-9ea8-88f026686774',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Sangat Kurang',
@@ -1122,10 +1122,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '54.7',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '5 Tahun - 10 Bulan - 17 Hari',
+
             ),
-            65 => 
-            array (
+            65 =>
+            array(
                 'anak_id' => 'ba1d0e1c-cd62-4e7c-b3d8-57762951e833',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -1139,10 +1139,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '85.3',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '3 Tahun - 2 Bulan - 10 Hari',
+
             ),
-            66 => 
-            array (
+            66 =>
+            array(
                 'anak_id' => 'aef4d053-042e-4515-b86d-0e4c1cf6528a',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Kurang',
@@ -1156,10 +1156,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '65.9',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '5 Tahun - 1 Bulan - 3 Hari',
+
             ),
-            67 => 
-            array (
+            67 =>
+            array(
                 'anak_id' => 'a67f9ef8-cec4-4a68-93ca-b980197198d2',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -1173,10 +1173,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '98.4',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '3 Tahun - 0 Bulan - 1 Hari',
+
             ),
-            68 => 
-            array (
+            68 =>
+            array(
                 'anak_id' => 'a682d5f2-3d2a-4555-978f-1fa56d27ae7f',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -1190,10 +1190,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '83.2',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '2 Tahun - 4 Bulan - 20 Hari',
+
             ),
-            69 => 
-            array (
+            69 =>
+            array(
                 'anak_id' => '9ac58b4f-d6cf-4d2c-8455-d96797a0107e',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -1207,10 +1207,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '103.9',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '2 Tahun - 1 Bulan - 24 Hari',
+
             ),
-            70 => 
-            array (
+            70 =>
+            array(
                 'anak_id' => '83508355-8b4f-427c-b502-ed1d8607cf35',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -1224,10 +1224,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '93.1',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '1 Tahun - 11 Bulan - 10 Hari',
+
             ),
-            71 => 
-            array (
+            71 =>
+            array(
                 'anak_id' => '606d0025-3814-445d-804a-35f877b2d39a',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -1241,10 +1241,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '60.6',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '5 Tahun - 3 Bulan - 5 Hari',
+
             ),
-            72 => 
-            array (
+            72 =>
+            array(
                 'anak_id' => 'c22b055f-3f8c-479b-acc1-8b6d80eeb4f5',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Kurang',
@@ -1258,10 +1258,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '95',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '3 Tahun - 10 Bulan - 8 Hari',
+
             ),
-            73 => 
-            array (
+            73 =>
+            array(
                 'anak_id' => '9fe825df-f93d-414a-a35c-76b985424fc6',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -1275,10 +1275,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '73.2',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '3 Tahun - 6 Bulan - 11 Hari',
+
             ),
-            74 => 
-            array (
+            74 =>
+            array(
                 'anak_id' => '8c5be0fb-fbec-4c9f-b7eb-fd6ff294e00d',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -1292,10 +1292,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '91.7',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '1 Tahun - 7 Bulan - 6 Hari',
+
             ),
-            75 => 
-            array (
+            75 =>
+            array(
                 'anak_id' => '882b855d-72a3-4937-91d1-a9d13f431a09',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -1309,10 +1309,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '102.5',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '3 Tahun - 5 Bulan - 13 Hari',
+
             ),
-            76 => 
-            array (
+            76 =>
+            array(
                 'anak_id' => 'd99f8096-689c-4d35-91ee-03ff7352c039',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -1326,10 +1326,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '72.1',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '4 Tahun - 6 Bulan - 12 Hari',
+
             ),
-            77 => 
-            array (
+            77 =>
+            array(
                 'anak_id' => '732d4e17-dfa7-427d-b388-73d6d01406c9',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -1343,10 +1343,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '49.1',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '1 Tahun - 1 Bulan - 19 Hari',
+
             ),
-            78 => 
-            array (
+            78 =>
+            array(
                 'anak_id' => 'd0c75574-91c2-4a8a-a53a-99e0af32c000',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Kurang',
@@ -1360,10 +1360,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '77.7',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '5 Tahun - 1 Bulan - 10 Hari',
+
             ),
-            79 => 
-            array (
+            79 =>
+            array(
                 'anak_id' => 'f4b10fee-cf0f-4cd8-96de-3210bc5f6d3c',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -1377,10 +1377,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '84.9',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '1 Tahun - 7 Bulan - 0 Hari',
+
             ),
-            80 => 
-            array (
+            80 =>
+            array(
                 'anak_id' => 'b1711ba5-126c-48f3-a73f-76899c68f832',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -1394,10 +1394,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '100.3',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '2 Tahun - 10 Bulan - 27 Hari',
+
             ),
-            81 => 
-            array (
+            81 =>
+            array(
                 'anak_id' => '89c66181-606c-4175-9756-ea9c997ebd45',
                 'bb_tb' => 'Gizi Kurang',
                 'bb_u' => 'Berat Badan Normal',
@@ -1411,10 +1411,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '108',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '3 Tahun - 10 Bulan - 2 Hari',
+
             ),
-            82 => 
-            array (
+            82 =>
+            array(
                 'anak_id' => '03f80d58-7010-4d63-81da-bebca12c3ec3',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -1428,10 +1428,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '104.9',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '2 Tahun - 0 Bulan - 12 Hari',
+
             ),
-            83 => 
-            array (
+            83 =>
+            array(
                 'anak_id' => 'bb787e0d-4676-4db6-adc3-1cd2f5f95e7f',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -1445,10 +1445,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '80.2',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '3 Tahun - 6 Bulan - 21 Hari',
+
             ),
-            84 => 
-            array (
+            84 =>
+            array(
                 'anak_id' => '19ff3a05-647d-4ed0-8644-eed90178674b',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -1462,10 +1462,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '99.3',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '2 Tahun - 4 Bulan - 6 Hari',
+
             ),
-            85 => 
-            array (
+            85 =>
+            array(
                 'anak_id' => '36c99bc7-a6a6-4ff3-9100-f08f291532f0',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -1479,10 +1479,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '100.5',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '4 Tahun - 11 Bulan - 16 Hari',
+
             ),
-            86 => 
-            array (
+            86 =>
+            array(
                 'anak_id' => 'ffb82585-77cb-4967-8433-bfbc3474e3c5',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -1496,10 +1496,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '102.3',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '5 Tahun - 1 Bulan - 26 Hari',
+
             ),
-            87 => 
-            array (
+            87 =>
+            array(
                 'anak_id' => 'b57d3b72-9480-4620-aea4-037119c13092',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -1513,10 +1513,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '98.3',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '5 Tahun - 7 Bulan - 7 Hari',
+
             ),
-            88 => 
-            array (
+            88 =>
+            array(
                 'anak_id' => '657228d9-d456-46e0-a9cc-6165168ea847',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -1530,10 +1530,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '76.6',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '2 Tahun - 10 Bulan - 11 Hari',
+
             ),
-            89 => 
-            array (
+            89 =>
+            array(
                 'anak_id' => '9d10da07-47f6-4502-ab4a-a67cc59c9e6a',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Kurang',
@@ -1547,10 +1547,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '70.2',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '2 Tahun - 0 Bulan - 16 Hari',
+
             ),
-            90 => 
-            array (
+            90 =>
+            array(
                 'anak_id' => '1805b26b-a522-407e-b3eb-e80ce8934572',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -1564,10 +1564,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '81.3',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 6 Bulan - 29 Hari',
+
             ),
-            91 => 
-            array (
+            91 =>
+            array(
                 'anak_id' => 'c1944b90-24fc-4543-a2c3-a1ad85370982',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Kurang',
@@ -1581,10 +1581,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '106',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '5 Tahun - 0 Bulan - 13 Hari',
+
             ),
-            92 => 
-            array (
+            92 =>
+            array(
                 'anak_id' => '37081732-b1bf-4a1a-a216-45beb648e5d7',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Lebih',
@@ -1598,10 +1598,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '107.5',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '2 Tahun - 7 Bulan - 27 Hari',
+
             ),
-            93 => 
-            array (
+            93 =>
+            array(
                 'anak_id' => '6e49c051-cc7b-438b-969e-8042f42a6731',
                 'bb_tb' => 'Gizi Kurang',
                 'bb_u' => 'Sangat Kurang',
@@ -1615,10 +1615,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '76.3',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '2 Tahun - 1 Bulan - 11 Hari',
+
             ),
-            94 => 
-            array (
+            94 =>
+            array(
                 'anak_id' => 'e8c7debd-bea5-4744-b2c5-0d01f5993413',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -1632,10 +1632,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '84.7',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 1 Bulan - 10 Hari',
+
             ),
-            95 => 
-            array (
+            95 =>
+            array(
                 'anak_id' => 'cf1f933e-6481-4aae-bc7b-8cc77df308f6',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -1649,10 +1649,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '67.3',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '5 Tahun - 8 Bulan - 21 Hari',
+
             ),
-            96 => 
-            array (
+            96 =>
+            array(
                 'anak_id' => '65d9c84f-4323-4cb1-b9d9-3a8aa9492475',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -1666,10 +1666,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '96.8',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '4 Tahun - 5 Bulan - 19 Hari',
+
             ),
-            97 => 
-            array (
+            97 =>
+            array(
                 'anak_id' => 'ec9db77e-516f-4fc6-b3db-822025fe6886',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -1683,10 +1683,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '90.9',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '4 Tahun - 6 Bulan - 7 Hari',
+
             ),
-            98 => 
-            array (
+            98 =>
+            array(
                 'anak_id' => '6f3295cc-9870-498d-be30-509b93e6dffa',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -1700,10 +1700,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '100.3',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '5 Tahun - 10 Bulan - 2 Hari',
+
             ),
-            99 => 
-            array (
+            99 =>
+            array(
                 'anak_id' => '861910ad-590e-46e1-8f02-5166be39bff8',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -1717,10 +1717,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '108.9',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '5 Tahun - 1 Bulan - 14 Hari',
+
             ),
-            100 => 
-            array (
+            100 =>
+            array(
                 'anak_id' => '6aa1af29-2b2a-4d81-891b-864ae17ee644',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -1734,10 +1734,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '100.8',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '4 Tahun - 9 Bulan - 2 Hari',
+
             ),
-            101 => 
-            array (
+            101 =>
+            array(
                 'anak_id' => '7f93a9c4-cd09-4e6f-aa62-6a84553dfe79',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -1751,10 +1751,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '90.4',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 8 Bulan - 3 Hari',
+
             ),
-            102 => 
-            array (
+            102 =>
+            array(
                 'anak_id' => '3f13a9b2-dd49-43a4-8782-c71745fd2ff4',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Berat Badan Normal',
@@ -1768,10 +1768,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '108.3',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '3 Tahun - 2 Bulan - 24 Hari',
+
             ),
-            103 => 
-            array (
+            103 =>
+            array(
                 'anak_id' => '10b6a65e-f938-4f5b-b1ac-5179ba2ba0b1',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -1785,10 +1785,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '104.5',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '4 Tahun - 5 Bulan - 22 Hari',
+
             ),
-            104 => 
-            array (
+            104 =>
+            array(
                 'anak_id' => 'c9c27322-37c5-4ebb-ba7e-3229d2acc471',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Sangat Kurang',
@@ -1802,10 +1802,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '53.2',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '1 Tahun - 8 Bulan - 10 Hari',
+
             ),
-            105 => 
-            array (
+            105 =>
+            array(
                 'anak_id' => 'cada6f6e-fecb-4934-aa07-ed4a1d5342d0',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -1819,10 +1819,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '99.6',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '1 Tahun - 9 Bulan - 10 Hari',
+
             ),
-            106 => 
-            array (
+            106 =>
+            array(
                 'anak_id' => 'c4c77f4e-10e4-4186-8170-07263587faa3',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -1836,10 +1836,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '89.1',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '5 Tahun - 3 Bulan - 1 Hari',
+
             ),
-            107 => 
-            array (
+            107 =>
+            array(
                 'anak_id' => 'ddbce88a-407d-466f-9e60-05c1b8be490a',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Lebih',
@@ -1853,10 +1853,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '109.3',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '2 Tahun - 10 Bulan - 14 Hari',
+
             ),
-            108 => 
-            array (
+            108 =>
+            array(
                 'anak_id' => 'ea361202-b220-442e-87aa-872c3ddcc87d',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -1870,10 +1870,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '94.8',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '1 Tahun - 4 Bulan - 5 Hari',
+
             ),
-            109 => 
-            array (
+            109 =>
+            array(
                 'anak_id' => 'b2fc7cc8-9fb8-441a-8a8e-06a8ebbb4a7e',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -1887,10 +1887,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '69.4',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '1 Tahun - 2 Bulan - 2 Hari',
+
             ),
-            110 => 
-            array (
+            110 =>
+            array(
                 'anak_id' => '91683e74-a785-420d-915d-6ca5004d9f2a',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Kurang',
@@ -1904,10 +1904,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '81.7',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '1 Tahun - 4 Bulan - 8 Hari',
+
             ),
-            111 => 
-            array (
+            111 =>
+            array(
                 'anak_id' => '8b3d278d-d909-4ec2-9b11-5426ada6feb6',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -1921,10 +1921,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '96.6',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '4 Tahun - 0 Bulan - 18 Hari',
+
             ),
-            112 => 
-            array (
+            112 =>
+            array(
                 'anak_id' => '34783495-2860-4a92-8a53-241bd9b902e4',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Kurang',
@@ -1938,10 +1938,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '92',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 7 Bulan - 9 Hari',
+
             ),
-            113 => 
-            array (
+            113 =>
+            array(
                 'anak_id' => '4a25fc05-3279-499c-a393-15bba8af9be2',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -1955,10 +1955,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '77.4',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '5 Tahun - 5 Bulan - 27 Hari',
+
             ),
-            114 => 
-            array (
+            114 =>
+            array(
                 'anak_id' => '68598075-c7db-42e8-9d33-3a573d986a33',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -1972,10 +1972,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '97.7',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '2 Tahun - 6 Bulan - 29 Hari',
+
             ),
-            115 => 
-            array (
+            115 =>
+            array(
                 'anak_id' => '82a08d0e-857c-48c4-9667-9c774ee32d96',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Sangat Kurang',
@@ -1989,10 +1989,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '80.9',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '3 Tahun - 10 Bulan - 20 Hari',
+
             ),
-            116 => 
-            array (
+            116 =>
+            array(
                 'anak_id' => '3f1357d5-48e0-47d6-b8ce-a66d3c1adbd7',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -2006,10 +2006,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '103.1',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '4 Tahun - 6 Bulan - 13 Hari',
+
             ),
-            117 => 
-            array (
+            117 =>
+            array(
                 'anak_id' => '6d6d36b1-1c97-4604-a75a-89f7ea59dd57',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -2023,10 +2023,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '50.6',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '5 Tahun - 8 Bulan - 6 Hari',
+
             ),
-            118 => 
-            array (
+            118 =>
+            array(
                 'anak_id' => 'a7d9d154-702b-4794-baa7-b9b03526ad58',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -2040,10 +2040,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '106.3',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '2 Tahun - 10 Bulan - 28 Hari',
+
             ),
-            119 => 
-            array (
+            119 =>
+            array(
                 'anak_id' => '9ae2bbe6-5030-4f08-a212-5548541e8620',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -2057,10 +2057,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '93.9',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '5 Tahun - 10 Bulan - 18 Hari',
+
             ),
-            120 => 
-            array (
+            120 =>
+            array(
                 'anak_id' => 'cdd22677-8dc8-46d9-92e5-c9edfd5328fe',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -2074,10 +2074,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '95.8',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '5 Tahun - 1 Bulan - 1 Hari',
+
             ),
-            121 => 
-            array (
+            121 =>
+            array(
                 'anak_id' => 'ee2c109b-6e58-46ae-bed3-24a53625a63c',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -2091,10 +2091,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '90.3',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '4 Tahun - 2 Bulan - 12 Hari',
+
             ),
-            122 => 
-            array (
+            122 =>
+            array(
                 'anak_id' => 'dcec63dd-96aa-414c-8bfd-238c991bd58c',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -2108,10 +2108,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '96.3',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '5 Tahun - 3 Bulan - 28 Hari',
+
             ),
-            123 => 
-            array (
+            123 =>
+            array(
                 'anak_id' => '44e2e484-a1dd-4827-87ac-6faa2dc49108',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -2125,10 +2125,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '56.4',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '1 Tahun - 11 Bulan - 21 Hari',
+
             ),
-            124 => 
-            array (
+            124 =>
+            array(
                 'anak_id' => '4d31943d-e1a3-409e-89e6-537317c498ab',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -2142,10 +2142,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '103.8',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '3 Tahun - 6 Bulan - 14 Hari',
+
             ),
-            125 => 
-            array (
+            125 =>
+            array(
                 'anak_id' => 'b4d3d5b8-28a8-4eff-892d-ee3abeb4ff53',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Berat Badan Normal',
@@ -2159,10 +2159,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '101.4',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '2 Tahun - 5 Bulan - 1 Hari',
+
             ),
-            126 => 
-            array (
+            126 =>
+            array(
                 'anak_id' => 'b5a04953-e32a-4fac-9f2c-b37f86d0a28a',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Kurang',
@@ -2176,10 +2176,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '74',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '3 Tahun - 8 Bulan - 9 Hari',
+
             ),
-            127 => 
-            array (
+            127 =>
+            array(
                 'anak_id' => 'a5e55743-ff56-4a6e-917d-b28c7adca3ac',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Kurang',
@@ -2193,10 +2193,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '65.4',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '4 Tahun - 3 Bulan - 19 Hari',
+
             ),
-            128 => 
-            array (
+            128 =>
+            array(
                 'anak_id' => 'b4036d70-d8d4-45a2-bae4-f5d5082d123d',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2210,10 +2210,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '95.2',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '1 Tahun - 4 Bulan - 1 Hari',
+
             ),
-            129 => 
-            array (
+            129 =>
+            array(
                 'anak_id' => '8e2fcd3c-0f5c-4fb9-ab10-8d64483732f9',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -2227,10 +2227,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '87',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 10 Bulan - 16 Hari',
+
             ),
-            130 => 
-            array (
+            130 =>
+            array(
                 'anak_id' => '89a6e30b-be0f-4866-ba55-455cca0d61d2',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Kurang',
@@ -2244,10 +2244,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '97.4',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '1 Tahun - 4 Bulan - 26 Hari',
+
             ),
-            131 => 
-            array (
+            131 =>
+            array(
                 'anak_id' => '377f2db1-ff6e-4a06-80ed-fdda2a480007',
                 'bb_tb' => 'Gizi Kurang',
                 'bb_u' => 'Berat Badan Normal',
@@ -2261,10 +2261,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '103.9',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '4 Tahun - 3 Bulan - 4 Hari',
+
             ),
-            132 => 
-            array (
+            132 =>
+            array(
                 'anak_id' => '1c1aa0ad-354e-4eba-a95f-cbd370a1f2f2',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Kurang',
@@ -2278,10 +2278,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '93.6',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '5 Tahun - 3 Bulan - 23 Hari',
+
             ),
-            133 => 
-            array (
+            133 =>
+            array(
                 'anak_id' => '726271a4-8e1c-4fde-b0a6-1fbdb34e4cf0',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2295,10 +2295,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '76.6',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '1 Tahun - 11 Bulan - 29 Hari',
+
             ),
-            134 => 
-            array (
+            134 =>
+            array(
                 'anak_id' => '5037e453-b2c6-465b-9215-1cef3ae232ba',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -2312,10 +2312,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '92.2',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '3 Tahun - 4 Bulan - 13 Hari',
+
             ),
-            135 => 
-            array (
+            135 =>
+            array(
                 'anak_id' => 'b1b96945-758f-470f-a11e-8767d26c4857',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Berat Badan Normal',
@@ -2329,10 +2329,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '105.6',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '1 Tahun - 3 Bulan - 2 Hari',
+
             ),
-            136 => 
-            array (
+            136 =>
+            array(
                 'anak_id' => '1e091c3d-ddf6-4075-9b2b-8d4e07ad37fb',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -2346,10 +2346,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '91.8',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '2 Tahun - 10 Bulan - 30 Hari',
+
             ),
-            137 => 
-            array (
+            137 =>
+            array(
                 'anak_id' => 'e70142f2-992b-4383-b3cf-fa5ee610e3b0',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -2363,10 +2363,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '88.1',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '4 Tahun - 6 Bulan - 28 Hari',
+
             ),
-            138 => 
-            array (
+            138 =>
+            array(
                 'anak_id' => 'd432c1fb-02b6-4b2c-8a4b-0a726a90689d',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2380,10 +2380,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '60.5',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '1 Tahun - 3 Bulan - 19 Hari',
+
             ),
-            139 => 
-            array (
+            139 =>
+            array(
                 'anak_id' => '399cd3f3-be19-4b2e-ae2b-3ee822f705aa',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -2397,10 +2397,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '89.9',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '2 Tahun - 1 Bulan - 12 Hari',
+
             ),
-            140 => 
-            array (
+            140 =>
+            array(
                 'anak_id' => '2acea009-2c1c-4833-b1ff-18bb6184c405',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Kurang',
@@ -2414,10 +2414,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '103.3',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '1 Tahun - 4 Bulan - 3 Hari',
+
             ),
-            141 => 
-            array (
+            141 =>
+            array(
                 'anak_id' => '40047e36-334c-4225-8cc4-21351811e943',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -2431,10 +2431,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '84.4',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '3 Tahun - 9 Bulan - 13 Hari',
+
             ),
-            142 => 
-            array (
+            142 =>
+            array(
                 'anak_id' => 'ff7f705e-5def-43b5-a0f8-482279a92509',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -2448,10 +2448,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '67.5',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '4 Tahun - 0 Bulan - 1 Hari',
+
             ),
-            143 => 
-            array (
+            143 =>
+            array(
                 'anak_id' => '3121c771-cf1c-48a6-b7a2-65c4c00dcba2',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2465,10 +2465,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '80.3',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '1 Tahun - 6 Bulan - 15 Hari',
+
             ),
-            144 => 
-            array (
+            144 =>
+            array(
                 'anak_id' => '75c7dd99-025b-4069-b4c6-b85bf39df58b',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2482,10 +2482,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '80.3',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '2 Tahun - 2 Bulan - 21 Hari',
+
             ),
-            145 => 
-            array (
+            145 =>
+            array(
                 'anak_id' => '8264f11c-0780-4220-8853-496bae446af9',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2499,10 +2499,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '97.2',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '2 Tahun - 11 Bulan - 10 Hari',
+
             ),
-            146 => 
-            array (
+            146 =>
+            array(
                 'anak_id' => 'c59183a9-7a63-4fd1-a916-16742bb71041',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -2516,10 +2516,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '66',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '5 Tahun - 8 Bulan - 6 Hari',
+
             ),
-            147 => 
-            array (
+            147 =>
+            array(
                 'anak_id' => '88c5edad-3889-4a90-a8b4-3c5b2ced7004',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2533,10 +2533,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '108.6',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '2 Tahun - 0 Bulan - 23 Hari',
+
             ),
-            148 => 
-            array (
+            148 =>
+            array(
                 'anak_id' => '788d8580-acef-4796-add1-412368683cd2',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2550,10 +2550,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '106.2',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '2 Tahun - 3 Bulan - 16 Hari',
+
             ),
-            149 => 
-            array (
+            149 =>
+            array(
                 'anak_id' => 'b741fca9-72ae-44f0-a556-22fd2eed5e32',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Kurang',
@@ -2567,10 +2567,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '97.1',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '4 Tahun - 4 Bulan - 4 Hari',
+
             ),
-            150 => 
-            array (
+            150 =>
+            array(
                 'anak_id' => '3c7e1f41-339f-4a08-a0ae-3412f08db488',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -2584,10 +2584,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '58',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '2 Tahun - 11 Bulan - 7 Hari',
+
             ),
-            151 => 
-            array (
+            151 =>
+            array(
                 'anak_id' => '6cdccac9-16e6-4495-8f3b-fe970676739c',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Kurang',
@@ -2601,10 +2601,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '54.5',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '4 Tahun - 8 Bulan - 10 Hari',
+
             ),
-            152 => 
-            array (
+            152 =>
+            array(
                 'anak_id' => '85b811da-430d-4507-b964-b6a0b2cb8871',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -2618,10 +2618,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '101.6',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '5 Tahun - 6 Bulan - 27 Hari',
+
             ),
-            153 => 
-            array (
+            153 =>
+            array(
                 'anak_id' => 'a8ec3bd9-2ce3-42dc-952b-69051188397f',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -2635,10 +2635,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '73.3',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '2 Tahun - 0 Bulan - 25 Hari',
+
             ),
-            154 => 
-            array (
+            154 =>
+            array(
                 'anak_id' => 'd1558f98-8ab5-4387-9237-95702d07fe5d',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -2652,10 +2652,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '109.7',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '5 Tahun - 9 Bulan - 24 Hari',
+
             ),
-            155 => 
-            array (
+            155 =>
+            array(
                 'anak_id' => '4801a97d-2ba5-4444-b166-5d278d44e420',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -2669,10 +2669,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '92.3',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '5 Tahun - 10 Bulan - 10 Hari',
+
             ),
-            156 => 
-            array (
+            156 =>
+            array(
                 'anak_id' => 'ddc924d5-b822-4c4b-a46f-0c1c2b6a3d18',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2686,10 +2686,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '70.6',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '1 Tahun - 8 Bulan - 28 Hari',
+
             ),
-            157 => 
-            array (
+            157 =>
+            array(
                 'anak_id' => 'a1e19c8e-178e-454c-9d1c-dbc0e7b780d6',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2703,10 +2703,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '90.7',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '1 Tahun - 9 Bulan - 22 Hari',
+
             ),
-            158 => 
-            array (
+            158 =>
+            array(
                 'anak_id' => 'daae4007-542b-4dbc-80b6-aa84763e94db',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2720,10 +2720,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '76',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '1 Tahun - 5 Bulan - 14 Hari',
+
             ),
-            159 => 
-            array (
+            159 =>
+            array(
                 'anak_id' => 'dafa5cbe-fb8e-402f-9d05-0bea6ec19a95',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Kurang',
@@ -2737,10 +2737,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '77.4',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '5 Tahun - 4 Bulan - 30 Hari',
+
             ),
-            160 => 
-            array (
+            160 =>
+            array(
                 'anak_id' => '13b76f0d-dbaf-461b-b793-63730f8f10dd',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2754,10 +2754,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '74.4',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '1 Tahun - 7 Bulan - 17 Hari',
+
             ),
-            161 => 
-            array (
+            161 =>
+            array(
                 'anak_id' => '4046b1b0-debe-4f22-b7fa-cf9aae72f9e6',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2771,10 +2771,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '98.4',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '2 Tahun - 4 Bulan - 9 Hari',
+
             ),
-            162 => 
-            array (
+            162 =>
+            array(
                 'anak_id' => '00c944e7-cc42-48fe-906f-3a4d4b807178',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2788,10 +2788,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '76.3',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '2 Tahun - 7 Bulan - 5 Hari',
+
             ),
-            163 => 
-            array (
+            163 =>
+            array(
                 'anak_id' => '55d0233c-acd9-4b55-9a34-7a1804454226',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -2805,10 +2805,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '66.7',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '5 Tahun - 2 Bulan - 3 Hari',
+
             ),
-            164 => 
-            array (
+            164 =>
+            array(
                 'anak_id' => '33e69716-b8ee-44b3-8c18-362608807f61',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2822,10 +2822,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '105.9',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '2 Tahun - 5 Bulan - 25 Hari',
+
             ),
-            165 => 
-            array (
+            165 =>
+            array(
                 'anak_id' => 'c366e95e-c031-4498-9bc2-a451fb0115ba',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2839,10 +2839,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '93.9',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '2 Tahun - 7 Bulan - 28 Hari',
+
             ),
-            166 => 
-            array (
+            166 =>
+            array(
                 'anak_id' => '6014010b-42de-40fa-b3f3-ac6c31e08d76',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Kurang',
@@ -2856,10 +2856,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '108.3',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '5 Tahun - 8 Bulan - 10 Hari',
+
             ),
-            167 => 
-            array (
+            167 =>
+            array(
                 'anak_id' => '1b426077-5a64-4151-9665-217b74764c55',
                 'bb_tb' => 'Gizi Kurang',
                 'bb_u' => 'Kurang',
@@ -2873,10 +2873,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '101.2',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '5 Tahun - 7 Bulan - 17 Hari',
+
             ),
-            168 => 
-            array (
+            168 =>
+            array(
                 'anak_id' => '25792970-ce6d-4576-a9d1-7034a8afbbb0',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2890,10 +2890,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '88.8',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '1 Tahun - 1 Bulan - 13 Hari',
+
             ),
-            169 => 
-            array (
+            169 =>
+            array(
                 'anak_id' => '0b154736-0440-4fdd-9b34-7046bcc6bfb6',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -2907,10 +2907,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '95.5',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '4 Tahun - 8 Bulan - 1 Hari',
+
             ),
-            170 => 
-            array (
+            170 =>
+            array(
                 'anak_id' => '22b7b55a-380c-4c1d-ab2e-d0d332caf633',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -2924,10 +2924,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '92.8',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '3 Tahun - 1 Bulan - 25 Hari',
+
             ),
-            171 => 
-            array (
+            171 =>
+            array(
                 'anak_id' => '5903483c-da10-4f37-9620-a0b27ba39554',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -2941,10 +2941,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '101.8',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '3 Tahun - 6 Bulan - 8 Hari',
+
             ),
-            172 => 
-            array (
+            172 =>
+            array(
                 'anak_id' => '6aab3f7a-18c6-46e5-b8b7-0f6fba4b5c57',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -2958,10 +2958,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '94.4',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '1 Tahun - 5 Bulan - 21 Hari',
+
             ),
-            173 => 
-            array (
+            173 =>
+            array(
                 'anak_id' => '71ce4534-4284-4aa0-b444-f45866ed7ca8',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -2975,10 +2975,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '93',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 6 Bulan - 24 Hari',
+
             ),
-            174 => 
-            array (
+            174 =>
+            array(
                 'anak_id' => '1b5d5d69-5d51-42a0-8571-f237bd73ca09',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Berat Badan Normal',
@@ -2992,10 +2992,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '105.8',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 0 Bulan - 2 Hari',
+
             ),
-            175 => 
-            array (
+            175 =>
+            array(
                 'anak_id' => '97ff9995-3288-4a24-88e5-c4a841c7261a',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -3009,10 +3009,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '108.5',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '5 Tahun - 9 Bulan - 9 Hari',
+
             ),
-            176 => 
-            array (
+            176 =>
+            array(
                 'anak_id' => '3fa62455-2981-4d4d-bf62-49797cd738d9',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -3026,10 +3026,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '87.2',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '2 Tahun - 0 Bulan - 5 Hari',
+
             ),
-            177 => 
-            array (
+            177 =>
+            array(
                 'anak_id' => 'ab273b82-b1c3-499a-bb21-a0879352403a',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -3043,10 +3043,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '91.7',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '3 Tahun - 9 Bulan - 10 Hari',
+
             ),
-            178 => 
-            array (
+            178 =>
+            array(
                 'anak_id' => '779c810f-787b-4a2b-94b6-070310a39f33',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -3060,10 +3060,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '99',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '5 Tahun - 1 Bulan - 18 Hari',
+
             ),
-            179 => 
-            array (
+            179 =>
+            array(
                 'anak_id' => '7863ccd5-af4e-4c1f-b833-40da842516f5',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3077,10 +3077,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '88.9',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '2 Tahun - 5 Bulan - 12 Hari',
+
             ),
-            180 => 
-            array (
+            180 =>
+            array(
                 'anak_id' => '22db9517-cda7-4853-8892-e8661f9cb5ac',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -3094,10 +3094,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '106.8',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '2 Tahun - 6 Bulan - 5 Hari',
+
             ),
-            181 => 
-            array (
+            181 =>
+            array(
                 'anak_id' => '72fb62fc-a7be-4fdb-9909-e3c33f528b1d',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Kurang',
@@ -3111,10 +3111,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '109.9',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '5 Tahun - 3 Bulan - 5 Hari',
+
             ),
-            182 => 
-            array (
+            182 =>
+            array(
                 'anak_id' => 'cc2967b4-27b9-4eee-b68d-8463ada963f7',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -3128,10 +3128,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '88.4',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '2 Tahun - 7 Bulan - 8 Hari',
+
             ),
-            183 => 
-            array (
+            183 =>
+            array(
                 'anak_id' => '201eb1a3-5bff-4ea1-9fc6-c76202233f37',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -3145,10 +3145,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '74.8',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '5 Tahun - 10 Bulan - 21 Hari',
+
             ),
-            184 => 
-            array (
+            184 =>
+            array(
                 'anak_id' => '8e7b8958-bae8-4f52-bd02-f3cda05e2334',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Berat Badan Normal',
@@ -3162,10 +3162,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '109.5',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '4 Tahun - 6 Bulan - 4 Hari',
+
             ),
-            185 => 
-            array (
+            185 =>
+            array(
                 'anak_id' => 'e8475715-43a7-444f-b204-13012b48b540',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Kurang',
@@ -3179,10 +3179,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '109.2',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '2 Tahun - 11 Bulan - 7 Hari',
+
             ),
-            186 => 
-            array (
+            186 =>
+            array(
                 'anak_id' => 'f5e716f5-5b8c-4643-82e1-e2895b693103',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -3196,10 +3196,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '109.9',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 8 Bulan - 27 Hari',
+
             ),
-            187 => 
-            array (
+            187 =>
+            array(
                 'anak_id' => '73819a27-987d-4c49-9bc7-1842c0322ed1',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3213,10 +3213,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '90.5',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '4 Tahun - 4 Bulan - 28 Hari',
+
             ),
-            188 => 
-            array (
+            188 =>
+            array(
                 'anak_id' => 'ea240968-ee6d-44c2-9fd8-c423dcf0df10',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -3230,10 +3230,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '83.8',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '3 Tahun - 7 Bulan - 16 Hari',
+
             ),
-            189 => 
-            array (
+            189 =>
+            array(
                 'anak_id' => 'ce3065f1-940e-4230-880d-3090ba56a794',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3247,10 +3247,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '102.1',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '2 Tahun - 4 Bulan - 20 Hari',
+
             ),
-            190 => 
-            array (
+            190 =>
+            array(
                 'anak_id' => '18aced6b-5f29-4a13-be6c-e0a873a015e8',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -3264,10 +3264,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '84.1',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 4 Bulan - 4 Hari',
+
             ),
-            191 => 
-            array (
+            191 =>
+            array(
                 'anak_id' => 'db2d37ce-d7c7-4178-8076-d2f41c6b1281',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3281,10 +3281,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '95',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '1 Tahun - 10 Bulan - 27 Hari',
+
             ),
-            192 => 
-            array (
+            192 =>
+            array(
                 'anak_id' => 'e7829c9c-8eaa-4ef2-bded-18b1efc45b0d',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -3298,10 +3298,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '65.4',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '3 Tahun - 10 Bulan - 26 Hari',
+
             ),
-            193 => 
-            array (
+            193 =>
+            array(
                 'anak_id' => '2908e9ac-cf4c-44b2-b63c-c1d277eb39f5',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Kurang',
@@ -3315,10 +3315,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '55',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '5 Tahun - 10 Bulan - 19 Hari',
+
             ),
-            194 => 
-            array (
+            194 =>
+            array(
                 'anak_id' => '3dc36428-e0b0-40b8-b7cc-c05eb7ff0629',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -3332,10 +3332,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '72.1',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '2 Tahun - 4 Bulan - 14 Hari',
+
             ),
-            195 => 
-            array (
+            195 =>
+            array(
                 'anak_id' => '08ec0eb5-659c-402b-b5b3-6859d366debe',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Sangat Kurang',
@@ -3349,10 +3349,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '63.6',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 7 Bulan - 4 Hari',
+
             ),
-            196 => 
-            array (
+            196 =>
+            array(
                 'anak_id' => '38449a3f-f952-462c-bcea-5af7c7c93606',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -3366,10 +3366,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '87.2',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 4 Bulan - 20 Hari',
+
             ),
-            197 => 
-            array (
+            197 =>
+            array(
                 'anak_id' => '63632aac-1159-42c0-ad75-3f1b65158d72',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -3383,10 +3383,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '102.3',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '5 Tahun - 4 Bulan - 3 Hari',
+
             ),
-            198 => 
-            array (
+            198 =>
+            array(
                 'anak_id' => '5303a7e1-6d23-4d1b-a1bc-14c5496ca931',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -3400,10 +3400,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '110',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '2 Tahun - 8 Bulan - 7 Hari',
+
             ),
-            199 => 
-            array (
+            199 =>
+            array(
                 'anak_id' => '07c32eeb-d4dc-487a-8b04-45579bcd9174',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -3417,10 +3417,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '86.3',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '5 Tahun - 2 Bulan - 3 Hari',
+
             ),
-            200 => 
-            array (
+            200 =>
+            array(
                 'anak_id' => 'b39c0545-346c-40b9-87f4-4cbbc04cf797',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -3434,10 +3434,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '104.8',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '4 Tahun - 1 Bulan - 30 Hari',
+
             ),
-            201 => 
-            array (
+            201 =>
+            array(
                 'anak_id' => '1a00d710-d8ba-4fae-ba6c-adbc8a4e9873',
                 'bb_tb' => 'Gizi Kurang',
                 'bb_u' => 'Berat Badan Normal',
@@ -3451,10 +3451,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '97.6',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '2 Tahun - 7 Bulan - 1 Hari',
+
             ),
-            202 => 
-            array (
+            202 =>
+            array(
                 'anak_id' => '049dacb4-589c-41ac-a835-0eeef62578d5',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3468,10 +3468,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '104.9',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '2 Tahun - 10 Bulan - 3 Hari',
+
             ),
-            203 => 
-            array (
+            203 =>
+            array(
                 'anak_id' => '6830a1de-1ec1-4fc6-8230-2c925217a985',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -3485,10 +3485,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '95.3',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '1 Tahun - 7 Bulan - 10 Hari',
+
             ),
-            204 => 
-            array (
+            204 =>
+            array(
                 'anak_id' => '7fcf4f5c-8986-4b79-af0e-5cccf3a46966',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3502,10 +3502,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '93.8',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '1 Tahun - 2 Bulan - 26 Hari',
+
             ),
-            205 => 
-            array (
+            205 =>
+            array(
                 'anak_id' => '105cc921-fa58-4693-b91a-c78b7dbf470a',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -3519,10 +3519,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '63',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '4 Tahun - 0 Bulan - 7 Hari',
+
             ),
-            206 => 
-            array (
+            206 =>
+            array(
                 'anak_id' => 'c163e5f2-54f0-4e13-bac3-7f5571e5104c',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -3536,10 +3536,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '95.2',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '3 Tahun - 7 Bulan - 18 Hari',
+
             ),
-            207 => 
-            array (
+            207 =>
+            array(
                 'anak_id' => 'a539c564-0089-41b6-9947-56dfc4978b27',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -3553,10 +3553,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '93.8',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '4 Tahun - 5 Bulan - 29 Hari',
+
             ),
-            208 => 
-            array (
+            208 =>
+            array(
                 'anak_id' => 'bf5d1c93-496e-4610-9c93-9cffec641956',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -3570,10 +3570,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '95.2',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '4 Tahun - 2 Bulan - 2 Hari',
+
             ),
-            209 => 
-            array (
+            209 =>
+            array(
                 'anak_id' => '5df7643d-31d6-4938-b8d7-b893d3d49483',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Kurang',
@@ -3587,10 +3587,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '96.1',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '5 Tahun - 7 Bulan - 27 Hari',
+
             ),
-            210 => 
-            array (
+            210 =>
+            array(
                 'anak_id' => '77a23b4a-4df6-47b2-8b43-2e2b40250cb8',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -3604,10 +3604,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '102.5',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '5 Tahun - 5 Bulan - 7 Hari',
+
             ),
-            211 => 
-            array (
+            211 =>
+            array(
                 'anak_id' => '580714f1-12d9-4cce-b41f-cf2443672210',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -3621,10 +3621,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '99.8',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '5 Tahun - 10 Bulan - 21 Hari',
+
             ),
-            212 => 
-            array (
+            212 =>
+            array(
                 'anak_id' => 'd6459c37-ad5c-4262-979c-ab12cec98aa2',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3638,10 +3638,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '106.3',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '1 Tahun - 6 Bulan - 2 Hari',
+
             ),
-            213 => 
-            array (
+            213 =>
+            array(
                 'anak_id' => '1f112c08-741f-4de0-90d2-a3209e5d8de0',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -3655,10 +3655,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '101.6',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '2 Tahun - 10 Bulan - 17 Hari',
+
             ),
-            214 => 
-            array (
+            214 =>
+            array(
                 'anak_id' => 'b698e1b4-71bd-4d0d-b277-36293df7cbe7',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -3672,10 +3672,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '95.9',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '4 Tahun - 3 Bulan - 24 Hari',
+
             ),
-            215 => 
-            array (
+            215 =>
+            array(
                 'anak_id' => '0f89f21e-4904-458f-bdf1-ebb07bce02f9',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -3689,10 +3689,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '70',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '5 Tahun - 10 Bulan - 10 Hari',
+
             ),
-            216 => 
-            array (
+            216 =>
+            array(
                 'anak_id' => 'f5b75ba5-8a61-4af5-8aab-e7b116c9eda8',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3706,10 +3706,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '109.4',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '1 Tahun - 1 Bulan - 23 Hari',
+
             ),
-            217 => 
-            array (
+            217 =>
+            array(
                 'anak_id' => '4cff5bf0-ffce-413f-8a91-bc0e2b495061',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Kurang',
@@ -3723,10 +3723,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '75.9',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 4 Bulan - 7 Hari',
+
             ),
-            218 => 
-            array (
+            218 =>
+            array(
                 'anak_id' => '23d8158e-b0ff-46a0-8b80-d5145d5446ad',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Berat Badan Normal',
@@ -3740,10 +3740,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '109.4',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '1 Tahun - 8 Bulan - 29 Hari',
+
             ),
-            219 => 
-            array (
+            219 =>
+            array(
                 'anak_id' => '86a57a75-af20-4498-a099-d88e310d4403',
                 'bb_tb' => 'Gizi Kurang',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3757,10 +3757,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '101',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '1 Tahun - 1 Bulan - 19 Hari',
+
             ),
-            220 => 
-            array (
+            220 =>
+            array(
                 'anak_id' => '2b18beca-0f32-48a9-a380-17fe17e38ede',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -3774,10 +3774,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '86.8',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '4 Tahun - 4 Bulan - 20 Hari',
+
             ),
-            221 => 
-            array (
+            221 =>
+            array(
                 'anak_id' => '298ca754-2719-44f3-b7c9-dcee8a5a8d56',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -3791,10 +3791,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '76.3',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '5 Tahun - 0 Bulan - 6 Hari',
+
             ),
-            222 => 
-            array (
+            222 =>
+            array(
                 'anak_id' => 'f68f388f-1a4d-4514-96fb-a36f6cefe46f',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -3808,10 +3808,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '97.8',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '2 Tahun - 9 Bulan - 9 Hari',
+
             ),
-            223 => 
-            array (
+            223 =>
+            array(
                 'anak_id' => '0e503582-6950-47b6-95e2-f2edcc260a58',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3825,10 +3825,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '93.6',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '2 Tahun - 1 Bulan - 17 Hari',
+
             ),
-            224 => 
-            array (
+            224 =>
+            array(
                 'anak_id' => '69328218-4b58-4e66-909b-100e6606c40d',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3842,10 +3842,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '73.6',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '3 Tahun - 0 Bulan - 26 Hari',
+
             ),
-            225 => 
-            array (
+            225 =>
+            array(
                 'anak_id' => '81e991e5-c97c-47e9-b63e-91ad6bd493f5',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -3859,10 +3859,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '94.8',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '3 Tahun - 8 Bulan - 24 Hari',
+
             ),
-            226 => 
-            array (
+            226 =>
+            array(
                 'anak_id' => '0b7e2f4c-eb1a-41ec-88c2-a40e62b71bb1',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -3876,10 +3876,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '86.9',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '5 Tahun - 11 Bulan - 16 Hari',
+
             ),
-            227 => 
-            array (
+            227 =>
+            array(
                 'anak_id' => '3cb8989e-c067-4f6c-88e3-5e6ffcd593e2',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -3893,10 +3893,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '107.8',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '5 Tahun - 7 Bulan - 19 Hari',
+
             ),
-            228 => 
-            array (
+            228 =>
+            array(
                 'anak_id' => 'f4d87a6c-e845-4c00-948f-1f61ba6516e3',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3910,10 +3910,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '108.6',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '2 Tahun - 9 Bulan - 23 Hari',
+
             ),
-            229 => 
-            array (
+            229 =>
+            array(
                 'anak_id' => '1f56c2b6-c3bf-43fd-9486-9c3bd752f97f',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3927,10 +3927,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '89',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '3 Tahun - 3 Bulan - 20 Hari',
+
             ),
-            230 => 
-            array (
+            230 =>
+            array(
                 'anak_id' => 'aa6a72ff-df80-44d2-9d79-f147decc7f42',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3944,10 +3944,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '93.2',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '2 Tahun - 6 Bulan - 16 Hari',
+
             ),
-            231 => 
-            array (
+            231 =>
+            array(
                 'anak_id' => 'b9c812c8-0a16-4fa5-b1a8-eab06645349f',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3961,10 +3961,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '108.8',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '3 Tahun - 4 Bulan - 20 Hari',
+
             ),
-            232 => 
-            array (
+            232 =>
+            array(
                 'anak_id' => 'eca3b2cf-87f3-4e26-b7ce-6e469d376199',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -3978,10 +3978,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '105.7',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '4 Tahun - 7 Bulan - 21 Hari',
+
             ),
-            233 => 
-            array (
+            233 =>
+            array(
                 'anak_id' => '38c3618b-c00b-4f82-8196-248325b53455',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -3995,10 +3995,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '90.4',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '2 Tahun - 6 Bulan - 3 Hari',
+
             ),
-            234 => 
-            array (
+            234 =>
+            array(
                 'anak_id' => 'b88bc855-b2ae-4f58-816d-0a07074413f9',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -4012,10 +4012,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '58.2',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '4 Tahun - 8 Bulan - 27 Hari',
+
             ),
-            235 => 
-            array (
+            235 =>
+            array(
                 'anak_id' => '4863be7c-41be-44d8-ab2b-e2b63e0ca6dd',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -4029,10 +4029,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '100.8',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '2 Tahun - 6 Bulan - 19 Hari',
+
             ),
-            236 => 
-            array (
+            236 =>
+            array(
                 'anak_id' => '6f260369-b27e-4682-85f0-2007565adc21',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -4046,10 +4046,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '57.6',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '5 Tahun - 2 Bulan - 14 Hari',
+
             ),
-            237 => 
-            array (
+            237 =>
+            array(
                 'anak_id' => 'cb69a4dc-e605-4fc0-ada0-e5d5578834b0',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Berat Badan Normal',
@@ -4063,10 +4063,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '108.1',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '1 Tahun - 8 Bulan - 14 Hari',
+
             ),
-            238 => 
-            array (
+            238 =>
+            array(
                 'anak_id' => 'bd769a19-9dad-4e5f-9731-e4d572a207fa',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -4080,10 +4080,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '89.6',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '2 Tahun - 6 Bulan - 17 Hari',
+
             ),
-            239 => 
-            array (
+            239 =>
+            array(
                 'anak_id' => '04df7ad0-6841-4e2d-8112-fcf70fc805cc',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Sangat Kurang',
@@ -4097,10 +4097,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '73.6',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '3 Tahun - 8 Bulan - 26 Hari',
+
             ),
-            240 => 
-            array (
+            240 =>
+            array(
                 'anak_id' => 'e4804cf3-acae-47d3-b0b4-b043bbd31160',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -4114,10 +4114,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '92.3',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '5 Tahun - 5 Bulan - 20 Hari',
+
             ),
-            241 => 
-            array (
+            241 =>
+            array(
                 'anak_id' => 'eb6976a9-efc2-47df-b394-e2b11e3b8e06',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Kurang',
@@ -4131,10 +4131,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '105.4',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '2 Tahun - 11 Bulan - 17 Hari',
+
             ),
-            242 => 
-            array (
+            242 =>
+            array(
                 'anak_id' => 'a3646758-00bb-4cff-9d96-87d07c1c4341',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -4148,10 +4148,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '97.6',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '3 Tahun - 2 Bulan - 5 Hari',
+
             ),
-            243 => 
-            array (
+            243 =>
+            array(
                 'anak_id' => '5e86e7e5-c541-4f5a-a4b3-cac63a47baa9',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -4165,10 +4165,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '105.5',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '5 Tahun - 4 Bulan - 3 Hari',
+
             ),
-            244 => 
-            array (
+            244 =>
+            array(
                 'anak_id' => '215e4734-ce6a-4d6e-9b25-fc67df4c687c',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -4182,10 +4182,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '94.5',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '1 Tahun - 9 Bulan - 3 Hari',
+
             ),
-            245 => 
-            array (
+            245 =>
+            array(
                 'anak_id' => '1748d187-6a83-4fac-85cb-8d7ba746d4d4',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -4199,10 +4199,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '86.1',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '1 Tahun - 3 Bulan - 11 Hari',
+
             ),
-            246 => 
-            array (
+            246 =>
+            array(
                 'anak_id' => 'ff393133-1ec6-4acf-8074-64e50556f000',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -4216,10 +4216,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '90.6',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '1 Tahun - 1 Bulan - 5 Hari',
+
             ),
-            247 => 
-            array (
+            247 =>
+            array(
                 'anak_id' => 'c89535f8-b6b2-4d09-81b7-a71d3c4806ec',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -4233,10 +4233,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '109.9',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '3 Tahun - 11 Bulan - 4 Hari',
+
             ),
-            248 => 
-            array (
+            248 =>
+            array(
                 'anak_id' => 'b9f1494e-f206-48fe-bcf9-146ace2aa31b',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -4250,10 +4250,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '105.7',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '5 Tahun - 8 Bulan - 10 Hari',
+
             ),
-            249 => 
-            array (
+            249 =>
+            array(
                 'anak_id' => '9c3c3a42-a81c-4b67-9617-2002ebcc00e5',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -4267,10 +4267,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '93.2',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '3 Tahun - 5 Bulan - 1 Hari',
+
             ),
-            250 => 
-            array (
+            250 =>
+            array(
                 'anak_id' => '3c566a1e-c558-48e1-8b59-edc2adbcdae4',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -4284,10 +4284,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '94.9',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '3 Tahun - 8 Bulan - 10 Hari',
+
             ),
-            251 => 
-            array (
+            251 =>
+            array(
                 'anak_id' => '05bf8165-95cb-46cd-9092-0b029a9c65db',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Kurang',
@@ -4301,10 +4301,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '91',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '5 Tahun - 1 Bulan - 19 Hari',
+
             ),
-            252 => 
-            array (
+            252 =>
+            array(
                 'anak_id' => 'afb73b08-c6f3-44b4-ae6c-bd82291a0601',
                 'bb_tb' => 'Gizi Kurang',
                 'bb_u' => 'Berat Badan Normal',
@@ -4318,10 +4318,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '84.1',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '1 Tahun - 4 Bulan - 2 Hari',
+
             ),
-            253 => 
-            array (
+            253 =>
+            array(
                 'anak_id' => 'c6c3b4e3-9017-4b9a-b446-f62a9c72bd86',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Sangat Kurang',
@@ -4335,10 +4335,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '87.3',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '4 Tahun - 4 Bulan - 1 Hari',
+
             ),
-            254 => 
-            array (
+            254 =>
+            array(
                 'anak_id' => 'bbd422b3-0eec-45e8-9347-7a2cc22ca39f',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Lebih',
@@ -4352,10 +4352,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '97.2',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '2 Tahun - 2 Bulan - 10 Hari',
+
             ),
-            255 => 
-            array (
+            255 =>
+            array(
                 'anak_id' => 'f52ca774-48d0-439f-ac31-0dbdded337f8',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -4369,10 +4369,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '69.6',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '3 Tahun - 11 Bulan - 1 Hari',
+
             ),
-            256 => 
-            array (
+            256 =>
+            array(
                 'anak_id' => '98c999e9-948b-446f-8bac-513bc917317e',
                 'bb_tb' => 'Beresiko Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -4386,10 +4386,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '76.4',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '2 Tahun - 11 Bulan - 8 Hari',
+
             ),
-            257 => 
-            array (
+            257 =>
+            array(
                 'anak_id' => '127d5408-6684-4c2b-ae92-12186ae4cebd',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Normal',
@@ -4403,10 +4403,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '92.1',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '3 Tahun - 6 Bulan - 21 Hari',
+
             ),
-            258 => 
-            array (
+            258 =>
+            array(
                 'anak_id' => '5202cdde-e477-40a2-b49a-f19bb6236c6f',
                 'bb_tb' => 'Gizi Lebih',
                 'bb_u' => 'Berat Badan Normal',
@@ -4420,10 +4420,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '97.6',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '4 Tahun - 4 Bulan - 2 Hari',
+
             ),
-            259 => 
-            array (
+            259 =>
+            array(
                 'anak_id' => 'ed57974f-dae3-4a28-b71d-734b4b271aff',
                 'bb_tb' => 'Gizi Kurang',
                 'bb_u' => 'Sangat Kurang',
@@ -4437,10 +4437,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '78.4',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '4 Tahun - 8 Bulan - 14 Hari',
+
             ),
-            260 => 
-            array (
+            260 =>
+            array(
                 'anak_id' => '85850276-f663-44c2-b32a-22c217cc7450',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -4454,10 +4454,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '67.8',
                 'updated_at' => '2022-10-16 14:06:14',
-                'usia_saat_ukur' => '4 Tahun - 1 Bulan - 26 Hari',
+
             ),
-            261 => 
-            array (
+            261 =>
+            array(
                 'anak_id' => '415cef92-bd8e-44c9-8d02-4f78c5ffe676',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Lebih',
@@ -4471,10 +4471,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '91.3',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '3 Tahun - 3 Bulan - 19 Hari',
+
             ),
-            262 => 
-            array (
+            262 =>
+            array(
                 'anak_id' => 'c9ddc0c6-f764-49f2-9efa-6306eb4a30fc',
                 'bb_tb' => 'Gizi Kurang',
                 'bb_u' => 'Kurang',
@@ -4488,10 +4488,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Pendek',
                 'tinggi' => '99.2',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '5 Tahun - 8 Bulan - 19 Hari',
+
             ),
-            263 => 
-            array (
+            263 =>
+            array(
                 'anak_id' => 'e0af4b73-f985-495b-ad5f-b9f9cae650c0',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Sangat Kurang',
@@ -4505,10 +4505,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '102.9',
                 'updated_at' => '2022-10-16 14:06:17',
-                'usia_saat_ukur' => '2 Tahun - 9 Bulan - 1 Hari',
+
             ),
-            264 => 
-            array (
+            264 =>
+            array(
                 'anak_id' => '5d02ffd3-7d7d-4105-a39c-67947ea403b4',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -4522,10 +4522,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '50.1',
                 'updated_at' => '2022-10-16 14:06:16',
-                'usia_saat_ukur' => '5 Tahun - 1 Bulan - 7 Hari',
+
             ),
-            265 => 
-            array (
+            265 =>
+            array(
                 'anak_id' => 'fc3f5155-c2b8-4549-87d1-e347fa459e73',
                 'bb_tb' => 'Gizi Baik',
                 'bb_u' => 'Berat Badan Lebih',
@@ -4539,10 +4539,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Tinggi',
                 'tinggi' => '102.6',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '1 Tahun - 3 Bulan - 23 Hari',
+
             ),
-            266 => 
-            array (
+            266 =>
+            array(
                 'anak_id' => '56362883-dc67-4e31-a7b0-0bd8d0d21af1',
                 'bb_tb' => 'Gizi Buruk',
                 'bb_u' => 'Kurang',
@@ -4556,10 +4556,10 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Normal',
                 'tinggi' => '109.9',
                 'updated_at' => '2022-10-16 14:06:18',
-                'usia_saat_ukur' => '4 Tahun - 6 Bulan - 1 Hari',
+
             ),
-            267 => 
-            array (
+            267 =>
+            array(
                 'anak_id' => '678d9a03-7311-4347-b6f0-6836f8256bb9',
                 'bb_tb' => 'Obesitas',
                 'bb_u' => 'Berat Badan Normal',
@@ -4573,10 +4573,8 @@ class PengukuranAnakTableSeeder extends Seeder
                 'tb_u' => 'Sangat Pendek',
                 'tinggi' => '93',
                 'updated_at' => '2022-10-16 14:06:15',
-                'usia_saat_ukur' => '5 Tahun - 6 Bulan - 22 Hari',
+
             ),
         ));
-        
-        
     }
 }
