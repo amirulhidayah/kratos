@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('nama');
             $table->string('nik');
             $table->string('jenis_kelamin');
-            $table->string('bb_lahir');
-            $table->string('tb_lahir');
+            $table->string('bb_lahir')->nullable();
+            $table->string('tb_lahir')->nullable();
             $table->date("tanggal_lahir");
             $table->uuid('orang_tua_id');
             $table->softDeletes();

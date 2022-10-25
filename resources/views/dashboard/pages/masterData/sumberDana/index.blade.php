@@ -261,17 +261,15 @@
         var table = $('#table-data').DataTable({
             processing: true,
             serverSide: true,
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/id.json'
+            },
             lengthMenu: [
                 [10, 25, 50, -1],
                 [10, 25, 50, "All"]
             ],
             ajax: {
                 url: "{{ url('master-data/sumber-dana') }}",
-                data: function(d) {
-                    d.statusValidasi = $('#status-validasi').val();
-                    d.kategori = $('#kategori').val();
-                    d.search = $('input[type="search"]').val();
-                }
             },
             columns: [{
                     data: 'DT_RowIndex',

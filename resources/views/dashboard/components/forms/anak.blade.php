@@ -80,7 +80,7 @@
                     'id' => 'bb_lahir',
                     'name' => 'bb_lahir',
                     'class' => 'numerik',
-                    'wajib' => '<sup class="text-danger">*</sup>',
+                    // 'wajib' => '<sup class="text-danger">*</sup>',
                     'placeholder' => 'Masukkan Berat Badan Lahir',
                 ])
             @endcomponent
@@ -88,12 +88,12 @@
         <div class="col-sm-12 col-lg-6">
             @component('dashboard.components.formElements.input',
                 [
-                    'label' => 'Tinggi Badan (BB) Lahir',
+                    'label' => 'Tinggi Badan (TB) Lahir',
                     'type' => 'text',
                     'id' => 'tb_lahir',
                     'name' => 'tb_lahir',
                     'class' => 'numerik',
-                    'wajib' => '<sup class="text-danger">*</sup>',
+                    // 'wajib' => '<sup class="text-danger">*</sup>',
                     'placeholder' => 'Masukkan Tinggi Badan Lahir',
                 ])
             @endcomponent
@@ -197,6 +197,18 @@
                                     window.location.href =
                                         "{{ $back_url }}";
                                 })
+                            } else if (response.status ==
+                                'success_pengukuran_lewat_tanggal_lahir') {
+                                swal("Berhasil",
+                                    "Terdapat Data Pengukuran yang Tanggal Pengukurannya Kurang Dari Tanggal Lahir", {
+                                        icon: "warning",
+                                        buttons: false,
+                                        timer: 3000,
+                                    }).then(function() {
+                                    window.location.href =
+                                        "{{ url('pengukuran-anak') }}" + '/' + response
+                                        .id;
+                                })
                             } else {
                                 swal("Periksa Kembali Data Anda", {
                                     buttons: false,
@@ -255,15 +267,21 @@
                             $('#orang_tua_id').append('<option value="' + data.id + '">Ibu : ' +
                                 data
                                 .nama_ibu + " (" + data.nik_ibu + ") | Ayah : " + data
-                                .nama_ayah + " (" + data.nik_ayah + ")" + '</option>');
+                                .nama_ayah + " (" + data.nik_ayah + ") | Kecamatan : " + data
+                                .desa
+                                .kecamatan.nama + ', Desa : ' + data.desa.nama + '</option>');
                         } else if (data.nama_ibu && !data.nama_ayah) {
                             $('#orang_tua_id').append('<option value="' + data.id + '">Ibu : ' +
                                 data
-                                .nama_ibu + " (" + data.nik_ibu + ")" + '</option>');
+                                .nama_ibu + " (" + data.nik_ibu + ") | Kecamatan : " + data
+                                .desa
+                                .kecamatan.nama + ', Desa : ' + data.desa.nama + '</option>');
                         } else if (!data.nama_ibu && data.nama_ayah) {
                             $('#orang_tua_id').append('<option value="' + data.id + ">Ayah : " +
                                 data
-                                .nama_ayah + " (" + data.nik_ayah + ")" + '</option>');
+                                .nama_ayah + " (" + data.nik_ayah + ")  | Kecamatan : " + data
+                                .desa
+                                .kecamatan.nama + ', Desa : ' + data.desa.nama + '</option>');
                         }
 
                     });

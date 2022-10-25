@@ -1,9 +1,5 @@
 <table>
     <tr>
-        <td colspan="3">Intervensi :</td>
-        <td>Habitat Keong</td>
-    </tr>
-    <tr>
         <td colspan="3">Tahun :</td>
         <td>
             @php
@@ -34,21 +30,21 @@
             $realisasi = 0;
             $persentase = 0;
         @endphp
-        @foreach ($tabelKeong as $keong)
+        @foreach ($tabel['tabel'] as $tbl)
             <tr>
                 <th scope="row" style="vertical-align: center;border: 1px solid black;" align="center">
                     {{ $loop->iteration }}</th>
-                <td style="vertical-align: center;border: 1px solid black;" align="center">{{ $keong['opd'] }}</td>
-                <td style="vertical-align: center;border: 1px solid black;" align="center">{{ $keong['perencanaan'] }}
+                <td style="vertical-align: center;border: 1px solid black;" align="center">{{ $tbl['opd'] }}</td>
+                <td style="vertical-align: center;border: 1px solid black;" align="center">{{ $tbl['perencanaan'] }}
                 </td>
-                <td style="vertical-align: center;border: 1px solid black;" align="center">{{ $keong['realisasi'] }}
+                <td style="vertical-align: center;border: 1px solid black;" align="center">{{ $tbl['realisasi'] }}
                 </td>
                 <td style="vertical-align: center;border: 1px solid black;" align="center">
-                    {{ $keong['persentase'] == '-' ? '-' : $keong['persentase'] . '%' }}</td>
+                    {{ $tbl['persentase'] == '-' ? '-' : $tbl['persentase'] . '%' }}</td>
             </tr>
             @php
-                $perencanaan += $keong['perencanaan'];
-                $realisasi += $keong['realisasi'];
+                $perencanaan += $tbl['perencanaan'];
+                $realisasi += $tbl['realisasi'];
             @endphp
         @endforeach
         @if (Auth::user()->role != 'OPD')

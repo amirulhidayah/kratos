@@ -156,9 +156,11 @@
                         $('#nik').html(response.anak.nik);
                         $('#jenis-kelamin').html(response.anak.jenis_kelamin);
                         $('#tanggal-lahir').html(response.tanggalLahir);
-                        $('#bb_lahir').html(response.anak.bb_lahir + " Kg");
-                        $('#tb_lahir').html(response.anak.tb_lahir + " Cm");
-                        $('#nama_ibu').html(response.orangTua.nama_ibu) ?? '-';
+                        $('#bb_lahir').html(response.anak.bb_lahir ? response.anak.bb_lahir + " Kg" :
+                            '-');
+                        $('#tb_lahir').html(response.anak.tb_lahir ? response.anak.tb_lahir + " Cm" :
+                            '-');
+                        $('#nama_ibu').html(response.orangTua.nama_ibu ?? '-');
                         $('#nik_ibu').html(response.orangTua.nik_ibu ?? '-');
                         $('#nama_ayah').html(response.orangTua.nama_ayah ?? '-');
                         $('#nik_ayah').html(response.orangTua.nik_ayah ?? '-');
@@ -167,13 +169,22 @@
                         $('#alamat').html(response.orangTua.alamat);
                         $('#tanggal-pengukuran').html(response.tanggalPengukuran);
                         if (response.pengukuranAnakTerakhir) {
-                            $('#usia-saat-ukur').html(response.pengukuranAnakTerakhir.usia_saat_ukur);
+                            $('#usia-saat-ukur').html(response.usiaSaatUkur);
                             $('#berat_ukur').html(response.pengukuranAnakTerakhir.berat + ' Kg');
                             $('#tinggi_ukur').html(response.pengukuranAnakTerakhir.tinggi + ' Cm');
-                            $('#lila').html(response.pengukuranAnakTerakhir.lila);
+                            $('#lila').html(response.pengukuranAnakTerakhir.lila ? response
+                                .pengukuranAnakTerakhir.lila + ' Cm' : '-');
                             $('#bbu').html(response.pengukuranAnakTerakhir.bb_u);
                             $('#tbu').html(response.pengukuranAnakTerakhir.tb_u);
                             $('#bbtb').html(response.pengukuranAnakTerakhir.bb_tb);
+                        } else {
+                            $('#usia-saat-ukur').html('-');
+                            $('#berat_ukur').html('-');
+                            $('#tinggi_ukur').html('-');
+                            $('#lila').html('-');
+                            $('#bbu').html('-');
+                            $('#tbu').html('-');
+                            $('#bbtb').html('-');
                         }
 
                         $('#modal-lihat').modal('show');
