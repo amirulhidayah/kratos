@@ -143,6 +143,7 @@ class PuskesmasController extends Controller
     public function destroy(Puskesmas $puskesmas)
     {
         $puskesmas->delete();
+        $puskesmas->posyandu()->delete();
 
         return response()->json(['status' => 'success']);
     }

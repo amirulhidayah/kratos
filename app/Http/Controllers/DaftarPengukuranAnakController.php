@@ -183,6 +183,8 @@ class DaftarPengukuranAnakController extends Controller
                         } else {
                             $actionBtn .= '<a class="btn btn-secondary btn-rounded btn-sm mr-1 my-1" href="' . url('pengukuran-anak/' . $row->id . '/create')  . '" ><i class="fas fa-ruler"></i></a>';
                         }
+                    } else {
+                        $actionBtn .= '<a class="btn btn-secondary btn-rounded btn-sm mr-1 my-1" href="' . url('pengukuran-anak/' . $row->id)  . '" ><i class="fas fa-ruler"></i></a>';
                     }
                     return $actionBtn;
                 })

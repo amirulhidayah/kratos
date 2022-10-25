@@ -16,6 +16,13 @@ use Yajra\DataTables\Facades\DataTables;
 
 class PengukuranAnakController extends Controller
 {
+    public function __construct(Request $request)
+    {
+        $anak = Anak::find($request->anak);
+        if ($anak == null) {
+            return redirect(url('daftar-pengukuran-anak'))->send();
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -119,7 +126,7 @@ class PengukuranAnakController extends Controller
             $request->all(),
             [
                 'tanggal_pengukuran' => 'required|date',
-                'lila' => 'required|numeric|min:0',
+                'lila' => $request->lila ? 'required|numeric|min:0' : 'nullable',
                 'bb' => 'required|numeric|min:0',
                 'tb' => 'required|numeric|min:0',
                 'puskesmas_id' => 'required',
@@ -205,6 +212,7 @@ class PengukuranAnakController extends Controller
     {
         $anak = Anak::find($request->anak);
         $pengukuranAnak = PengukuranAnak::find($request->pengukuranAnak);
+
         return view('dashboard.pages.pengukuranAnak.edit', compact(['anak', 'pengukuranAnak']));
     }
 
@@ -222,7 +230,7 @@ class PengukuranAnakController extends Controller
             $request->all(),
             [
                 'tanggal_pengukuran' => 'required|date',
-                'lila' => 'required|numeric|min:0',
+                'lila' => $request->lila ? 'required|numeric|min:0' : 'nullable',
                 'bb' => 'required|numeric|min:0',
                 'tb' => 'required|numeric|min:0',
                 'puskesmas_id' => 'required',

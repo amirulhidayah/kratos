@@ -163,11 +163,6 @@
             ],
             ajax: {
                 url: "{{ url('master-data/puskesmas') }}",
-                data: function(d) {
-                    d.statusValidasi = $('#status-validasi').val();
-                    d.kategori = $('#kategori').val();
-                    d.search = $('input[type="search"]').val();
-                }
             },
             columns: [{
                     data: 'DT_RowIndex',

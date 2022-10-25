@@ -12,6 +12,7 @@ class OrangTua extends Model
     use HasFactory, TraitUuid, SoftDeletes;
 
     protected $table = 'orang_tua';
+    protected $appends = ['anakLewatTanggalLahir'];
 
     public function desa()
     {
@@ -21,5 +22,17 @@ class OrangTua extends Model
     public function anak()
     {
         return $this->hasMany(Anak::class);
+    }
+
+    public function getAnakLewatTanggalLahirAttribute()
+    {
+        $anakLewatTanggalLahir = 0;
+        foreach ($this->anak as $anak) {
+            if (count($anak->pengukuranAnakLewatTanggalLahir) > 0) {
+                $anakLewatTanggalLahir++;
+            }
+        }
+
+        return $anakLewatTanggalLahir;
     }
 }

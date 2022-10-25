@@ -1,11 +1,11 @@
 @extends('dashboard.layouts.main')
 
 @section('title')
-    POSYANDU | {{ $puskesmas->nama }}
+    POSYANDU | PUSKESMAS : {{ $puskesmas->nama }}
 @endsection
 
 @section('titlePanelHeader')
-    POSYANDU | {{ $puskesmas->nama }}
+    POSYANDU | PUSKESMAS : {{ $puskesmas->nama }}
 @endsection
 
 @section('subTitlePanelHeader')
@@ -166,11 +166,6 @@
             ],
             ajax: {
                 url: "{{ url('master-data/posyandu' . '/' . $puskesmas->id) }}",
-                data: function(d) {
-                    d.statusValidasi = $('#status-validasi').val();
-                    d.kategori = $('#kategori').val();
-                    d.search = $('input[type="search"]').val();
-                }
             },
             columns: [{
                     data: 'DT_RowIndex',

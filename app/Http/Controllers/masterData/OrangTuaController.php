@@ -44,16 +44,16 @@ class OrangTuaController extends Controller
                     $query->orWhere('nama_ayah', 'LIKE', '%' . $request->nama_nik . '%');
                     $query->orWhere('nik_ayah', 'LIKE', '%' . $request->nama_nik . '%');
                 }
-            })->get();
+            })->get()->sortByDesc(function ($orangTua) {
+                return $orangTua->AnakLewatTanggalLahir;
+            });
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('nama_ibu', function ($row) {
                     $pengukuran = '';
                     $ibu = $row->nama_ibu ? '<p class="my-0">'  . $row->nama_ibu . '</p>' : '<p class="my-0">-</p>';
-                    foreach ($row->anak as $anak) {
-                        if (count($anak->pengukuranAnakLewatTanggalLahir) > 0) {
-                            $pengukuran = '<p class="blink-soft"><span class="badge badge-danger"> Terdapat Pengukuran Anak yang Tanggal Pengukurannya Kurang Dari Tanggal Lahir</span></p>';
-                        }
+                    if ($row->AnakLewatTanggalLahir) {
+                        $pengukuran = '<p class="blink-soft"><span class="badge badge-danger"> Terdapat Pengukuran Anak yang Tanggal Pengukurannya Kurang Dari Tanggal Lahir</span></p>';
                     }
 
                     $ibu .= $pengukuran;
@@ -237,21 +237,21 @@ class OrangTuaController extends Controller
         $namaAyah = $request->nama_ayah;
         $nikAyah = $request->nik_ayah;
 
-        if (((!$namaIbu && !$nikIbu) && (!$namaAyah && !$nikAyah)) || (($namaIbu && !$nikIbu) || (!$namaIbu && $nikIbu) || ($namaIbu && $nikIbu)) || (($namaAyah && !$nikAyah) || (!$namaAyah && $nikAyah) || ($namaAyah && $nikAyah))) {
+        if (((!$namaIbu && !$nikIbu) && (!$namaAyah && !$nikAyah)) || (($namaIbu && $nikIbu) && ($namaAyah && !$nikAyah) || ($namaIbu && $nikIbu) && (!$namaAyah && $nikAyah) || (!$namaIbu && $nikIbu) && ($namaAyah && $nikAyah) || ($namaIbu && !$nikIbu) && ($namaAyah && $nikAyah) || (!$namaIbu && $nikIbu) && (!$namaAyah && $nikAyah) || ($namaIbu && !$nikIbu) && ($namaAyah && !$nikAyah) || (!$namaIbu && $nikIbu) && ($namaAyah && !$nikAyah) || ($namaIbu && !$nikIbu) && (!$namaAyah && $nikAyah)) || (($namaIbu && $nikIbu) && ($namaAyah && $nikAyah))) {
             $validatorNamaIbu = 'required';
-            $validatorNikIbu = ['required', Rule::unique('orang_tua')->ignore($orangTua->id)->withoutTrashed(), 'digits:16'];
+            $validatorNikIbu = ['required', Rule::unique('orang_tua')->withoutTrashed()->ignore($orangTua->id), 'digits:16'];
             $validatorNamaAyah = 'required';
-            $validatorNikAyah = ['required', Rule::unique('orang_tua')->ignore($orangTua->id)->withoutTrashed(), 'digits:16'];
+            $validatorNikAyah = ['required', Rule::unique('orang_tua')->withoutTrashed()->ignore($orangTua->id), 'digits:16'];
         } else if ((($namaIbu && !$nikIbu) || (!$namaIbu && $nikIbu) || ($namaIbu && $nikIbu))  && (!$namaAyah && !$nikAyah)) {
             $validatorNamaIbu = 'required';
-            $validatorNikIbu = ['required', Rule::unique('orang_tua')->ignore($orangTua->id)->withoutTrashed(), 'digits:16'];
+            $validatorNikIbu = ['required', Rule::unique('orang_tua')->withoutTrashed()->ignore($orangTua->id), 'digits:16'];
             $validatorNamaAyah = 'nullable';
             $validatorNikAyah = 'nullable';
         } else if ((($namaAyah && !$nikAyah) || (!$namaAyah && $nikAyah) || ($namaAyah && $nikAyah))  && (!$namaIbu && !$nikIbu)) {
             $validatorNamaIbu = 'nullable';
             $validatorNikIbu = 'nullable';
             $validatorNamaAyah = 'required';
-            $validatorNikAyah = ['required', Rule::unique('orang_tua')->ignore($orangTua->id)->withoutTrashed(), 'digits:16'];
+            $validatorNikAyah = ['required', Rule::unique('orang_tua')->withoutTrashed()->ignore($orangTua->id), 'digits:16'];
         }
 
         $validator = Validator::make(

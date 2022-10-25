@@ -5,6 +5,7 @@ namespace App\Http\Controllers\masterData\wilayah;
 use App\Exports\DesaExport;
 use App\Http\Controllers\Controller;
 use App\Models\Desa;
+use App\Models\Kecamatan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -21,6 +22,11 @@ class DesaController extends Controller
      */
     public function index(Request $request)
     {
+        $kecamatan = Kecamatan::find($request->kecamatan);
+        if ($kecamatan == null) {
+            return redirect()->back();
+        }
+
         $kecamatanId = $request->kecamatan;
         if ($request->ajax()) {
             $data = Desa::orderBy('nama', 'asc')->where('kecamatan_id', $kecamatanId)->get();
@@ -30,8 +36,11 @@ class DesaController extends Controller
                     $actionBtn = '<a href="' . url('master-data/wilayah/desa' . '/' . $row->kecamatan_id . '/' . $row->id . '/edit') . '" class="btn btn-warning btn-round btn-sm mr-1" value="' . $row->id . '"><i class="fa fa-edit"></i></a><button id="btn-delete" class="btn btn-danger btn-round btn-sm mr-1" value="' . $row->id . '" ><i class="fa fa-trash"></i></button>';
                     return $actionBtn;
                 })
+                ->addColumn('kode', function ($row) {
+                    return $row->kode ?? '-';
+                })
                 ->addColumn('luas', function ($row) {
-                    return $row->luas . " Km<sup>2</sup>";
+                    return $row->luas ? $row->luas . " Km<sup>2</sup>" : '-';
                 })
                 ->addColumn('statusPolygon', function ($row) {
                     if ($row->polygon) {
@@ -61,6 +70,11 @@ class DesaController extends Controller
      */
     public function create(Request $request)
     {
+        $kecamatan = Kecamatan::find($request->kecamatan);
+        if ($kecamatan == null) {
+            return redirect()->back();
+        }
+
         $kecamatanId = $request->kecamatan;
         return view('dashboard.pages.masterData.wilayah.desa.create', compact(['kecamatanId']));
     }
@@ -73,6 +87,11 @@ class DesaController extends Controller
      */
     public function store(Request $request)
     {
+        $kecamatan = Kecamatan::find($request->kecamatan);
+        if ($kecamatan == null) {
+            return redirect()->back();
+        }
+
         $validator = Validator::make(
             $request->all(),
             [
@@ -129,6 +148,12 @@ class DesaController extends Controller
     public function edit(Request $request)
     {
         $desa = Desa::find($request->desa);
+
+        $kecamatan = Kecamatan::find($request->kecamatan);
+        if ($kecamatan == null && $desa == null) {
+            return redirect()->back();
+        }
+
         $kecamatanId = $request->kecamatan;
         return view('dashboard.pages.masterData.wilayah.desa.edit', compact(['desa', 'kecamatanId']));
     }
@@ -142,7 +167,14 @@ class DesaController extends Controller
      */
     public function update(Request $request)
     {
+
         $desa = Desa::find($request->desa);
+
+        $kecamatan = Kecamatan::find($request->kecamatan);
+        if ($kecamatan == null && $desa == null) {
+            return redirect()->back();
+        }
+
         $validator = Validator::make(
             $request->all(),
             [

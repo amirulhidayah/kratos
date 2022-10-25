@@ -50,7 +50,9 @@ class AnakController extends Controller
                         $query->orWhere('nik_ayah', 'LIKE', '%' . $request->nama_nik . '%');
                     });
                 }
-            })->orderBy('created_at', 'desc')->get();
+            })->orderBy('created_at', 'desc')->get()->sortByDesc(function ($anak) {
+                return count($anak->pengukuranAnakLewatTanggalLahir);
+            });
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('nama', function ($row) {
@@ -102,6 +104,8 @@ class AnakController extends Controller
                             $actionBtn .= '<a class="btn btn-secondary btn-rounded btn-sm mr-1 my-1" href="' . url('pengukuran-anak/' . $row->id . '/create')  . '" ><i class="fas fa-ruler"></i></a>';
                         }
                         $actionBtn .= '<a id="btn-edit" class="btn btn-warning btn-rounded btn-sm mr-1" href="' . url('master-data/anak/' . $row->id . '/edit')  . '" ><i class="fas fa-edit"></i></a><button id="btn-delete" class="btn btn-danger btn-rounded btn-sm mr-1" value="' . $row->id . '" > <i class="fas fa-trash-alt"></i></button>';
+                    } else {
+                        $actionBtn .= '<a class="btn btn-secondary btn-rounded btn-sm mr-1 my-1" href="' . url('pengukuran-anak/' . $row->id)  . '" ><i class="fas fa-ruler"></i></a>';
                     }
                     return $actionBtn;
                 })
@@ -227,7 +231,6 @@ class AnakController extends Controller
             $pengukuranAnak->tanggal_pengukuran = Carbon::parse($request->tanggal_pengukuran)->format('Y-m-d');
             $pengukuranAnak->puskesmas_id = $request->puskesmas_id;
             $pengukuranAnak->posyandu_id = $request->posyandu_id;
-            $pengukuranAnak->usia_saat_ukur = $usiaSebut;
             $pengukuranAnak->bb_u = $bbu;
             $pengukuranAnak->tb_u = $tbu;
             $pengukuranAnak->bb_tb = $bbtb;
@@ -253,6 +256,7 @@ class AnakController extends Controller
             'kecamatan' => $anak->orangTua->desa->kecamatan->nama,
             'desa' => $anak->orangTua->desa->nama,
             'pengukuranAnakTerakhir' => $anak->pengukuranAnakTerakhir,
+            'usiaSaatUkur' => $anak->pengukuranAnakTerakhir ? usiaSebut($anak->tanggal_lahir, $anak->pengukuranAnakTerakhir->tanggal_pengukuran) : '-',
             'tanggalPengukuran' => $anak->pengukuranAnakTerakhir->tanggal_pengukuran ?? '' ? Carbon::parse($anak->pengukuranAnakTerakhir->tanggal_pengukuran)->translatedFormat('d F Y') : '-',
             'tanggalLahir' => $anak->tanggal_lahir ?? '' ? Carbon::parse($anak->tanggal_lahir)->translatedFormat('d F Y') : '-',
         ]);

@@ -69,6 +69,18 @@
                                     {{ $anak->orangTua->nik_ayah ?? '-' }}
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="fw-bold">Kecamatan : </td>
+                                <td class="text-right">
+                                    {{ $anak->orangTua->desa->kecamatan->nama ?? '-' }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Desa : </td>
+                                <td class="text-right">
+                                    {{ $anak->orangTua->desa->nama ?? '-' }}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

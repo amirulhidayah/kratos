@@ -17,6 +17,13 @@ use Yajra\DataTables\Facades\DataTables;
 
 class OrangTuaAnakController extends Controller
 {
+    public function __construct(Request $request)
+    {
+        $orangTua = OrangTua::where('id', $request->orangTua)->first();
+        if ($orangTua == null) {
+            return redirect(url('master-data/orang-tua'))->send();
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -86,6 +93,8 @@ class OrangTuaAnakController extends Controller
                             $actionBtn .= '<a class="btn btn-secondary btn-rounded btn-sm mr-1 my-1" href="' . url('pengukuran-anak/' . $row->id . '/create')  . '" ><i class="fas fa-ruler"></i></a>';
                         }
                         $actionBtn .= '<a id="btn-edit" class="btn btn-warning btn-rounded btn-sm mr-1" href="' . url('master-data/orang-tua/anak/' . $row->orang_tua_id . '/' . $row->id . '/edit')  . '" ><i class="fas fa-edit"></i></a><button id="btn-delete" class="btn btn-danger btn-rounded btn-sm mr-1" value="' . $row->id . '" > <i class="fas fa-trash-alt"></i></button>';
+                    } else {
+                        $actionBtn .= '<a class="btn btn-secondary btn-rounded btn-sm mr-1 my-1" href="' . url('pengukuran-anak/' . $row->id)  . '" ><i class="fas fa-ruler"></i></a>';
                     }
                     return $actionBtn;
                 })
@@ -209,7 +218,6 @@ class OrangTuaAnakController extends Controller
             $pengukuranAnak->tanggal_pengukuran = Carbon::parse($request->tanggal_pengukuran)->format('Y-m-d');
             $pengukuranAnak->puskesmas_id = $request->puskesmas_id;
             $pengukuranAnak->posyandu_id = $request->posyandu_id;
-            $pengukuranAnak->usia_saat_ukur = $usiaSebut;
             $pengukuranAnak->bb_u = $bbu;
             $pengukuranAnak->tb_u = $tbu;
             $pengukuranAnak->bb_tb = $bbtb;
